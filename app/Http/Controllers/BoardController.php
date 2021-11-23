@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Board;
+use App\Models\Board_users;
 use Illuminate\Support\Facades\Auth;
 
 class BoardController extends Controller
@@ -15,10 +16,9 @@ class BoardController extends Controller
     public function storeBoard()
     {
       $this->validateBoard();
-
       $board = new Board(request(['name','madeby_id','description']));
       $board->save();
-
+      $this->addBoardUsers($board->id, $board->madeby_id);
       return redirect('/home');
     }
 
@@ -27,6 +27,14 @@ class BoardController extends Controller
         'name' => ['required', 'min:1', 'max:20'],
         'madeby_id' => ['required'],
         'description' => ['required', 'min:1', 'max:50']
-      ]);
+                                 ]);
+    }
+
+    public function addBoardUsers($board_id, $user_id)
+    {
+      $boardUsers = new Board_users ();
+      $boardUsers->board_id = $board_id;
+      $boardUsers->user_id = $user_id;
+      $boardUsers->save();
     }
 }

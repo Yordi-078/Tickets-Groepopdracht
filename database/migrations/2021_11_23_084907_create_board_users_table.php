@@ -14,7 +14,6 @@ class CreateBoardUsersTable extends Migration
     public function up()
     {
         Schema::create('board_users', function (Blueprint $table) {
-            $table->id();
             $table->unsignedBigInteger('board_id');
             $table->unsignedBigInteger('user_id');
         });
