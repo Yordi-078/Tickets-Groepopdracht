@@ -14,9 +14,9 @@
                         </div>
                     @endif
 
-                    @if (Auth::user()->user_role === 2)
+                    @if (Auth::user()->user_role === 2 || Auth::user()->user_role === 1 )
                     <a class="dropdown-item" href="{{ route('createBoard') }}">
-                        {{ __('Add Category') }}
+                        {{ __('create board') }}
                     </a>
                     @endif
 
