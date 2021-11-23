@@ -19,7 +19,7 @@ class Board_users extends Model
      *
      * @var bool
      */
-    public $timestamps = true;
+    public $timestamps = false;
 
       /**
      * The attributes that are mass assignable.
@@ -27,6 +27,6 @@ class Board_users extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'board_id', 'user_id'
+     'board_id', 'user_id'
     ];
 }
