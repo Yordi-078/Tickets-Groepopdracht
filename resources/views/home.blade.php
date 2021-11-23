@@ -20,7 +20,7 @@
                     </a>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    {{dd($allBoard)}}
                 </div>
             </div>
         </div>
