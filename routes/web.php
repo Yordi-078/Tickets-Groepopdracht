@@ -24,4 +24,5 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('createBoard',  [BoardController::class, 'createBoardForm'])->name('createBoard')->middleware('checkDocentAdmin');
 Route::post('/home',  [BoardController::class, 'storeBoard'])->name('home')->middleware('checkDocentAdmin');
+Route::get('oneBoard/{id}', [BoardController::class, 'oneBoard'])->name('oneBoard');
 

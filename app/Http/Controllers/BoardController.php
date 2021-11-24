@@ -37,4 +37,10 @@ class BoardController extends Controller
       $boardUsers->user_id = $user_id;
       $boardUsers->save();
     }
+
+    public function oneBoard($board_id){
+
+        $board = Board::where('id', $board_id)->get();
+        return view('boardCrud.oneBoard', ['board'=>$board]);
+    }
 }

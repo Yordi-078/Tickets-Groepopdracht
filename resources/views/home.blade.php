@@ -5,7 +5,11 @@
     <button id="toggle-board"  onclick="toggleBoard()">block</button>
     <div class="flex-row" id="home-board-content-box" >
         @foreach($allBoard as $board)
+<<<<<<< HEAD
             <a href="{{ Route('oneBoard', $board['id']) }}" class="board flex-row">{{$board["name"]}}</a>    
+=======
+            <a href="{{ Route('oneBoard', $board['id']) }}" class="board flex-row">{{$board["name"]}}</a>  
+>>>>>>> 1ec2927b4d059fe8e951156860966604e33f4846
         @endforeach
     </div>
     
