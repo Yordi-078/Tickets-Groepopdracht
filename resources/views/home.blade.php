@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container">
+<<<<<<< HEAD
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -38,7 +39,7 @@
     
     <!-- this is what the user sees if user is admin or docent. 
     this wil be added to all the other code and wil not replace it -->
-    @if (Auth::user()->user_role === 2 || Auth::user()->user_role === 1 )
+    @if (Auth::user()->user_role == 'teacher' || Auth::user()->user_role == 'student' )
     <a class="create-board-button" href="{{ route('createBoard') }}">
         {{ __('create board') }}
     </a>
