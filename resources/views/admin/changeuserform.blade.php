@@ -1,9 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+@if ($user->id == auth()->id())
+    <h2> You cannot change you own user role</h2>
+@else
 
 
-<a href="{{ route('changeUserRoles') }}"> Return to change user roles page</a>
+<a href="{{ route('changeUserRoles') }}"> <-Return to change user roles page</a>
 <h1>Current User Data</h1>
 
     <div class="">
@@ -54,5 +57,6 @@
 </div>
 
 
+@endif
 
 @endsection
