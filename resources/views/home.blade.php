@@ -5,7 +5,7 @@
     <button id="toggle-board"  onclick="toggleBoard()">block</button>
     <div class="flex-row" id="home-board-content-box" >
         @foreach($allBoard as $board)
-            <a href="#" class="board flex-row">{{$board["name"]}}</a>  
+            <a href="{{ Route('oneBoard', $board['id']) }}" class="board flex-row">{{$board["name"]}}</a>    
         @endforeach
     </div>
     
