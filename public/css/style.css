@@ -103,6 +103,7 @@ a{
   
 .user-info:hover .dropdown-content {
     display: block;
+    border-radius: 5px;
 }
   
 .user-info:hover .dropdown-button {
@@ -112,8 +113,60 @@ a{
 
 /* style for home.blade.php */
 
-.home-board-content-box{
+
+#home-board-content-box{
     background: var(--test);
     width:80vw;
-    height:80vh;
+    min-height:79vh;
+    position:absolute;
+    top:16vh;
+    left:2vw;
+    display: flex;
+    padding:5px;
+    flex-wrap: wrap;
+    align-content: flex-start
+}
+.flex-row{
+    flex-direction: row;
+}
+
+.flex-column{
+    flex-direction: column;
+}
+
+.board{
+    width:15vw;
+    height:12vh;
+    background: chartreuse;
+    border-radius: 10px;
+    margin:5px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+    font-weight: bold;
+    transition: all .2s ease-in-out;
+}
+
+.board-row{
+    width:99%;
+    transition: none;
+}
+
+.board:hover{
+    margin:0;
+    padding:5px;
+    border: 1px solid black;
+}
+
+.toggle-board{
+    width:50px;
+    height:30px;
+    background: chocolate;
+}
+
+.create-board-button{
+    width:50px;
+    height:30px;
+    background: chocolate;
 }

@@ -2,28 +2,23 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    @if (Auth::user()->user_role === 2 || Auth::user()->user_role === 1 )
-                    <a class="dropdown-item" href="{{ route('createBoard') }}">
-                        {{ __('create board') }}
-                    </a>
-                    @endif
-
-                    {{dd($allBoard)}}
-                </div>
-            </div>
-        </div>
+    <button id="toggle-board"  onclick="myFunction()">block</button>
+    <div class="flex-row" id="home-board-content-box" >
+        @foreach($allBoard as $board)
+            <div class="board flex-row">{{$board["name"]}}</div>
+            <div class="board flex-row">{{$board["name"]}}</div>
+            <div class="board flex-row">{{$board["name"]}}</div>
+            <div class="board flex-row">{{$board["name"]}}</div>
+            
+        @endforeach
     </div>
+    
+    <!-- this is what the user sees if user is admin or docent. 
+    this wil be added to all the other code and wil not replace it -->
+    @if (Auth::user()->user_role === 2 || Auth::user()->user_role === 1 )
+    <a class="create-board-button" href="{{ route('createBoard') }}">
+        {{ __('create board') }}
+    </a>
+    @endif
 </div>
 @endsection
