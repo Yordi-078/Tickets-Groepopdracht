@@ -14,6 +14,7 @@
             <a>You cannot change your own account</a><br>
         @else
             <a href="{{ route('changeUserForm', [$user->id]) }}"> Change this user role</a><br>
+            <a href="{{ route('destroyUserPage', [$user->id]) }}">Delete this user</a><br>
         @endif
         
 
