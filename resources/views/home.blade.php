@@ -14,10 +14,14 @@
                         </div>
                     @endif
 
-                    @if (Auth::user()->user_role === 2 || Auth::user()->user_role === 1 )
+                    @if (Auth::user()->user_role == 'admin' || Auth::user()->user_role == 'teacher' )
                     <a class="dropdown-item" href="{{ route('createBoard') }}">
                         {{ __('create board') }}
-                    </a>
+                    </a><br>
+                    <a class="dropdown-item" href="{{ route('changeUserRoles') }}">
+                        {{ __('change user roles') }}
+                    </a><br>
+
                     @endif
 
                     {{ __('You are logged in!') }}

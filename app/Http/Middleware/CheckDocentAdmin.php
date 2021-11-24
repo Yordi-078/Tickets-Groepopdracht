@@ -17,7 +17,7 @@ class CheckDocentAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (\Auth::user() && \Auth::user()->user_role === 1 || \Auth::user()->user_role === 2) {
+        if (\Auth::user() && \Auth::user()->user_role == 'admin' || \Auth::user()->user_role == 'teacher') {
             return $next($request);
         } else {
             return redirect('/');
