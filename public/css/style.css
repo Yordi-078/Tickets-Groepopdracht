@@ -20,6 +20,7 @@ body{
     font: var(--text-font);
     background-color: var(--color-secondary);
     margin:0;
+    background-image: url(images/davinciBackground.png);
 }
 
 a{
@@ -137,7 +138,7 @@ a{
 .board{
     width:15vw;
     height:12vh;
-    background: chartreuse;
+    background:var(--color-secondary);
     border-radius: 10px;
     margin:5px;
     display:flex;
@@ -146,6 +147,7 @@ a{
     font-size: 1.5em;
     font-weight: bold;
     transition: all .2s ease-in-out;
+    box-shadow: 5px 5px 0px 0px var(--color-tertiary);
 }
 
 .board-row{
@@ -154,9 +156,10 @@ a{
 }
 
 .board:hover{
-    margin:0;
-    padding:5px;
+    margin-top:9px;
+    margin-left:9px;
     border: 1px solid black;
+    box-shadow: 1px 1px 0px 0px var(--color-tertiary);
 }
 
 .toggle-board{
