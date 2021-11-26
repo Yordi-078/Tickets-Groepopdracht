@@ -59,13 +59,15 @@ class BoardController extends Controller
 
   public function addToBoard($board_id, $user_id)
   {  
-   
-      $boardUsers = new Board_users();
-      $boardUsers->board_id = $board_id;
-      $boardUsers->user_id = $user_id;
-      $boardUsers->save();
-      return redirect('/home');  
-  
-      
-}
+    {
+      Board_users::updateOrCreate(
+        [
+            "board_id" => $board_id,
+            "user_id" => $user_id
+        ]
+        );
+    }
+
+    return redirect('/home');        
+  }
 }
