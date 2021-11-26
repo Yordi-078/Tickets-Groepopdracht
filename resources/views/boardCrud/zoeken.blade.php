@@ -1,5 +1,7 @@
-<form class="search" type="get" action="{{ route('search') }}">
-                
+
+
+<form class="search" type="get" action="{{ route('search', $board_id) }}">
+        @csrf        
     <div class="input-group md-form form-sm form-1 pl-0">
       <div class="input-group-prepend">
         <span class="input-group-text purple lighten-3" id="basic-text1"><i class="fas fa-search text-danger"
@@ -10,6 +12,8 @@
 </form>
 
 
- @foreach ($zoeken as $zoek)
- <h5 class="card-title"> {{$zoek['name']}}</h5>
+ @foreach ($search as $s)
+ <a class="card-title" href="{{route("addToBoard" , [$board_id, $s['id']])}}"> {{$s['name']}} </a>
+
 @endforeach   
+

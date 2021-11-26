@@ -39,25 +39,33 @@ class BoardController extends Controller
       $boardUsers->save();
     }
 
-    public function oneBoard($board_id){
-        $board = Board::where('id', $board_id)->get();
-        return view('boardCrud.oneBoard', ['board'=>$board, 'board_id'=>$board_id]);
+    public function oneBoard($board_id)
+    {
+      $board = Board::where('id', $board_id)->get();
+      return view('boardCrud.oneBoard', ['board'=>$board, 'board_id'=>$board_id]);
     }
 
-    public function addStudentsToBoard($board_id){
+    public function addStudentsToBoard($board_id)
+    {
       return view('boardCrud.addStudentsToBoard' , ['board_id'=>$board_id]);
     }
 
-    public function search(){
-      $board_id = $_GET['board_id'];
-      dd($board_id);
+    public function search($board_id)
+    {
       $search_text = $_GET['query'];
-      $zoeken = User::where('name','LIKE', '%' .$search_text.'%')->get();
-      return view('boardCrud.zoeken', ['zoeken'=>$zoeken]);
-      
-  }
+      $search = User::where('name','LIKE', '%' .$search_text.'%')->get();
+      return view('boardCrud.zoeken', ['search'=>$search, 'board_id'=>$board_id]);     
+    }
 
-  public function addToBoard(){
-    dd('i0jfissoihgduz0');
-  }
+  public function addToBoard($board_id, $user_id)
+  {  
+   
+      $boardUsers = new Board_users();
+      $boardUsers->board_id = $board_id;
+      $boardUsers->user_id = $user_id;
+      $boardUsers->save();
+      return redirect('/home');  
+  
+      
+}
 }
