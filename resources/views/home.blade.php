@@ -2,16 +2,13 @@
 
 @section('content')
 <div class="container">
-    <button id="toggle-board"  onclick="toggleBoard()">block</button>
+    <button id="toggle-board" class="home-buttons" onclick="toggleBoard()">block</button>
     <!-- this is what the user sees if user is admin or docent. 
     this wil be added to all the other code and wil not replace it -->
     @if (Auth::user()->user_role == 'teacher' || Auth::user()->user_role == 'admin' )
-    <a class="create-board-button" href="{{ route('createBoard') }}">
+    <div class="home-buttons"><a class=" create-board-button " href="{{ route('createBoard') }}">
         {{ __('create board') }}
-    </a>
-    <a class="dropdown-item" href="{{ route('changeUserRoles') }}">
-        {{ __('change user roles') }}
-    </a><br>
+    </a></div>
     @endif
     <div class="flex-row" id="home-board-content-box" >
         @foreach($allBoard as $board)
