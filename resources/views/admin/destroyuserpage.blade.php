@@ -1,13 +1,16 @@
 @extends('layouts.app')
-
 @section('content')
-@if ($user->id == auth()->id())
-    <h2> You cannot change you own user role</h2>
-@else
 
 
 <a href="{{ route('changeUserRoles') }}"> <-Return to change user roles page</a>
-<h1>DESTROY CURRENT USER *THIS ACTION CANNOT BE UNDONE*</h1>
+
+
+
+@if ($user->id == auth()->id())
+    <h1>DESTROY YOUR OWN ACCOUNT *THIS ACTION CANNOT BE UNDONE*</h1>
+@else
+    <h1>DESTROY CURRENT USER *THIS ACTION CANNOT BE UNDONE*</h1>
+@endif
 
     <div class="">
         <a> name:{{ $user->name }} </a><br>
@@ -41,6 +44,5 @@
 </div>
 
 
-@endif
 
 @endsection

@@ -40,7 +40,15 @@ class UserController extends Controller
     {
         $user = User::where('id', $id);
         $user->delete();
-        return redirect()->route('changeUserRoles');
+
+        if ($id == auth()->id())
+        {
+            return redirect()->route('home');
+        }
+        else
+        {
+            return redirect()->route('changeUserRoles');
+        }
     }
 
 

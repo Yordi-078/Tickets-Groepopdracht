@@ -28,7 +28,7 @@ Route::get('changeUserRoles',  [UserController::class, 'changeUserRolesPage'])->
 Route::get('changeUserForm/{id}',  [UserController::class, 'changeUserFormPage'])->name('changeUserForm')->middleware('checkDocentAdmin');
 Route::get('destroyUserPage/{id}',  [UserController::class, 'destroyUserPage'])->name('destroyUserPage')->middleware('checkDocentAdmin');
 Route::post('destroyUser/{id}',  [UserController::class, 'destroyUser'])->name('destroyUser')->middleware('checkDocentAdmin');
-Route::post('updateUserRole/{id}',  [UserController::class, 'updateUserRole'])->name('updateUserRole')->middleware('checkDocentAdmin');
+Route::put('updateUserRole/{id}',  [UserController::class, 'updateUserRole'])->name('updateUserRole')->middleware('checkDocentAdmin');
 Route::post('/home',  [BoardController::class, 'storeBoard'])->name('home')->middleware('checkDocentAdmin');
 Route::get('oneBoard/{id}', [BoardController::class, 'oneBoard'])->name('oneBoard');
 
