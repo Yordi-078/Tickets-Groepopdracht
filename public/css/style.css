@@ -1,6 +1,7 @@
 /* style for welcome.blade.php */
 :root{
     --text-font:Arial;
+    --navbar-gradient:linear-gradient(315deg, #338c7a 0%, #58aa85 70%, #99CE93 85%, #93d2e9 95%);
     --color-primary:#99CE93;
     --color-secondary:#58aa85;
     --color-tertiary:#338c7a;
@@ -18,7 +19,6 @@
 
 body{
     font: var(--text-font);
-    background-color: var(--color-secondary);
     margin:0;
     background-image: url(images/davinciBackground.png);
 }
@@ -60,7 +60,7 @@ a{
 .navbar{
     width:100%;
     height:8vh;
-    background:var(--color-tertiary);
+    background:var(--navbar-gradient);
     display:flex;
     align-items: center;
 }
@@ -91,6 +91,7 @@ a{
     min-width: 160px;
     border-radius: 5px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index:1000;
 }
   
 .dropdown-content a {
@@ -114,18 +115,24 @@ a{
 
 /* style for home.blade.php */
 
+.container{
+    position:absolute;
+    top:9vh;
+    left: 50%;
+    transform: translate(-50%);
+    background:var(--navbar-gradient);
+    border-radius: 10px 10px 0px 0px;
+    box-shadow: 1px 1px 7px 0px black;
+}
 
 #home-board-content-box{
-    background: var(--test);
+    background:#EEEEEE;
     width:80vw;
     min-height:79vh;
-    position:absolute;
-    top:16vh;
-    left:2vw;
     display: flex;
     padding:5px;
     flex-wrap: wrap;
-    align-content: flex-start
+    align-content: flex-start;
 }
 .flex-row{
     flex-direction: row;
@@ -147,7 +154,6 @@ a{
     font-size: 1.5em;
     font-weight: bold;
     transition: all .2s ease-in-out;
-    box-shadow: 5px 5px 0px 0px var(--color-tertiary);
 }
 
 .board-row{
@@ -156,20 +162,34 @@ a{
 }
 
 .board:hover{
-    margin-top:9px;
-    margin-left:9px;
+    margin:0px;
+    padding:5px;
     border: 1px solid black;
-    box-shadow: 1px 1px 0px 0px var(--color-tertiary);
 }
 
-.toggle-board{
-    width:50px;
-    height:30px;
-    background: chocolate;
+.home-buttons{
+    border-style: none;
+    width:6vw;
+    height:6vh;
+    margin:.5vh .5vw 1.5vh 0;
+    background-color:var(--color-secondary);
+    box-shadow: 5px 5px 0px 0px var(--color-tertiary);
+    border-radius: 10px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+#toggle-board{
+    margin-left:1vw;
 }
 
 .create-board-button{
-    width:50px;
-    height:30px;
-    background: chocolate;
+    width: inherit;
+    height: inherit;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
 }
+

@@ -41,6 +41,11 @@
                             <a id="" class="" href="#">
                                 {{ Auth::user()->name }}
                             </a>
+                            @if (Auth::user()->user_role == 'teacher' || Auth::user()->user_role == 'admin' )
+                                <a class="dropdown-item" href="{{ route('changeUserRoles') }}">
+                                    {{ __('change user roles') }}
+                                </a>
+                            @endif
 
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
