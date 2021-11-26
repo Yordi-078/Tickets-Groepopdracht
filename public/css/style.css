@@ -169,7 +169,7 @@ a{
 
 .home-buttons{
     border-style: none;
-    width:6vw;
+    width:7vw;
     height:6vh;
     margin:.5vh .5vw 1.5vh 0;
     background-color:var(--color-secondary);
@@ -183,6 +183,9 @@ a{
 
 #toggle-board{
     margin-left:1vw;
+    margin-left: 1vw;
+    width: 4vw;
+    font-size: 1em;
 }
 
 .create-board-button{
