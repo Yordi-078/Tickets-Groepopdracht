@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Board;
+use App\Models\User;
 use App\Models\Board_users;
 use Illuminate\Support\Facades\Auth;
 
@@ -39,8 +40,24 @@ class BoardController extends Controller
     }
 
     public function oneBoard($board_id){
-
         $board = Board::where('id', $board_id)->get();
-        return view('boardCrud.oneBoard', ['board'=>$board]);
+        return view('boardCrud.oneBoard', ['board'=>$board, 'board_id'=>$board_id]);
     }
+
+    public function addStudentsToBoard($board_id){
+      return view('boardCrud.addStudentsToBoard' , ['board_id'=>$board_id]);
+    }
+
+    public function search(){
+      $board_id = $_GET['board_id'];
+      dd($board_id);
+      $search_text = $_GET['query'];
+      $zoeken = User::where('name','LIKE', '%' .$search_text.'%')->get();
+      return view('boardCrud.zoeken', ['zoeken'=>$zoeken]);
+      
+  }
+
+  public function addToBoard(){
+    dd('i0jfissoihgduz0');
+  }
 }
