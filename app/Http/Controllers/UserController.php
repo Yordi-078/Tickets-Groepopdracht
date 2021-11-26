@@ -31,6 +31,25 @@ class UserController extends Controller
             return redirect()->route('changeUserRoles');
         
     }
+    public function destroyUserPage($id)
+    {
+        return view('admin/destroyuserpage')->with('user', User::where('id', $id)->first());
+    }
+    
+    public function destroyUser(Request $request, $id)
+    {
+        $user = User::where('id', $id);
+        $user->delete();
+
+        if ($id == auth()->id())
+        {
+            return redirect()->route('home');
+        }
+        else
+        {
+            return redirect()->route('changeUserRoles');
+        }
+    }
 
 
 

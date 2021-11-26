@@ -26,7 +26,13 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('createBoard',  [BoardController::class, 'createBoardForm'])->name('createBoard')->middleware('checkDocentAdmin');
 Route::get('changeUserRoles',  [UserController::class, 'changeUserRolesPage'])->name('changeUserRoles')->middleware('checkDocentAdmin');
 Route::get('changeUserForm/{id}',  [UserController::class, 'changeUserFormPage'])->name('changeUserForm')->middleware('checkDocentAdmin');
+Route::get('destroyUserPage/{id}',  [UserController::class, 'destroyUserPage'])->name('destroyUserPage')->middleware('checkDocentAdmin');
+Route::post('destroyUser/{id}',  [UserController::class, 'destroyUser'])->name('destroyUser')->middleware('checkDocentAdmin');
 Route::put('updateUserRole/{id}',  [UserController::class, 'updateUserRole'])->name('updateUserRole')->middleware('checkDocentAdmin');
 Route::post('/home',  [BoardController::class, 'storeBoard'])->name('home')->middleware('checkDocentAdmin');
-Route::get('oneBoard/{id}', [BoardController::class, 'oneBoard'])->name('oneBoard');
+Route::get('oneBoard/{board_id}', [BoardController::class, 'oneBoard'])->name('oneBoard');
+Route::get('addStudentsToBoard/{board_id}',  [BoardController::class, 'addStudentsToBoard'])->name('addStudentsToBoard')->middleware('checkDocentAdmin');
+Route::get('search', [BoardController::class, 'search'])->name('search')->middleware('checkDocentAdmin');
+Route::post('addToBoard',  [BoardController::class, 'addToBoard'])->name('addToBoard')->middleware('checkDocentAdmin');
+
 
