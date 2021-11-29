@@ -4,3 +4,6 @@
 </a>
 @endif
 
+    <a href="{{ url('boardCrud/createCard', $board_id) }}" id="">Add Card</a>
+
+
