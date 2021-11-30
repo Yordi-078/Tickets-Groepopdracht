@@ -25,12 +25,16 @@ class CardController extends Controller
         $name = $request->input('name');
         $description = $request->input('description');
         $user_id = Auth::user()->id;
+
+        date_default_timezone_set('Europe/Amsterdam');
+        $date = date('y-m-d h:i:s');
         
         $card = new Card();
         $card->name = $name;
         $card->description = $description;
         $card->user_id = $user_id;
         $card->board_id = $board_id;
+        $card->created_at = $date;
         $card->save();
 
         return redirect()->route('oneBoard', ['board_id'=>$board_id]);
