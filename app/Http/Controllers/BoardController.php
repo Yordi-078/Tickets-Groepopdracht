@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Board;
+use App\Models\Card;
 use App\Models\User;
 use App\Models\Board_users;
 use Illuminate\Support\Facades\Auth;
@@ -42,7 +43,8 @@ class BoardController extends Controller
     public function oneBoard($board_id)
     {
       $board = Board::where('id', $board_id)->get();
-      return view('boardCrud.oneBoard', ['board'=>$board, 'board_id'=>$board_id]);
+      $cards = Card::where('board_id', $board_id)->get();
+      return view('boardCrud.oneBoard', ['cards'=>$cards, 'thisBoard'=>$board, 'board_id'=>$board_id]);
     }
 
     public function addStudentsToBoard($board_id)
