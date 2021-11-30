@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BoardController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CardController;
 use App\Http\Middleware\checkDocentAdmin;
 
 /*
@@ -32,7 +33,14 @@ Route::put('updateUserRole/{id}',  [UserController::class, 'updateUserRole'])->n
 Route::post('/home',  [BoardController::class, 'storeBoard'])->name('home')->middleware('checkDocentAdmin');
 Route::get('oneBoard/{board_id}', [BoardController::class, 'oneBoard'])->name('oneBoard');
 Route::get('addStudentsToBoard/{board_id}',  [BoardController::class, 'addStudentsToBoard'])->name('addStudentsToBoard')->middleware('checkDocentAdmin');
+<<<<<<< Updated upstream
 Route::get('search/{board_id}', [BoardController::class, 'search'])->name('search')->middleware('checkDocentAdmin');
 Route::get('addToBoard/{board_id}/{user_id}',  [BoardController::class, 'addToBoard'])->name('addToBoard')->middleware('checkDocentAdmin');
 
+=======
+Route::get('search', [BoardController::class, 'search'])->name('search')->middleware('checkDocentAdmin');
+Route::post('addToBoard',  [BoardController::class, 'addToBoard'])->name('addToBoard')->middleware('checkDocentAdmin');
+Route::get('boardCrud/createCard/{board_id}',  [CardController::class, 'addACard'])->name('addACard');
+Route::post('oneBoard/{board_id}',  [CardController::class, 'storeCard'])->name('storeCard');
+>>>>>>> Stashed changes
 
