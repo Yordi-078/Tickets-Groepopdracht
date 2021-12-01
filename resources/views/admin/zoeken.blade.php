@@ -8,7 +8,6 @@
   </div>
 </form>
 
-
 @foreach ($search as $s)
 <div class="">
     <a> name:{{ $s->name }} </a><br>

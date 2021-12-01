@@ -20,7 +20,7 @@ class Board extends Model
      * @var bool
      */
     public $timestamps = true;
-
+ 
       /**
      * The attributes that are mass assignable.
      *
