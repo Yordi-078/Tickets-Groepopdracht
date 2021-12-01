@@ -16,12 +16,6 @@
 
 <h1>Change User Roles Page</h1>
 
-
-
-
-
-
-
 @foreach ($users as $user) 
     <div class="">
         <a> name:{{ $user->name }} </a><br>
