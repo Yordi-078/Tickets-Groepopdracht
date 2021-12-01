@@ -12,7 +12,13 @@
 
 @section('content')
 
+<a href="{{ route('home') }}">  <-Return to change user roles page </a>
+
 <h1>Change User Roles Page</h1>
+
+
+
+
 
 
 
