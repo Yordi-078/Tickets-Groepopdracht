@@ -40,11 +40,10 @@ class BoardController extends Controller
       $boardUsers->save();
     }
 
-    public function oneBoard($board_id)
+    public function oneBoard(Board $board_id)
     {
-      $board = Board::where('id', $board_id)->get();
-      $cards = Card::where('board_id', $board_id)->get();
-      return view('boardCrud.oneBoard', ['cards'=>$cards, 'thisBoard'=>$board, 'board_id'=>$board_id]);
+      $cards = $board_id->cards;
+      return view('boardCrud.oneBoard', ['cards'=>$cards, 'thisBoard'=>$board_id]);
     }
 
     public function addStudentsToBoard($board_id)

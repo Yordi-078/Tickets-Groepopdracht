@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Board;
 
 class Card extends Model
 {
@@ -29,4 +30,8 @@ class Card extends Model
     protected $fillable = [
      'name', 'description','board_id'
     ];
+
+    public function board(){
+      return $this->belongsTo(Board::class);
+    }
 }
