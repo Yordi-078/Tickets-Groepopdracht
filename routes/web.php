@@ -40,4 +40,7 @@ Route::get('search', [BoardController::class, 'search'])->name('search')->middle
 Route::post('addToBoard',  [BoardController::class, 'addToBoard'])->name('addToBoard')->middleware('checkDocentAdmin');
 Route::get('boardCrud/createCard/{board_id}',  [CardController::class, 'addACard'])->name('addACard');
 Route::post('oneBoard/{board_id}',  [CardController::class, 'storeCard'])->name('storeCard');
+Route::get('searchAdminPage', [UserController::class, 'searchAdminPage'])->name('searchAdminPage')->middleware('checkDocentAdmin');
+
+
 
