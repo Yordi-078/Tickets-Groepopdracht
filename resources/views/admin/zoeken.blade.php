@@ -1,10 +1,17 @@
+@extends('layouts.app')
+@section('content')
+
+
+
+<a href="{{ route('changeUserRoles') }}"> <-Reset search result</a>
+
 <form class="search" type="get" action="{{ route('searchAdminPage') }}">
     @csrf     
   <div class="input-group md-form form-sm form-1 pl-0">
     <div class="input-group-prepend">
       <span class="input-group-text purple lighten-3" id="basic-text1"><i class="fas fa-search text-danger" aria-hidden="true"></i></span>
     </div>
-    <input class="form-control my-0 py-1" name="query" type="search" placeholder="Zoek" aria-label="Search">
+    <input class="form-control my-0 py-1" name="query" type="search" placeholder="Search for Name of User" aria-label="Search">
   </div>
 </form>
 
@@ -26,3 +33,5 @@
 </div>
 
 @endforeach   
+
+@endsection
