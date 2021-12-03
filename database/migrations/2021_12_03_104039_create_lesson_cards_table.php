@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCardsTable extends Migration
+class CreateLessonCardsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,16 @@ class CreateCardsTable extends Migration
      */
     public function up()
     {
-        Schema::create('cards', function (Blueprint $table) {
+        Schema::create('lesson_cards', function (Blueprint $table) {
             $table->id();
             $table->string('name', 100);
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('board_id');
-            $table->unsignedBigInteger('helper_id')->nullable();
             $table->text('description');
             $table->enum('status', ['in_progress', 'finished']);
-            $table->string('image')->nullable();
-            $table->timestamps(); // finished_date is hetzelfde als: updated_at
+            $table->text('start_time');
+            $table->text('finished_date');
+            $table->timestamps();
         });
     }
 
@@ -33,6 +33,6 @@ class CreateCardsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cards');
+        Schema::dropIfExists('lesson_cards');
     }
 }
