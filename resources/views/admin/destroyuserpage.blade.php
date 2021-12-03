@@ -23,7 +23,6 @@
     <div class="">
         <div class="">
             <div class="">
-                <h2 class="">DELETE A USER</h2>
                 <div class="">
                     <form method="POST" action="{{ url('destroyUser',$user->id)}} ">
                         @csrf
