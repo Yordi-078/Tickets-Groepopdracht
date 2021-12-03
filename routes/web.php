@@ -35,9 +35,6 @@ Route::get('oneBoard/{board_id}', [BoardController::class, 'oneBoard'])->name('o
 Route::get('addStudentsToBoard/{board_id}',  [BoardController::class, 'addStudentsToBoard'])->name('addStudentsToBoard')->middleware('checkDocentAdmin');
 Route::get('search/{board_id}', [BoardController::class, 'search'])->name('search')->middleware('checkDocentAdmin');
 Route::get('addToBoard/{board_id}/{user_id}',  [BoardController::class, 'addToBoard'])->name('addToBoard')->middleware('checkDocentAdmin');
-
-Route::get('search', [BoardController::class, 'search'])->name('search')->middleware('checkDocentAdmin');
-Route::post('addToBoard',  [BoardController::class, 'addToBoard'])->name('addToBoard')->middleware('checkDocentAdmin');
 Route::get('boardCrud/createCard/{board_id}',  [CardController::class, 'addACard'])->name('addACard');
 Route::post('oneBoard/{board_id}',  [CardController::class, 'storeCard'])->name('storeCard');
 Route::get('searchAdminPage', [UserController::class, 'searchAdminPage'])->name('searchAdminPage')->middleware('checkDocentAdmin');
