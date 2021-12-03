@@ -21,7 +21,7 @@ class CreateLessonCardsTable extends Migration
             $table->text('description');
             $table->enum('status', ['in_progress', 'finished']);
             $table->text('start_time');
-            $table->text('finished_date');
+            $table->text('finished_date')->nullable();
             $table->timestamps();
         });
     }

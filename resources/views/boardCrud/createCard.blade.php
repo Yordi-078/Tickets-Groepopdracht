@@ -1,4 +1,4 @@
-<form method="POST" action="{{ url('/oneBoard', $board_id) }}">
+<form method="POST" action="{{ url('storeCard', $board_id) }}">
     @csrf
         <div class="field">
             <label class="label" for="name">Name: </label>
