@@ -34,8 +34,4 @@ class Card extends Model
     public function board(){
       return $this->belongsTo(Board::class);
     }
-
-    public function sortCard(){
-      $sortCards = $this->hasMany(Card::class)->orderBy('created_at');
-    }
 }
