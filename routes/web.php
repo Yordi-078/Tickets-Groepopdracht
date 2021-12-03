@@ -38,6 +38,8 @@ Route::get('addToBoard/{board_id}/{user_id}',  [BoardController::class, 'addToBo
 Route::get('boardCrud/createCard/{board_id}',  [CardController::class, 'addACard'])->name('addACard');
 Route::post('oneBoard/{board_id}',  [CardController::class, 'storeCard'])->name('storeCard');
 Route::get('searchAdminPage', [UserController::class, 'searchAdminPage'])->name('searchAdminPage')->middleware('checkDocentAdmin');
+Route::get('boardCrud/createLessCard/{board_id}',  [CardController::class, 'createLessCard'])->name('createLessCard');
+Route::post('oneBoard/{board_id}',  [CardController::class, 'storeLessonCard'])->name('storeLessonCard');
 
 
 

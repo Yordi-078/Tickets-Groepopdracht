@@ -42,13 +42,30 @@
 </div>
 <div class="lesson-board-container">
     <div class="board-header">
-        <a href="{{ url('boardCrud/createCard', $thisBoard['id']) }}" class="home-buttons">Add Card</a>
+        <a href="{{ url('boardCrud/createLessCard', $thisBoard['id']) }}" class="home-buttons">Add Card</a>
     </div>
     
     <div class="flex-row" id="board-lesson-content-box" >
         
-            <a href="#" class="lesson-board">voorbeeld les</a>  
+        @foreach($lessonCards as $lessonCard)
+        <a href="#" class="toggle cards flex-row">{{$lessonCard["name"]}}<button class="card-popup-button" onclick="showPopup('myModal{{$lessonCard['id']}}')"><i class="far fa-eye"></i></button></a> 
+        
+        <!-- The Modal -->
+        <div id="myModal{{$lessonCard['id']}}" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+              <span class="close">&times;</span>
+              <form>
+                      <input placeholder="hello world" required>
+                      <input value="{{$lessonCard['name']}}">
+              </form>
+            </div>
+
+        </div>
+    @endforeach
         
     </div>
 </div>
 @endsection
+
