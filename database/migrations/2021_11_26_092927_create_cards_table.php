@@ -18,12 +18,11 @@ class CreateCardsTable extends Migration
             $table->string('name', 100);
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('board_id');
-            $table->unsignedBigInteger('helper_id');
+            $table->unsignedBigInteger('helper_id')->nullable();
             $table->text('description');
             $table->enum('status', ['in_progress', 'finished']);
-            $table->string('image');
-            $table->text('finished_state');
-            $table->timestamps();
+            $table->string('image')->nullable();
+            $table->timestamps(); // finished_date is hetzelfde als: updated_at
         });
     }
 
