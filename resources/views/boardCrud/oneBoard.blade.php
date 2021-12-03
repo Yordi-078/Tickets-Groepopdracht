@@ -20,7 +20,12 @@
 
     <div class="flex-row" id="board-question-content-box" >
         @foreach($cards as $card)
-            <a href="#" class="toggle cards flex-row">{{$card["name"]}}<button class="card-popup-button" onclick="showPopup('myModal{{$card['id']}}')"><i class="far fa-eye"></i></button></a> 
+            <a href="#" class="cards flex-row">
+                <button class="card-popup-button" onclick="showPopup('myModal{{$card['id']}}')">
+                    <i class="far fa-eye"></i>
+                </button>
+                {{$card["name"]}}
+            </a> 
             
             <!-- The Modal -->
             <div id="myModal{{$card['id']}}" class="modal">
@@ -28,9 +33,21 @@
                 <!-- Modal content -->
                 <div class="modal-content">
                   <span class="close">&times;</span>
+                  
                   <form>
-                          <input placeholder="hello world" required>
-                          <input value="{{$card['name']}}">
+                        <div id="general">
+                            <input type="text" value="{{$card['name']}}" required>
+                            <input type="text" value="{{$card['description']}}" required>
+                        </div>
+                        <div id="imageUploader">
+                            <input type="file">
+                        </div>
+                        <select name="status">
+                            <option value="in_progress">in progress</option>
+                            <option value="finished">finished</option>
+                        </select>
+                        <input type="button" value="{{$card['helper']}}">
+                        <p>{{$card['created_at']}}</p>
                   </form>
                 </div>
   

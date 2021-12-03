@@ -12,7 +12,7 @@
     @endif
     <div class="flex-row" id="home-board-content-box" >
         @foreach($allBoard as $board)
-            <a href="{{ Route('oneBoard', $board['id']) }}" class="toggle board flex-row">{{$board["name"]}}</a>  
+            <a href="{{ Route('oneBoard', $board['id']) }}" class="board flex-row">{{$board["name"]}}</a>  
         @endforeach
     </div>
 

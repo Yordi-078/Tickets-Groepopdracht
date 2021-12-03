@@ -318,20 +318,22 @@ a{
 .card-popup-button{
     background: transparent;
     border: none;
-    position:relative;
-    top:-4vh;
-    right:-4vw;
+    grid-row: 1/2;
+    position: relative;
+    top: 1vh;
+    left: 85%;
+    width: fit-content;
 }
 
 .cards{
-    width:15vw;
-    height:12vh;
-    background:var(--color-secondary);
+    width: 14vw;
+    height: 12vh;
+    background: var(--color-secondary);
     border-radius: 10px;
-    margin:5px;
-    display:flex;
-    justify-content: center;
-    align-items: center;
+    margin: 5px;
+    display: grid;
+    grid-template-rows: 2vh 1fr 1fr;
+    padding-left: 1vw;
     font-size: 1.5em;
     font-weight: bold;
     transition: all .2s ease-in-out;
@@ -340,6 +342,7 @@ a{
 .cards:hover{
     margin:0px;
     padding:5px;
+    padding-left:calc(1vw + 5px);
     border: 1px solid black;
 }
 
@@ -365,14 +368,15 @@ a{
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%;
+    width: 60%;
+    height: 60%;
   }
   
   /* The Close Button */
   .close {
     color: #aaaaaa;
     float: right;
-    font-size: 28px;
+    font-size: 30px;
     font-weight: bold;
   }
   
