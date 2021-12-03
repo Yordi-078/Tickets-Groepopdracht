@@ -20,7 +20,21 @@
 
     <div class="flex-row" id="board-question-content-box" >
         @foreach($cards as $card)
-            <a href="#" class="board flex-row">{{$card["name"]}}</a>  
+            <a href="#" class="toggle cards flex-row">{{$card["name"]}}<button class="card-popup-button" onclick="showPopup('myModal{{$card['id']}}')"><i class="far fa-eye"></i></button></a> 
+            
+            <!-- The Modal -->
+            <div id="myModal{{$card['id']}}" class="modal">
+
+                <!-- Modal content -->
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <form>
+                          <input placeholder="hello world" required>
+                          <input value="{{$card['name']}}">
+                  </form>
+                </div>
+  
+            </div>
         @endforeach
     </div>
 
@@ -33,7 +47,7 @@
     
     <div class="flex-row" id="board-lesson-content-box" >
         
-            <a href="#" class="lesson-board">test les</a>  
+            <a href="#" class="lesson-board">voorbeeld les</a>  
         
     </div>
 </div>
