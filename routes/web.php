@@ -40,6 +40,8 @@ Route::post('storeCard/{board_id}',  [CardController::class, 'storeCard'])->name
 Route::get('searchAdminPage', [UserController::class, 'searchAdminPage'])->name('searchAdminPage')->middleware('checkDocentAdmin');
 Route::get('boardCrud/createLessCard/{board_id}',  [CardController::class, 'createLessCard'])->name('createLessCard');
 Route::post('storeLessonCard/{board_id}',  [CardController::class, 'storeLessonCard'])->name('storeLessonCard');
+Route::get('storeLessonUpVote/{lesson_id}/{board_id}',  [CardController::class, 'storeLessonUpVote'])->name('storeLessonUpVote');
+Route::get('getCardInfo/{lesson_id}/{board_id}',  [CardController::class, 'getCardInfo'])->name('getCardInfo');
 
 
 

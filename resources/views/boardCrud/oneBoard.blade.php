@@ -65,23 +65,20 @@
     <div class="flex-row" id="board-lesson-content-box" >
         
         @foreach($lessonCards as $lessonCard)
-        <a href="#" class="toggle cards flex-row">{{$lessonCard["name"]}}<button class="card-popup-button" onclick="showPopup('myModal{{$lessonCard['id']}}')"><i class="far fa-eye"></i></button></a> 
+        <a href="#" class="toggle cards flex-row">{{$lessonCard["name"]}}<button class="card-popup-button" onclick="showPopup('myModalLesson{{$lessonCard['id']}}')"><i class="far fa-eye"></i></button></a> 
         
         <!-- The Modal -->
-        <div id="myModal{{$lessonCard['id']}}" class="modal">
-
+        <div id="myModalLesson{{$lessonCard['id']}}" class="modal">
             <!-- Modal content -->
             <div class="modal-content">
               <span class="close">&times;</span>
               <form>
-                      <input placeholder="hello world" required>
-                      <input value="{{$lessonCard['name']}}">
+                <a href="{{ url('storeLessonUpVote', [$lessonCard['id'], $thisBoard['id']]) }}" class="home-buttons">Upvote</a>
+
               </form>
             </div>
-
         </div>
     @endforeach
-        
     </div>
 </div>
 @endsection

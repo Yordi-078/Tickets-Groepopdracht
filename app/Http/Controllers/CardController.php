@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Board;
 use App\Models\User;
 use App\Models\LessonCards;
+use App\Models\LessonUpvotes;
 use App\Models\Board_users;
 use App\Models\Card;
 use Illuminate\Support\Facades\Auth;
@@ -84,4 +85,31 @@ class CardController extends Controller
             'description' => ['required', 'min:1', 'max:100']
         ]);
     }
+    
+    public function storeLessonUpVote($lesson_id, $board_id)
+    {
+        $user_id = Auth::user()->id;
+
+        LessonUpvotes::updateOrCreate(
+            [
+                "card_id" => $lesson_id,
+                "user_id" => $user_id
+            ]
+            );
+
+            $userID = LessonUpvotes::where('card_id', $lesson_id)->get('user_id');
+            $user = User::find($userID);
+             
+
+            return redirect()->route('oneBoard', ['board_id'=>$board_id]); 
+    }
+
+    public function getCardInfo($lesson_id, $board_id)
+    {
+        $userID = LessonUpvotes::where('card_id', $lesson_id)->get('user_id');
+        $users = User::find($userID);
+        
+        return redirect()->route('oneBoard', ['board_id'=>$board_id, 'users'=>$users]);
+    }
 }
+

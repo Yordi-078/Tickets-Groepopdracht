@@ -25,6 +25,7 @@ var span = document.getElementsByClassName("close")[0];
 function showPopup($var){
     modal = document.getElementById($var);
     modal.style.display = "block";
+    {{dd('asiuoofiszw')}}
 }
 
 span.onclick = function() {
