@@ -34,20 +34,30 @@
                 <div class="modal-content">
                   <span class="close">&times;</span>
                   
-                  <form>
-                        <div id="general">
-                            <input type="text" value="{{$card['name']}}" required>
-                            <input type="text" value="{{$card['description']}}" required>
+                  <form id="card-info-popup">
+                        <div id="general" class="card-info-border">
+                            <span><i class="fas fa-align-left"></i></span>
+                            <textarea type="text" id="title" maxlength="300" required>{{$card['name']}}</textarea>
+                            <span>descrition: </span>
+                            <textarea type="text" id="description" maxlength="665" required>{{$card['description']}}</textarea>
                         </div>
-                        <div id="imageUploader">
+
+                        <div id="image-uploader" class="card-info-border">
                             <input type="file">
                         </div>
-                        <select name="status">
-                            <option value="in_progress">in progress</option>
-                            <option value="finished">finished</option>
-                        </select>
-                        <input type="button" value="{{$card['helper']}}">
-                        <p>{{$card['created_at']}}</p>
+                        <div id="progress-info" class="card-info-border">
+                            <p>{{$card['created_at']}}</p>
+                            <select name="status">
+                                <option value="in_progress">in progress</option>
+                                <option value="finished">finished</option>
+                            </select>
+                        </div>
+                        <div id="helper-box" class="card-info-border">
+                            @if ($card['helper'])
+                                <input type="button" value="{{$card['helper']}}">
+                            @endif
+                            <input type="button" value=" + ">
+                        </div>
                   </form>
                 </div>
   
