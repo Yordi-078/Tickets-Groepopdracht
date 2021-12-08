@@ -42,4 +42,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function Boards()
+    {
+        return $this->belongToMany(Board::class);
+    }
+    /** upvotes cards-users */
+    public function Cards()
+    {
+        return $this->belongToMany(Card::class);
+    }
 }

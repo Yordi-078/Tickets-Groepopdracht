@@ -41,4 +41,8 @@ class Board extends Model
     {
         return $this->hasMany(LessonCards::class);
     }
+    public function Users()
+    {
+        return $this->belongToMany(User::class);
+    }
 }

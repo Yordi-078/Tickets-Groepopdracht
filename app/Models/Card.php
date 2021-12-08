@@ -31,7 +31,13 @@ class Card extends Model
      'name', 'description','board_id'
     ];
 
-    public function board(){
+    public function board()
+    {
       return $this->belongsTo(Board::class);
+    }
+    /** upvotes cards-users */
+    public function Users()
+    {
+        return $this->belongToMany(User::class);
     }
 }
