@@ -16,7 +16,7 @@ class UserController extends Controller
     public function changeUserRolesPage()
     {
         $users = User::all();
-        return view('admin/changeuserroles', compact('users'));
+        return view('admin/change-user-roles', compact('users'));
     }
 
 
@@ -27,7 +27,7 @@ class UserController extends Controller
      */
     public function changeUserFormPage($id)
     {
-        return view('admin/changeuserform')->with('user', User::where('id', $id)->first());
+        return view('admin/change-user-form')->with('user', User::where('id', $id)->first());
     }
 
     /**
@@ -57,7 +57,7 @@ class UserController extends Controller
      */
     public function destroyUserPage($id)
     {
-        return view('admin/destroyuserpage')->with('user', User::where('id', $id)->first());
+        return view('admin/destroy-user-page')->with('user', User::where('id', $id)->first());
     }
 
 
@@ -86,7 +86,7 @@ class UserController extends Controller
     {
         $search_text = $_GET['query'];
         $search = User::where('name','LIKE', '%' .$search_text.'%')->get();
-        return view('admin.zoeken', ['search'=>$search]);   
+        return view('admin.search-user', ['search'=>$search]);   
     }
 
 }

@@ -23,7 +23,7 @@
                 <div class="">
                     <form method="POST" action="{{ url('updateUserRole',$user->id)}} ">
                         @csrf
-                        @method('PUT')
+                        @method('POST')
 
                         <div class="">
                             <label for="name" class="">User Role</label>
