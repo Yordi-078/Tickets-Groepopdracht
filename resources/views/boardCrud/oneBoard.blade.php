@@ -1,16 +1,15 @@
 @extends('layouts.app')
 
-@section('addStudent')
-        <!-- this is what the user sees if user is admin or docent. 
-        this wil be added to all the other code and wil not replace it -->
-        @if (Auth::user()->user_role == 'teacher' || Auth::user()->user_role == 'admin' )
-        <a class="dropdown-item" href="{{ route('addStudentsToBoard', $thisBoard['id']) }}">
-            {{ __('Add students') }}
-        </a>
-        @endif
-@endsection
-
 @section('content')
+<div class="board-page-header">
+    <!-- this is what the user sees if user is admin or docent. 
+    this wil be added to all the other code and wil not replace it -->
+    @if (Auth::user()->user_role == 'teacher' || Auth::user()->user_role == 'admin' )
+    <a id="add-student-button" class="dropdown-item" href="{{ route('addStudentsToBoard', $thisBoard['id']) }}">
+        {{ __('Add students') }}
+    </a>
+    @endif
+</div>
 <div class="question-board-container">
     <div class="board-header">
         <button id="toggle-board" class="home-buttons" onclick="toggleBoard()"><i class="fas fa-bars"></i></button>
