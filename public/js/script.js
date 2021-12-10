@@ -28,6 +28,7 @@ var span = document.getElementsByClassName("close")[0];
 function showPopup(modal_id, board_id){
        var url = '{{ route("getCardInfo") }}';
        console.log(url)
+       /*
        let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
        var body = {
          lesson_id : modal_id,
@@ -36,7 +37,7 @@ function showPopup(modal_id, board_id){
        fetch(url, {
          headers: {
            "Content-Type": "application/json",
-           "Accept": "application/json, text-plain, */*",
+           "Accept": "application/json, text-plain, *//* only 1 line  ",
            "X-Requested-With": "XMLHttpRequest",
            "X-CSRF-TOKEN": token,
          },
@@ -48,7 +49,7 @@ function showPopup(modal_id, board_id){
        .then(data => console.log(data));
       modal = document.getElementById(modal_id);
       modal.style.display = "block";
-
+    */
    
 }
 
