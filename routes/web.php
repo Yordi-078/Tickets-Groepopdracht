@@ -26,20 +26,20 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 /** board routes */
-Route::post('/home',  [BoardController::class, 'storeBoard'])->name('home')->middleware('checkDocentAdmin');
-Route::get('createBoard',  [BoardController::class, 'createBoardForm'])->name('createBoard')->middleware('checkDocentAdmin');
+Route::post('/home',  [BoardController::class, 'storeBoard'])->name('home')->middleware('checkTeacherOrAdmin');
+Route::get('createBoard',  [BoardController::class, 'createBoardForm'])->name('createBoard')->middleware('checkTeacherOrAdmin');
 Route::get('oneBoard/{board_id}', [BoardController::class, 'oneBoard'])->name('oneBoard');
-Route::get('addStudentsToBoard/{board_id}',  [BoardController::class, 'addStudentsToBoard'])->name('addStudentsToBoard')->middleware('checkDocentAdmin');
-Route::get('search/{board_id}', [BoardController::class, 'search'])->name('search')->middleware('checkDocentAdmin');
-Route::get('addToBoard/{board_id}/{user_id}',  [BoardController::class, 'addToBoard'])->name('addToBoard')->middleware('checkDocentAdmin');
+Route::get('addStudentsToBoard/{board_id}',  [BoardController::class, 'addStudentsToBoard'])->name('addStudentsToBoard')->middleware('checkTeacherOrAdmin');
+Route::get('search/{board_id}', [BoardController::class, 'search'])->name('search')->middleware('checkTeacherOrAdmin');
+Route::get('addToBoard/{board_id}/{user_id}',  [BoardController::class, 'addToBoard'])->name('addToBoard')->middleware('checkTeacherOrAdmin');
 
 /** admin routes */
-Route::get('admin/user-overview',  [UserController::class, 'changeUserRolesPage'])->name('changeUserRoles')->middleware('checkDocentAdmin');
-Route::get('admin/change-user-role/{id}',  [UserController::class, 'changeUserFormPage'])->name('changeUserForm')->middleware('checkDocentAdmin');
-Route::post('updateUserRole/{id}',  [UserController::class, 'updateUserRole'])->name('updateUserRole')->middleware('checkDocentAdmin');
-Route::get('admin/confirm-delete/{id}',  [UserController::class, 'destroyUserPage'])->name('destroyUserPage')->middleware('checkDocentAdmin');
-Route::post('destroyUser/{id}',  [UserController::class, 'destroyUser'])->name('destroyUser')->middleware('checkDocentAdmin');
-Route::get('admin/search-user', [UserController::class, 'searchAdminPage'])->name('searchAdminPage')->middleware('checkDocentAdmin');
+Route::get('admin/user-overview',  [UserController::class, 'changeUserRolesPage'])->name('changeUserRoles')->middleware('checkAdmin');
+Route::get('admin/change-user-role/{id}',  [UserController::class, 'changeUserFormPage'])->name('changeUserForm')->middleware('checkAdmin');
+Route::post('updateUserRole/{id}',  [UserController::class, 'updateUserRole'])->name('updateUserRole')->middleware('checkAdmin');
+Route::get('admin/confirm-delete/{id}',  [UserController::class, 'destroyUserPage'])->name('destroyUserPage')->middleware('checkAdmin');
+Route::post('destroyUser/{id}',  [UserController::class, 'destroyUser'])->name('destroyUser')->middleware('checkAdmin');
+Route::get('admin/search-user', [UserController::class, 'searchAdminPage'])->name('searchAdminPage')->middleware('checkAdmin');
 
 
 /** card routes */

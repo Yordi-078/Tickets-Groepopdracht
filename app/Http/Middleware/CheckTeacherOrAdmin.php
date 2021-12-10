@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use App\Http\Middleware\Auth;
 
-class CheckDocentAdmin
+class CheckTeacherOrAdmin
 {
     /**
      * Handle an incoming request.
@@ -17,9 +17,12 @@ class CheckDocentAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (\Auth::user() && \Auth::user()->user_role == 'admin' || \Auth::user()->user_role == 'teacher') {
+        if (\Auth::user() && \Auth::user()->user_role == 'admin' || \Auth::user()->user_role == 'teacher') 
+        {
             return $next($request);
-        } else {
+        } 
+        else 
+        {
             return redirect('/');
         }
     }
