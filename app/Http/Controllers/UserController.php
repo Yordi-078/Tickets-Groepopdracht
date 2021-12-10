@@ -82,6 +82,10 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * page where you see the search result
+     *
+     */
     public function searchAdminPage()
     {
         $search_text = $_GET['query'];

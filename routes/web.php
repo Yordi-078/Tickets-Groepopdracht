@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BoardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CardController;
+use App\Http\Controllers\LessonCardController;
 use App\Http\Middleware\checkDocentAdmin;
 
 /*
@@ -44,9 +45,9 @@ Route::get('admin/search-user', [UserController::class, 'searchAdminPage'])->nam
 /** card routes */
 Route::get('boardCrud/createCard/{board_id}',  [CardController::class, 'addACard'])->name('addACard');
 Route::post('storeCard/{board_id}',  [CardController::class, 'storeCard'])->name('storeCard');
-Route::get('boardCrud/createLessCard/{board_id}',  [CardController::class, 'createLessCard'])->name('createLessCard');
-Route::post('storeLessonCard/{board_id}',  [CardController::class, 'storeLessonCard'])->name('storeLessonCard');
-Route::get('storeLessonUpVote/{lesson_id}/{board_id}',  [CardController::class, 'storeLessonUpVote'])->name('storeLessonUpVote');
+Route::get('boardCrud/createLessCard/{board_id}',  [LessonCardController::class, 'createLessCard'])->name('createLessCard');
+Route::post('storeLessonCard/{board_id}',  [LessonCardController::class, 'storeLessonCard'])->name('storeLessonCard');
+Route::get('storeLessonUpVote/{lesson_id}/{board_id}',  [LessonCardController::class, 'storeLessonUpVote'])->name('storeLessonUpVote');
 Route::get('getCardInfo/{lesson_id}/{board_id}',  [CardController::class, 'getCardInfo'])->name('getCardInfo');
 
 

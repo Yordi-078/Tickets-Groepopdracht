@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Board;
 use App\Models\LessonCards;
+use Illuminate\Support\Facades\Auth;
 
 class LessonCardController extends Controller
 {
