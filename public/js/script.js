@@ -1,3 +1,6 @@
+const { isPlainObject } = require("jquery");
+const { default: plugin } = require("tailwindcss/plugin");
+
 function toggleBoard() {
     var boards = document.getElementsByClassName("board");
     for (i = 0; i < boards.length; i++) {
@@ -22,10 +25,31 @@ var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks the button, open the modal 
 
-function showPopup($var){
-    modal = document.getElementById($var);
-    modal.style.display = "block";
-    {{dd('asiuoofiszw')}}
+function showPopup(modal_id, board_id){
+       var url = '{{ route("getCardInfo") }}';
+       console.log(url)
+       let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+       var body = {
+         lesson_id : modal_id,
+         board_id : board_id
+       };
+       fetch(url, {
+         headers: {
+           "Content-Type": "application/json",
+           "Accept": "application/json, text-plain, */*",
+           "X-Requested-With": "XMLHttpRequest",
+           "X-CSRF-TOKEN": token,
+         },
+         method: 'post',
+         credentials: "same-origin",
+         body: JSON.stringify(body)
+       })
+      .then(response => response.json())
+       .then(data => console.log(data));
+      modal = document.getElementById(modal_id);
+      modal.style.display = "block";
+
+   
 }
 
 span.onclick = function() {

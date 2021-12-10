@@ -75,7 +75,7 @@
     <div class="flex-row" id="board-lesson-content-box" >
         
         @foreach($lessonCards as $lessonCard)
-        <a href="#" class="toggle cards flex-row">{{$lessonCard["name"]}}<button class="card-popup-button" onclick="showPopup('myModalLesson{{$lessonCard['id']}}')"><i class="far fa-eye"></i></button></a> 
+        <a href="#" class="toggle cards flex-row">{{$lessonCard["name"]}}<button class="card-popup-button" onclick="showPopup(`myModalLesson{{$lessonCard['id'], $thisBoard['id']}}`)"><i class="far fa-eye"></i></button></a> 
         
         <!-- The Modal -->
         <div id="myModalLesson{{$lessonCard['id']}}" class="modal">
@@ -84,12 +84,16 @@
               <span class="close">&times;</span>
               <form>
                 <a href="{{ url('storeLessonUpVote', [$lessonCard['id'], $thisBoard['id']]) }}" class="home-buttons">Upvote</a>
-
+                {{-- $lessonCard['id']}}`,`{{$thisBoard['id'] --}}
               </form>
             </div>
         </div>
     @endforeach
     </div>
+
+    
+
 </div>
+ {{-- <script> var url = {{ route('getCardInfo') }}</script> --}}
 @endsection
 
