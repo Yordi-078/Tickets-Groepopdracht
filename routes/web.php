@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BoardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CardController;
-use App\Http\Middleware\checkDocentAdmin;
+use App\Http\Middleware\CheckAdmin;
+use App\Http\Middleware\CheckTeacherOrAdmin;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,7 @@ Route::get('/', function () {
 
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 /** board routes */
 Route::post('/home',  [BoardController::class, 'storeBoard'])->name('home')->middleware('CheckTeacherOrAdmin');
 Route::get('createBoard',  [BoardController::class, 'createBoardForm'])->name('createBoard')->middleware('CheckTeacherOrAdmin');

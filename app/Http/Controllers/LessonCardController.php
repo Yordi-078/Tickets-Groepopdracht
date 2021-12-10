@@ -57,11 +57,6 @@ class LessonCardController extends Controller
                 "user_id" => $user_id
             ]
             );
-
-            $userID = LessonUpvotes::where('card_id', $lesson_id)->get('user_id');
-            $user = User::find($userID);
-             
-
             return redirect()->route('oneBoard', ['board_id'=>$board_id]); 
     }
 }
