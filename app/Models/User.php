@@ -33,7 +33,7 @@ class User extends Authenticatable
 
 
 
-    public function Boards()
+    public function boards()
     {
         return $this->belongToMany(Board::class);
     }
