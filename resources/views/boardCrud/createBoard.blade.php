@@ -1,7 +1,14 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="form-container">
+<div class="form-header">
+        <h1>maak een board aan</h1>
+    </div>
 <form  method="POST" action="{{url('/home')}}">
     @csrf
     <label for="name">name</label>
-    <input type="text" id="name" name="name">
+    <input type="text" id="name" name="name" required>
 
     
     <div style="display: none;">
@@ -12,5 +19,8 @@
     <label for="description">description</label>
     <input type="text" id="description" name="description">
 
-    <button type="submit" class="btn">Maak board aan</button>
+    <button type="submit" class="form-submit-button">Maak board aan</button>
   </form>
+  
+</div>
+@endsection
