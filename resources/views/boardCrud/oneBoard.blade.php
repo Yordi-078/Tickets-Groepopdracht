@@ -31,7 +31,7 @@
 
                 <!-- Modal content -->
                 <div class="modal-content">
-                  <span class="close">&times;</span>
+                  <span id="close-popup" class="close">&times;</span>
                   
                   <form id="card-info-popup">
                         <div id="general" class="card-info-border">
@@ -53,9 +53,10 @@
                         </div>
                         <div id="helper-box" class="card-info-border">
                             @if ($card['helper'])
-                                <input type="button" value="{{$card['helper']}}">
+                                <input class="helper" type="button" value="{{$card['helper']}}">
+                            @else
+                            <input id="add-helper-button" type="button" onclick="addHelper('{{Auth::user()->id}}','{{Auth::user()->name}}' )" value=" + ">
                             @endif
-                            <input type="button" value=" + ">
                         </div>
                   </form>
                 </div>
