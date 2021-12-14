@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Board;
-use App\Models\Board_users;
+use App\Models\BoardUser;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -26,7 +26,7 @@ class HomeController extends Controller
     public function index()
     {
         $user_id =  Auth::user()->id;
-        $board_id = Board_users::where("user_id", $user_id)->get('board_id');
+        $board_id = BoardUser::where("user_id", $user_id)->get('board_id');
         $allBoard = Board::find($board_id);
         return view('home', ['allBoard'=>$allBoard]);
        

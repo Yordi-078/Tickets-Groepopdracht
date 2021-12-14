@@ -7,7 +7,7 @@ use App\Models\Board;
 use App\Models\User;
 use App\Models\LessonCards;
 use App\Models\LessonUpvotes;
-use App\Models\Board_users;
+use App\Models\BoardUser;
 use App\Models\Card; 
 use Illuminate\Support\Facades\Auth;
 
