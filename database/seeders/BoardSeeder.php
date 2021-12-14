@@ -17,6 +17,6 @@ class BoardSeeder extends Seeder
      */
     public function run()
     {
-        Board::factory()->count(20)->create();
+        // Board::factory()->count(20)->create();
     }
 }
