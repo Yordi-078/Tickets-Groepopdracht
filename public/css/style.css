@@ -126,9 +126,32 @@ a{
     box-shadow: 1px 1px 7px 0px black;
 }
 
+.board-page-header{
+    position: relative;
+    top:.5vw;
+    width:90vw;
+    height: 3vw;
+    margin:auto;
+    border-left: 1px solid rgb(128, 128, 128, .6);
+    border-right: 1px solid rgb(128, 128, 128, .6);
+    padding:2px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+#add-student-button{
+    background: rgb(128, 128, 128, .3);
+    padding: 5px;
+}
+
+#add-student-button:hover{
+    background: rgb(128, 128, 128, .5);
+}
+
 .question-board-container{
     position:absolute;
-    top:9vh;
+    top:16vh;
     left: 5vw;
     width:65vw;
     background:var(--navbar-gradient);
@@ -138,7 +161,7 @@ a{
 
 .lesson-board-container{
     position:absolute;
-    top:9vh;
+    top:16vh;
     left: 72vw;
     width:23vw;
     background:var(--navbar-gradient);
@@ -157,7 +180,7 @@ a{
 
 #board-question-content-box{
     background:#EEEEEE;
-    min-height:80vh;
+    min-height:70vh;
     display: flex;
     padding:5px;
     flex-wrap: wrap;
@@ -166,7 +189,7 @@ a{
 
 #board-lesson-content-box{
     background:#EEEEEE;
-    min-height:80vh;
+    min-height:70vh;
     display: flex;
     padding:5px;
     flex-wrap: wrap;
@@ -302,7 +325,7 @@ a{
 }
 
 .form-submit-button{
-    width: 5vw;
+    min-width: 5vw;
     height: 3vh;
     background: var(--color-secondary);
     border: none;
@@ -438,8 +461,20 @@ a{
   }
 
   #helper-box{
-    grid-column: 2/4;
-    grid-row: 2/3;
+    grid-column: 2/3;
+    grid-row: 3/4;
+  }
+
+  .helper{
+    background-image: var(--navbar-gradient);
+    display: inline-flex;
+    width: 50px;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-weight: bold;
+    margin:2px;
   }
 
   #helper-box input{
@@ -450,10 +485,31 @@ a{
   }
 
   #progress-info{
-    grid-column: 2/3;
-    grid-row: 3/4;
+    grid-column: 2/4;
+    grid-row: 2/3;
   }
 
+  #submit-form{
+        display: grid;
+    	justify-content: center;
+        align-items: center;
+  }
+
+  .card-submit-button{
+      width:calc(80vw / 4);
+      height:100%;
+      border: none;
+      background-color: var(--color-secondary);
+      font-size: 3rem;
+      border-radius: 10px;
+      cursor: pointer;
+  }
+
+  .card-submit-button:hover{
+    width:calc(calc(80vw / 4) + 5px);
+      height:calc(100% + 5px);
+    border: 1px solid black;
+  }
 
   .card-info-border{
       border: 3px solid#D3D3D3;
