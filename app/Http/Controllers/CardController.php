@@ -8,7 +8,7 @@ use App\Models\User;
 use App\Models\LessonCards;
 use App\Models\LessonUpvotes;
 use App\Models\Board_users;
-use App\Models\Card;
+use App\Models\Card; 
 use Illuminate\Support\Facades\Auth;
 
 
@@ -110,6 +110,24 @@ class CardController extends Controller
         $users = User::find($userID);
         
         return redirect()->route('oneBoard', ['board_id'=>$board_id, 'users'=>$users]);
+    }
+
+    public function updateCard(Request $request, $card_id ,$board_id)
+    { 
+        $this->validateCard();
+        $user_id = Auth::user()->id;
+        Card::updateOrCreate(
+            [
+                "id" => $card_id
+            ],
+            [
+                "name" => $request["name"],
+                "description" => $request["description"],
+                "status" => $request["status"]
+            ]
+        );
+
+        return redirect()->route('oneBoard', ['board_id'=>$board_id]);
     }
 }
 
