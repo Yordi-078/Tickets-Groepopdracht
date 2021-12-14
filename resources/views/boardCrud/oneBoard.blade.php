@@ -1,5 +1,12 @@
 @extends('layouts.app')
 
+<?php 
+
+use Illuminate\support\facades\Auth;
+$user_id = Auth::user()->id;
+
+?>
+
 @section('addStudent')
         <!-- this is what the user sees if user is admin or docent. 
         this wil be added to all the other code and wil not replace it -->
@@ -17,16 +24,44 @@
         <a href="{{ url('boardCrud/createCard', $thisBoard['id']) }}" class="home-buttons">Add Card</a>
 
     </div>
-
     <div class="flex-row" id="board-question-content-box" >
         @foreach($cards as $card)
+            
             <a href="#" class="cards flex-row">
                 <button class="card-popup-button" onclick="showPopup('myModal{{$card['id']}}')">
                     <i class="far fa-eye"></i>
                 </button>
                 {{$card["name"]}}
             </a> 
+
+            @if ($user_id == $card["user_id"])
+            <!-- The Modal -->
+            <div id="myModal{{$card['id']}}" class="modal">
+                <!-- Modal content -->
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  
+                  <form action="{{ url('updateCard', [$card['id'], $card['board_id']]) }}" method="POST">
+                      
+                      @csrf
+                        <div id="general">
+                            <input type="text" name ="name" value="{{$card['name']}}" required>
+                            <input type="text" name="description" value="{{$card['description']}}" required>
+                        </div>
+                        <div id="imageUploader">
+                            <input type="file">
+                        </div>
+                        <select name="status">
+                            <option value="{{$card['in_progress']}}">in progress</option>
+                            <option value="{{$card['finished']}}">finished</option>
+                        </select>
+                        <button type="submit">Submit</button>
+                  </form>
+                </div>
+  
+            </div>
             
+            @else
             <!-- The Modal -->
             <div id="myModal{{$card['id']}}" class="modal">
 
@@ -34,35 +69,27 @@
                 <div class="modal-content">
                   <span class="close">&times;</span>
                   
-                  <form id="card-info-popup">
-                        <div id="general" class="card-info-border">
-                            <span><i class="fas fa-align-left"></i></span>
-                            <textarea type="text" id="title" maxlength="300" required>{{$card['name']}}</textarea>
-                            <span>descrition: </span>
-                            <textarea type="text" id="description" maxlength="665" required>{{$card['description']}}</textarea>
+                  <form>
+                        <div id="general">
+                            <input type="text" value="{{$card['name']}}" required readonly>
+                            <input type="text" value="{{$card['description']}}" required readonly>
                         </div>
-
-                        <div id="image-uploader" class="card-info-border">
-                            <input type="file">
+                        <div id="imageUploader">
+                            <input type="file" readonly>
                         </div>
-                        <div id="progress-info" class="card-info-border">
-                            <p>{{$card['created_at']}}</p>
-                            <select name="status">
-                                <option value="in_progress">in progress</option>
-                                <option value="finished">finished</option>
-                            </select>
-                        </div>
-                        <div id="helper-box" class="card-info-border">
-                            @if ($card['helper'])
-                                <input type="button" value="{{$card['helper']}}">
-                            @endif
-                            <input type="button" value=" + ">
-                        </div>
+                        <select name="status">
+                            <option value="in_progress">in progress</option>
+                            <option value="finished">finished</option>
+                        </select>
+                        <input type="button" value="{{$card['helper']}}" readonly>
+                        <p>{{$card['created_at']}}</p>
                   </form>
                 </div>
   
             </div>
-        @endforeach
+
+            @endif 
+            @endforeach
     </div>
 
     
@@ -75,7 +102,7 @@
     <div class="flex-row" id="board-lesson-content-box" >
         
         @foreach($lessonCards as $lessonCard)
-        <a href="#" class="toggle cards flex-row">{{$lessonCard["name"]}}<button class="card-popup-button" onclick="showPopup(`myModalLesson{{$lessonCard['id'], $thisBoard['id']}}`)"><i class="far fa-eye"></i></button></a> 
+        <a href="#" class="toggle cards flex-row">{{$lessonCard["name"]}}<button class="card-popup-button" onclick="showPopup('myModalLesson{{$lessonCard['id']}}')"><i class="far fa-eye"></i></button></a> 
         
         <!-- The Modal -->
         <div id="myModalLesson{{$lessonCard['id']}}" class="modal">
@@ -84,16 +111,11 @@
               <span class="close">&times;</span>
               <form>
                 <a href="{{ url('storeLessonUpVote', [$lessonCard['id'], $thisBoard['id']]) }}" class="home-buttons">Upvote</a>
-                {{-- $lessonCard['id']}}`,`{{$thisBoard['id'] --}}
               </form>
             </div>
         </div>
     @endforeach
     </div>
-
-    
-
 </div>
- {{-- <script> var url = {{ route('getCardInfo') }}</script> --}}
 @endsection
 

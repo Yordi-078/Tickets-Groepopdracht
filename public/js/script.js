@@ -26,8 +26,10 @@ var span = document.getElementsByClassName("close")[0];
 // When the user clicks the button, open the modal 
 
 function showPopup(modal_id, board_id){
-       var url = '{{ route("getCardInfo") }}';
-       console.log(url)
+  modal = document.getElementById(modal_id);
+  modal.style.display = "block";
+      //  var url = '{{ route("getCardInfo") }}';
+      //  console.log(url)
        /*
        let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
        var body = {
