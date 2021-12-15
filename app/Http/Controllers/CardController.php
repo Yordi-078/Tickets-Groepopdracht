@@ -76,6 +76,8 @@ class CardController extends Controller
             ]
         );
 
+        //dd($request->input('status'));
+
         return redirect()->route('oneBoard', ['board_id'=>$board_id]);
     }
 }
