@@ -22,7 +22,7 @@ class Board extends Model
 
     public function LessonCards()
     {
-        return $this->hasMany(LessonCards::class);
+        return $this->hasMany(LessonCard::class);
     }
     public function users()
     {

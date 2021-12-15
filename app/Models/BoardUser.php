@@ -12,4 +12,5 @@ class BoardUser extends Model
     protected $fillable = [
      'board_id', 'user_id'
     ];
+    protected $primaryKey = 'post_id';
 }

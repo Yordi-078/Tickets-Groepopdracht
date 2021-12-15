@@ -123,7 +123,7 @@ $user_id = Auth::user()->id;
 </div>
 <div class="lesson-board-container">
     <div class="board-header">
-        <a href="{{ url('boardCrud/createLessCard', $thisBoard['id']) }}" class="home-buttons">Add Card</a>
+        <a href="{{ url('boardCrud/createLessonCard', $thisBoard['id']) }}" class="home-buttons">Add Card</a>
     </div>
     
     <div class="flex-row" id="board-lesson-content-box" >
