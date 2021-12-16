@@ -30,6 +30,7 @@ $user_id = Auth::user()->id;
                 <button class="card-popup-button" onclick="showPopup('myModal{{$card['id']}}')">
                     <i class="far fa-eye"></i>
                 </button>
+                {{$card->status == "finished" ? "//" : ''}}
                 {{$card["name"]}}
             </a> 
 
@@ -53,13 +54,17 @@ $user_id = Auth::user()->id;
                         <div id="image-uploader" class="card-info-border">
                             <input type="file">
                         </div>
+
                         <div id="progress-info" class="card-info-border">
                             <p>{{$card['created_at']}}</p>
-                            <select name="status">
-                                <option value="{{$card['in_progress']}}">in progress</option>
-                                <option value="{{$card['finished']}}">finished</option>
+                            <select name="status" id="status">
+                                <option name='status' value="in_progress" {{$card->status == "in_progress" ? 'selected' : '' }}>in progress</option>
+                                <option name='status' value="finished"    {{$card->status == "finished" ? 'selected' : '' }}>finished</option>
                             </select>
                         </div>
+
+
+
                         <div id="helper-box" class="card-info-border">
                             @if ($card['helper'])
                                 <input class="helper" type="button" value="{{$card['helper']}}">
