@@ -16,7 +16,7 @@ class CreateBoardsTable extends Migration
         Schema::create('boards', function (Blueprint $table) {
             $table->id();
             $table->string('name', 100);
-            $table->unsignedBigInteger('madeby_id');
+            $table->bigInteger('madeby_id');
             $table->text('description');
             $table->timestamps();
         });
