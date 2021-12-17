@@ -5,10 +5,13 @@
 @else
 
 
-<a href="{{ route('changeUserRoles') }}"> <-Return to change user roles page</a>
-<h1>Current User Data</h1>
+<a class="change-user-back-button" href="{{ route('changeUserRoles') }}"> <-Return to change user roles page</a>
 
-    <div class="">
+<div class="change-user-role-form">
+<h1 class="change-user-role-data-header">Current User Data</h1>
+<h1 class="change-user-role-form-heade">Update this user</h1>
+
+    <div class="change-user-role-user-data">
         <a> name:{{ $user->name }} </a><br>
         <a> email:{{ $user->email }}</a><br>
         <a> role:{{ $user->user_role }}</a><br>
@@ -16,45 +19,25 @@
 
     
 <div class="">
-    <div class="">
-        <div class="">
-            <div class="">
-                <h2 class="">Update a user</h2>
-                <div class="">
-                    <form method="POST" action="{{ url('updateUserRole',$user->id)}} ">
-                        @csrf
-                        @method('POST')
-
-                        <div class="">
-                            <label for="name" class="">User Role</label>
-                            <div class="">
-                                
-                                <select name='user_role' class="" required>
-                                    <option selected disabled value="">Select a user role...</option>
-                                    <option name="user_role" class="" value="{{ 1 }}" {{$user->user_role == 'student' ? 'selected' : ''}} autofocus>Student</option>
-                                    <option name="user_role" class="" value="{{ 2 }}" {{$user->user_role == 'teacher' ? 'selected' : ''}} autofocus>Teacher</option>
-                                    <option name="user_role" class="" value="{{ 3 }}" {{$user->user_role == 'admin'   ? 'selected' : ''}} autofocus>Admin</option>
-                                </select>
-                            </div>
-                        </div>
-
-
-
-
-
-                        <div class="">
-                            <div class="">
-                                <button type="submit" class="">UPDATE</button>
-                            </div>
-                        </div>
-
-                    </form>
+    
+    <div class="change-user-role-user-form">
+        <form method="POST" action="{{ url('updateUserRole',$user->id)}} ">
+            @csrf
+            @method('POST')
+                <label for="name" class="">User Role:</label>
+                <select name='user_role' class="" required>
+                    <option selected disabled value="">Select a user role...</option>
+                    <option name="user_role" class="" value="{{ 1 }}" {{$user->user_role == 'student' ? 'selected' : ''}} autofocus>Student</option>
+                    <option name="user_role" class="" value="{{ 2 }}" {{$user->user_role == 'teacher' ? 'selected' : ''}} autofocus>Teacher</option>
+                    <option name="user_role" class="" value="{{ 3 }}" {{$user->user_role == 'admin'   ? 'selected' : ''}} autofocus>Admin</option>
+                </select>
+                <div>
+                    <button type="submit" class="change-user-role-submit-button">UPDATE</button>
                 </div>
-            </div>
-        </div>
+        </form>
     </div>
 </div>
-
+</div>
 
 @endif
 

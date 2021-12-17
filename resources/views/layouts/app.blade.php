@@ -23,7 +23,7 @@
 <body>
     <div id="app">
             <nav class="navbar">
-                <a class="" href="{{ url('/') }}">Tick-It</a>
+                <a class="navbar-title" href="{{ url('/') }}">Tick-It</a>
                 
 
                 <div class="user-info">
