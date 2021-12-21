@@ -38,6 +38,7 @@ class CardController extends Controller
         $card->user_id = $user_id;
         $card->board_id = $board_id;
         $card->created_at = Carbon::now();
+        $card->status = 'in_progress';
         $card->save();
 
         return redirect()->route('oneBoard', ['board_id'=>$board_id]);
