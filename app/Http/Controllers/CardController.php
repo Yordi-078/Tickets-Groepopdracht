@@ -9,6 +9,7 @@ use App\Models\LessonCard;
 use App\Models\LessonUpvotes;
 use App\Models\BoardUser;
 use App\Models\Card; 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -29,14 +30,14 @@ class CardController extends Controller
         $user_id = Auth::user()->id;
 
         date_default_timezone_set('Europe/Amsterdam');
-        $date = date('y-m-d h:i:s');
+        // $date = date('y-m-d h:i:s');
         
         $card = new Card();
         $card->name = $name;
         $card->description = $description;
         $card->user_id = $user_id;
         $card->board_id = $board_id;
-        $card->created_at = $date;
+        $card->created_at = Carbon::now();
         $card->save();
 
         return redirect()->route('oneBoard', ['board_id'=>$board_id]);
