@@ -5,7 +5,7 @@
 <a href="{{ route('changeUserRoles') }}"> <-Return to change user roles page</a>
 
 
-
+destroy
 @if ($user->id == auth()->id())
     <h1>DESTROY YOUR OWN ACCOUNT *THIS ACTION CANNOT BE UNDONE*</h1>
 @else
