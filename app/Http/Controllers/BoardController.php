@@ -40,7 +40,7 @@ class BoardController extends Controller
       $boardUsers->save();
     }
 
-    public function oneBoard(Board $board)
+    public function oneBoard(Board $board_id)
     {
       $cards = $board_id->cards;
       $lessonCards = $board_id->lessoncards;
