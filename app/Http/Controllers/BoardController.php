@@ -44,7 +44,7 @@ class BoardController extends Controller
     {
       $cards = $board_id->cards;
       $lessonCards = $board_id->lessoncards;
-      return view('boardCrud.oneBoard', ['cards'=>$cards, 'thisBoard'=>$board_id, 'lessonCards'=>$lessonCards, 'boardInfo'=>$board]);
+      return view('boardCrud.oneBoard', ['cards'=>$cards, 'thisBoard'=>$board_id, 'lessonCards'=>$lessonCards]);
     }
 
     public function addStudentsToBoard($board_id)
