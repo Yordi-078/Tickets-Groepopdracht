@@ -40,9 +40,8 @@ class BoardController extends Controller
       $boardUsers->save();
     }
 
-    public function oneBoard(Board $board_id)
+    public function oneBoard(Board $board)
     {
-      $board = Board::find($board_id);
       $cards = $board_id->cards;
       $lessonCards = $board_id->lessoncards;
       return view('boardCrud.oneBoard', ['cards'=>$cards, 'thisBoard'=>$board_id, 'lessonCards'=>$lessonCards, 'boardInfo'=>$board]);
