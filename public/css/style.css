@@ -577,7 +577,7 @@ a{
 }
 
 .change-user-role-form{
-    position:absolute;
+    position:absolute;  
     top: 20vh;
     left: 50%;
     transform: translate(-50%);

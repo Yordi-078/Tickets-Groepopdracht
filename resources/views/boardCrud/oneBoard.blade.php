@@ -31,6 +31,7 @@ $user_id = Auth::user()->id;
                     <i class="far fa-eye"></i>
                 </button>
                 {{$card->status == "finished" ? "//" : ''}}
+                {{$card[""]}}
                 {{$card["name"]}}
             </a> 
 
