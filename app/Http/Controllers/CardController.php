@@ -106,10 +106,24 @@ class CardController extends Controller
 
     public function getCardInfo($lesson_id, $board_id)
     {
-        $userID = LessonUpvotes::where('card_id', $lesson_id)->get('user_id');
-        $users = User::find($userID);
+         $userID = LessonUpvotes::where('card_id', $lesson_id)->get('user_id');
+         $users = User::find($userID);
+
+         $users = [
+            0 => "Yordi", 
+            1 => "Piet", 
+            2 => "Wed", 
+            3 => "Thu",
+            4 => "Fri", 
+            5 => "Sat",
+            6 => "Sun"
+          ];
         
-        return redirect()->route('oneBoard', ['board_id'=>$board_id, 'users'=>$users]);
+          $response = [
+             'users' => $users
+          ];
+        
+          return response()->json($response);
     }
 
     public function updateCard(Request $request, $card_id ,$board_id)

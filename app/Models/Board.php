@@ -17,7 +17,7 @@ class Board extends Model
 
     public function Cards()
     {
-        return $this->hasMany(Card::class)->orderBy('created_at', 'desc');;
+        return $this->hasMany(Card::class)->orderBy('created_at', 'asc');;
     }
 
     public function LessonCards()
