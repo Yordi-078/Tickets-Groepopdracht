@@ -40,9 +40,13 @@ function showPopup(modal_id, board_id){
   })
   
  .then(response => response.json())
-  .then(data => console.log(data));
+  .then(data => showData(data['users']));
    modal = document.getElementById(modal_id);
    modal.style.display = "block"; 
+}
+
+function showData(data){
+  document.getElementById('lesson-card-info-test').innerText = 'de hele array: ' + data;
 }
 
 span.onclick = function() {

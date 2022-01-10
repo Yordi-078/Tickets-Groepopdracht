@@ -149,10 +149,11 @@ $user_id = Auth::user()->id;
         <div id="myModalLesson{{$lessonCard['id']}}" class="modal">
         
             <!-- Modal content -->
-            
+    
             <div class="modal-content">
               <span class="close">&times;</span>
               <form>
+                  <a id="lesson-card-info-test">hello</a>
                 <a href="{{ url('storeLessonUpVote', [$lessonCard['id'], $thisBoard['id']]) }}" class="home-buttons">Upvote</a>
               </form>
             </div>
