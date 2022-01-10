@@ -65,31 +65,33 @@ function destroyHelper($helperId, $helperName){
 }
 
   
-// function showPopup(modal_id, board_id){
-  //    var url = '{{ route("getCardInfo") }}';
-  //    console.log(url)
-     /*
-     let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-     var body = {
-       lesson_id : modal_id,
-       board_id : board_id
-     };
-     fetch(url, {
-       headers: {
-         "Content-Type": "application/json",
-         "Accept": "application/json, text-plain, *//* only 1 line  ",
-         "X-Requested-With": "XMLHttpRequest",
-         "X-CSRF-TOKEN": token,
-       },
-       method: 'post',
-       credentials: "same-origin",
-       body: JSON.stringify(body)
-     })
-    .then(response => response.json())
-     .then(data => console.log(data));
-    modal = document.getElementById(modal_id);
-    modal.style.display = "block";
+//  function showPopup(modal_id, board_id){
+//     var url = '{{ route("getCardInfo", "1", "1") }}';
+//     console.log(url)
+    
+//      let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+//      var body = {
+//        lesson_id : modal_id,
+//        board_id : board_id
+//      }; 
+//         fetch(url, {
+//           method: 'POST',
+//           redirect: 'follow'
+//         })
+//           .then((response)=>{
+//           return response.json();
+//         }).then((data) => {
+//           console.log('send data')
+//           console.log(data)
+          // let profile = data.find();      
+          // document.getElementById("name-input").value = profile.name;
+          // document.getElementById("email-input").value = profile.email;
+        // });
+    // .then(response => response.json())
+    //  .then(data => console.log(data));
+    // modal = document.getElementById(modal_id);
+    // modal.style.display = "block";
   
  
-}*/
-
+// }
+ 
