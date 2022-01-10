@@ -24,9 +24,25 @@ var modal = 0;
 var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks the button, open the modal 
-function showPopup($var){
-  modal = document.getElementById($var);
-  modal.style.display = "block"; 
+function showPopup(modal_id, board_id){
+  var url = route('getCardInfo', [modal_id, board_id])
+  let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+  
+  fetch(url, {
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json, text-plain, *//* only 1 line  ",
+      "X-Requested-With": "XMLHttpRequest",
+      "X-CSRF-TOKEN": token,
+    },
+    method: 'GET',
+    credentials: "same-origin",
+  })
+  
+ .then(response => response.json())
+  .then(data => console.log(data));
+   modal = document.getElementById(modal_id);
+   modal.style.display = "block"; 
 }
 
 span.onclick = function() {
