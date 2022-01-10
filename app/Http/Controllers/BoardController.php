@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 use App\Models\Board;
 use App\Models\Card;
 use App\Models\User;
-use App\Models\Board_users;
+use App\Models\BoardUser;
 use Illuminate\Support\Facades\Auth;
 
 class BoardController extends Controller
@@ -34,7 +34,7 @@ class BoardController extends Controller
 
     public function addBoardUsers($board_id, $user_id)
     {
-      $boardUsers = new Board_users ();
+      $boardUsers = new BoardUser ();
       $boardUsers->board_id = $board_id;
       $boardUsers->user_id = $user_id;
       $boardUsers->save();
@@ -42,10 +42,9 @@ class BoardController extends Controller
 
     public function oneBoard(Board $board_id)
     {
-      $board = Board::find($board_id);
       $cards = $board_id->cards;
       $lessonCards = $board_id->lessoncards;
-      return view('boardCrud.oneBoard', ['cards'=>$cards, 'thisBoard'=>$board_id, 'lessonCards'=>$lessonCards, 'boardInfo'=>$board]);
+      return view('boardCrud.oneBoard', ['cards'=>$cards, 'thisBoard'=>$board_id, 'lessonCards'=>$lessonCards]);
     }
 
     public function addStudentsToBoard($board_id)
@@ -63,7 +62,7 @@ class BoardController extends Controller
   public function addToBoard($board_id, $user_id)
   {  
     {
-      Board_users::updateOrCreate(
+      BoardUser::updateOrCreate(
         [
             "board_id" => $board_id,
             "user_id" => $user_id

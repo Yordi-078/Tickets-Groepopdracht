@@ -27,7 +27,7 @@
 
         <div>
             <label class="label" for="start_time">start_time: </label>    
-            <input class="input @error('description') is-danger @enderror" type="text" name="start_time" id="" value="{{ old('start_time') }}">
+            <input class="input @error('description') is-danger @enderror" type="datetime-local" name="start_time" id="" value="{{ old('start_time') }}">
             
             @error('description')
                 <p class="help is-danger">{{ $errors->first('start_time') }}</p>

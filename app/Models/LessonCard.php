@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class LessonCards extends Model
+class LessonCard extends Model
 {
-  
+    
     protected $table = 'lesson_cards';
     public $timestamps = false;
     protected $fillable = [
@@ -21,6 +21,12 @@ class LessonCards extends Model
     public function Users()
     {
       return $this->belongToMany(User::class);
+    }
+
+
+    public function sfdg()
+    {
+      
     }
 
 }

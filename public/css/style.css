@@ -23,6 +23,10 @@ body{
     background-image: url(images/davinciBackground.png);
 }
 
+.navbar-title{
+    margin-left: 1vw;
+}
+
 a{
     color:black;
     text-decoration: none;
@@ -507,7 +511,13 @@ a{
 
   .card-submit-button:hover{
     width:calc(calc(80vw / 4) + 5px);
-      height:calc(100% + 5px);
+    height:calc(100% + 5px);
+    border: 1px solid black;
+  }
+
+  #submit-form .card-submit-button:hover{
+    width:calc(calc(80vw / 4) + 5px);
+    height:calc(100% + 5px);
     border: 1px solid black;
   }
 
@@ -516,3 +526,106 @@ a{
       border-radius:10px;
       padding: 5px;
   }
+
+  /* change user roles */
+  
+.table-change-user-role{
+    position:absolute;
+    top: 20vh;
+    left: 50%;
+    transform: translate(-50%);
+    width:65vw;
+    background:white;
+    box-shadow: 1px 1px 7px 0px black;
+    background: var(--navbar-gradient);
+    border-collapse: collapse;
+}
+
+.table-change-user-role th, .table-change-user-role td {
+    padding: 0.25rem;
+    text-align: left;
+}
+
+.table-change-user-role tr,.table-header{
+    border: 1px solid black; 
+}
+
+.table-body{
+    background-color: white;
+}
+
+.table-search-bar{
+    flex-direction: column;
+    float: left;
+    padding: 0 0 0 .5vw;
+}
+
+.table-change-user-role tbody tr:hover {
+    background: var(--color-quaternary);
+  }
+
+.change-user-back-button{
+    position:absolute;
+    top: 15vh;
+    left:calc(calc(100% - 67%) / 2);
+    padding: .25rem .5rem;
+    border: none;
+    background-color: var(--color-quaternary);
+    border-radius: 10px;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+.change-user-role-form{
+    position:absolute;
+    top: 20vh;
+    left: 50%;
+    transform: translate(-50%);
+    width:65vw;
+    background:white;
+    box-shadow: 1px 1px 7px 0px black;
+    padding: 2vh 1vw;
+}
+
+.change-user-role-data-header{
+    width: 50%;
+    float: left;
+}
+
+.change-user-role-form-header{
+    width: 50%;
+    float: right;
+}
+
+.change-user-role-user-data{
+    width: calc(calc(50% - 2vw) - 10px);
+    height: 8vh;
+    border: 3px solid#D3D3D3;
+    border-radius:10px;
+    padding: 10px;
+    float: left;
+}
+
+.change-user-role-user-form{
+    width: calc(calc(50% - 2vw) - 10px);
+    height: 8vh;
+    border: 3px solid#D3D3D3;
+    border-radius:10px;
+    padding: 10px;
+    float: right;
+}
+
+.change-user-role-submit-button{
+    margin-top: 2vh;
+    padding: .25rem .5rem;
+    border: none;
+    background-color: var(--color-secondary);
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.change-user-role-submit-button:hover{
+    padding: calc(.25rem - 1px) calc(.5rem - 1px);
+    border: 1px solid black;
+}

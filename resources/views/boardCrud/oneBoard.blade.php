@@ -30,6 +30,7 @@ $user_id = Auth::user()->id;
                 <button class="card-popup-button" onclick="showPopup('myModal{{$card['id']}}')">
                     <i class="far fa-eye"></i>
                 </button>
+                {{$card->status == "finished" ? "//" : ''}}
                 {{$card["name"]}}
             </a> 
 
@@ -53,13 +54,17 @@ $user_id = Auth::user()->id;
                         <div id="image-uploader" class="card-info-border">
                             <input type="file">
                         </div>
+
                         <div id="progress-info" class="card-info-border">
                             <p>{{$card['created_at']}}</p>
-                            <select name="status">
-                                <option value="{{$card['in_progress']}}">in progress</option>
-                                <option value="{{$card['finished']}}">finished</option>
+                            <select name="status" id="status">
+                                <option name='status' value="in_progress" {{$card->status == "in_progress" ? 'selected' : '' }}>in progress</option>
+                                <option name='status' value="finished"    {{$card->status == "finished" ? 'selected' : '' }}>finished</option>
                             </select>
                         </div>
+
+
+
                         <div id="helper-box" class="card-info-border">
                             @if ($card['helper'])
                                 <input class="helper" type="button" value="{{$card['helper']}}">
@@ -84,23 +89,28 @@ $user_id = Auth::user()->id;
                   <span class="close">&times;</span>
                   
                   <form id="card-info-popup">
+                    @csrf
+
+
                   <div id="general" class="card-info-border">
                             <span><i class="fas fa-align-left"></i></span>
                             <textarea type="text" id="title" maxlength="300" readonly>{{$card['name']}}</textarea>
-                            <span>descrition: </span>
+                            <span>description: </span>
                             <textarea type="text" id="description" maxlength="665" readonly>{{$card['description']}}</textarea>
                         </div>
 
                         <div id="image-uploader" class="card-info-border" readonly>
                             <input type="file">
                         </div>
+
                         <div id="progress-info" class="card-info-border">
                             <p>{{$card['created_at']}}</p>
-                            <select name="status" readonly>
-                                <option value="{{$card['in_progress']}}">in progress</option>
-                                <option value="{{$card['finished']}}">finished</option>
+                            <select name="status" id="status">
+                                <option name='status' value="1">in progress</option>
+                                <option name='status' value="2">finished</option>
                             </select>
                         </div>
+
                         <div id="helper-box" class="card-info-border">
                             @if ($card['helper'])
                                 <input class="helper" type="button" value="{{$card['helper']}}">
@@ -123,7 +133,7 @@ $user_id = Auth::user()->id;
 </div>
 <div class="lesson-board-container">
     <div class="board-header">
-        <a href="{{ url('boardCrud/createLessCard', $thisBoard['id']) }}" class="home-buttons">Add Card</a>
+        <a href="{{ url('boardCrud/createLessonCard', $thisBoard['id']) }}" class="home-buttons">Add Card</a>
     </div>
     
     <div class="flex-row" id="board-lesson-content-box" >

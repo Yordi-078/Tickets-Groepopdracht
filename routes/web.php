@@ -52,3 +52,6 @@ Route::get('storeLessonUpVote/{lesson_id}/{board_id}',  [CardController::class, 
 Route::get('getCardInfo/{lesson_id}/{board_id}',  [CardController::class, 'getCardInfo'])->name('getCardInfo');
 Route::post('updateCard/{card_id}/{board_id}',  [CardController::class, 'updateCard'])->name('updateCard');
 
+Route::get('boardCrud/createLessonCard/{board_id}',  [LessonCardController::class, 'createLessonCard'])->name('createLessonCard');
+Route::post('storeLessonCard/{board_id}',  [LessonCardController::class, 'storeLessonCard'])->name('storeLessonCard');
+Route::get('storeLessonUpVote/{lesson_id}/{board_id}',  [LessonCardController::class, 'storeLessonUpVote'])->name('storeLessonUpVote');

@@ -20,8 +20,8 @@ class CreateLessonCardsTable extends Migration
             $table->unsignedBigInteger('board_id');
             $table->text('description');
             $table->enum('status', ['in_progress', 'finished']);
-            $table->text('start_time');
-            $table->text('finished_date')->nullable();
+            $table->date('start_time');
+            $table->date('finished_date')->nullable();
             $table->timestamps();
         });
     }
