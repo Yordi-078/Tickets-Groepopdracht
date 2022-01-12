@@ -57,22 +57,13 @@ class CardController extends Controller
 
     public function getCardInfo($lesson_id, $board_id)
     {
-         $userID = LessonUpvotes::where('card_id', $lesson_id)->get('user_id');
-         $users = User::find($userID);
-
-         $users = [
-            0 => "Yordi", 
-            1 => "Piet", 
-            2 => "Wed", 
-            3 => "Thu",
-            4 => "Fri", 
-            5 => "Sat",
-            6 => "Sun"
-          ];
-        
-          $response = [
-             'users' => $users
-          ];
+        $response = [];
+         $userID = LessonUpvotes::where('card_id', substr($lesson_id, -1))->get('user_id');
+         // loop door alle userID's en zet ze in 
+         for ($i=0; $i < count($userID) ; $i++) { 
+            $users = User::where('id', $userID[$i]['user_id'])->get('name');
+            array_push($response, $users[0]['name']);
+         }
         
           return response()->json($response);
     }

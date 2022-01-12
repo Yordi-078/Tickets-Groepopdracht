@@ -23,7 +23,12 @@ var modal = 0;
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 
-// When the user clicks the button, open the modal 
+// When the user clicks the button, open the modal
+function showQuestionPopup($var){
+  modal = document.getElementById($var);
+  modal.style.display = 'block';
+}
+
 function showPopup(modal_id, board_id){
   var url = route('getCardInfo', [modal_id, board_id])
   let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
@@ -40,13 +45,14 @@ function showPopup(modal_id, board_id){
   })
   
  .then(response => response.json())
-  .then(data => showData(data['users']));
+  .then(data => showData(data));
    modal = document.getElementById(modal_id);
    modal.style.display = "block"; 
 }
 
 function showData(data){
-  document.getElementById('lesson-card-info-test').innerText = 'de hele array: ' + data;
+  console.log(data)
+  document.getElementById('lesson-card-info-test').innerText = 'de hele array: ' + data[0] + ', ' + data[1];
 }
 
 span.onclick = function() {
