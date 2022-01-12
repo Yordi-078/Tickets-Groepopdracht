@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BoardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CardController;
+use App\Http\Controllers\LessonCardController;
 use App\Http\Middleware\CheckAdmin;
 use App\Http\Middleware\CheckTeacherOrAdmin;
 
