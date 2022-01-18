@@ -62,7 +62,6 @@ function calcInit(name){
   }
   document.getElementById('card-owner').innerText = name[0]['name']
   
-  
 }
 
 function showPopup(modal_id, board_id){
