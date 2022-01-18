@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BoardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CardController;
+use App\Http\Controllers\LessonCardController;
 use App\Http\Middleware\CheckAdmin;
 use App\Http\Middleware\CheckTeacherOrAdmin;
 
@@ -55,3 +56,7 @@ Route::post('updateCard/{card_id}/{board_id}',  [CardController::class, 'updateC
 Route::get('boardCrud/createLessonCard/{board_id}',  [LessonCardController::class, 'createLessonCard'])->name('createLessonCard');
 Route::post('storeLessonCard/{board_id}',  [LessonCardController::class, 'storeLessonCard'])->name('storeLessonCard');
 Route::get('storeLessonUpVote/{lesson_id}/{board_id}',  [LessonCardController::class, 'storeLessonUpVote'])->name('storeLessonUpVote');
+
+Route::get('getUsername/{user_id}/{helperId}',  [CardController::class, 'getUsername'])->name('getUsername');
+Route::get('saveHelper/{card_id}/{helperId}',  [CardController::class, 'saveHelper'])->name('saveHelper');
+Route::get('removeHelper/{card_id}',  [CardController::class, 'removeHelper'])->name('removeHelper');

@@ -85,5 +85,46 @@ class CardController extends Controller
 
         return redirect()->route('oneBoard', ['board_id'=>$board_id]);
     }
+    
+    public function getUsername($user_id, $helper_id)
+    {
+        $userID = user::where('id', $user_id)->get('name');
+        if($helper_id != 'empty'){
+            $helperID = user::where('id', $helper_id)->get('name');
+            $response = [$userID[0], $helperID[0]];
+        }
+        else{
+            $response = [$userID[0], 'empty'];
+        }
+        
+
+          return response()->json($response);
+    }
+    
+    public function saveHelper($card_id, $helperId)
+    {
+        Card::updateOrCreate(
+            [
+                "id" => $card_id
+            ],[
+                "helper_id" => $helperId,
+            ]
+        );
+
+          return response()->json();
+    }
+    
+    public function removeHelper($card_id)
+    {
+        Card::updateOrCreate(
+            [
+                "id" => $card_id
+            ],[
+                "helper_id" => NULL,
+            ]
+        );
+
+          return response()->json();
+    }
 }
 
