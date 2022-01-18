@@ -30,7 +30,6 @@ class CardController extends Controller
         $user_id = Auth::user()->id;
 
         date_default_timezone_set('Europe/Amsterdam');
-        // $date = date('y-m-d h:i:s');
         
         $card = new Card();
         $card->name = $name;
