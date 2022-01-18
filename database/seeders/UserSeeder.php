@@ -26,6 +26,13 @@ class UserSeeder extends Seeder
             'user_role' => 'admin'
         ]);
 
+        DB::table('users')->insert([
+            'name' => 'admin2-account',
+            'email' => 'admin2@admin.com',
+            'password' => Hash::make('password'),
+            'user_role' => 'admin'
+        ]);
+
         // User::factory()->count(19)->create();
     }
 }
