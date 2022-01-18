@@ -40,6 +40,12 @@ class UserSeeder extends Seeder
             'user_role' => 'teacher'
         ]);
 
+        DB::table('users')->insert([
+            'name' => 'student-account',
+            'email' => 'student@student.com',
+            'password' => Hash::make('password'),
+            'user_role' => 'student'
+        ]);
         // User::factory()->count(19)->create();
     }
 }
