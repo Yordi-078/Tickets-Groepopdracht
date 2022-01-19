@@ -6,6 +6,7 @@ use App\Models\Board;
 use App\Models\Card;
 use App\Models\User;
 use App\Models\BoardUser;
+use App\Models\LessonUpvotes;
 use Illuminate\Support\Facades\Auth;
 
 class BoardController extends Controller
@@ -42,8 +43,29 @@ class BoardController extends Controller
 
     public function oneBoard(Board $board_id)
     {
+      $lessonCard = array();
+      $upvotes = LessonUpvotes::all();
       $cards = $board_id->cards;
-      $lessonCards = $board_id->lessoncards;
+      $lesCard = $board_id->lessoncards;
+
+      for($i =0; $i < count($lesCard); $i++) {
+        $lessonCard[$i]['id'] = $lesCard[$i]['id'];
+        $lessonCard[$i]['name'] = $lesCard[$i]['name'];
+        $lessonCard[$i]['user_id'] = $lesCard[$i]['user_id'];
+        $lessonCard[$i]['board_id'] = $lesCard[$i]['board_id'];
+        $lessonCard[$i]['description'] = $lesCard[$i]['description'];
+        $lessonCard[$i]['status'] = $lesCard[$i]['status'];
+        $lessonCard[$i]['start_time'] = $lesCard[$i]['start_time'];
+        $lessonCard[$i]['finished_date'] = $lesCard[$i]['finished_date'];
+        $upVotes = LessonUpvotes::where("card_id", $lesCard[$i]['id'])->get();
+        $countUpVotes = count($upVotes);
+        $lessonCard[$i]['upvotes'] = $countUpVotes;
+      }
+      
+      $lessonCards = collect($lessonCard)->sortBy('upvotes')->reverse()->toArray();
+
+    
+
       return view('boardCrud.oneBoard', ['cards'=>$cards, 'thisBoard'=>$board_id, 'lessonCards'=>$lessonCards]);
     }
 

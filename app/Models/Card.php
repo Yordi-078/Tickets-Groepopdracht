@@ -11,7 +11,7 @@ class Card extends Model
     protected $table = 'cards';
     public $timestamps = false;
     protected $fillable = [
-     'name', 'description','board_id', 'status'
+     'name', 'description', 'board_id', 'helper_id', 'status'
     ];
 
     public function board()

@@ -27,10 +27,11 @@ $user_id = Auth::user()->id;
         @foreach($cards as $card)
             
             <a href="#" class="cards flex-row">
-                <button class="card-popup-button" onclick="showPopup('myModal{{$card['id']}}')">
+                <button class="card-popup-button" onclick="showQuestionPopup('myModal{{$card['id']}}','{{$card['user_id']}}','{{$card['helper_id']}}')">
                     <i class="far fa-eye"></i>
                 </button>
                 {{$card->status == "finished" ? "//" : ''}}
+                {{$card[""]}}
                 {{$card["name"]}}
             </a> 
 
@@ -39,7 +40,8 @@ $user_id = Auth::user()->id;
             <div id="myModal{{$card['id']}}" class="modal">
                 <!-- Modal content -->
                 <div class="modal-content">
-                  <span id="close-popup" class="close">&times;</span>
+                    <span id="card-owner" class="card-info-owner"></span>
+                    <span id="close-popup" class="close">&times;</span>
                   
                   <form  id="card-info-popup" action="{{ url('updateCard', [$card['id'], $card['board_id']]) }}" method="POST">
                       
@@ -66,15 +68,17 @@ $user_id = Auth::user()->id;
 
 
                         <div id="helper-box" class="card-info-border">
-                            @if ($card['helper'])
-                                <input class="helper" type="button" value="{{$card['helper']}}">
-                            @else
-                            <input id="add-helper-button" type="button" onclick="addHelper('{{Auth::user()->id}}','{{Auth::user()->name}}' )" value=" + ">
+                            @if ($card['helper_id'])
+                                <p id="helper" class="helper"></p>
                             @endif
+                            <input id="remove-helper-button" type="button" onclick="destroyHelper('{{$card['id']}}')" value=" - ">
+                            <input id="add-helper-button" type="button" onclick="addHelper('{{Auth::user()->id}}','{{Auth::user()->name}}','{{$card['id']}}' )" value=" + ">
                         </div>
                         <div id="submit-form" class="card-info-border">
                             <input type="submit" class="card-submit-button" value="submit">
                         </div>
+                        <a href="{{ url('storeCardUpVote', [$card['id'], $thisBoard['id']]) }}" class="home-buttons">Upvote</a>
+
                   </form>
                 </div>
   
@@ -86,6 +90,7 @@ $user_id = Auth::user()->id;
 
                 <!-- Modal content -->
                 <div class="modal-content">
+                <span id="card-owner" class="card-info-owner"></span>
                   <span class="close">&times;</span>
                   
                   <form id="card-info-popup">
@@ -115,7 +120,7 @@ $user_id = Auth::user()->id;
                             @if ($card['helper'])
                                 <input class="helper" type="button" value="{{$card['helper']}}">
                             @else
-                            <input id="add-helper-button" type="button" onclick="addHelper('{{Auth::user()->id}}','{{Auth::user()->name}}' )" value=" + ">
+                            <input id="add-helper-button" type="button" onclick="addHelper('{{Auth::user()->id}}','{{Auth::user()->name}}','{{$card['id']}}' )" value=" + ">
                             @endif
                         </div>
 
@@ -149,10 +154,11 @@ $user_id = Auth::user()->id;
         <div id="myModalLesson{{$lessonCard['id']}}" class="modal">
         
             <!-- Modal content -->
-            
+    
             <div class="modal-content">
               <span class="close">&times;</span>
               <form>
+                  <a id="lesson-card-info-test">hello</a>
                 <a href="{{ url('storeLessonUpVote', [$lessonCard['id'], $thisBoard['id']]) }}" class="home-buttons">Upvote</a>
               </form>
             </div>

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Board;
 use App\Models\User;
 use App\Models\LessonCard;
+use App\Models\CardUpvotes;
 use App\Models\LessonUpvotes;
 use App\Models\BoardUser;
 use App\Models\Card; 
@@ -30,7 +31,6 @@ class CardController extends Controller
         $user_id = Auth::user()->id;
 
         date_default_timezone_set('Europe/Amsterdam');
-        // $date = date('y-m-d h:i:s');
         
         $card = new Card();
         $card->name = $name;
@@ -57,22 +57,13 @@ class CardController extends Controller
 
     public function getCardInfo($lesson_id, $board_id)
     {
-         $userID = LessonUpvotes::where('card_id', $lesson_id)->get('user_id');
-         $users = User::find($userID);
-
-         $users = [
-            0 => "Yordi", 
-            1 => "Piet", 
-            2 => "Wed", 
-            3 => "Thu",
-            4 => "Fri", 
-            5 => "Sat",
-            6 => "Sun"
-          ];
-        
-          $response = [
-             'users' => $users
-          ];
+        $response = [];
+         $userID = LessonUpvotes::where('card_id', substr($lesson_id, -1))->get('user_id');
+         // loop door alle userID's en zet ze in 
+         for ($i=0; $i < count($userID) ; $i++) { 
+            $users = User::where('id', $userID[$i]['user_id'])->get('name');
+            array_push($response, $users[0]['name']);
+         }
         
           return response()->json($response);
     }
@@ -93,6 +84,60 @@ class CardController extends Controller
         );
 
         return redirect()->route('oneBoard', ['board_id'=>$board_id]);
+    }
+    
+    public function getUsername($user_id, $helper_id)
+    {
+        $userID = user::where('id', $user_id)->get('name');
+        if($helper_id != 'empty'){
+            $helperID = user::where('id', $helper_id)->get('name');
+            $response = [$userID[0], $helperID[0]];
+        }
+        else{
+            $response = [$userID[0], 'empty'];
+        }
+        
+
+          return response()->json($response);
+    }
+    
+    public function saveHelper($card_id, $helperId)
+    {
+        Card::updateOrCreate(
+            [
+                "id" => $card_id
+            ],[
+                "helper_id" => $helperId,
+            ]
+        );
+
+          return response()->json();
+    }
+    
+    public function removeHelper($card_id)
+    {
+        Card::updateOrCreate(
+            [
+                "id" => $card_id
+            ],[
+                "helper_id" => NULL,
+            ]
+        );
+
+          return response()->json();
+    }
+
+    public function storeCardUpVote($card_id, $board_id)
+    {
+        $user_id = Auth::user()->id;
+
+        CardUpvotes::updateOrCreate(
+            [
+                "card_id" => $card_id,
+                "user_id" => $user_id
+            ]
+            );
+            return redirect()->route('oneBoard', ['board_id'=>$board_id]); 
     }
 }
 
