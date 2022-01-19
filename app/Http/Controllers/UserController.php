@@ -88,7 +88,7 @@ class UserController extends Controller
     public function searchAdminPage()
     {
         $search_text = $_GET['query'];
-        // $search = User::where('name','LIKE', '%' .$search_text.'%')->get();
+        $search = User::where('name','LIKE', '%' .$search_text.'%')->get();
         return view('admin.search-user', ['search'=>$search]);   
     }
 
