@@ -21,6 +21,8 @@ body{
     font: var(--text-font);
     margin:0;
     background-image: url(images/davinciBackground.png);
+    background-size: cover;
+    background-repeat: repeat-y;
 }
 
 .navbar-title{
@@ -400,6 +402,15 @@ a{
     border-radius:10px;
   }
   
+  .card-info-owner{
+    /* width: 30px;
+    height: 30px; */
+    position:absolute;
+    font-size: 18px;
+    /* background-color: grey;
+    border-radius: 50%; */
+  }
+
   /* The Close Button */
   .close {
     color: #aaaaaa;
@@ -472,8 +483,8 @@ a{
   .helper{
     background-image: var(--navbar-gradient);
     display: inline-flex;
-    width: 50px;
-    height: 50px;
+    width: 55px;
+    height: 55px;
     justify-content: center;
     align-items: center;
     border-radius: 50%;
@@ -484,8 +495,12 @@ a{
   #helper-box input{
     background: lightgrey;
     border: none;
-    font-size: 2rem;
-    min-width: 3vw;
+    border-radius: 15px;
+    font-weight: bold;
+  }
+
+  .helper-buttons, .helper-status{
+      display: inline;
   }
 
   #progress-info{

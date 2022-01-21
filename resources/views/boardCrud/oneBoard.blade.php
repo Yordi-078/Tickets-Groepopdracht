@@ -27,7 +27,7 @@ $user_id = Auth::user()->id;
         @foreach($cards as $card)
             
             <a href="#" class="cards flex-row">
-                <button class="card-popup-button" onclick="showQuestionPopup('myModal{{$card['id']}}','{{$card['user_id']}}','{{$card['helper_id']}}')">
+                <button class="card-popup-button" onclick="showQuestionPopup('myModal{{$card['id']}}','{{$card['user_id']}}','{{$card['helper_id']}}','{{$card['id']}}','{{Auth::user()->id}}')">
                     <i class="far fa-eye"></i>
                 </button>
                 {{$card->status == "finished" ? "//" : ''}}
@@ -68,12 +68,14 @@ $user_id = Auth::user()->id;
 
 
                         <div id="helper-box" class="card-info-border">
-                            @if ($card['helper_id'])
-                                <p id="helper" class="helper"></p>
-                            @endif
-                            <input id="remove-helper-button" type="button" onclick="destroyHelper('{{$card['id']}}')" value=" - ">
-                            <input id="add-helper-button" type="button" onclick="addHelper('{{Auth::user()->id}}','{{Auth::user()->name}}','{{$card['id']}}' )" value=" + ">
+                            <p id="helper-{{$card['id']}}">no one is helping this card</p>
+                            <input id="remove-helper-button" class="helper-buttons" type="button" onclick="destroyHelper('{{$card['id']}}')" value=" - ">
+                            <p id="card-{{$card['id']}}-helper-email">email: </p>
+                            <p id="card-{{$card['id']}}-helper-name">name: </p>
+                            <p id="card-{{$card['id']}}-helper-role">role: </p>
+                            
                         </div>
+                        
                         <div id="submit-form" class="card-info-border">
                             <input type="submit" class="card-submit-button" value="submit">
                         </div>
@@ -115,11 +117,13 @@ $user_id = Auth::user()->id;
                         </div>
 
                         <div id="helper-box" class="card-info-border">
-                            @if ($card['helper'])
-                                <input class="helper" type="button" value="{{$card['helper']}}">
-                            @else
-                            <input id="add-helper-button" type="button" onclick="addHelper('{{Auth::user()->id}}','{{Auth::user()->name}}','{{$card['id']}}' )" value=" + ">
-                            @endif
+                            <p id="helper-{{$card['id']}}" class="helper-status">no one is helping this card</p>
+                            <input id="remove-helper-button" class="helper-buttons" type="button" onclick="destroyHelper('{{$card['id']}}')" value=" - ">
+                            <input id="add-helper-button" class="helper-buttons" type="button" onclick="addHelper('{{Auth::user()->id}}','{{Auth::user()->name}}','{{Auth::user()->email}}','{{Auth::user()->user_role}}','{{$card['id']}}' )" value=" + ">
+                            <p data-card-id="" id="card-{{$card['id']}}-helper-email">email: </p>
+                            <p data-card-id="" id="card-{{$card['id']}}-helper-name">name: </p>
+                            <p data-card-id="" id="card-{{$card['id']}}-helper-role">role: </p>
+                            
                         </div>
 
 
