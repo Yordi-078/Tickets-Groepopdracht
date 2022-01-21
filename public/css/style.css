@@ -644,3 +644,20 @@ a{
     padding: calc(.25rem - 1px) calc(.5rem - 1px);
     border: 1px solid black;
 }
+
+#allUsersBtn{
+    position:absolute;
+    top:79px;
+    left:1150px;
+    width:200px;
+    height:18px;
+    background: rgb(128, 128, 128, .3);
+    padding: 5px;
+    border:none;
+    text-align:center;
+}
+
+.form-body{
+    text-align:center;
+    font-size:20px;
+}

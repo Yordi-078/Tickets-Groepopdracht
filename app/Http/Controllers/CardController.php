@@ -8,7 +8,7 @@ use App\Models\User;
 use App\Models\LessonCard;
 use App\Models\LessonUpvotes;
 use App\Models\BoardUser;
-use App\Models\Card; 
+use App\Models\Card;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
@@ -78,7 +78,7 @@ class CardController extends Controller
             [
                 "name" => $request["name"],
                 "description" => $request["description"],
-                "status" => $request["status"]
+                "status" => $request["status"],
             ]
         );
 

@@ -17,8 +17,10 @@ $user_id = Auth::user()->id;
     </a>
     @endif
 </div>
+<a href="{{ route('viewUsersFromBoard', $thisBoard['id']) }}" id="allUsersBtn">View all users from this board</a>
 <div class="question-board-container">
     <div class="board-header">
+        
         <button id="toggle-board" class="home-buttons" onclick="toggleBoard()"><i class="fas fa-bars"></i></button>
         <a href="{{ url('boardCrud/createCard', $thisBoard['id']) }}" class="home-buttons">Add Card</a>
 
@@ -148,6 +150,7 @@ $user_id = Auth::user()->id;
         @foreach($lessonCards as $lessonCard)
  
         <a href="#" class="toggle cards flex-row">{{$lessonCard["name"]}}<button class="card-popup-button" onclick="showPopup('myModalLesson{{$lessonCard['id']}}',{{$thisBoard['id']}})"><i class="far fa-eye"></i></button></a> 
+        
         <!-- The Modal -->
 
         
@@ -159,7 +162,7 @@ $user_id = Auth::user()->id;
             <div class="modal-content">
               <span class="close">&times;</span>
               <form>
-                  <a id="lesson-card-info-test"></a>
+                  <a id="lesson-card-info-test">hello</a>
                 <a href="{{ url('storeLessonUpVote', [$lessonCard['id'], $thisBoard['id']]) }}" class="home-buttons">Upvote</a>
               </form>
             </div>
