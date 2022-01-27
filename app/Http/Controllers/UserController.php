@@ -45,8 +45,7 @@ class UserController extends Controller
             ->update([
                 'user_role' => $request->input('user_role')
             ]);
-            return redirect()->route('changeUserRoles');
-        
+        return redirect()->route('changeUserRoles');
     }
 
     /**
@@ -90,6 +89,13 @@ class UserController extends Controller
         $search_text = $_GET['query'];
         $search = User::where('name','LIKE', '%' .$search_text.'%')->get();
         return view('admin.search-user', ['search'=>$search]);   
+    }
+    /**
+     * teacher dashboard page
+     */
+    public function teacherDashboard()
+    {
+        return view('teacherDashboard.index');
     }
 
 }
