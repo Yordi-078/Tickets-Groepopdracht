@@ -5,6 +5,7 @@
     <a>{{ $card->name }}</a>
     <br>
     <a>{{ $card->updated_at }}</a>
+    <br>
 @endforeach
 
 
