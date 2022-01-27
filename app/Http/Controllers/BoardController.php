@@ -94,4 +94,15 @@ class BoardController extends Controller
 
     return redirect('/home');        
   }
+
+  public function viewUsersFromBoard($board_id){
+    $user_ids = BoardUser::where('board_id', $board_id)->get('user_id');
+    $users = [];
+    for ($i=0; $i < count($user_ids); $i++) { 
+      $user = User::where('id', $user_ids[$i]['user_id'])->get();
+      array_push($users, $user[0]);
+    }
+  
+    return view('boardCrud.allUsersFromBoard', ['allUsers' => $users]);
+  }
 }

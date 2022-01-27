@@ -8,7 +8,7 @@ use App\Models\User;
 use App\Models\LessonCard;
 use App\Models\LessonUpvotes;
 use App\Models\BoardUser;
-use App\Models\Card; 
+use App\Models\Card;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
@@ -78,7 +78,7 @@ class CardController extends Controller
             [
                 "name" => $request["name"],
                 "description" => $request["description"],
-                "status" => $request["status"]
+                "status" => $request["status"],
             ]
         );
 
@@ -89,7 +89,7 @@ class CardController extends Controller
     {
         $userID = user::where('id', $user_id)->get('name');
         if($helper_id != 'empty'){
-            $helperID = user::where('id', $helper_id)->get('name');
+            $helperID = user::where('id', $helper_id)->get();
             $response = [$userID[0], $helperID[0]];
         }
         else{

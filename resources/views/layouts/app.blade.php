@@ -8,6 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
+    <link rel="icon" href="{{ asset('css/images/logo.png') }}" type="image/x-icon">
 
     <!-- Scripts -->
     <script src="{{ asset('js/script.js') }}" defer></script>
