@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Card;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -95,7 +97,9 @@ class UserController extends Controller
      */
     public function teacherDashboard()
     {
-        return view('teacherDashboard.index');
+        //$cards = Card::all();
+        $cards = Card::all()->where('status', 'finished')->where("helper_id", auth()->id());
+        return view('teacherDashboard.index', compact('cards'));
     }
 
 }
