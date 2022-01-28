@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Board;
 use App\Models\User;
 use App\Models\LessonCard;
+use App\Models\CardUpvotes;
 use App\Models\LessonUpvotes;
 use App\Models\BoardUser;
 use App\Models\Card;
@@ -81,7 +82,7 @@ class CardController extends Controller
                 "status" => $request["status"],
             ]
         );
-
+        
         return redirect()->route('oneBoard', ['board_id'=>$board_id]);
     }
     
@@ -89,7 +90,7 @@ class CardController extends Controller
     {
         $userID = user::where('id', $user_id)->get('name');
         if($helper_id != 'empty'){
-            $helperID = user::where('id', $helper_id)->get();
+            $helperID = user::where('id', $helper_id)->get('name');
             $response = [$userID[0], $helperID[0]];
         }
         else{
@@ -124,6 +125,19 @@ class CardController extends Controller
         );
 
           return response()->json();
+    }
+
+    public function storeCardUpVote($card_id, $board_id)
+    {
+        $user_id = Auth::user()->id;
+
+        CardUpvotes::updateOrCreate(
+            [
+                "card_id" => $card_id,
+                "user_id" => $user_id
+            ]
+            );
+            return redirect()->route('oneBoard', ['board_id'=>$board_id]); 
     }
 }
 

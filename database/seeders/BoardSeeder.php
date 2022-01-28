@@ -22,11 +22,12 @@ class BoardSeeder extends Seeder
             'madeby_id' => 1,
             'description' => 'Programeer groep voor vragen en lessen',
         ]);
-        DB::table('board_user')->insert([
-            'board_id' => 1,
-            'user_id' => 1,
-        ]);
-
+        for($i=1; $i < 10; $i++){
+            DB::table('board_user')->insert([
+                'board_id' => 1,
+                'user_id' => $i,
+            ]);
+        }
         
         // Board::factory()->count(20)->create();
     }
