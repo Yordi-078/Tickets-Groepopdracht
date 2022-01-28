@@ -8,6 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
+    <link rel="icon" href="{{ asset('css/images/logo.png') }}" type="image/x-icon">
 
     <!-- Scripts -->
     <script src="{{ asset('js/script.js') }}" defer></script>
@@ -46,6 +47,11 @@
                             @if (Auth::user()->user_role == 'teacher' || Auth::user()->user_role == 'admin' )
                                 <a class="dropdown-item" href="{{ route('changeUserRoles') }}">
                                     {{ __('change user roles') }}
+                                </a>
+                            @endif
+                            @if (Auth::user()->user_role == 'teacher')
+                                <a class="dropdown-item" href="{{ route('teacherDashboard') }}">
+                                    {{ __('Teacher Dashboard') }}
                                 </a>
                             @endif
                             <a class="dropdown-item" href="{{ route('logout') }}"

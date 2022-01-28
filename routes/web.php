@@ -33,6 +33,7 @@ Route::get('oneBoard/{board_id}', [BoardController::class, 'oneBoard'])->name('o
 Route::get('addStudentsToBoard/{board_id}',  [BoardController::class, 'addStudentsToBoard'])->name('addStudentsToBoard')->middleware('CheckTeacherOrAdmin');
 Route::get('search/{board_id}', [BoardController::class, 'search'])->name('search')->middleware('CheckTeacherOrAdmin');
 Route::get('addToBoard/{board_id}/{user_id}',  [BoardController::class, 'addToBoard'])->name('addToBoard')->middleware('CheckTeacherOrAdmin');
+Route::get('viewUsersFromBoard/{board_id}', [BoardController::class, 'viewUsersFromBoard'])->name('viewUsersFromBoard');
 
 /** admin routes */
 Route::get('admin/user-overview',  [UserController::class, 'changeUserRolesPage'])->name('changeUserRoles')->middleware('CheckAdmin');
@@ -42,6 +43,8 @@ Route::get('admin/confirm-delete/{id}',  [UserController::class, 'destroyUserPag
 Route::post('destroyUser/{id}',  [UserController::class, 'destroyUser'])->name('destroyUser')->middleware('CheckAdmin');
 Route::get('admin/search-user', [UserController::class, 'searchAdminPage'])->name('searchAdminPage')->middleware('CheckAdmin');
 
+/** teacher dashboard routes */
+route::get('teacher/dashboard', [UserController::class, 'teacherDashboard'])->name('teacherDashboard')->middleware('CheckTeacher');
 
 /** card routes */
 Route::get('boardCrud/createCard/{board_id}',  [CardController::class, 'addACard'])->name('addACard');

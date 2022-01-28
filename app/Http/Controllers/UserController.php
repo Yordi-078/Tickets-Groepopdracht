@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Card;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -45,8 +47,7 @@ class UserController extends Controller
             ->update([
                 'user_role' => $request->input('user_role')
             ]);
-            return redirect()->route('changeUserRoles');
-        
+        return redirect()->route('changeUserRoles');
     }
 
     /**
@@ -90,6 +91,15 @@ class UserController extends Controller
         $search_text = $_GET['query'];
         $search = User::where('name','LIKE', '%' .$search_text.'%')->get();
         return view('admin.search-user', ['search'=>$search]);   
+    }
+    /**
+     * teacher dashboard page
+     */
+    public function teacherDashboard()
+    {
+        //$cards = Card::all();
+        $cards = Card::all()->where('status', 'finished')->where("helper_id", auth()->id());
+        return view('teacherDashboard.index', compact('cards'));
     }
 
 }
