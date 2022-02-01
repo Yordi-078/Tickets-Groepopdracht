@@ -145,7 +145,6 @@ $user_id = Auth::user()->id;
     </div>
     
     <div class="flex-row" id="board-lesson-content-box" >
-        
         @foreach($lessonCards as $lessonCard)
  
         <a href="#" class="toggle cards flex-row">{{$lessonCard["name"]}}<button class="card-popup-button" onclick="showPopup('myModalLesson{{$lessonCard['id']}}',{{$thisBoard['id']}})"><i class="far fa-eye"></i></button></a> 

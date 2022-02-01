@@ -170,6 +170,7 @@ a{
     top:16vh;
     left: 72vw;
     width:23vw;
+    max-height: 80vh;
     background:var(--navbar-gradient);
     border-radius: 10px 10px 0px 0px;
     box-shadow: 1px 1px 7px 0px black;
@@ -178,6 +179,7 @@ a{
 #home-board-content-box{
     background:#EEEEEE;
     min-height:80vh;
+    max-height: 80vh;
     display: flex;
     padding:5px;
     flex-wrap: wrap;
@@ -194,8 +196,10 @@ a{
 }
 
 #board-lesson-content-box{
+    overflow-y : scroll;
     background:#EEEEEE;
-    min-height:70vh;
+    min-height:69vh;
+    max-height: 70vh;
     display: flex;
     padding:5px;
     flex-wrap: wrap;

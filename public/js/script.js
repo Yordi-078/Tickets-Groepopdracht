@@ -87,6 +87,7 @@ function showPopup(modal_id, board_id){
 }
 
 function showData(data){
+  console.log(data);
   document.getElementById('lesson-card-info-test').innerText = 'de hele array: ' + data[0] + ', ' + data[1];
 }
 
