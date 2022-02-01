@@ -90,7 +90,7 @@ class CardController extends Controller
     {
         $userID = user::where('id', $user_id)->get('name');
         if($helper_id != 'empty'){
-            $helperID = user::where('id', $helper_id)->get('name');
+            $helperID = user::where('id', $helper_id)->get();
             $response = [$userID[0], $helperID[0]];
         }
         else{

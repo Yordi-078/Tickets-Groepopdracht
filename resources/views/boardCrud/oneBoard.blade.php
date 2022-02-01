@@ -43,7 +43,7 @@ $user_id = Auth::user()->id;
                 <!-- Modal content -->
                 <div class="modal-content">
                     <span id="card-owner" class="card-info-owner"></span>
-                    <span id="close-popup" class="close">&times;</span>
+                    <span id="close-popup" onclick="history.go(-0)" class="close">&times;</span>
                   
                   <form  id="card-info-popup" action="{{ url('updateCard', [$card['id'], $card['board_id']]) }}" method="POST">
                       
@@ -51,7 +51,7 @@ $user_id = Auth::user()->id;
                       <div id="general" class="card-info-border">
                             <span><i class="fas fa-align-left"></i></span>
                             <textarea type="text" id="title" name="name" maxlength="300" required>{{$card['name']}}</textarea>
-                            <span>descrition: </span>
+                            <span>description: </span>
                             <textarea type="text" id="description" name="description" maxlength="665" required>{{$card['description']}}</textarea>
                         </div>
 
@@ -70,11 +70,19 @@ $user_id = Auth::user()->id;
 
 
                         <div id="helper-box" class="card-info-border">
-                            @if ($card['helper_id'])
-                                <p id="helper" class="helper"></p>
-                            @endif
-                            <input id="remove-helper-button" type="button" onclick="destroyHelper('{{$card['id']}}')" value=" - ">
-                            <input id="add-helper-button" type="button" onclick="addHelper('{{Auth::user()->id}}','{{Auth::user()->name}}','{{$card['id']}}' )" value=" + ">
+                            <p id="helper-{{$card['id']}}">no one is helping this card</p>
+                            <input id="remove-helper-button" class="helper-buttons" type="button" onclick="destroyHelper('{{$card['id']}}')" value=" - ">
+                            <div onclick="showUserData('Anthony Inocencio Ramos', 'AIR', 'navy')" title="" style="background-color:pink;" class="avatar" id="card-{{$card['id']}}-helper-avatar"><a id="card-{{$card['id']}}-helper-avatar-init" href="#"></a></div>
+                        </div>
+                        <div id="userPopup">
+                            <div class="user-popup-header">
+                                <div id="userPopupBol" title="" class="avatar user-popup-header-avatar"><a href="#" id="userPopupAvatar"></a></div>
+                                <div id="userPopupName" class="user-popup-header-username"><a href="#" id="userPopupInit"></a></div>
+                            </div>
+                            <div id="userPopupProfilePage" class="user-popup-button"><a href="#">profiel informatie wijzigen</a></div>
+                            <hr>
+                            <div id="userPopupBordInfo" class="user-popup-button"><a href="#">bekijk bord informatie</a></div>
+                            <div id="userPopupLeaveBord" class="user-popup-button"><a href="#">bord verlaten</a></div>
                         </div>
                         
                         <div id="submit-form" class="card-info-border">
@@ -95,7 +103,6 @@ $user_id = Auth::user()->id;
                 <div class="modal-content">
                 <span id="card-owner" class="card-info-owner"></span>
                   <span class="close">&times;</span>
-                  
                   <form id="card-info-popup">
                     @csrf
 
@@ -120,11 +127,20 @@ $user_id = Auth::user()->id;
                         </div>
 
                         <div id="helper-box" class="card-info-border">
-                            @if ($card['helper'])
-                                <input class="helper" type="button" value="{{$card['helper']}}">
-                            @else
-                            <input id="add-helper-button" type="button" onclick="addHelper('{{Auth::user()->id}}','{{Auth::user()->name}}','{{$card['id']}}' )" value=" + ">
-                            @endif
+                            <p id="helper-{{$card['id']}}" class="helper-status">no one is helping this card</p>
+                            <input id="remove-helper-button" class="helper-buttons" type="button" onclick="destroyHelper('{{$card['id']}}')" value=" - ">
+                            <input id="add-helper-button" class="helper-buttons" type="button" onclick="addHelper('{{Auth::user()->id}}','{{Auth::user()->name}}','{{Auth::user()->email}}','{{Auth::user()->user_role}}','{{$card['id']}}' )" value=" + ">
+                            <div onclick="showUserData('Anthony Inocencio Ramos', 'AIR', 'navy')" title="" style="background-color:pink;" class="avatar" id="card-{{$card['id']}}-helper-avatar"><a id="card-{{$card['id']}}-helper-avatar-init" href="#"></a></div>
+                        </div>
+                        <div id="userPopup">
+                            <div class="user-popup-header">
+                                <div id="userPopupBol" title="" class="avatar user-popup-header-avatar"><a href="#" id="userPopupAvatar"></a></div>
+                                <div id="userPopupName" class="user-popup-header-username"><a href="#" id="userPopupInit"></a></div>
+                            </div>
+                            <div id="userPopupProfilePage" class="user-popup-button"><a href="#">profiel informatie wijzigen</a></div>
+                            <hr>
+                            <div id="userPopupBordInfo" class="user-popup-button"><a href="#">bekijk bord informatie</a></div>
+                            <div id="userPopupLeaveBord" class="user-popup-button"><a href="#">bord verlaten</a></div>
                         </div>
 
 
@@ -147,7 +163,7 @@ $user_id = Auth::user()->id;
     <div class="flex-row" id="board-lesson-content-box" >
         @foreach($lessonCards as $lessonCard)
  
-        <a href="#" class="toggle cards flex-row">{{$lessonCard["name"]}}<button class="card-popup-button" onclick="showPopup('myModalLesson{{$lessonCard['id']}}',{{$thisBoard['id']}})"><i class="far fa-eye"></i></button></a> 
+        <a onclick="showPopup('myModalLesson{{$lessonCard['id']}}',{{$thisBoard['id']}})" class="toggle cards flex-row">{{$lessonCard["name"]}}<button class="card-popup-button"><i class="far fa-eye"></i></button></a> 
         
         <!-- The Modal -->
 
@@ -158,7 +174,7 @@ $user_id = Auth::user()->id;
             <!-- Modal content -->
     
             <div class="modal-content">
-              <span class="close">&times;</span>
+              <span onclick="history.go(-1)" class="close">&times;</span>
               <form>
                   <a id="lesson-card-info-test">hello</a>
                 <a href="{{ url('storeLessonUpVote', [$lessonCard['id'], $thisBoard['id']]) }}" class="home-buttons">Upvote</a>
