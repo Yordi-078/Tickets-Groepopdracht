@@ -29,7 +29,7 @@ $user_id = Auth::user()->id;
         @foreach($cards as $card)
             
             <a href="#" class="cards flex-row">
-                <button class="card-popup-button" onclick="showQuestionPopup('myModal{{$card['id']}}','{{$card['user_id']}}','{{$card['helper_id']}}','{{$card['id']}}','{{Auth::user()->id}}')">
+                <button class="card-popup-button" onclick="showQuestionPopup('myModal{{$card['id']}}','{{$card['user_id']}}','{{$card['helper_id']}}')">
                     <i class="far fa-eye"></i>
                 </button>
                 {{$card->status == "finished" ? "//" : ''}}

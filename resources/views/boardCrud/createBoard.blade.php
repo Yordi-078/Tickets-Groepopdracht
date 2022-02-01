@@ -12,7 +12,7 @@
 
     
     <div style="display: none;">
-    <input type="text" id="madeby_id" name="madeby_id" value="{{ Auth::user()->id  }}">
+    <input type="text" id="madeby_id" name="madeby_id" value="{{ Auth::user()->id }}">
     </div>  
 
     
