@@ -12,12 +12,20 @@ $user_id = Auth::user()->id;
     <!-- this is what the user sees if user is admin or docent. 
     this wil be added to all the other code and wil not replace it -->
     @if (Auth::user()->user_role == 'teacher' || Auth::user()->user_role == 'admin' )
-    <a id="add-student-button" class="dropdown-item" href="{{ route('addStudentsToBoard', $thisBoard['id']) }}">
-        {{ __('Add students') }}
-    </a>
+        <a id="add-student-button" class="dropdown-item" href="{{ route('addStudentsToBoard', $thisBoard['id']) }}">
+            {{ __('Add students') }}
+        </a>
     @endif
+    @if (Auth::user()->user_role == 'teacher')
+        <a id="add-student-button" class="dropdown-item" href="{{ route('teacherDashboard',$thisBoard['id']) }}">
+            {{ __('Teacher Dashboard') }}
+        </a>
+    @endif
+    <a href="{{ route('viewUsersFromBoard', $thisBoard['id']) }}" id="add-student-button">View all users from this board</a>
 </div>
-<a href="{{ route('viewUsersFromBoard', $thisBoard['id']) }}" id="allUsersBtn">View all users from this board</a>
+
+
+
 <div class="question-board-container">
     <div class="board-header">
         

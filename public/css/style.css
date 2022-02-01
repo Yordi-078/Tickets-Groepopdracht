@@ -149,6 +149,7 @@ a{
 #add-student-button{
     background: rgb(128, 128, 128, .3);
     padding: 5px;
+    margin: 0 10px;
 }
 
 #add-student-button:hover{

@@ -44,7 +44,7 @@ Route::post('destroyUser/{id}',  [UserController::class, 'destroyUser'])->name('
 Route::get('admin/search-user', [UserController::class, 'searchAdminPage'])->name('searchAdminPage')->middleware('CheckAdmin');
 
 /** teacher dashboard routes */
-route::get('teacher/dashboard', [UserController::class, 'teacherDashboard'])->name('teacherDashboard')->middleware('CheckTeacher');
+route::get('teacher/dashboard/{board_id}', [UserController::class, 'teacherDashboard'])->name('teacherDashboard')->middleware('CheckTeacher');
 
 /** card routes */
 Route::get('boardCrud/createCard/{board_id}',  [CardController::class, 'addACard'])->name('addACard');
