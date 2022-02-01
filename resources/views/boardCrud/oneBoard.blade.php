@@ -72,10 +72,17 @@ $user_id = Auth::user()->id;
                         <div id="helper-box" class="card-info-border">
                             <p id="helper-{{$card['id']}}">no one is helping this card</p>
                             <input id="remove-helper-button" class="helper-buttons" type="button" onclick="destroyHelper('{{$card['id']}}')" value=" - ">
-                            <p id="card-{{$card['id']}}-helper-email">email: </p>
-                            <p id="card-{{$card['id']}}-helper-name">name: </p>
-                            <p id="card-{{$card['id']}}-helper-role">role: </p>
-                            
+                            <div onclick="showUserData('Anthony Inocencio Ramos', 'AIR', 'navy')" title="" style="background-color:pink;" class="avatar" id="card-{{$card['id']}}-helper-avatar"><a id="card-{{$card['id']}}-helper-avatar-init" href="#"></a></div>
+                        </div>
+                        <div id="userPopup">
+                            <div class="user-popup-header">
+                                <div id="userPopupBol" title="" class="avatar user-popup-header-avatar"><a href="#" id="userPopupAvatar"></a></div>
+                                <div id="userPopupName" class="user-popup-header-username"><a href="#" id="userPopupInit"></a></div>
+                            </div>
+                            <div id="userPopupProfilePage" class="user-popup-button"><a href="#">profiel informatie wijzigen</a></div>
+                            <hr>
+                            <div id="userPopupBordInfo" class="user-popup-button"><a href="#">bekijk bord informatie</a></div>
+                            <div id="userPopupLeaveBord" class="user-popup-button"><a href="#">bord verlaten</a></div>
                         </div>
                         
                         <div id="submit-form" class="card-info-border">
@@ -122,9 +129,7 @@ $user_id = Auth::user()->id;
                             <p id="helper-{{$card['id']}}" class="helper-status">no one is helping this card</p>
                             <input id="remove-helper-button" class="helper-buttons" type="button" onclick="destroyHelper('{{$card['id']}}')" value=" - ">
                             <input id="add-helper-button" class="helper-buttons" type="button" onclick="addHelper('{{Auth::user()->id}}','{{Auth::user()->name}}','{{Auth::user()->email}}','{{Auth::user()->user_role}}','{{$card['id']}}' )" value=" + ">
-                            <p data-card-id="" id="card-{{$card['id']}}-helper-email">email: </p>
-                            <p data-card-id="" id="card-{{$card['id']}}-helper-name">name: </p>
-                            <p data-card-id="" id="card-{{$card['id']}}-helper-role">role: </p>
+                            <div onclick="showUserData('Anthony Inocencio Ramos', 'AIR', 'navy')" title="" style="background-color:pink;" class="avatar" id="card-{{$card['id']}}-helper-avatar"><a id="card-{{$card['id']}}-helper-avatar-init" href="#"></a></div>
                             
                         </div>
 
