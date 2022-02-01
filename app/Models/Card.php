@@ -9,7 +9,7 @@ use App\Models\Board;
 class Card extends Model
 {
     protected $table = 'cards';
-    public $timestamps = false;
+    public $timestamps = true;
     protected $fillable = [
      'name', 'description', 'board_id', 'helper_id', 'status'
     ];

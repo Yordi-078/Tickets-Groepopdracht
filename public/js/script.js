@@ -24,7 +24,7 @@ var modal = 0;
 var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks the button, open the modal
-function showQuestionPopup($modal, card_owner_id, $helper_id, $card_id, user_id){
+function showQuestionPopup($var, card_owner_id, $helper_id, $card_id, user_id){
   if(!$helper_id) {$helper_id = 'empty'}
   var url = route('getUsername', [card_owner_id, $helper_id]);
 
@@ -44,11 +44,12 @@ function showQuestionPopup($modal, card_owner_id, $helper_id, $card_id, user_id)
  .then(response => response.json())
   .then(data => calcInit(data, $card_id, user_id) );
 
-  
+  modal = document.getElementById($var);
+  modal.style.display = 'block';
 }
 
 function calcInit(name, $card_id, user_id){
-  if(name[1] == 'empty'){// if there is no helper, form needs to be empty and add helper button needs to be visible
+  if(name[1] == 'empty'){
     document.getElementById("remove-helper-button").style.display = "none";
     document.getElementById('card-' + $card_id + '-helper-avatar').style.display = 'none'
   }
@@ -57,6 +58,7 @@ function calcInit(name, $card_id, user_id){
     var initials = name[1]['name'].match(/\b(\w)/g);
     var acronym = initials.join('');
     //get element with the id
+    console.log($card_id)
     document.getElementById('helper-' + $card_id).innerText = name[1]['name'] + ' is helping this card.';
     document.getElementById('card-' + $card_id + '-helper-avatar').style.backgroundColor= 'gray'
     document.getElementById('card-' + $card_id + '-helper-avatar').title= name[1]['name']
@@ -64,12 +66,11 @@ function calcInit(name, $card_id, user_id){
     //fill in the data 
     //display the correct button 
     if(user_id != name[1]['id']){
+      console.log(name[1])
       document.getElementById("remove-helper-button").style.display = "none";
     }
     document.getElementById("add-helper-button").style.display = "none";
-    
   }
-  
   document.getElementById('card-owner').innerText = name[0]['name']
   
 }
@@ -151,6 +152,7 @@ function destroyHelper(card_id){
 }
 
 function saveHelper(card_id, $helperId){
+  console.log("card id is: " + $helperId)
   var url = route('saveHelper', [card_id, $helperId])
   let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
   
