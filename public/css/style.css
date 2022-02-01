@@ -187,6 +187,7 @@ a{
 }
 
 #board-question-content-box{
+       overflow-y : scroll;
     background:#EEEEEE;
     min-height:70vh;
     display: flex;
@@ -198,7 +199,7 @@ a{
 #board-lesson-content-box{
     overflow-y : scroll;
     background:#EEEEEE;
-    min-height:69vh;
+    min-height:70vh;
     max-height: 70vh;
     display: flex;
     padding:5px;
@@ -740,4 +741,12 @@ hr{
     margin: 7px 5px;
     border: 0;
     padding: 0;
+}
+
+.form-header{
+font-size: 30px;
+font-weight: bold;
+display: flex;
+justify-content: center;
+align-items: center;
 }
