@@ -24,7 +24,7 @@ var modal = 0;
 var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks the button, open the modal
-function showQuestionPopup($modal, card_owner_id, $helper_id, $card_id, user_id){
+function showQuestionPopup($var, card_owner_id, $helper_id, $card_id, user_id){
   if(!$helper_id) {$helper_id = 'empty'}
   var url = route('getUsername', [card_owner_id, $helper_id]);
 
@@ -44,31 +44,33 @@ function showQuestionPopup($modal, card_owner_id, $helper_id, $card_id, user_id)
  .then(response => response.json())
   .then(data => calcInit(data, $card_id, user_id) );
 
-  modal = document.getElementById($modal);
+  modal = document.getElementById($var);
   modal.style.display = 'block';
 }
 
 function calcInit(name, $card_id, user_id){
-  if(name[1] == 'empty'){// if there is no helper, form needs to be empty and add helper button needs to be visible
+  if(name[1] == 'empty'){
     document.getElementById("remove-helper-button").style.display = "none";
+    document.getElementById('card-' + $card_id + '-helper-avatar').style.display = 'none'
   }
   else{// if there is a helper, fill in the form with corresponding info
     //calculate the data (if needed)
+    var initials = name[1]['name'].match(/\b(\w)/g);
+    var acronym = initials.join('');
     //get element with the id
+    console.log($card_id)
     document.getElementById('helper-' + $card_id).innerText = name[1]['name'] + ' is helping this card.';
-    document.getElementById('card-' + $card_id + '-helper-name').innerText = 'name: ' + name[1]['name'];
-    document.getElementById('card-' + $card_id + '-helper-email').innerText = 'email: ' + name[1]['email'];
-    if(name[1]['user_role'] == 'admin') {name[1]['user_role'] = 'docent'}
-    document.getElementById('card-' + $card_id + '-helper-role').innerText = 'role: ' + name[1]['user_role'];
+    document.getElementById('card-' + $card_id + '-helper-avatar').style.backgroundColor= 'gray'
+    document.getElementById('card-' + $card_id + '-helper-avatar').title= name[1]['name']
+    document.getElementById('card-' + $card_id + '-helper-avatar-init').innerText= acronym
     //fill in the data 
     //display the correct button 
     if(user_id != name[1]['id']){
+      console.log(name[1])
       document.getElementById("remove-helper-button").style.display = "none";
     }
     document.getElementById("add-helper-button").style.display = "none";
-    
   }
-  
   document.getElementById('card-owner').innerText = name[0]['name']
   
 }
@@ -96,6 +98,7 @@ function showPopup(modal_id, board_id){
 }
 
 function showData(data){
+  console.log(data);
   document.getElementById('lesson-card-info-test').innerText = 'de hele array: ' + data[0] + ', ' + data[1];
 }
 
@@ -112,13 +115,15 @@ window.onclick = function(event) {
 
 function addHelper($helperId, $helperName, $helperMail, $helperRole, card_id){
   saveHelper(card_id, $helperId);
-  document.getElementById('helper-' + card_id).innerText = $helperName + ' is helping this card.';
-  document.getElementById('card-' + card_id + '-helper-name').innerText = 'name: ' + $helperName;
-  document.getElementById('card-' + card_id + '-helper-email').innerText = 'email: ' + $helperMail;
-  if($helperRole == 'admin') {$helperRole = 'docent'}
-  document.getElementById('card-' + card_id + '-helper-role').innerText = 'role: ' + $helperRole;
-  document.getElementById("add-helper-button").style.display = "none";
+  var initials = $helperName.match(/\b(\w)/g);
+  var acronym = initials.join('');
+  document.getElementById('card-' + card_id + '-helper-avatar').style.display = 'flex'
+  document.getElementById('card-' + card_id + '-helper-avatar').style.backgroundColor= 'gray'
+  document.getElementById('card-' + card_id + '-helper-avatar').title= $helperName
+  document.getElementById('card-' + card_id + '-helper-avatar-init').innerText= acronym
+  // document.getElementById('card-' + card_id + '-helper-avatar').onclick= showUserData('jan pieter son', 'jps', 'green');
   document.getElementById("remove-helper-button").style.display = "inline";
+  document.getElementById("add-helper-button").style.display = "none";
 }
 
 function destroyHelper(card_id){
@@ -139,14 +144,16 @@ function destroyHelper(card_id){
  .then(response => response.json())
   .then(data => console.log(data));
   document.getElementById('helper-' + card_id).innerText = 'no one is helping this card';
-  document.getElementById('card-' + card_id + '-helper-name').innerText = 'name: ';
-  document.getElementById('card-' + card_id + '-helper-email').innerText = 'email: ';
-  document.getElementById('card-' + card_id + '-helper-role').innerText = 'role: ';
+  document.getElementById('card-' + card_id + '-helper-avatar').style.display = 'none';
+  document.getElementById('card-' + card_id + '-helper-avatar').style.backgroundColor= '';
+  document.getElementById('card-' + card_id + '-helper-avatar').title= '';
+  document.getElementById('card-' + card_id + '-helper-avatar-init').innerText= '';
   document.getElementById("remove-helper-button").style.display = "none";
   document.getElementById("add-helper-button").style.display = "inline";
 }
 
 function saveHelper(card_id, $helperId){
+  console.log("card id is: " + $helperId)
   var url = route('saveHelper', [card_id, $helperId])
   let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
   
@@ -164,3 +171,31 @@ function saveHelper(card_id, $helperId){
  .then(response => response.json())
   .then(data => console.log(data));
 }
+
+function showUserData(username, initials,color){
+  if(document.getElementById('userPopup').style.display == 'block'){
+    document.getElementById('userPopup').style.display = 'none'
+    return
+  }
+  document.getElementById('userPopup').style.display='block';
+  document.getElementById('userPopupBol').style.backgroundColor= 'gray'
+  document.getElementById('userPopupBol').title= username
+  document.getElementById('userPopupInit').innerText= username
+  document.getElementById('userPopupName').title= username
+  document.getElementById('userPopupAvatar').innerText= initials;
+
+  // i need 
+  //username
+  //user id
+  //user color
+}
+
+
+// to do
+// all variables that have a '$' should remove '$' from there name
+// function for randomizing color of avatar bal and remembering color for next use
+// move all fetch related request to the bottom of the javascript file
+// make a loader for all popups
+
+// extra 
+// remove all the foreaches in oneboard for popups and handel everything with javscript fetch
