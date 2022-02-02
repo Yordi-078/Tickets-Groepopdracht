@@ -510,7 +510,7 @@ a{
   }
 
   #progress-info{
-    grid-column: 2/4;
+    grid-column: 2/3;
     grid-row: 2/3;
   }
 
@@ -743,11 +743,17 @@ hr{
     border: 0;
     padding: 0;
 }
-
 .form-header{
 font-size: 30px;
 font-weight: bold;
 display: flex;
 justify-content: center;
 align-items: center;
+}
+.avatarContainer{
+    grid-column:3/4;
+    grid-row:2/3;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
 }

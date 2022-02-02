@@ -43,6 +43,7 @@ function showQuestionPopup($var, card_owner_id, $helper_id, $card_id, user_id){
   
  .then(response => response.json())
   .then(data => calcInit(data, $card_id, user_id) );
+  getCardAvatars($card_id);
 
   modal = document.getElementById($var);
   modal.style.display = 'block';
@@ -199,3 +200,65 @@ function showUserData(username, initials,color){
 
 // extra 
 // remove all the foreaches in oneboard for popups and handel everything with javscript fetch
+
+
+
+
+function saveCardUpvote($card_id, $user_id){
+  var url = route('saveCardUpvote', [$card_id, $user_id])
+  let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+  
+  fetch(url, {
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json, text-plain, *//* only 1 line  ",
+      "X-Requested-With": "XMLHttpRequest",
+      "X-CSRF-TOKEN": token,
+    },
+    method: 'GET',
+    credentials: "same-origin",
+  })
+  
+ .then(response => response.json())
+  .then(data => console.log(data));
+}
+
+function getCardAvatars($card_id){
+  var url = route('GetCardAvatars', $card_id)
+  let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+  
+  fetch(url, {
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json, text-plain, *//* only 1 line  ",
+      "X-Requested-With": "XMLHttpRequest",
+      "X-CSRF-TOKEN": token,
+    },
+    method: 'GET',
+    credentials: "same-origin",
+  })
+  
+ .then(response => response.json())
+  .then(data => showCardAvatars(data, $card_id));
+}
+
+function showCardAvatars(data, $card_id){
+  console.log(data)
+  for (let i = 0; i < data.length; i++) {
+    var initials = data[i]['name'].match(/\b(\w)/g);
+    var acronym = initials.join('');
+    
+    const container = document.getElementById('cardAvatarContainer');
+    const avatar = document.createElement("div");
+    avatar.id = "card-" + data[i]['id'] + "-helper-avatar";
+    avatar.className = "avatar";
+    avatar.title = data[i]['name'];
+    avatar.style.backgroundColor = 'grey';
+    container.appendChild(avatar);
+
+    const avatarInit = document.createElement("a");
+    avatarInit.id = "card-" + data[i]['id'] + "-helper-avatar-init";
+    avatarInit.innerText = acronym;
+    avatar.appendChild(avatarInit);
+  }
+}

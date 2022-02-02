@@ -37,7 +37,7 @@ $user_id = Auth::user()->id;
         @foreach($cards as $card)
             
             <a href="#" class="cards flex-row">
-                <button class="card-popup-button" onclick="showQuestionPopup('myModal{{$card['id']}}','{{$card['user_id']}}','{{$card['helper_id']}}')">
+            <button class="card-popup-button" onclick="showQuestionPopup('myModal{{$card['id']}}','{{$card['user_id']}}','{{$card['helper_id']}}','{{$card['id']}}','{{Auth::user()->id}}')">
                     <i class="far fa-eye"></i>
                 </button>
                 {{$card->status == "finished" ? "//" : ''}}
@@ -96,7 +96,8 @@ $user_id = Auth::user()->id;
                         <div id="submit-form" class="card-info-border">
                             <input type="submit" class="card-submit-button" value="submit">
                         </div>
-                        <a href="{{ url('storeCardUpVote', [$card['id'], $thisBoard['id']]) }}" class="home-buttons">Upvote</a>
+                        <a href="#" onclick="saveCardUpvote('{{$card['id']}}', '{{Auth::User()->id}}')" class="home-buttons">Upvote</a>
+                        <div id="cardAvatarContainer" class="avatarContainer card-info-border"></div>
 
                   </form>
                 </div>

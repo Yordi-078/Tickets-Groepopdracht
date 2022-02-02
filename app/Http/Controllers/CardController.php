@@ -88,9 +88,9 @@ class CardController extends Controller
     
     public function getUsername($user_id, $helper_id)
     {
-        $userID = user::where('id', $user_id)->get('name');
+        $userID = User::where('id', $user_id)->get('name');
         if($helper_id != 'empty'){
-            $helperID = user::where('id', $helper_id)->get();
+            $helperID = User::where('id', $helper_id)->get();
             $response = [$userID[0], $helperID[0]];
         }
         else{
@@ -126,18 +126,31 @@ class CardController extends Controller
 
           return response()->json();
     }
-
-    public function storeCardUpVote($card_id, $board_id)
+    
+    public function saveCardUpvote($card_id, $user_id)
     {
-        $user_id = Auth::user()->id;
-
         CardUpvotes::updateOrCreate(
             [
-                "card_id" => $card_id,
-                "user_id" => $user_id
+                "id" => $card_id
+            ],[
+                "user_id" => $user_id,
             ]
-            );
-            return redirect()->route('oneBoard', ['board_id'=>$board_id]); 
+        );
+
+          return response()->json();
+    }
+
+    public function GetCardAvatars($card_id)
+    {
+        $cardAvatars = [];
+        $cardAvatarsId = CardUpvotes::where('card_id', $card_id)->get('user_id');
+        for ($i=0; $i < count($cardAvatarsId); $i++) { 
+            $cardAvatar = User::where('id', $cardAvatarsId[$i]['user_id'])->get();
+            array_push($cardAvatars, $cardAvatar[0]);
+        }
+        
+          return response()->json($cardAvatars);
     }
 }
+
 

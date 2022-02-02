@@ -65,3 +65,5 @@ Route::get('storeLessonUpVote/{lesson_id}/{board_id}',  [LessonCardController::c
 Route::get('getUsername/{user_id}/{helperId}',  [CardController::class, 'getUsername'])->name('getUsername');
 Route::get('saveHelper/{card_id}/{helperId}',  [CardController::class, 'saveHelper'])->name('saveHelper');
 Route::get('removeHelper/{card_id}',  [CardController::class, 'removeHelper'])->name('removeHelper');
+Route::get('saveCardUpvote/{card_id}/{user_id}',  [CardController::class, 'saveCardUpvote'])->name('saveCardUpvote');
+Route::get('GetCardAvatars/{card_id}',  [CardController::class, 'GetCardAvatars'])->name('GetCardAvatars');
