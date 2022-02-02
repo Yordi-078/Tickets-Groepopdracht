@@ -87,7 +87,7 @@ $user_id = Auth::user()->id;
                                 <div id="userPopupBol" title="" class="avatar user-popup-header-avatar"><a href="#" id="userPopupAvatar"></a></div>
                                 <div id="userPopupName" class="user-popup-header-username"><a href="#" id="userPopupInit"></a></div>
                             </div>
-                            <div id="userPopupProfilePage" class="user-popup-button"><a href="{{ route('viewUserPage', $card['id']) }}">profiel bekijken</a></div>
+                            <div id="userPopupProfilePage" class="user-popup-button"><a href="{{ url('viewUserPage', $user_id) }}">Profiel bekijken</a></div>
                             <hr>
                             <div id="userPopupBordInfo" class="user-popup-button"><a href="#">bekijk bord informatie</a></div>
                             <div id="userPopupLeaveBord" class="user-popup-button"><a href="#">bord verlaten</a></div>
