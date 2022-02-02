@@ -80,14 +80,14 @@ $user_id = Auth::user()->id;
                         <div id="helper-box" class="card-info-border">
                             <p id="helper-{{$card['id']}}">no one is helping this card</p>
                             <input id="remove-helper-button" class="helper-buttons" type="button" onclick="destroyHelper('{{$card['id']}}')" value=" - ">
-                            <div onclick="showUserData('Anthony Inocencio Ramos', 'AIR', 'navy')" title="" style="background-color:pink;" class="avatar" id="card-{{$card['id']}}-helper-avatar"><a id="card-{{$card['id']}}-helper-avatar-init" href="#"></a></div>
+                            <div onclick="showUserData('moet nog komen', 'air', 'navy')" title="" style="background-color:pink;" class="avatar" id="card-{{$card['id']}}-helper-avatar"><a id="card-{{$card['id']}}-helper-avatar-init" href="#"></a></div>
                         </div>
                         <div id="userPopup">
                             <div class="user-popup-header">
                                 <div id="userPopupBol" title="" class="avatar user-popup-header-avatar"><a href="#" id="userPopupAvatar"></a></div>
                                 <div id="userPopupName" class="user-popup-header-username"><a href="#" id="userPopupInit"></a></div>
                             </div>
-                            <div id="userPopupProfilePage" class="user-popup-button"><a href="#">profiel informatie wijzigen</a></div>
+                            <div id="userPopupProfilePage" class="user-popup-button"><a href="">profiel bekijken</a></div>
                             <hr>
                             <div id="userPopupBordInfo" class="user-popup-button"><a href="#">bekijk bord informatie</a></div>
                             <div id="userPopupLeaveBord" class="user-popup-button"><a href="#">bord verlaten</a></div>
@@ -99,8 +99,9 @@ $user_id = Auth::user()->id;
                         <a href="#" onclick="saveCardUpvote('{{$card['id']}}', '{{Auth::User()->id}}')" class="home-buttons">Upvote</a>
                         <div id="cardAvatarContainer" class="avatarContainer card-info-border"></div>
 
+                        </div>   
                   </form>
-                </div>
+                     </div>
   
             </div>
             
@@ -114,8 +115,6 @@ $user_id = Auth::user()->id;
                   <span class="close">&times;</span>
                   <form id="card-info-popup">
                     @csrf
-
-
                   <div id="general" class="card-info-border">
                             <span><i class="fas fa-align-left"></i></span>
                             <textarea type="text" id="title" maxlength="300" readonly>{{$card['name']}}</textarea>
@@ -151,9 +150,10 @@ $user_id = Auth::user()->id;
                             <div id="userPopupBordInfo" class="user-popup-button"><a href="#">bekijk bord informatie</a></div>
                             <div id="userPopupLeaveBord" class="user-popup-button"><a href="#">bord verlaten</a></div>
                         </div>
-
-
-                  </form>
+                        <div id="submit-form" class="card-info-border">
+                        <a href="{{ url('storeCardUpVote', [$card['id'], $thisBoard['id']]) }}" class="card-submit-button">Upvote</a>
+                        </div>
+                    </form>
                 </div>
   
             </div>
