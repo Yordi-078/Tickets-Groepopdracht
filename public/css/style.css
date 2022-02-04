@@ -445,7 +445,7 @@ a{
       margin-left:5px;
   }
 
-  #general>#title{
+  #general>.title{
     width: calc(97% - 10px);
     height: 30%;
     border: 1px solid var(--color-quinary);
@@ -455,7 +455,7 @@ a{
     float: right;
     border-radius: 10px;
   }
-  #general>#description{
+  #general>.description{
     width:calc(100% - 8px);
     height:40%;
     border: 1px solid var(--color-quinary);

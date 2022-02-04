@@ -24,7 +24,9 @@ var modal = 0;
 var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks the button, open the modal
-function showQuestionPopup($var, card_owner_id, $helper_id, $card_id, user_id){
+function showQuestionPopup(card_owner_id, $helper_id, user_id, card_id){
+  resetQuestionPopup();
+  getQuestionCardInfo(card_id);
   if(!$helper_id) {$helper_id = 'empty'}
   var url = route('getUsername', [card_owner_id, $helper_id]);
 
@@ -42,36 +44,40 @@ function showQuestionPopup($var, card_owner_id, $helper_id, $card_id, user_id){
   })
   
  .then(response => response.json())
-  .then(data => calcInit(data, $card_id, user_id) );
+  .then(data => calcInit(data, user_id, card_owner_id) );
 
-  modal = document.getElementById($var);
+  modal = document.getElementById('cardModal');
   modal.style.display = 'block';
 }
 
-function calcInit(name, $card_id, user_id){
+function calcInit(name, user_id, card_owner_id){
+  document.getElementById('card-owner').innerText = name[0]['name'];
+
   if(name[1] == 'empty'){
     document.getElementById("remove-helper-button").style.display = "none";
-    document.getElementById('card-' + $card_id + '-helper-avatar').style.display = 'none'
+    document.getElementById('card-helper-avatar').style.display = 'none'
+
+    if(user_id != card_owner_id){
+      document.getElementById('add-helper-button').style.display = 'inline';
+    }
   }
-  else{// if there is a helper, fill in the form with corresponding info
-    //calculate the data (if needed)
+
+  else{
     var initials = name[1]['name'].match(/\b(\w)/g);
     var acronym = initials.join('');
-    //get element with the id
-    console.log($card_id)
-    document.getElementById('helper-' + $card_id).innerText = name[1]['name'] + ' is helping this card.';
-    document.getElementById('card-' + $card_id + '-helper-avatar').style.backgroundColor= 'gray'
-    document.getElementById('card-' + $card_id + '-helper-avatar').title= name[1]['name']
-    document.getElementById('card-' + $card_id + '-helper-avatar-init').innerText= acronym
-    //fill in the data 
-    //display the correct button 
-    if(user_id != name[1]['id']){
-      console.log(name[1])
-      document.getElementById("remove-helper-button").style.display = "none";
+    
+    document.getElementById('helper').innerText = name[1]['name'] + ' is helping this card.';
+    document.getElementById('card-helper-avatar').style.display = 'flex';
+    document.getElementById('card-helper-avatar').style.backgroundColor= 'gray'
+    document.getElementById('card-helper-avatar').title= name[1]['name']
+    document.getElementById('card-helper-avatar-init').innerText= acronym
+
+    if(user_id == name[1]['id'] || user_id == card_owner_id){
+      document.getElementById("remove-helper-button").style.display = "inline";
     }
-    document.getElementById("add-helper-button").style.display = "none";
+
+    document.getElementById('add-helper-button').style.display = 'none';
   }
-  document.getElementById('card-owner').innerText = name[0]['name']
   
 }
 
@@ -112,14 +118,17 @@ window.onclick = function(event) {
   }
 }
 
-function addHelper($helperId, $helperName, $helperMail, $helperRole, card_id){
+function addHelper($helperId, $helperName){
   saveHelper(card_id, $helperId);
+
   var initials = $helperName.match(/\b(\w)/g);
   var acronym = initials.join('');
-  document.getElementById('card-' + card_id + '-helper-avatar').style.display = 'flex'
-  document.getElementById('card-' + card_id + '-helper-avatar').style.backgroundColor= 'gray'
-  document.getElementById('card-' + card_id + '-helper-avatar').title= $helperName
-  document.getElementById('card-' + card_id + '-helper-avatar-init').innerText= acronym
+
+  document.getElementById('helper').innerText = helperName + ' is helping this card.';
+  document.getElementById('card-helper-avatar').style.display = 'flex'
+  document.getElementById('card-helper-avatar').style.backgroundColor= 'gray'
+  document.getElementById('card-helper-avatar').title= $helperName
+  document.getElementById('card-helper-avatar-init').innerText= acronym
   // document.getElementById('card-' + card_id + '-helper-avatar').onclick= showUserData('jan pieter son', 'jps', 'green');
   document.getElementById("remove-helper-button").style.display = "inline";
   document.getElementById("add-helper-button").style.display = "none";
@@ -142,17 +151,17 @@ function destroyHelper(card_id){
   
  .then(response => response.json())
   .then(data => console.log(data));
-  document.getElementById('helper-' + card_id).innerText = 'no one is helping this card';
-  document.getElementById('card-' + card_id + '-helper-avatar').style.display = 'none';
-  document.getElementById('card-' + card_id + '-helper-avatar').style.backgroundColor= '';
-  document.getElementById('card-' + card_id + '-helper-avatar').title= '';
-  document.getElementById('card-' + card_id + '-helper-avatar-init').innerText= '';
+  document.getElementById('helper').innerText = 'no one is helping this card';
+  document.getElementById('card-helper-avatar').style.display = 'none';
+  document.getElementById('card-helper-avatar').style.backgroundColor= '';
+  document.getElementById('card-helper-avatar').title= '';
+  document.getElementById('card-helper-avatar-init').innerText= '';
   document.getElementById("remove-helper-button").style.display = "none";
-  document.getElementById("add-helper-button").style.display = "inline";
+  // add helper button visible only if not the owner of card
+  // document.getElementById("add-helper-button").style.display = "inline";
 }
 
 function saveHelper(card_id, $helperId){
-  console.log("card id is: " + $helperId)
   var url = route('saveHelper', [card_id, $helperId])
   let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
   
@@ -169,6 +178,47 @@ function saveHelper(card_id, $helperId){
   
  .then(response => response.json())
   .then(data => console.log(data));
+}
+
+function getQuestionCardInfo(card_id){
+  var url = route('getQuestionCardInfo', card_id)
+  let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+  
+  fetch(url, {
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json, text-plain, *//* only 1 line  ",
+      "X-Requested-With": "XMLHttpRequest",
+      "X-CSRF-TOKEN": token,
+    },
+    method: 'GET',
+    credentials: "same-origin",
+  })
+  
+ .then(response => response.json())
+  .then(data => fillQuestionPopup(data));
+}
+
+function resetQuestionPopup(){
+  document.getElementById('card-owner').innerText = '';
+//name
+//description
+  document.getElementById('helper').innerText = 'no one is helping this card';
+  document.getElementById('card-helper-avatar').style.display = 'none';
+  document.getElementById('card-helper-avatar').style.backgroundColor= '';
+  document.getElementById('card-helper-avatar').title= '';
+  document.getElementById('card-helper-avatar-init').innerText= '';
+  document.getElementById("remove-helper-button").style.display = "none";
+  document.getElementById("add-helper-button").style.display = "none";
+}
+
+function fillQuestionPopup(data){
+  document.getElementById('card-info-popup')
+  document.getElementById('card-title').value = data[0]['name'];
+  document.getElementById('card-description').value = data[0]['description'];
+  document.getElementById('card-created-at').innerText = data[0]['created_at'];
+  //status
+  //image
 }
 
 function showUserData(username, initials,color){

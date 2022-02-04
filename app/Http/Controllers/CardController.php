@@ -72,6 +72,7 @@ class CardController extends Controller
     { 
         $this->validateCard();
         $user_id = Auth::user()->id;
+        dd($card_id);
         Card::updateOrCreate(
             [
                 "id" => $card_id
@@ -139,5 +140,12 @@ class CardController extends Controller
             );
             return redirect()->route('oneBoard', ['board_id'=>$board_id]); 
     }
+
+    function getQuestionCardInfo($card_id){
+        $response = Card::where('id', $card_id)->get();
+
+        return response()->json($response);
+    }
 }
+
 
