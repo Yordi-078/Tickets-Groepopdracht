@@ -56,7 +56,7 @@ Route::post('storeLessonCard/{board_id}',  [CardController::class, 'storeLessonC
 Route::get('storeLessonUpVote/{lesson_id}/{board_id}',  [CardController::class, 'storeLessonUpVote'])->name('storeLessonUpVote');
 Route::get('getCardInfo/{lesson_id}/{board_id}',  [CardController::class, 'getCardInfo'])->name('getCardInfo');
 Route::post('updateCard/{card_id}/{board_id}',  [CardController::class, 'updateCard'])->name('updateCard');
-Route::get('storeCardUpVote/{card_id}/{board_id}',  [CardController::class, 'storeCardUpVote'])->name('storeCardUpVote');
+// Route::get('storeCardUpVote/{card_id}/{board_id}',  [CardController::class, 'storeCardUpVote'])->name('storeCardUpVote');
 
 
 Route::get('boardCrud/createLessonCard/{board_id}',  [LessonCardController::class, 'createLessonCard'])->name('createLessonCard');
@@ -66,5 +66,5 @@ Route::get('storeLessonUpVote/{lesson_id}/{board_id}',  [LessonCardController::c
 Route::get('getUsername/{user_id}/{helperId}',  [CardController::class, 'getUsername'])->name('getUsername');
 Route::get('saveHelper/{card_id}/{helperId}',  [CardController::class, 'saveHelper'])->name('saveHelper');
 Route::get('removeHelper/{card_id}',  [CardController::class, 'removeHelper'])->name('removeHelper');
-Route::get('saveCardUpvote/{card_id}/{user_id}',  [CardController::class, 'saveCardUpvote'])->name('saveCardUpvote');
+Route::get('saveCardUpvote/{card_id}',  [CardController::class, 'saveCardUpvote'])->name('saveCardUpvote');
 Route::get('GetCardAvatars/{card_id}',  [CardController::class, 'GetCardAvatars'])->name('GetCardAvatars');

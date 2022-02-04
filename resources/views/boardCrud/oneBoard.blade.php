@@ -96,10 +96,9 @@ $user_id = Auth::user()->id;
                         <div id="submit-form" class="card-info-border">
                             <input type="submit" class="card-submit-button" value="submit">
                         </div>
-                        <a href="#" onclick="saveCardUpvote('{{$card['id']}}', '{{Auth::User()->id}}')" class="home-buttons">Upvote</a>
+                        <!-- <a href="#" onclick="saveCardUpvote('{{$card['id']}}', '{{Auth::User()->id}}')" class="home-buttons">Upvote</a> -->
                         <div id="cardAvatarContainer" class="avatarContainer card-info-border"></div>
 
-                        </div>   
                   </form>
                      </div>
   
@@ -150,9 +149,10 @@ $user_id = Auth::user()->id;
                             <div id="userPopupBordInfo" class="user-popup-button"><a href="#">bekijk bord informatie</a></div>
                             <div id="userPopupLeaveBord" class="user-popup-button"><a href="#">bord verlaten</a></div>
                         </div>
-                        <div id="submit-form" class="card-info-border">
-                        <a href="{{ url('storeCardUpVote', [$card['id'], $thisBoard['id']]) }}" class="card-submit-button">Upvote</a>
-                        </div>
+                  
+                        <a href="#" onclick="saveCardUpvote('{{$card['id']}}')" class="home-buttons">Upvote</a>
+                        <div id="cardAvatarContainer" class="avatarContainer card-info-border"></div>
+                        
                     </form>
                 </div>
   
