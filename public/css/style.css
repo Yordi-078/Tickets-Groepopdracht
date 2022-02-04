@@ -751,3 +751,21 @@ display: flex;
 justify-content: center;
 align-items: center;
 }
+
+.date-columns {
+    list-style-type: none;
+    overflow-y: auto;
+    white-space: nowrap;
+}
+
+.date-columns li {
+    display: inline-block;
+    width: 600px;
+    overflow-x: auto;
+    height: 50%;
+    border-right: 5px solid black;
+    border-left: 5px solid black;
+    margin: 0;
+    padding: 0;
+}
+
