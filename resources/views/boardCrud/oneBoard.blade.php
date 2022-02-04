@@ -12,12 +12,20 @@ $user_id = Auth::user()->id;
     <!-- this is what the user sees if user is admin or docent. 
     this wil be added to all the other code and wil not replace it -->
     @if (Auth::user()->user_role == 'teacher' || Auth::user()->user_role == 'admin' )
-    <a id="add-student-button" class="dropdown-item" href="{{ route('addStudentsToBoard', $thisBoard['id']) }}">
-        {{ __('Add students') }}
-    </a>
+        <a id="add-student-button" class="dropdown-item" href="{{ route('addStudentsToBoard', $thisBoard['id']) }}">
+            {{ __('Add students') }}
+        </a>
     @endif
+    @if (Auth::user()->user_role == 'teacher')
+        <a id="add-student-button" class="dropdown-item" href="{{ route('teacherDashboard',$thisBoard['id']) }}">
+            {{ __('Teacher Dashboard') }}
+        </a>
+    @endif
+    <a href="{{ route('viewUsersFromBoard', $thisBoard['id']) }}" id="add-student-button">View all users from this board</a>
 </div>
-<a href="{{ route('viewUsersFromBoard', $thisBoard['id']) }}" id="allUsersBtn">View all users from this board</a>
+
+
+
 <div class="question-board-container">
     <div class="board-header">
         
@@ -83,7 +91,7 @@ $user_id = Auth::user()->id;
                                 <div id="userPopupBol" title="" class="avatar user-popup-header-avatar"><a href="#" id="userPopupAvatar"></a></div>
                                 <div id="userPopupName" class="user-popup-header-username"><a href="#" id="userPopupInit"></a></div>
                             </div>
-                            <div id="userPopupProfilePage" class="user-popup-button"><a href="#">profiel informatie wijzigen</a></div>
+                            <div id="userPopupProfilePage" class="user-popup-button"><a href="">profiel bekijken</a></div>
                             <hr>
                             <div id="userPopupBordInfo" class="user-popup-button"><a href="#">bekijk bord informatie</a></div>
                             <div id="userPopupLeaveBord" class="user-popup-button"><a href="#">bord verlaten</a></div>
@@ -92,14 +100,16 @@ $user_id = Auth::user()->id;
                         <fieldset id="submit-form" class="card-info-border">
                             <input type="submit" class="card-submit-button" value="submit">
                         </fieldset>
-                        <a href="{{ url('storeCardUpVote', [$card['id'], $thisBoard['id']]) }}" class="home-buttons">Upvote</a><!-- href is going to break -->
+                        
+                        <a href="#" onclick="saveCardUpvote('{{$card['id']}}', '{{Auth::User()->id}}')" class="home-buttons">Upvote</a>
+                        <div id="cardAvatarContainer" class="avatarContainer card-info-border"></div>
 
+                        </div>   
                   </form>
-                </div>
+                     </div>
   
             </div>
             
-
 
 
 
@@ -113,7 +123,6 @@ $user_id = Auth::user()->id;
     </div>
     
     <div class="flex-row" id="board-lesson-content-box" >
-        
         @foreach($lessonCards as $lessonCard)
  
         <a onclick="showPopup('myModalLesson{{$lessonCard['id']}}',{{$thisBoard['id']}})" class="toggle cards flex-row">{{$lessonCard["name"]}}<button class="card-popup-button"><i class="far fa-eye"></i></button></a> 

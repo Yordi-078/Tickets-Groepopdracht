@@ -4,13 +4,13 @@
 <div class="form-container">
 
     <div class="form-header">
-        <h1>Alle gebruikers:</h1>
+        Alle gebruikers:
     </div>
 
     <div class="form-body">
         @foreach($allUsers as $allUsersThisBoard)
             {{$allUsersThisBoard["name"]}}
-            <br><br>
+            <br><hr><br>
         @endforeach
     </div>
 

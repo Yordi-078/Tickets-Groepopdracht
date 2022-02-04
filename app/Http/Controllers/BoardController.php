@@ -105,4 +105,9 @@ class BoardController extends Controller
   
     return view('boardCrud.allUsersFromBoard', ['allUsers' => $users]);
   }
+
+  public function viewUserPage($user_id){
+      return view('boardCrud.userProfilePage', ['userInfo' => $user_id]);
+  }
+
 }

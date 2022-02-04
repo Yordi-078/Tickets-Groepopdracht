@@ -49,11 +49,6 @@
                                     {{ __('change user roles') }}
                                 </a>
                             @endif
-                            @if (Auth::user()->user_role == 'teacher')
-                                <a class="dropdown-item" href="{{ route('teacherDashboard') }}">
-                                    {{ __('Teacher Dashboard') }}
-                                </a>
-                            @endif
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">

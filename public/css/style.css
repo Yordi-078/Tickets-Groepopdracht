@@ -149,6 +149,7 @@ a{
 #add-student-button{
     background: rgb(128, 128, 128, .3);
     padding: 5px;
+    margin: 0 10px;
 }
 
 #add-student-button:hover{
@@ -170,6 +171,7 @@ a{
     top:16vh;
     left: 72vw;
     width:23vw;
+    max-height: 80vh;
     background:var(--navbar-gradient);
     border-radius: 10px 10px 0px 0px;
     box-shadow: 1px 1px 7px 0px black;
@@ -178,6 +180,7 @@ a{
 #home-board-content-box{
     background:#EEEEEE;
     min-height:80vh;
+    max-height: 80vh;
     display: flex;
     padding:5px;
     flex-wrap: wrap;
@@ -185,6 +188,7 @@ a{
 }
 
 #board-question-content-box{
+       overflow-y : scroll;
     background:#EEEEEE;
     min-height:70vh;
     display: flex;
@@ -194,8 +198,10 @@ a{
 }
 
 #board-lesson-content-box{
+    overflow-y : scroll;
     background:#EEEEEE;
     min-height:70vh;
+    max-height: 70vh;
     display: flex;
     padding:5px;
     flex-wrap: wrap;
@@ -504,7 +510,7 @@ a{
   }
 
   #progress-info{
-    grid-column: 2/4;
+    grid-column: 2/3;
     grid-row: 2/3;
   }
 
@@ -736,4 +742,18 @@ hr{
     margin: 7px 5px;
     border: 0;
     padding: 0;
+}
+.form-header{
+font-size: 30px;
+font-weight: bold;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+.avatarContainer{
+    grid-column:3/4;
+    grid-row:2/3;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
 }
