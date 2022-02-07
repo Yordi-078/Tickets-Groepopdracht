@@ -68,23 +68,23 @@ class CardController extends Controller
           return response()->json($response);
     }
 
-    public function updateCard(Request $request, $card_id ,$board_id)
+    public function updateCard( $card_id, $card_name, $card_description, $card_status)
     { 
-        $this->validateCard();
+        // $this->validateCard();
         $user_id = Auth::user()->id;
-        dd($card_id);
+
         Card::updateOrCreate(
             [
                 "id" => $card_id
             ],
             [
-                "name" => $request["name"],
-                "description" => $request["description"],
-                "status" => $request["status"],
+                "name" => $card_name,
+                "description" => $card_description,
+                "status" => $card_status,
             ]
         );
         
-        return redirect()->route('oneBoard', ['board_id'=>$board_id]);
+        return response()->json();
     }
     
     public function getUsername($user_id, $helper_id)

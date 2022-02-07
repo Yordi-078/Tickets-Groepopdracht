@@ -1,6 +1,9 @@
 // const { isPlainObject } = require("jquery");
 // const { default: plugin } = require("tailwindcss/plugin");
 
+const removeHelperBtn = document.getElementById('remove-helper-button');
+const addHelperBtn = document.getElementById('add-helper-button');
+
 function toggleBoard() {
   var boards = document.getElementsByClassName("board");
   for (i = 0; i < boards.length; i++) {
@@ -24,9 +27,11 @@ var modal = 0;
 var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks the button, open the modal
-function showQuestionPopup(card_owner_id, $helper_id, user_id, card_id){
+function showQuestionPopup(card_owner_id, $helper_id, user_id, user_name, card_id){
   resetQuestionPopup();
   getQuestionCardInfo(card_id);
+  checkForOwner(user_id, card_owner_id);
+  eventListeners(card_id, user_id, user_name);
   if(!$helper_id) {$helper_id = 'empty'}
   var url = route('getUsername', [card_owner_id, $helper_id]);
 
@@ -120,13 +125,14 @@ window.onclick = function(event) {
   }
 }
 
-function addHelper($helperId, $helperName){
+var addHelper = function($helperId, $helperName, card_id){
+
   saveHelper(card_id, $helperId);
 
   var initials = $helperName.match(/\b(\w)/g);
   var acronym = initials.join('');
 
-  document.getElementById('helper').innerText = helperName + ' is helping this card.';
+  document.getElementById('helper').innerText = $helperName + ' is helping this card.';
   document.getElementById('card-helper-avatar').style.display = 'flex'
   document.getElementById('card-helper-avatar').style.backgroundColor= 'gray'
   document.getElementById('card-helper-avatar').title= $helperName
@@ -136,7 +142,8 @@ function addHelper($helperId, $helperName){
   document.getElementById("add-helper-button").style.display = "none";
 }
 
-function destroyHelper(card_id){
+var destroyHelper = function(card_id){
+
   var url = route('removeHelper', card_id)
   let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
   
@@ -149,18 +156,15 @@ function destroyHelper(card_id){
     },
     method: 'GET',
     credentials: "same-origin",
-  })
-  
- .then(response => response.json())
-  .then(data => console.log(data));
+  });
+
   document.getElementById('helper').innerText = 'no one is helping this card';
   document.getElementById('card-helper-avatar').style.display = 'none';
   document.getElementById('card-helper-avatar').style.backgroundColor= '';
   document.getElementById('card-helper-avatar').title= '';
   document.getElementById('card-helper-avatar-init').innerText= '';
   document.getElementById("remove-helper-button").style.display = "none";
-  // add helper button visible only if not the owner of card
-  // document.getElementById("add-helper-button").style.display = "inline";
+  document.getElementById("add-helper-button").style.display = "inline";
 }
 
 function saveHelper(card_id, $helperId){
@@ -176,10 +180,7 @@ function saveHelper(card_id, $helperId){
     },
     method: 'GET',
     credentials: "same-origin",
-  })
-  
- .then(response => response.json())
-  .then(data => console.log(data));
+  });
 }
 
 function getQuestionCardInfo(card_id){
@@ -203,8 +204,6 @@ function getQuestionCardInfo(card_id){
 
 function resetQuestionPopup(){
   document.getElementById('card-owner').innerText = '';
-//name
-//description
   document.getElementById('helper').innerText = 'no one is helping this card';
   document.getElementById('card-helper-avatar').style.display = 'none';
   document.getElementById('card-helper-avatar').style.backgroundColor= '';
@@ -219,8 +218,26 @@ function fillQuestionPopup(data){
   document.getElementById('card-title').value = data[0]['name'];
   document.getElementById('card-description').value = data[0]['description'];
   document.getElementById('card-created-at').innerText = data[0]['created_at'];
-  //status
+  var i = 0;
+  if(data[0]['status'] == 'finished'){i = 1}
+
+  document.getElementById('card-status').options[i].selected = true;
   //image
+}
+
+function checkForOwner(user_id, card_owner_id){
+  document.getElementById('card-title').readOnly = false;
+  document.getElementById('card-description').readOnly = false;
+  document.getElementById('card-status').disabled = false;
+  document.getElementById('upload-image').disabled = false;
+  document.getElementById('submit-form').style.display = 'grid';
+  if(user_id == card_owner_id) return
+  document.getElementById('card-title').readOnly = true;
+  document.getElementById('card-description').readOnly = true;
+  document.getElementById('card-status').disabled = true;
+  document.getElementById('upload-image').disabled = true;
+  document.getElementById('submit-form').style.display = 'none';
+  
 }
 
 function showUserData(username, initials,color){
@@ -265,10 +282,7 @@ function saveCardUpvote($card_id){
     },
     method: 'GET',
     credentials: "same-origin",
-  })
-  
- .then(response => response.json())
-  .then(data => console.log(data));
+  });
 }
 
 function getCardAvatars(card_id){
@@ -291,7 +305,6 @@ function getCardAvatars(card_id){
 }
 
 function showCardAvatars(data){
-  console.log(data);
   for (let i = 0; i < data.length; i++) {
     var initials = data[i]['name'].match(/\b(\w)/g);
     var acronym = initials.join('');
@@ -309,4 +322,34 @@ function showCardAvatars(data){
     avatarInit.innerText = acronym;
     avatar.appendChild(avatarInit);
   }
+}
+
+function eventListeners(card_id, helper_id, helper_name){
+  //remove helper
+  // removeHelperBtn.addEventListener('click',destroyHelper, false);
+  removeHelperBtn.addEventListener('click',destroyHelper.bind(event,card_id), false);
+  //add helper
+  addHelperBtn.addEventListener('click',addHelper.bind(event,helper_id, helper_name, card_id), false);
+  //submit
+  document.getElementById('card-info-popup').addEventListener('submit', function(event){
+    event.preventDefault();
+  
+    var card_name = document.getElementById('card-title').value
+    var card_description = document.getElementById('card-description').value
+    var card_status = document.getElementById('card-status').selectedOptions[0].value
+
+    var url = route('updateCard', [card_id, card_name, card_description, card_status])
+    let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+    
+    fetch(url, {
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json, text-plain, *//* only 1 line  ",
+        "X-Requested-With": "XMLHttpRequest",
+        "X-CSRF-TOKEN": token,
+      },
+      method: 'GET',
+      credentials: "same-origin",
+    });
+  });
 }

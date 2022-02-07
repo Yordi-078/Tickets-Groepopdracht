@@ -37,7 +37,7 @@ $user_id = Auth::user()->id;
         @foreach($cards as $card)
             
             <a href="#" class="cards flex-row">
-                <button class="card-popup-button" onclick="showQuestionPopup('{{$card['user_id']}}','{{$card['helper_id']}}','{{Auth::user()->id}}','{{$card['id']}}')">
+                <button class="card-popup-button" onclick="showQuestionPopup('{{$card['user_id']}}','{{$card['helper_id']}}','{{Auth::user()->id}}','{{Auth::user()->name}}','{{$card['id']}}')">
                     <i class="far fa-eye"></i>
                 </button>
                 {{$card->status == "finished" ? "//" : ''}}
@@ -55,7 +55,7 @@ $user_id = Auth::user()->id;
                     <span id="card-owner" class="card-info-owner"></span>
                     <span id="close-popup" onclick="history.go(-0)" class="close">&times;</span>
                   
-                    <form  id="card-info-popup" action="{{ url('updateCard', [$cards[0]['id'], $card['board_id']]) }}" method="POST"><!-- the submit wil break becose the the data is null -->
+                    <form id="card-info-popup">
                       
                       @csrf
                       <fieldset id="general" class="card-info-border">
@@ -66,15 +66,15 @@ $user_id = Auth::user()->id;
                         </fieldset>
 
                         <fieldset id="image-uploader" class="card-info-border">
-                            <input type="file">
+                            <input id="upload-image" type="file">
                         </fieldset>
 
                         <fieldset id="progress-info" class="card-info-border">
                             <p id="card-created-at"></p>
                             
-                            <select name="status" id="card-status"><!-- met yordi kijken hoe dit gemaakt moet worden -->
-                                <option name='status' value="in_progress" {{$card->status == "in_progress" ? 'selected' : '' }}>in progress</option>
-                                <option name='status' value="finished"    {{$card->status == "finished" ? 'selected' : '' }}>finished</option>
+                            <select name="status" id="card-status">
+                                <option name='status' value="in_progress" >in progress</option>
+                                <option name='status' value="finished" >finished</option>
                             </select>
                         </fieldset>
 
@@ -82,8 +82,8 @@ $user_id = Auth::user()->id;
 
                         <fieldset id="helper-box" class="card-info-border">
                             <p id="helper">no one is helping this card</p>
-                            <input id="remove-helper-button" class="helper-buttons" type="button" onclick="destroyHelper('{{$card['id']}}')" value=" - "><!-- onclick destroyHelper('{{$card['id']}}') --> 
-                            <input id="add-helper-button" class="helper-buttons" type="button" onclick="addHelper('{{Auth::user()->id}}','{{Auth::user()->name}}','{{Auth::user()->email}}','{{Auth::user()->user_role}}','{{$card['id']}}' )" value=" + "><!-- onclick destroyHelper('{{$card['id']}}') --> 
+                            <input id="remove-helper-button" class="helper-buttons" type="button" value=" - "><!-- onclick destroyHelper('{{$card['id']}}') --> 
+                            <input id="add-helper-button" class="helper-buttons" type="button"value=" + "><!-- onclick destroyHelper('{{$card['id']}}') --> 
                             <div onclick="showUserData('Anthony Inocencio Ramos', 'AIR', 'navy')" title="" style="background-color:pink;" class="avatar" id="card-helper-avatar"><a id="card-helper-avatar-init" href="#"></a></div>
                         </fieldset>
                         <div id="userPopup">
