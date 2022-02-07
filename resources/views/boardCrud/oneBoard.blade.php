@@ -104,7 +104,6 @@ $user_id = Auth::user()->id;
                         <a href="#" onclick="saveCardUpvote('{{$card['id']}}', '{{Auth::User()->id}}')" class="home-buttons">Upvote</a>
                         <div id="cardAvatarContainer" class="avatarContainer card-info-border"></div>
 
-                        </div>   
                   </form>
                      </div>
   

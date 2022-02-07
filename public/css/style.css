@@ -528,6 +528,8 @@ a{
       font-size: 3rem;
       border-radius: 10px;
       cursor: pointer;
+      position: relative;
+      top: 120px;
   }
 
   .card-submit-button:hover{

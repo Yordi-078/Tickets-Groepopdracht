@@ -252,10 +252,8 @@ function showUserData(username, initials,color){
 // remove all the foreaches in oneboard for popups and handel everything with javscript fetch
 
 
-
-
-function saveCardUpvote($card_id, $user_id){
-  var url = route('saveCardUpvote', [$card_id, $user_id])
+function saveCardUpvote($card_id){
+  var url = route('saveCardUpvote', [$card_id])
   let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
   
   fetch(url, {

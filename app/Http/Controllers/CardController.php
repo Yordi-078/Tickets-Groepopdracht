@@ -128,16 +128,17 @@ class CardController extends Controller
           return response()->json();
     }
     
-    public function saveCardUpvote($card_id, $user_id)
+    public function saveCardUpvote($card_id)
     {
+
+        $user_id = Auth::user()->id;
+
         CardUpvotes::updateOrCreate(
             [
-                "card_id" => $card_id
-            ],[
-                "user_id" => $user_id,
+                "card_id" => $card_id,
+                "user_id" => $user_id
             ]
-        );
-
+            );
           return response()->json();
     }
 
