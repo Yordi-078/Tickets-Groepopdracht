@@ -36,8 +36,8 @@ $user_id = Auth::user()->id;
     <div class="flex-row" id="board-question-content-box" >
         @foreach($cards as $card)
             
-            <a href="#" class="cards flex-row">
-                <button class="card-popup-button" onclick="showQuestionPopup('{{$card['user_id']}}','{{$card['helper_id']}}','{{Auth::user()->id}}','{{Auth::user()->name}}','{{$card['id']}}')">
+            <a onclick="showQuestionPopup('{{$card['user_id']}}','{{$card['helper_id']}}','{{Auth::user()->id}}','{{Auth::user()->name}}','{{$card['id']}}')" href="#" class="cards flex-row">
+                <button class="card-popup-button">
                     <i class="far fa-eye"></i>
                 </button>
                 {{$card->status == "finished" ? "//" : ''}}
