@@ -97,8 +97,7 @@ class UserController extends Controller
      */
     public function teacherDashboard(User $board_id)
     {
-        $cards = Card::all();
-        //$cards = Card::all()->where('status', 'finished')->where("helper_id", auth()->id())->sortBy('updated_at');
+        $cards = Card::all()->where('status', 'finished')->where("helper_id", auth()->id())->sortBy('updated_at');
         return view('teacherDashboard.index', compact('cards', 'board_id'));
     }
 

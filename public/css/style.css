@@ -753,17 +753,25 @@ justify-content: center;
 align-items: center;
 }
 
+.teacher-dashboard-content {
+    overflow-y: scroll;
+    max-height: 90vh;
+}
+
+
 .date-columns {
-    list-style-type: none;
-    overflow-y: auto;
+    overflow-x: scroll;
     white-space: nowrap;
+    
+}
+
+.date-colums h2{
+    margin: 0;
 }
 
 .date-columns li {
     display: inline-block;
     width: 600px;
-    overflow-x: auto;
-    height: 50%;
     border-right: 5px solid black;
     border-left: 5px solid black;
     margin: 0;
