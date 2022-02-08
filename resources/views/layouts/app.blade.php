@@ -1,7 +1,6 @@
 <?php 
 
 use Illuminate\support\facades\Auth;
-$user_id = Auth::user()->id;
 
 ?>
 
@@ -48,7 +47,7 @@ $user_id = Auth::user()->id;
                                 <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                             @endif
                         @else
-                            <a id="" class="" href="{{ route('viewUserPage', $user_id ) }}">
+                            <a id="" class="" href="{{ route('viewUserPage', {{ Auth::user()->id }} ) }}">
                                 {{ Auth::user()->name }}
                             </a>
                             @if (Auth::user()->user_role == 'teacher' || Auth::user()->user_role == 'admin' )
