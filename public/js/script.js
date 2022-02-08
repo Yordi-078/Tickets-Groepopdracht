@@ -28,6 +28,7 @@ var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks the button, open the modal
 function showQuestionPopup(card_owner_id, $helper_id, user_id, user_name, card_id){
+  console.log(card_id)
   resetQuestionPopup();
   getQuestionCardInfo(card_id);
   checkForOwner(user_id, card_owner_id);
@@ -230,13 +231,19 @@ function checkForOwner(user_id, card_owner_id){
   document.getElementById('card-description').readOnly = false;
   document.getElementById('card-status').disabled = false;
   document.getElementById('upload-image').disabled = false;
+  //make eventListener enabled
   document.getElementById('submit-form').style.display = 'grid';
+  //make eventListener disabled
+  document.getElementById('card-upvote-question').style.display = 'none';
   if(user_id == card_owner_id) return
   document.getElementById('card-title').readOnly = true;
   document.getElementById('card-description').readOnly = true;
   document.getElementById('card-status').disabled = true;
   document.getElementById('upload-image').disabled = true;
+  //make eventListener disabled
   document.getElementById('submit-form').style.display = 'none';
+  //make eventListener enabled
+  document.getElementById('card-upvote-question').style.display = 'flex';
   
 }
 
@@ -258,18 +265,7 @@ function showUserData(username, initials,color){
   //user color
 }
 
-
-// to do
-// all variables that have a '$' should remove '$' from there name
-// function for randomizing color of avatar bal and remembering color for next use
-// move all fetch related request to the bottom of the javascript file
-// make a loader for all popups
-
-// extra 
-// remove all the foreaches in oneboard for popups and handel everything with javscript fetch
-
-
-function saveCardUpvote($card_id){
+var saveCardUpvote = function ($card_id){
   var url = route('saveCardUpvote', [$card_id])
   let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
   
@@ -330,6 +326,8 @@ function eventListeners(card_id, helper_id, helper_name){
   removeHelperBtn.addEventListener('click',destroyHelper.bind(event,card_id), false);
   //add helper
   addHelperBtn.addEventListener('click',addHelper.bind(event,helper_id, helper_name, card_id), false);
+  //question upvote
+  document.getElementById('card-upvote-question').addEventListener('click', saveCardUpvote.bind(event, card_id), false);
   //submit
   document.getElementById('card-info-popup').addEventListener('submit', function(event){
     event.preventDefault();
@@ -353,3 +351,10 @@ function eventListeners(card_id, helper_id, helper_name){
     });
   });
 }
+
+// to do
+// all variables that have a '$' should remove '$' from there name
+// function for randomizing color of avatar bal and remembering color for next use
+// move all fetch related request to the bottom of the javascript file
+// make a loader for all popups
+//remove all document.getElementById and place them in const at the top of script.js file

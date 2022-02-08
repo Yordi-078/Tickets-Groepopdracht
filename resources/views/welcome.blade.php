@@ -20,11 +20,20 @@
             <div class="login-buttons">
                 @if (Route::has('login'))
                     @auth
-                        <a href="{{ url('/home') }}" class="buttons">Home</a>
+                    <div>
+                        <a href="{{ url('/home') }}" class="buttons landing-page-buttons">Home</a>
+                        <hr class="focus-border">
+                    </div>
                     @else
-                        <a href="{{ route('login') }}" class="buttons">Log-in</a>
+                    <div>
+                        <a href="{{ route('login') }}" class="buttons landing-page-buttons">Log-in</a>
+                        <hr class="focus-border">
+                    </div>
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="buttons">Register</a>
+                        <div>
+                            <a href="{{ route('register') }}" class="buttons landing-page-buttons">Register</a>
+                            <hr class="focus-border">
+                        </div>
                         @endif
                     @endauth
                 @endif
