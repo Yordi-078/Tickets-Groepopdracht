@@ -9,8 +9,7 @@ $user_id = Auth::user()->id;
 
 @section('content')
 <div class="board-page-header">
-    <!-- this is what the user sees if user is admin or docent. 
-    this wil be added to all the other code and wil not replace it -->
+
     @if (Auth::user()->user_role == 'teacher' || Auth::user()->user_role == 'admin' )
         <a id="add-student-button" class="dropdown-item" href="{{ route('addStudentsToBoard', $thisBoard['id']) }}">
             {{ __('Add students') }}
@@ -48,9 +47,9 @@ $user_id = Auth::user()->id;
 
             
 
-            <!-- The Modal -->
+            
             <div id="cardModal" class="modal">
-                <!-- Modal content -->
+               
                 <div class="modal-content">
                     <span id="card-owner" class="card-info-owner"></span>
                     <span id="close-popup" onclick="history.go(-0)" class="close">&times;</span>
@@ -84,8 +83,8 @@ $user_id = Auth::user()->id;
 
                         <fieldset id="helper-box" class="card-info-border">
                             <legend id="helper">no one is helping this card</legend>
-                            <input id="remove-helper-button" class="helper-buttons" type="button" value=" - "><!-- onclick destroyHelper('{{$card['id']}}') --> 
-                            <input id="add-helper-button" class="helper-buttons" type="button"value=" + "><!-- onclick destroyHelper('{{$card['id']}}') --> 
+                            <input id="remove-helper-button" class="helper-buttons" type="button" value=" - ">
+                            <input id="add-helper-button" class="helper-buttons" type="button"value=" + ">
                             <div onclick="showUserData('Anthony Inocencio Ramos', 'AIR', 'navy')" title="" style="background-color:pink;" class="avatar" id="card-helper-avatar"><a id="card-helper-avatar-init" href="#"></a></div>
                         </fieldset>
 
@@ -139,13 +138,13 @@ $user_id = Auth::user()->id;
  
         <a onclick="showPopup('myModalLesson{{$lessonCard['id']}}',{{$thisBoard['id']}})" class="toggle cards flex-row">{{$lessonCard["name"]}}<button class="card-popup-button"><i class="far fa-eye"></i></button></a> 
         
-        <!-- The Modal -->
+     
 
         
       
         <div id="myModalLesson{{$lessonCard['id']}}" class="modal">
         
-            <!-- Modal content -->
+        
     
             <div class="modal-content">
               <span onclick="history.go(-1)" class="close">&times;</span>
