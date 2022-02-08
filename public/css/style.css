@@ -61,6 +61,18 @@ a{
     font-size: 35px;
 }
 
+.focus-border{
+    border: none;
+    width: 0%;
+	border-bottom: 1px solid whitesmoke;
+    transition: 0.5s linear;
+}
+
+.landing-page-buttons:hover~.focus-border{
+	width: 100%;
+    transition: 0.5s;
+}
+
 /* style for app.blade.php */
 
 .navbar{
@@ -432,7 +444,7 @@ a{
     cursor: pointer;
   }
 
-  #card-info-popup{
+  .card-info-popup{
     position: relative;
     top: 2vw;
     display: grid;

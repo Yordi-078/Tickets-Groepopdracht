@@ -55,7 +55,7 @@ $user_id = Auth::user()->id;
                     <span id="card-owner" class="card-info-owner"></span>
                     <span id="close-popup" onclick="history.go(-0)" class="close">&times;</span>
                   
-                    <form id="card-info-popup">
+                    <form id="card-info-popup" class="card-info-popup">
                       
                       @csrf
                       <fieldset id="general" class="card-info-border">
@@ -102,7 +102,7 @@ $user_id = Auth::user()->id;
                             <input type="submit" class="card-submit-button" value="submit">
                         </fieldset>
                         
-                        <a href="#" onclick="saveCardUpvote('{{$card['id']}}', '{{Auth::User()->id}}')" class="home-buttons">Upvote</a>
+                        <a href="#" class="home-buttons" id="card-upvote-question">Upvote</a>
                         <div id="cardAvatarContainer" class="avatarContainer card-info-border"></div>
 
                   </form>
@@ -137,12 +137,23 @@ $user_id = Auth::user()->id;
     
             <div class="modal-content">
               <span onclick="history.go(-1)" class="close">&times;</span>
-              <form>
-                  <a id="lesson-card-info-test">hello</a>
-                <a href="{{ url('storeLessonUpVote', [$lessonCard['id'], $thisBoard['id']]) }}" class="home-buttons">Upvote</a>
+              <form class="card-info-popup">
+                    <fieldset id="general" class="card-info-border">
+                        <span><i class="fas fa-align-left"></i></span>
+                        <textarea type="text" id="" class="title" name="name" maxlength="300" required></textarea>
+                        <span>description: </span>
+                        <textarea type="text" id="" class="description" name="description" maxlength="665" required></textarea>
+                    </fieldset>
+
+                    <fieldset id="image-uploader" class="card-info-border">
+                        <input id="upload-image" type="file">
+                    </fieldset>
+                    <a id="lesson-card-info-test"></a>
+                    <a href="{{ url('storeLessonUpVote', [$lessonCard['id'], $thisBoard['id']]) }}" class="home-buttons">Upvote</a>
               </form>
             </div>
         </div>
+
     @endforeach
     </div>
 </div>
