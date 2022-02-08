@@ -9,8 +9,6 @@ $user_id = Auth::user()->id;
 
 @section('content')
 <div class="board-page-header">
-    <!-- this is what the user sees if user is admin or docent. 
-    this wil be added to all the other code and wil not replace it -->
     @if (Auth::user()->user_role == 'teacher' || Auth::user()->user_role == 'admin' )
         <a id="add-student-button" class="dropdown-item" href="{{ route('addStudentsToBoard', $thisBoard['id']) }}">
             {{ __('Add students') }}
@@ -84,8 +82,8 @@ $user_id = Auth::user()->id;
 
                         <fieldset id="helper-box" class="card-info-border">
                             <legend id="helper">no one is helping this card</legend>
-                            <input id="remove-helper-button" class="helper-buttons" type="button" value=" - "><!-- onclick destroyHelper('{{$card['id']}}') --> 
-                            <input id="add-helper-button" class="helper-buttons" type="button"value=" + "><!-- onclick destroyHelper('{{$card['id']}}') --> 
+                            <input id="remove-helper-button" class="helper-buttons" type="button" value=" - ">
+                            <input id="add-helper-button" class="helper-buttons" type="button"value=" + ">
                             <div onclick="showUserData('Anthony Inocencio Ramos', 'AIR', 'navy')" title="" style="background-color:pink;" class="avatar" id="card-helper-avatar"><a id="card-helper-avatar-init" href="#"></a></div>
                         </fieldset>
 
