@@ -25,6 +25,11 @@ body{
     background-repeat: repeat-y;
 }
 
+legend{
+    margin-left:10px;
+    padding-bottom:3px;
+}
+
 .navbar-title{
     margin-left: 1vw;
 }
@@ -819,4 +824,24 @@ align-items: center;
     border-radius:25px;
     width:250px;
     height:225px;
+  }
+
+  .vote-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1vh;
+  }
+
+  .vote-count{
+      margin: 1vh 0;
+  }
+
+  .vote-thumb:hover{
+    color:rgb(110, 109, 109);
+  }
+  
+  .card-avatar-container{
+      margin-left: 1vw;
+      width: 100%;
   }

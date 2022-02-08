@@ -28,7 +28,7 @@ var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks the button, open the modal
 function showQuestionPopup(card_owner_id, $helper_id, user_id, user_name, card_id){
-  console.log(card_id)
+
   resetQuestionPopup();
   getQuestionCardInfo(card_id);
   checkForOwner(user_id, card_owner_id);
@@ -111,7 +111,7 @@ function showPopup(modal_id, board_id){
 }
 
 function showData(data){
-  console.log(data);
+
   document.getElementById('lesson-card-info-test').innerText = 'de hele array: ' + data[0] + ', ' + data[1];
 }
 
@@ -204,6 +204,7 @@ function getQuestionCardInfo(card_id){
 }
 
 function resetQuestionPopup(){
+  document.getElementById('cardAvatarContainer').innerHTML = '';
   document.getElementById('card-owner').innerText = '';
   document.getElementById('helper').innerText = 'no one is helping this card';
   document.getElementById('card-helper-avatar').style.display = 'none';
@@ -235,6 +236,7 @@ function checkForOwner(user_id, card_owner_id){
   document.getElementById('submit-form').style.display = 'grid';
   //make eventListener disabled
   document.getElementById('card-upvote-question').style.display = 'none';
+  document.getElementById('card-downvote-question').style.display = 'none';
   if(user_id == card_owner_id) return
   document.getElementById('card-title').readOnly = true;
   document.getElementById('card-description').readOnly = true;
@@ -244,6 +246,7 @@ function checkForOwner(user_id, card_owner_id){
   document.getElementById('submit-form').style.display = 'none';
   //make eventListener enabled
   document.getElementById('card-upvote-question').style.display = 'flex';
+  document.getElementById('card-downvote-question').style.display = 'flex';
   
 }
 
@@ -267,6 +270,22 @@ function showUserData(username, initials,color){
 
 var saveCardUpvote = function ($card_id){
   var url = route('saveCardUpvote', [$card_id])
+  let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+  
+  fetch(url, {
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json, text-plain, *//* only 1 line  ",
+      "X-Requested-With": "XMLHttpRequest",
+      "X-CSRF-TOKEN": token,
+    },
+    method: 'GET',
+    credentials: "same-origin",
+  });
+}
+
+var deleteCardUpvote = function ($card_id){
+  var url = route('deleteCardUpvote', [$card_id])
   let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
   
   fetch(url, {
@@ -318,6 +337,7 @@ function showCardAvatars(data){
     avatarInit.innerText = acronym;
     avatar.appendChild(avatarInit);
   }
+  document.getElementById('question-upvote-count').innerText = data.length;
 }
 
 function eventListeners(card_id, helper_id, helper_name){
@@ -328,6 +348,8 @@ function eventListeners(card_id, helper_id, helper_name){
   addHelperBtn.addEventListener('click',addHelper.bind(event,helper_id, helper_name, card_id), false);
   //question upvote
   document.getElementById('card-upvote-question').addEventListener('click', saveCardUpvote.bind(event, card_id), false);
+  //question downvote
+  document.getElementById('card-downvote-question').addEventListener('click', deleteCardUpvote.bind(event, card_id), false);
   //submit
   document.getElementById('card-info-popup').addEventListener('submit', function(event){
     event.preventDefault();

@@ -59,17 +59,19 @@ $user_id = Auth::user()->id;
                       
                       @csrf
                       <fieldset id="general" class="card-info-border">
-                            <span><i class="fas fa-align-left"></i></span>
+                          <legend>summary</legend>
                             <textarea type="text" id="card-title" class="title" name="name" maxlength="300" required></textarea>
                             <span>description: </span>
                             <textarea type="text" id="card-description" class="description" name="description" maxlength="665" required></textarea>
                         </fieldset>
 
                         <fieldset id="image-uploader" class="card-info-border">
+                            <legend>image</legend>
                             <input id="upload-image" type="file">
                         </fieldset>
 
                         <fieldset id="progress-info" class="card-info-border">
+                            <legend>card info</legend>
                             <p id="card-created-at"></p>
                             
                             <select name="status" id="card-status">
@@ -81,7 +83,7 @@ $user_id = Auth::user()->id;
 
 
                         <fieldset id="helper-box" class="card-info-border">
-                            <p id="helper">no one is helping this card</p>
+                            <legend id="helper">no one is helping this card</legend>
                             <input id="remove-helper-button" class="helper-buttons" type="button" value=" - "><!-- onclick destroyHelper('{{$card['id']}}') --> 
                             <input id="add-helper-button" class="helper-buttons" type="button"value=" + "><!-- onclick destroyHelper('{{$card['id']}}') --> 
                             <div onclick="showUserData('Anthony Inocencio Ramos', 'AIR', 'navy')" title="" style="background-color:pink;" class="avatar" id="card-helper-avatar"><a id="card-helper-avatar-init" href="#"></a></div>
@@ -102,8 +104,18 @@ $user_id = Auth::user()->id;
                             <input type="submit" class="card-submit-button" value="submit">
                         </fieldset>
                         
-                        <a href="#" class="home-buttons" id="card-upvote-question">Upvote</a>
-                        <div id="cardAvatarContainer" class="avatarContainer card-info-border"></div>
+                        
+                        <fieldset class="avatarContainer card-info-border">
+                            <legend>upvoters</legend>
+                            <div class="vote-container">
+                                <a id="card-upvote-question" class="vote-thumb"><i class="fas fa-thumbs-up"></i></a>
+                                <a id="question-upvote-count" class="vote-count">-</a>
+                                <a id="card-downvote-question" class="vote-thumb"><i class="fas fa-thumbs-down"></i></a>
+                            </div>
+                            <div id="cardAvatarContainer" class="card-avatar-container">
+
+                            </div>
+                        </fieldset>
 
                   </form>
                      </div>
