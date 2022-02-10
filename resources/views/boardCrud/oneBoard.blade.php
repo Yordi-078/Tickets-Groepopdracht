@@ -9,8 +9,7 @@ $user_id = Auth::user()->id;
 
 @section('content')
 <div class="board-page-header">
-    <!-- this is what the user sees if user is admin or docent. 
-    this wil be added to all the other code and wil not replace it -->
+
     @if (Auth::user()->user_role == 'teacher' || Auth::user()->user_role == 'admin' )
         <a id="add-student-button" class="dropdown-item" href="{{ route('addStudentsToBoard', $thisBoard['id']) }}">
             {{ __('Add students') }}
@@ -36,8 +35,8 @@ $user_id = Auth::user()->id;
     <div class="flex-row" id="board-question-content-box" >
         @foreach($cards as $card)
             
-            <a href="#" class="cards flex-row">
-                <button class="card-popup-button" onclick="showQuestionPopup('{{$card['user_id']}}','{{$card['helper_id']}}','{{Auth::user()->id}}','{{Auth::user()->name}}','{{$card['id']}}')">
+            <a onclick="showQuestionPopup('{{$card['user_id']}}','{{$card['helper_id']}}','{{Auth::user()->id}}','{{Auth::user()->name}}','{{$card['id']}}')" href="#" class="cards flex-row">
+                <button class="card-popup-button">
                     <i class="far fa-eye"></i>
                 </button>
                 {{$card->status == "finished" ? "//" : ''}}
@@ -48,9 +47,9 @@ $user_id = Auth::user()->id;
 
             
 
-            <!-- The Modal -->
+            
             <div id="cardModal" class="modal">
-                <!-- Modal content -->
+               
                 <div class="modal-content">
                     <span id="card-owner" class="card-info-owner"></span>
                     <span id="close-popup" onclick="history.go(-0)" class="close">&times;</span>
@@ -59,17 +58,19 @@ $user_id = Auth::user()->id;
                       
                       @csrf
                       <fieldset id="general" class="card-info-border">
-                            <span><i class="fas fa-align-left"></i></span>
+                          <legend>summary</legend>
                             <textarea type="text" id="card-title" class="title" name="name" maxlength="300" required></textarea>
                             <span>description: </span>
                             <textarea type="text" id="card-description" class="description" name="description" maxlength="665" required></textarea>
                         </fieldset>
 
                         <fieldset id="image-uploader" class="card-info-border">
+                            <legend>image</legend>
                             <input id="upload-image" type="file">
                         </fieldset>
 
                         <fieldset id="progress-info" class="card-info-border">
+                            <legend>card info</legend>
                             <p id="card-created-at"></p>
                             
                             <select name="status" id="card-status">
@@ -81,17 +82,18 @@ $user_id = Auth::user()->id;
 
 
                         <fieldset id="helper-box" class="card-info-border">
-                            <p id="helper">no one is helping this card</p>
-                            <input id="remove-helper-button" class="helper-buttons" type="button" value=" - "><!-- onclick destroyHelper('{{$card['id']}}') --> 
-                            <input id="add-helper-button" class="helper-buttons" type="button"value=" + "><!-- onclick destroyHelper('{{$card['id']}}') --> 
+                            <legend id="helper">no one is helping this card</legend>
+                            <input id="remove-helper-button" class="helper-buttons" type="button" value=" - ">
+                            <input id="add-helper-button" class="helper-buttons" type="button"value=" + ">
                             <div onclick="showUserData('Anthony Inocencio Ramos', 'AIR', 'navy')" title="" style="background-color:pink;" class="avatar" id="card-helper-avatar"><a id="card-helper-avatar-init" href="#"></a></div>
                         </fieldset>
+
                         <div id="userPopup">
                             <div class="user-popup-header">
                                 <div id="userPopupBol" title="" class="avatar user-popup-header-avatar"><a href="#" id="userPopupAvatar"></a></div>
                                 <div id="userPopupName" class="user-popup-header-username"><a href="#" id="userPopupInit"></a></div>
                             </div>
-                            <div id="userPopupProfilePage" class="user-popup-button"><a href="">profiel bekijken</a></div>
+                            <div id="userPopupProfilePage" class="user-popup-button"><a href="{{ route('viewUserPage', $user_id ) }}">profiel bekijken</a></div>
                             <hr>
                             <div id="userPopupBordInfo" class="user-popup-button"><a href="#">bekijk bord informatie</a></div>
                             <div id="userPopupLeaveBord" class="user-popup-button"><a href="#">bord verlaten</a></div>
@@ -101,8 +103,18 @@ $user_id = Auth::user()->id;
                             <input type="submit" class="card-submit-button" value="submit">
                         </fieldset>
                         
-                        <a href="#" class="home-buttons" id="card-upvote-question">Upvote</a>
-                        <div id="cardAvatarContainer" class="avatarContainer card-info-border"></div>
+                        
+                        <fieldset class="avatarContainer card-info-border">
+                            <legend>upvoters</legend>
+                            <div class="vote-container">
+                                <a id="card-upvote-question" class="vote-thumb"><i class="fas fa-thumbs-up"></i></a>
+                                <a id="question-upvote-count" class="vote-count">-</a>
+                                <a id="card-downvote-question" class="vote-thumb"><i class="fas fa-thumbs-down"></i></a>
+                            </div>
+                            <div id="cardAvatarContainer" class="card-avatar-container">
+
+                            </div>
+                        </fieldset>
 
                   </form>
                      </div>
@@ -124,15 +136,15 @@ $user_id = Auth::user()->id;
     <div class="flex-row" id="board-lesson-content-box" >
         @foreach($lessonCards as $lessonCard)
  
-        <a onclick="showPopup({{$lessonCard['id']}})" class="toggle cards flex-row">{{$lessonCard["name"]}}<button class="card-popup-button"><i class="far fa-eye"></i></button></a> 
-        @endforeach
-        <!-- The Modal -->
+        <a onclick="showPopup('myModalLesson{{$lessonCard['id']}}',{{$thisBoard['id']}})" class="toggle cards flex-row">{{$lessonCard["name"]}}<button class="card-popup-button"><i class="far fa-eye"></i></button></a> 
+        
+     
 
         
       
         <div id="myModalLesson" class="modal">
         
-            <!-- Modal content -->
+        
     
             <div class="modal-content">
               <span onclick="history.go(-1)" class="close">&times;</span>

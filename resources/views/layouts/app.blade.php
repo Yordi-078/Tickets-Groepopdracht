@@ -1,3 +1,9 @@
+<?php 
+
+use Illuminate\support\facades\Auth;
+
+?>
+
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -41,7 +47,7 @@
                                 <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                             @endif
                         @else
-                            <a id="" class="" href="#">
+                            <a id="" class="" href="{{ route('viewUserPage', Auth::user()->id ) }}">
                                 {{ Auth::user()->name }}
                             </a>
                             @if (Auth::user()->user_role == 'teacher' || Auth::user()->user_role == 'admin' )

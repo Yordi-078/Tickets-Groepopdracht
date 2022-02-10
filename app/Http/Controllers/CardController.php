@@ -70,7 +70,6 @@ class CardController extends Controller
 
     public function updateCard( $card_id, $card_name, $card_description, $card_status)
     { 
-        // $this->validateCard();
         $user_id = Auth::user()->id;
 
         Card::updateOrCreate(
@@ -140,6 +139,15 @@ class CardController extends Controller
             ]
             );
           return response()->json();
+    }
+
+    public function deleteCardUpvote($card_id){
+        $user_id = Auth::user()->id;
+
+        $voter = CardUpvotes::where('card_id', $card_id)->where('user_id', $user_id);
+        $voter->delete();
+
+        return response()->json();
     }
 
     public function GetCardAvatars($card_id)

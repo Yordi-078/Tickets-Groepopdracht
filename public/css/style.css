@@ -25,6 +25,11 @@ body{
     background-repeat: repeat-y;
 }
 
+legend{
+    margin-left:10px;
+    padding-bottom:3px;
+}
+
 .navbar-title{
     margin-left: 1vw;
 }
@@ -540,8 +545,6 @@ a{
       font-size: 3rem;
       border-radius: 10px;
       cursor: pointer;
-      position: relative;
-      top: 120px;
   }
 
   .card-submit-button:hover{
@@ -765,17 +768,25 @@ justify-content: center;
 align-items: center;
 }
 
+.teacher-dashboard-content {
+    overflow-y: scroll;
+    max-height: 90vh;
+}
+
+
 .date-columns {
-    list-style-type: none;
-    overflow-y: auto;
+    overflow-x: scroll;
     white-space: nowrap;
+    
+}
+
+.date-colums h2{
+    margin: 0;
 }
 
 .date-columns li {
     display: inline-block;
     width: 600px;
-    overflow-x: auto;
-    height: 50%;
     border-right: 5px solid black;
     border-left: 5px solid black;
     margin: 0;
@@ -789,3 +800,54 @@ align-items: center;
     align-items: center;
     flex-direction: row;
 }
+
+.profileCard{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    margin: auto;
+    text-align: center;
+  }
+  
+  .profileTitle{
+    color: grey;
+    font-size: 18px;
+  }
+  
+  .profileBtn{
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+  }
+
+  #profileImg{
+    border-radius:25px;
+    width:250px;
+    height:225px;
+  }
+
+  .vote-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1vh;
+  }
+
+  .vote-count{
+      margin: 1vh 0;
+  }
+
+  .vote-thumb:hover{
+    color:rgb(110, 109, 109);
+  }
+  
+  .card-avatar-container{
+      margin-left: 1vw;
+      width: 100%;
+  }

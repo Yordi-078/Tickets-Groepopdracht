@@ -107,7 +107,8 @@ class BoardController extends Controller
   }
 
   public function viewUserPage($user_id){
-      return view('boardCrud.userProfilePage', ['userInfo' => $user_id]);
+      $userProfile = User::where('id', $user_id)->get();
+      return view('boardCrud.userProfilePage', ['profileInfo' => $userProfile]);
   }
 
 }
