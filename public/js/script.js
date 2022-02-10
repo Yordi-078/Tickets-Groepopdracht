@@ -10,6 +10,7 @@ const cardHelperAvatar =document.getElementById('card-helper-avatar');
 const helper = document.getElementById('helper');
 const cardHelperAvatarInit = document.getElementById('card-helper-avatar-init');
 const cardAvatarContainer = document.getElementById('cardAvatarContainer');
+const lessonAvatarContainer = document.getElementById('lessonAvatarContainer');
 const cardTitle = document.getElementById('card-title');
 const cardDescription = document.getElementById('card-description');
 const cardCreatedAt = document.getElementById('card-created-at');
@@ -18,6 +19,8 @@ const cardUploadImage = document.getElementById('card-upload-image');
 const cardSubmitForm = document.getElementById('card-submit-form');
 const cardUpvoteQuestion = document.getElementById('card-upvote-question');
 const cardDownvoteQuestion = document.getElementById('card-downvote-question');
+const cardUpvoteLesson = document.getElementById('card-upvote-lesson');
+const cardDownvoteLesson = document.getElementById('card-downvote-lesson');
 const lessonOwner = document.getElementById('lesson-owner');
 const lessonTitle = document.getElementById('lesson-title');
 const lessonDescription = document.getElementById('lesson-description');
@@ -28,11 +31,13 @@ const userPopupInit = document.getElementById('userPopupInit');
 const userPopupName = document.getElementById('userPopupName');
 const userPopupAvatar = document.getElementById('userPopupAvatar');
 const questionUpvoteCount = document.getElementById('question-upvote-count');
+const lessonUpvoteCount = document.getElementById('lesson-upvote-count');
 const cardInfoPopup = document.getElementById('card-info-popup');
 const lessonModal = document.getElementById('lessonModal');
 const lessonSpan = document.getElementById("close-lesson-popup");
 const cardModal = document.getElementById('cardModal');
 const cardSpan = document.getElementById("close-popup");
+
 
 // uncatogorized 
 
@@ -65,7 +70,7 @@ function setLoader(theModal){
   setTimeout(() => {
     loaderScreen.style.display = 'none';
     theModal.style.display = 'block';
-  }, randomNumber(700, 1500));
+  }, randomNumber(700, 800));
 }
 
 // single use functions
@@ -100,7 +105,7 @@ function showPopup(card_id, card_owner_id, user_id){
   resetLessonPopup();
   getLessonCardInfo(card_id);
   //checkForDocent
-  //eventListeners
+  lessonEventListeners(card_id);
   getLessonOwner(card_owner_id, user_id);
   getCardInfo(card_id);
   setLoader(lessonModal);
@@ -165,8 +170,23 @@ var url = route('storeLessonUpVote', card_id)
 }
 
 function showData(data){
+  for (let i = 0; i < data.length; i++) {
+    var initials = data[i]['name'].match(/\b(\w)/g);
+    var acronym = initials.join('');
+    
+    const avatar = document.createElement("div");
+    avatar.id = "lesson-" + data[i]['id'] + "-upvote-avatar";
+    avatar.className = "avatar";
+    avatar.title = data[i]['name'];
+    avatar.style.backgroundColor = 'grey';
+    lessonAvatarContainer.appendChild(avatar);
 
-  document.getElementById('lesson-card-info-test').innerText = 'de hele array: ' + data + ', ' + data[1];
+    const avatarInit = document.createElement("a");
+    avatarInit.id = "lesson-" + data[i]['id'] + "-upvote-avatar-init";
+    avatarInit.innerText = acronym;
+    avatar.appendChild(avatarInit);
+  }
+  lessonUpvoteCount.innerText = data.length;
 }
 
 var addHelper = function(helperId, helperName, card_id){
@@ -210,7 +230,8 @@ function resetQuestionPopup(){
 }
 
 function resetLessonPopup(){
-//reset all
+  lessonAvatarContainer.innerHTML = '';
+  lessonOwner.innerText = '';
 }
 
 function fillQuestionPopup(data){
@@ -311,6 +332,12 @@ function eventListeners(card_id, helper_id, helper_name){
     var card_status = cardStatus.selectedOptions[0].value
     updateCard(card_id, card_name, card_description, card_status);
   });
+}
+
+function lessonEventListeners(card_id){
+  cardUpvoteLesson.addEventListener('click', saveLessonUpvote.bind(event, card_id), false);
+
+  cardDownvoteLesson.addEventListener('click', deleteLessonUpvote.bind(event, card_id), false);
 }
 
 // fetch requests
@@ -432,8 +459,36 @@ var saveCardUpvote = function (card_id){
   });
 }
 
+var saveLessonUpvote = function (card_id){
+  var url = route('saveLessonUpvote', [card_id])
+  
+  fetch(url, {
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json, text-plain, *//* only 1 line  ",
+      "X-Requested-With": "XMLHttpRequest"
+    },
+    method: 'GET',
+    credentials: "same-origin",
+  });
+}
+
 var deleteCardUpvote = function (card_id){
   var url = route('deleteCardUpvote', [card_id])
+  
+  fetch(url, {
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json, text-plain, *//* only 1 line  ",
+      "X-Requested-With": "XMLHttpRequest"
+    },
+    method: 'GET',
+    credentials: "same-origin",
+  });
+}
+
+var deleteLessonUpvote = function (card_id){
+  var url = route('deleteLessonUpvote', [card_id])
   
   fetch(url, {
     headers: {
@@ -478,5 +533,3 @@ function updateCard(card_id, card_name, card_description, card_status){
 
 // to do
 // function for randomizing color of avatar bal and remembering color for next use
-// make a loader for all popups
-// X op popup werkt niet omdat, hij nu 1 pagina terug gaat en soms zorgt dat ervoor dat hij naar de board pagina gaat.

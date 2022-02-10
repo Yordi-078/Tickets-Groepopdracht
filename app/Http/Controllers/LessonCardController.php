@@ -45,7 +45,8 @@ class LessonCardController extends Controller
     {
         return request()->validate([
             'name' => ['required', 'min:1', 'max:40'],
-            'description' => ['required', 'min:1', 'max:100']
+            'description' => ['required', 'min:1', 'max:100'],
+            'start_time' => ['required']
         ]);
     }
     

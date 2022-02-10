@@ -872,6 +872,7 @@ align-items: center;
 }
 
 .loader{
+    color:var(--color-secondary);
     position: relative;
     bottom:0px;
     font-size: 26px;

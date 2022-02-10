@@ -71,7 +71,9 @@ Route::get('removeHelper/{card_id}',  [CardController::class, 'removeHelper'])->
 Route::get('getQuestionCardInfo/{card_id}',  [CardController::class, 'getQuestionCardInfo'])->name('getQuestionCardInfo');
 Route::get('getLessonCardInfo/{card_id}',  [CardController::class, 'getLessonCardInfo'])->name('getLessonCardInfo');
 Route::get('saveCardUpvote/{card_id}',  [CardController::class, 'saveCardUpvote'])->name('saveCardUpvote');
+Route::get('saveLessonUpvote/{card_id}',  [CardController::class, 'saveLessonUpvote'])->name('saveLessonUpvote');
 Route::get('deleteCardUpvote/{card_id}',  [CardController::class, 'deleteCardUpvote'])->name('deleteCardUpvote');
+Route::get('deleteLessonUpvote/{card_id}',  [CardController::class, 'deleteLessonUpvote'])->name('deleteLessonUpvote');
 Route::get('GetCardAvatars/{card_id}',  [CardController::class, 'GetCardAvatars'])->name('GetCardAvatars');
 Route::get('updateCard/{card_id}/{card_name}/{card_description}/{card_status}',  [CardController::class, 'updateCard'])->name('updateCard');
 

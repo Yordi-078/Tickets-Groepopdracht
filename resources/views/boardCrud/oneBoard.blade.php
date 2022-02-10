@@ -176,8 +176,16 @@ $user_id = Auth::user()->id;
                         <p>datum van lesson komt hier.</p>
                         <p id="lesson-start-date" ></p>
                     </fieldset>
-                    <a id="lesson-card-info-test"></a>
-                    <a id="lesson-upvote" class="home-buttons">Upvote</a>
+                    <fieldset class="avatarContainer card-info-border">
+                        <div class="vote-container">
+                            <a id="card-upvote-lesson" class="vote-thumb"><i class="fas fa-thumbs-up"></i></a>
+                            <a id="lesson-upvote-count" class="vote-count">-</a>
+                            <a id="card-downvote-lesson" class="vote-thumb"><i class="fas fa-thumbs-down"></i></a>
+                        </div>
+                        <div id="lessonAvatarContainer" class="card-avatar-container">
+
+                        </div>
+                    </fieldset>
               </form>
             </div>
         </div>
