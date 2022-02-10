@@ -177,7 +177,7 @@ $user_id = Auth::user()->id;
                         <p id="lesson-start-date" ></p>
                     </fieldset>
                     <a id="lesson-card-info-test"></a>
-                    <a href="{{ url('storeLessonUpVote', [$lessonCard['id'], $thisBoard['id']]) }}" class="home-buttons">Upvote</a>
+                    <a id="lesson-upvote" class="home-buttons">Upvote</a>
               </form>
             </div>
         </div>

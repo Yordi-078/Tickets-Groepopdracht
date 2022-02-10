@@ -60,7 +60,9 @@ Route::get('getCardInfo/{lesson_id}',  [CardController::class, 'getCardInfo'])->
 
 Route::get('boardCrud/createLessonCard/{board_id}',  [LessonCardController::class, 'createLessonCard'])->name('createLessonCard');
 Route::post('storeLessonCard/{board_id}',  [LessonCardController::class, 'storeLessonCard'])->name('storeLessonCard');
-Route::get('storeLessonUpVote/{lesson_id}/{board_id}',  [LessonCardController::class, 'storeLessonUpVote'])->name('storeLessonUpVote');
+Route::get('storeLessonUpVote/{card_id}',  [LessonCardController::class, 'storeLessonUpVote'])->name('storeLessonUpVote');
+Route::get('getLessonCardInfo/{card_id}',  [LessonCardController::class, 'getLessonCardInfo'])->name('getLessonCardInfo');
+
 
 Route::get('getUsername/{user_id}/{helperId}',  [CardController::class, 'getUsername'])->name('getUsername');
 Route::get('getLessonOwner/{user_id}',  [CardController::class, 'getLessonOwner'])->name('getLessonOwner');
@@ -72,3 +74,5 @@ Route::get('saveCardUpvote/{card_id}',  [CardController::class, 'saveCardUpvote'
 Route::get('deleteCardUpvote/{card_id}',  [CardController::class, 'deleteCardUpvote'])->name('deleteCardUpvote');
 Route::get('GetCardAvatars/{card_id}',  [CardController::class, 'GetCardAvatars'])->name('GetCardAvatars');
 Route::get('updateCard/{card_id}/{card_name}/{card_description}/{card_status}',  [CardController::class, 'updateCard'])->name('updateCard');
+
+

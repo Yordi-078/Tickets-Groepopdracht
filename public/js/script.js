@@ -142,6 +142,28 @@ function setOwner(name, user_id, card_owner_id){
 
 }
 
+function showLessonData(data){
+console.log(data[0]['description'])
+document.getElementById('lessoncard-title').value = data[0]['name'];
+document.getElementById('lessoncard-description').value = data[0]['name'];
+}
+
+var storeLessonUpVote = function(card_id){
+var url = route('storeLessonUpVote', card_id)
+  let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+  
+  fetch(url, {
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json, text-plain, *//* only 1 line  ",
+      "X-Requested-With": "XMLHttpRequest",
+      "X-CSRF-TOKEN": token,
+    },
+    method: 'GET',
+    credentials: "same-origin",
+  });
+}
+
 function showData(data){
 
   document.getElementById('lesson-card-info-test').innerText = 'de hele array: ' + data + ', ' + data[1];
