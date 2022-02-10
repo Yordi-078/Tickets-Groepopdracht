@@ -54,7 +54,7 @@ Route::get('searchAdminPage', [UserController::class, 'searchAdminPage'])->name(
 Route::get('boardCrud/createLessCard/{board_id}',  [CardController::class, 'createLessCard'])->name('createLessCard');
 Route::post('storeLessonCard/{board_id}',  [CardController::class, 'storeLessonCard'])->name('storeLessonCard');
 Route::get('storeLessonUpVote/{lesson_id}/{board_id}',  [CardController::class, 'storeLessonUpVote'])->name('storeLessonUpVote');
-Route::get('getCardInfo/{lesson_id}/{board_id}',  [CardController::class, 'getCardInfo'])->name('getCardInfo');
+Route::get('getCardInfo/{lesson_id}',  [CardController::class, 'getCardInfo'])->name('getCardInfo');
 // Route::get('storeCardUpVote/{card_id}/{board_id}',  [CardController::class, 'storeCardUpVote'])->name('storeCardUpVote');
 
 
@@ -63,9 +63,11 @@ Route::post('storeLessonCard/{board_id}',  [LessonCardController::class, 'storeL
 Route::get('storeLessonUpVote/{lesson_id}/{board_id}',  [LessonCardController::class, 'storeLessonUpVote'])->name('storeLessonUpVote');
 
 Route::get('getUsername/{user_id}/{helperId}',  [CardController::class, 'getUsername'])->name('getUsername');
+Route::get('getLessonOwner/{user_id}',  [CardController::class, 'getLessonOwner'])->name('getLessonOwner');
 Route::get('saveHelper/{card_id}/{helperId}',  [CardController::class, 'saveHelper'])->name('saveHelper');
 Route::get('removeHelper/{card_id}',  [CardController::class, 'removeHelper'])->name('removeHelper');
 Route::get('getQuestionCardInfo/{card_id}',  [CardController::class, 'getQuestionCardInfo'])->name('getQuestionCardInfo');
+Route::get('getLessonCardInfo/{card_id}',  [CardController::class, 'getLessonCardInfo'])->name('getLessonCardInfo');
 Route::get('saveCardUpvote/{card_id}',  [CardController::class, 'saveCardUpvote'])->name('saveCardUpvote');
 Route::get('deleteCardUpvote/{card_id}',  [CardController::class, 'deleteCardUpvote'])->name('deleteCardUpvote');
 Route::get('GetCardAvatars/{card_id}',  [CardController::class, 'GetCardAvatars'])->name('GetCardAvatars');

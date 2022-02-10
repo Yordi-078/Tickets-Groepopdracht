@@ -44,14 +44,27 @@ $user_id = Auth::user()->id;
             </a>  
             @endforeach
 
-            
-
-            <!-- The Modal -->
+            <div class="modal" id="loader-screen">
+                <div class="loader-screen">
+                    <div class="loader-wrap">
+                      <span class="loader letter-1">l</span>
+                      <span class="loader letter-2">o</span>
+                      <span class="loader letter-3">a</span>
+                      <span class="loader letter-4">d</span>
+                      <span class="loader letter-5">i</span>
+                      <span class="loader letter-6">n</span>
+                      <span class="loader letter-7">g</span>
+                      <span class="loader letter-8">.</span>
+                      <span class="loader letter-9">.</span>
+                      <span class="loader letter-10">.</span>
+                    </div>
+                </div>
+            </div>
             <div id="cardModal" class="modal">
-                <!-- Modal content -->
+                
                 <div class="modal-content">
                     <span id="card-owner" class="card-info-owner"></span>
-                    <span id="close-popup" onclick="history.go(-0)" class="close">&times;</span>
+                    <span id="close-popup" class="close">&times;</span>
                   
                     <form id="card-info-popup" class="card-info-popup">
                       
@@ -65,7 +78,7 @@ $user_id = Auth::user()->id;
 
                         <fieldset id="image-uploader" class="card-info-border">
                             <legend>image</legend>
-                            <input id="upload-image" type="file">
+                            <input id="card-upload-image" type="file">
                         </fieldset>
 
                         <fieldset id="progress-info" class="card-info-border">
@@ -98,7 +111,7 @@ $user_id = Auth::user()->id;
                             <div id="userPopupLeaveBord" class="user-popup-button"><a href="#">bord verlaten</a></div>
                         </div>
                         
-                        <fieldset id="submit-form" class="card-info-border">
+                        <fieldset id="card-submit-form" class="card-info-border">
                             <input type="submit" class="card-submit-button" value="submit">
                         </fieldset>
                         
@@ -129,34 +142,39 @@ $user_id = Auth::user()->id;
 </div>
 <div class="lesson-board-container">
     <div class="board-header">
+    @if (Auth::user()->user_role == 'teacher' || Auth::user()->user_role == 'admin')
         <a href="{{ url('boardCrud/createLessonCard', $thisBoard['id']) }}" class="home-buttons">Add Card</a>
+    @endif
     </div>
     
     <div class="flex-row" id="board-lesson-content-box" >
         @foreach($lessonCards as $lessonCard)
  
-        <a onclick="showPopup('myModalLesson{{$lessonCard['id']}}',{{$thisBoard['id']}})" class="toggle cards flex-row">{{$lessonCard["name"]}}<button class="card-popup-button"><i class="far fa-eye"></i></button></a> 
+        <a onclick="showPopup('{{$lessonCard['id']}}', '{{$lessonCard['user_id']}}', '{{Auth::user()->id}}')" class="toggle cards flex-row">{{$lessonCard["name"]}}<button class="card-popup-button"><i class="far fa-eye"></i></button></a> 
         
-        <!-- The Modal -->
+        @endforeach
 
         
       
-        <div id="myModalLesson{{$lessonCard['id']}}" class="modal">
+        <div id="lessonModal" class="modal">
         
-            <!-- Modal content -->
+        
     
             <div class="modal-content">
-              <span onclick="history.go(-1)" class="close">&times;</span>
+            <span id="lesson-owner" class="card-info-owner"></span>
+              <span id="close-lesson-popup" class="close">&times;</span>
               <form class="card-info-popup">
                     <fieldset id="general" class="card-info-border">
-                        <span><i class="fas fa-align-left"></i></span>
-                        <textarea type="text" id="" class="title" name="name" maxlength="300" required></textarea>
+                    <legend>summary</legend>
+                        <textarea type="text" id="lesson-title" class="title" name="name" maxlength="300" required></textarea>
                         <span>description: </span>
-                        <textarea type="text" id="" class="description" name="description" maxlength="665" required></textarea>
+                        <textarea type="text" id="lesson-description" class="description" name="description" maxlength="665" required></textarea>
                     </fieldset>
 
                     <fieldset id="image-uploader" class="card-info-border">
-                        <input id="upload-image" type="file">
+                    <legend>lesson date</legend>
+                        <p>datum van lesson komt hier.</p>
+                        <p id="lesson-start-date" ></p>
                     </fieldset>
                     <a id="lesson-card-info-test"></a>
                     <a href="{{ url('storeLessonUpVote', [$lessonCard['id'], $thisBoard['id']]) }}" class="home-buttons">Upvote</a>
@@ -164,8 +182,6 @@ $user_id = Auth::user()->id;
             </div>
         </div>
 
-    @endforeach
     </div>
 </div>
 @endsection
-

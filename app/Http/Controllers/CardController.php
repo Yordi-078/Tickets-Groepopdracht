@@ -55,10 +55,10 @@ class CardController extends Controller
    
 
 
-    public function getCardInfo($lesson_id, $board_id)
+    public function getCardInfo($lesson_id)
     {
         $response = [];
-         $userID = LessonUpvotes::where('card_id', substr($lesson_id, -1))->get('user_id');
+         $userID = LessonUpvotes::where('card_id', $lesson_id)->get('user_id');
          // loop door alle userID's en zet ze in 
          for ($i=0; $i < count($userID) ; $i++) { 
             $users = User::where('id', $userID[$i]['user_id'])->get('name');
@@ -100,7 +100,14 @@ class CardController extends Controller
 
           return response()->json($response);
     }
-    
+
+    public function getLessonOwner($user_id)
+    {
+        $response = User::where('id', $user_id)->get('name');
+
+          return response()->json($response);
+    }
+
     public function saveHelper($card_id, $helperId)
     {
         Card::updateOrCreate(
@@ -164,6 +171,12 @@ class CardController extends Controller
 
     function getQuestionCardInfo($card_id){
         $response = Card::where('id', $card_id)->get();
+
+        return response()->json($response);
+    }
+
+    function getLessonCardInfo($card_id){
+        $response = LessonCard::where('id', $card_id)->get();
 
         return response()->json($response);
     }

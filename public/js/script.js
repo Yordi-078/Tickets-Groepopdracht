@@ -1,9 +1,74 @@
 // const { isPlainObject } = require("jquery");
 // const { default: plugin } = require("tailwindcss/plugin");
 
+// all document.getElementById in const's
+const loaderScreen = document.getElementById('loader-screen');
+const cardOwner = document.getElementById('card-owner');
 const removeHelperBtn = document.getElementById('remove-helper-button');
 const addHelperBtn = document.getElementById('add-helper-button');
+const cardHelperAvatar =document.getElementById('card-helper-avatar');
+const helper = document.getElementById('helper');
+const cardHelperAvatarInit = document.getElementById('card-helper-avatar-init');
+const cardAvatarContainer = document.getElementById('cardAvatarContainer');
+const cardTitle = document.getElementById('card-title');
+const cardDescription = document.getElementById('card-description');
+const cardCreatedAt = document.getElementById('card-created-at');
+const cardStatus = document.getElementById('card-status');
+const cardUploadImage = document.getElementById('card-upload-image');
+const cardSubmitForm = document.getElementById('card-submit-form');
+const cardUpvoteQuestion = document.getElementById('card-upvote-question');
+const cardDownvoteQuestion = document.getElementById('card-downvote-question');
+const lessonOwner = document.getElementById('lesson-owner');
+const lessonTitle = document.getElementById('lesson-title');
+const lessonDescription = document.getElementById('lesson-description');
+const lessonStartDate = document.getElementById('lesson-start-date');
+const userPopup = document.getElementById('userPopup');
+const userPopupBol = document.getElementById('userPopupBol');
+const userPopupInit = document.getElementById('userPopupInit');
+const userPopupName = document.getElementById('userPopupName');
+const userPopupAvatar = document.getElementById('userPopupAvatar');
+const questionUpvoteCount = document.getElementById('question-upvote-count');
+const cardInfoPopup = document.getElementById('card-info-popup');
+const lessonModal = document.getElementById('lessonModal');
+const lessonSpan = document.getElementById("close-lesson-popup");
+const cardModal = document.getElementById('cardModal');
+const cardSpan = document.getElementById("close-popup");
 
+// uncatogorized 
+
+cardSpan.onclick = function() {
+  cardModal.style.display = "none";
+}
+
+lessonSpan.onclick = function() {
+  lessonModal.style.display = "none";
+}
+
+window.onclick = function(event) {
+  if (event.target == lessonModal) {
+    lessonModal.style.display = "none";
+  }
+  else if( event.target == cardModal){
+    cardModal.style.display = "none";
+  }
+}
+
+
+// multiple use functions
+function randomNumber(min, max){
+  var number = Math.floor(Math.random() * max) + min
+  return number
+}
+
+function setLoader(theModal){
+  loaderScreen.style.display = 'block';
+  setTimeout(() => {
+    loaderScreen.style.display = 'none';
+    theModal.style.display = 'block';
+  }, randomNumber(700, 1500));
+}
+
+// single use functions
 function toggleBoard() {
   var boards = document.getElementsByClassName("board");
   for (i = 0; i < boards.length; i++) {
@@ -20,52 +85,36 @@ function toggleBoard() {
   document.getElementById("home-board-content-box").classList.toggle("flex-column");
 }
 
-// Get the modal
-var modal = 0;
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks the button, open the modal
-function showQuestionPopup(card_owner_id, $helper_id, user_id, user_name, card_id){
-
+function showQuestionPopup(card_owner_id, helper_id, user_id, user_name, card_id){
+  if(!helper_id) {helper_id = 'empty'}
   resetQuestionPopup();
   getQuestionCardInfo(card_id);
   checkForOwner(user_id, card_owner_id);
   eventListeners(card_id, user_id, user_name);
-  if(!$helper_id) {$helper_id = 'empty'}
-  var url = route('getUsername', [card_owner_id, $helper_id]);
-
-  let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-  
-  fetch(url, {
-    headers: {
-      "Content-Type": "application/json",
-      "Accept": "application/json, text-plain, *//* only 1 line  ",
-      "X-Requested-With": "XMLHttpRequest",
-      "X-CSRF-TOKEN": token,
-    },
-    method: 'GET',
-    credentials: "same-origin",
-  })
-  
- .then(response => response.json())
-  .then(data => calcInit(data, user_id, card_owner_id) );
+  getUsername(card_owner_id, helper_id, user_id);
   getCardAvatars(card_id);
-
-  modal = document.getElementById('cardModal');
-  modal.style.display = 'block';
+  setLoader(cardModal);
 }
 
-function calcInit(name, user_id, card_owner_id){
-  document.getElementById('card-owner').innerText = name[0]['name'];
+function showPopup(card_id, card_owner_id, user_id){
+  resetLessonPopup();
+  getLessonCardInfo(card_id);
+  //checkForDocent
+  //eventListeners
+  getLessonOwner(card_owner_id, user_id);
+  getCardInfo(card_id);
+  setLoader(lessonModal);
+}
+
+function setHelperAndOwner(name, user_id, card_owner_id){
+  cardOwner.innerText = name[0]['name'];
 
   if(name[1] == 'empty'){
-    document.getElementById("remove-helper-button").style.display = "none";
-    document.getElementById('card-helper-avatar').style.display = 'none'
+    removeHelperBtn.style.display = "none";
+    cardHelperAvatar.style.display = 'none'
 
     if(user_id != card_owner_id){
-      document.getElementById('add-helper-button').style.display = 'inline';
+      addHelperBtn.style.display = 'inline';
     }
   }
 
@@ -73,111 +122,244 @@ function calcInit(name, user_id, card_owner_id){
     var initials = name[1]['name'].match(/\b(\w)/g);
     var acronym = initials.join('');
     
-    document.getElementById('helper').innerText = name[1]['name'] + ' is helping this card.';
-    document.getElementById('card-helper-avatar').style.display = 'flex';
-    document.getElementById('card-helper-avatar').style.backgroundColor= 'gray'
-    document.getElementById('card-helper-avatar').title= name[1]['name']
-    document.getElementById('card-helper-avatar-init').innerText= acronym
+    helper.innerText = name[1]['name'] + ' is helping this card.';
+    cardHelperAvatar.style.display = 'flex';
+    cardHelperAvatar.style.backgroundColor= 'gray'
+    cardHelperAvatar.title= name[1]['name']
+    cardHelperAvatarInit.innerText= acronym
 
     if(user_id == name[1]['id'] || user_id == card_owner_id){
-      document.getElementById("remove-helper-button").style.display = "inline";
+      removeHelperBtn.style.display = "inline";
     }
 
-    document.getElementById('add-helper-button').style.display = 'none';
+    addHelperBtn.style.display = 'none';
   }
-  
 }
 
-function showPopup(modal_id, board_id){
-  // modal_id substringen
-  var url = route('getCardInfo', [modal_id, board_id])
-  let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-  
-  fetch(url, {
-    headers: {
-      "Content-Type": "application/json",
-      "Accept": "application/json, text-plain, *//* only 1 line  ",
-      "X-Requested-With": "XMLHttpRequest",
-      "X-CSRF-TOKEN": token,
-    },
-    method: 'GET',
-    credentials: "same-origin",
-  })
-  
- .then(response => response.json())
-  .then(data => showData(data));
-   modal = document.getElementById(modal_id);
-   modal.style.display = "block"; 
+function setOwner(name, user_id, card_owner_id){
+  console.log(name)
+  lessonOwner.innerText = name[0]['name'];
+
 }
 
 function showData(data){
 
-  document.getElementById('lesson-card-info-test').innerText = 'de hele array: ' + data[0] + ', ' + data[1];
+  document.getElementById('lesson-card-info-test').innerText = 'de hele array: ' + data + ', ' + data[1];
 }
 
-span.onclick = function() {
-  modal.style.display = "none";
-}
-    
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
+var addHelper = function(helperId, helperName, card_id){
 
-var addHelper = function($helperId, $helperName, card_id){
+  saveHelper(card_id, helperId);
 
-  saveHelper(card_id, $helperId);
-
-  var initials = $helperName.match(/\b(\w)/g);
+  var initials = helperName.match(/\b(\w)/g);
   var acronym = initials.join('');
 
-  document.getElementById('helper').innerText = $helperName + ' is helping this card.';
-  document.getElementById('card-helper-avatar').style.display = 'flex'
-  document.getElementById('card-helper-avatar').style.backgroundColor= 'gray'
-  document.getElementById('card-helper-avatar').title= $helperName
-  document.getElementById('card-helper-avatar-init').innerText= acronym
+  helper.innerText = helperName + ' is helping this card.';
+  cardHelperAvatar.style.display = 'flex'
+  cardHelperAvatar.style.backgroundColor= 'gray'
+  cardHelperAvatar.title= helperName
+  cardHelperAvatarInit.innerText= acronym
   // document.getElementById('card-' + card_id + '-helper-avatar').onclick= showUserData('jan pieter son', 'jps', 'green');
-  document.getElementById("remove-helper-button").style.display = "inline";
-  document.getElementById("add-helper-button").style.display = "none";
+  removeHelperBtn.style.display = "inline";
+  addHelperBtn.style.display = "none";
 }
 
-var destroyHelper = function(card_id){
+var removeHelper = function(card_id){
+  deleteHelper(card_id);
+  helper.innerText = 'no one is helping this card';
+  cardHelperAvatar.style.display = 'none';
+  cardHelperAvatar.style.backgroundColor= '';
+  cardHelperAvatar.title= '';
+  cardHelperAvatarInit.innerText= '';
+  removeHelperBtn.style.display = "none";
+  addHelperBtn.style.display = "inline";
+}
 
-  var url = route('removeHelper', card_id)
-  let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+function resetQuestionPopup(){
+  cardAvatarContainer.innerHTML = '';
+  cardOwner.innerText = '';
+  helper.innerText = 'no one is helping this card';
+  cardHelperAvatar.style.display = 'none';
+  cardHelperAvatar.style.backgroundColor= '';
+  cardHelperAvatar.title= '';
+  cardHelperAvatarInit.innerText= '';
+  removeHelperBtn.style.display = "none";
+  addHelperBtn.style.display = "none";
+}
+
+function resetLessonPopup(){
+//reset all
+}
+
+function fillQuestionPopup(data){
+  cardTitle.value = data[0]['name'];
+  cardDescription.value = data[0]['description'];
+  cardCreatedAt.innerText = data[0]['created_at'];
+  var i = 0;
+  if(data[0]['status'] == 'finished'){i = 1}
+  cardStatus.options[i].selected = true;
+  //image
+}
+
+function fillLessonPopup(data){
+  lessonTitle.value = data[0]['name'];
+  lessonDescription.value = data[0]['description'];
+  lessonStartDate.innerText = data[0]['start_time'];
+  // var i = 0;
+  // if(data[0]['status'] == 'finished'){i = 1}
+  // cardStatus.options[i].selected = true;
+  //image
+}
+
+function checkForOwner(user_id, card_owner_id){
+  cardTitle.readOnly = false;
+  cardDescription.readOnly = false;
+  cardStatus.disabled = false;
+  cardUploadImage.disabled = false;
+  //make eventListener enabled
+  cardSubmitForm.style.display = 'grid';
+  //make eventListener disabled
+  cardUpvoteQuestion.style.display = 'none';
+  cardDownvoteQuestion.style.display = 'none';
+  if(user_id == card_owner_id) return
+  cardTitle.readOnly = true;
+  cardDescription.readOnly = true;
+  cardStatus.disabled = true;
+  cardUploadImage.disabled = true;
+  //make eventListener disabled
+  cardSubmitForm.style.display = 'none';
+  //make eventListener enabled
+  cardUpvoteQuestion.style.display = 'flex';
+  cardDownvoteQuestion.style.display = 'flex';
+}
+
+function showUserData(username, initials,color){
+  if(userPopup.style.display == 'block'){
+    userPopup.style.display = 'none'
+    return
+  }
+  userPopup.style.display='block';
+  userPopupBol.style.backgroundColor= 'gray'
+  userPopupBol.title= username
+  userPopupInit.innerText= username
+  userPopupName.title= username
+  userPopupAvatar.innerText= initials;
+
+  // i need 
+  //username
+  //user id
+  //user color
+}
+
+function showCardAvatars(data){
+  for (let i = 0; i < data.length; i++) {
+    var initials = data[i]['name'].match(/\b(\w)/g);
+    var acronym = initials.join('');
+    
+    const avatar = document.createElement("div");
+    avatar.id = "card-" + data[i]['id'] + "-upvote-avatar";
+    avatar.className = "avatar";
+    avatar.title = data[i]['name'];
+    avatar.style.backgroundColor = 'grey';
+    cardAvatarContainer.appendChild(avatar);
+
+    const avatarInit = document.createElement("a");
+    avatarInit.id = "card-" + data[i]['id'] + "-upvote-avatar-init";
+    avatarInit.innerText = acronym;
+    avatar.appendChild(avatarInit);
+  }
+  questionUpvoteCount.innerText = data.length;
+}
+
+function eventListeners(card_id, helper_id, helper_name){
+  //remove helper
+  // removeHelperBtn.addEventListener('click',destroyHelper, false);
+  removeHelperBtn.addEventListener('click',removeHelper.bind(event,card_id), false);
+  //add helper
+  addHelperBtn.addEventListener('click',addHelper.bind(event,helper_id, helper_name, card_id), false);
+  //question upvote
+  cardUpvoteQuestion.addEventListener('click', saveCardUpvote.bind(event, card_id), false);
+  //question downvote
+  cardDownvoteQuestion.addEventListener('click', deleteCardUpvote.bind(event, card_id), false);
+  //submit
+  cardInfoPopup.addEventListener('submit', function(event){
+    event.preventDefault();
+    var card_name = cardTitle.value
+    var card_description = cardDescription.value
+    var card_status = cardStatus.selectedOptions[0].value
+    updateCard(card_id, card_name, card_description, card_status);
+  });
+}
+
+// fetch requests
+
+function getUsername(card_owner_id, helper_id, user_id){
+  var url = route('getUsername', [card_owner_id, helper_id]);
   
   fetch(url, {
     headers: {
       "Content-Type": "application/json",
       "Accept": "application/json, text-plain, *//* only 1 line  ",
-      "X-Requested-With": "XMLHttpRequest",
-      "X-CSRF-TOKEN": token,
+      "X-Requested-With": "XMLHttpRequest"
+    },
+    method: 'GET',
+    credentials: "same-origin",
+  }) .then(response => response.json())
+  .then(data => setHelperAndOwner(data, user_id, card_owner_id) );
+}
+
+function getLessonOwner(card_owner_id, user_id){
+  var url = route('getLessonOwner', card_owner_id);
+  
+  fetch(url, {
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json, text-plain, *//* only 1 line  ",
+      "X-Requested-With": "XMLHttpRequest"
+    },
+    method: 'GET',
+    credentials: "same-origin",
+  }) .then(response => response.json())
+  .then(data => setOwner(data, user_id, card_owner_id) );
+}
+
+function getCardInfo(modal_id){
+  var url = route('getCardInfo', modal_id)
+  
+  fetch(url, {
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json, text-plain, *//* only 1 line  ",
+      "X-Requested-With": "XMLHttpRequest"
+    },
+    method: 'GET',
+    credentials: "same-origin",
+  }).then(response => response.json())
+  .then(data => showData(data));
+}
+
+function deleteHelper(card_id){
+  var url = route('removeHelper', card_id)
+  
+  fetch(url, {
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json, text-plain, *//* only 1 line  ",
+      "X-Requested-With": "XMLHttpRequest"
     },
     method: 'GET',
     credentials: "same-origin",
   });
-
-  document.getElementById('helper').innerText = 'no one is helping this card';
-  document.getElementById('card-helper-avatar').style.display = 'none';
-  document.getElementById('card-helper-avatar').style.backgroundColor= '';
-  document.getElementById('card-helper-avatar').title= '';
-  document.getElementById('card-helper-avatar-init').innerText= '';
-  document.getElementById("remove-helper-button").style.display = "none";
-  document.getElementById("add-helper-button").style.display = "inline";
 }
 
-function saveHelper(card_id, $helperId){
-  var url = route('saveHelper', [card_id, $helperId])
-  let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+function saveHelper(card_id, helperId){
+  var url = route('saveHelper', [card_id, helperId])
   
   fetch(url, {
     headers: {
       "Content-Type": "application/json",
       "Accept": "application/json, text-plain, *//* only 1 line  ",
-      "X-Requested-With": "XMLHttpRequest",
-      "X-CSRF-TOKEN": token,
+      "X-Requested-With": "XMLHttpRequest"
     },
     method: 'GET',
     credentials: "same-origin",
@@ -186,114 +368,56 @@ function saveHelper(card_id, $helperId){
 
 function getQuestionCardInfo(card_id){
   var url = route('getQuestionCardInfo', card_id)
-  let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
   
   fetch(url, {
     headers: {
       "Content-Type": "application/json",
       "Accept": "application/json, text-plain, *//* only 1 line  ",
-      "X-Requested-With": "XMLHttpRequest",
-      "X-CSRF-TOKEN": token,
+      "X-Requested-With": "XMLHttpRequest"
     },
     method: 'GET',
     credentials: "same-origin",
-  })
-  
- .then(response => response.json())
+  }).then(response => response.json())
   .then(data => fillQuestionPopup(data));
 }
 
-function resetQuestionPopup(){
-  document.getElementById('cardAvatarContainer').innerHTML = '';
-  document.getElementById('card-owner').innerText = '';
-  document.getElementById('helper').innerText = 'no one is helping this card';
-  document.getElementById('card-helper-avatar').style.display = 'none';
-  document.getElementById('card-helper-avatar').style.backgroundColor= '';
-  document.getElementById('card-helper-avatar').title= '';
-  document.getElementById('card-helper-avatar-init').innerText= '';
-  document.getElementById("remove-helper-button").style.display = "none";
-  document.getElementById("add-helper-button").style.display = "none";
-}
-
-function fillQuestionPopup(data){
-  document.getElementById('card-info-popup')
-  document.getElementById('card-title').value = data[0]['name'];
-  document.getElementById('card-description').value = data[0]['description'];
-  document.getElementById('card-created-at').innerText = data[0]['created_at'];
-  var i = 0;
-  if(data[0]['status'] == 'finished'){i = 1}
-
-  document.getElementById('card-status').options[i].selected = true;
-  //image
-}
-
-function checkForOwner(user_id, card_owner_id){
-  document.getElementById('card-title').readOnly = false;
-  document.getElementById('card-description').readOnly = false;
-  document.getElementById('card-status').disabled = false;
-  document.getElementById('upload-image').disabled = false;
-  //make eventListener enabled
-  document.getElementById('submit-form').style.display = 'grid';
-  //make eventListener disabled
-  document.getElementById('card-upvote-question').style.display = 'none';
-  document.getElementById('card-downvote-question').style.display = 'none';
-  if(user_id == card_owner_id) return
-  document.getElementById('card-title').readOnly = true;
-  document.getElementById('card-description').readOnly = true;
-  document.getElementById('card-status').disabled = true;
-  document.getElementById('upload-image').disabled = true;
-  //make eventListener disabled
-  document.getElementById('submit-form').style.display = 'none';
-  //make eventListener enabled
-  document.getElementById('card-upvote-question').style.display = 'flex';
-  document.getElementById('card-downvote-question').style.display = 'flex';
-  
-}
-
-function showUserData(username, initials,color){
-  if(document.getElementById('userPopup').style.display == 'block'){
-    document.getElementById('userPopup').style.display = 'none'
-    return
-  }
-  document.getElementById('userPopup').style.display='block';
-  document.getElementById('userPopupBol').style.backgroundColor= 'gray'
-  document.getElementById('userPopupBol').title= username
-  document.getElementById('userPopupInit').innerText= username
-  document.getElementById('userPopupName').title= username
-  document.getElementById('userPopupAvatar').innerText= initials;
-
-  // i need 
-  //username
-  //user id
-  //user color
-}
-
-var saveCardUpvote = function ($card_id){
-  var url = route('saveCardUpvote', [$card_id])
-  let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+function getLessonCardInfo(card_id){
+  var url = route('getLessonCardInfo', card_id)
   
   fetch(url, {
     headers: {
       "Content-Type": "application/json",
       "Accept": "application/json, text-plain, *//* only 1 line  ",
-      "X-Requested-With": "XMLHttpRequest",
-      "X-CSRF-TOKEN": token,
+      "X-Requested-With": "XMLHttpRequest"
+    },
+    method: 'GET',
+    credentials: "same-origin",
+  }).then(response => response.json())
+  .then(data => fillLessonPopup(data));
+}
+
+var saveCardUpvote = function (card_id){
+  var url = route('saveCardUpvote', [card_id])
+  
+  fetch(url, {
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json, text-plain, *//* only 1 line  ",
+      "X-Requested-With": "XMLHttpRequest"
     },
     method: 'GET',
     credentials: "same-origin",
   });
 }
 
-var deleteCardUpvote = function ($card_id){
-  var url = route('deleteCardUpvote', [$card_id])
-  let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+var deleteCardUpvote = function (card_id){
+  var url = route('deleteCardUpvote', [card_id])
   
   fetch(url, {
     headers: {
       "Content-Type": "application/json",
       "Accept": "application/json, text-plain, *//* only 1 line  ",
-      "X-Requested-With": "XMLHttpRequest",
-      "X-CSRF-TOKEN": token,
+      "X-Requested-With": "XMLHttpRequest"
     },
     method: 'GET',
     credentials: "same-origin",
@@ -302,81 +426,35 @@ var deleteCardUpvote = function ($card_id){
 
 function getCardAvatars(card_id){
   var url = route('GetCardAvatars', card_id)
-  let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
   
   fetch(url, {
     headers: {
       "Content-Type": "application/json",
       "Accept": "application/json, text-plain, *//* only 1 line  ",
-      "X-Requested-With": "XMLHttpRequest",
-      "X-CSRF-TOKEN": token,
+      "X-Requested-With": "XMLHttpRequest"
     },
     method: 'GET',
     credentials: "same-origin",
-  })
-  
- .then(response => response.json())
+  }).then(response => response.json())
   .then(data => showCardAvatars(data));
 }
 
-function showCardAvatars(data){
-  for (let i = 0; i < data.length; i++) {
-    var initials = data[i]['name'].match(/\b(\w)/g);
-    var acronym = initials.join('');
+function updateCard(card_id, card_name, card_description, card_status){
+  var url = route('updateCard', [card_id, card_name, card_description, card_status])
     
-    const container = document.getElementById('cardAvatarContainer');
-    const avatar = document.createElement("div");
-    avatar.id = "card-" + data[i]['id'] + "-helper-avatar";
-    avatar.className = "avatar";
-    avatar.title = data[i]['name'];
-    avatar.style.backgroundColor = 'grey';
-    container.appendChild(avatar);
-
-    const avatarInit = document.createElement("a");
-    avatarInit.id = "card-" + data[i]['id'] + "-helper-avatar-init";
-    avatarInit.innerText = acronym;
-    avatar.appendChild(avatarInit);
-  }
-  document.getElementById('question-upvote-count').innerText = data.length;
-}
-
-function eventListeners(card_id, helper_id, helper_name){
-  //remove helper
-  // removeHelperBtn.addEventListener('click',destroyHelper, false);
-  removeHelperBtn.addEventListener('click',destroyHelper.bind(event,card_id), false);
-  //add helper
-  addHelperBtn.addEventListener('click',addHelper.bind(event,helper_id, helper_name, card_id), false);
-  //question upvote
-  document.getElementById('card-upvote-question').addEventListener('click', saveCardUpvote.bind(event, card_id), false);
-  //question downvote
-  document.getElementById('card-downvote-question').addEventListener('click', deleteCardUpvote.bind(event, card_id), false);
-  //submit
-  document.getElementById('card-info-popup').addEventListener('submit', function(event){
-    event.preventDefault();
-  
-    var card_name = document.getElementById('card-title').value
-    var card_description = document.getElementById('card-description').value
-    var card_status = document.getElementById('card-status').selectedOptions[0].value
-
-    var url = route('updateCard', [card_id, card_name, card_description, card_status])
-    let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-    
-    fetch(url, {
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json, text-plain, *//* only 1 line  ",
-        "X-Requested-With": "XMLHttpRequest",
-        "X-CSRF-TOKEN": token,
-      },
-      method: 'GET',
-      credentials: "same-origin",
-    });
+  fetch(url, {
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json, text-plain, *//* only 1 line  ",
+      "X-Requested-With": "XMLHttpRequest"
+    },
+    method: 'GET',
+    credentials: "same-origin",
   });
 }
 
+
 // to do
-// all variables that have a '$' should remove '$' from there name
 // function for randomizing color of avatar bal and remembering color for next use
-// move all fetch related request to the bottom of the javascript file
 // make a loader for all popups
-//remove all document.getElementById and place them in const at the top of script.js file
+// X op popup werkt niet omdat, hij nu 1 pagina terug gaat en soms zorgt dat ervoor dat hij naar de board pagina gaat.
