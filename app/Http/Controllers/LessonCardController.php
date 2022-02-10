@@ -51,16 +51,22 @@ class LessonCardController extends Controller
     
 
 
-    public function storeLessonUpVote($lesson_id, $board_id)
+    public function storeLessonUpVote($card_id)
     {
         $user_id = Auth::user()->id;
 
         LessonUpvotes::updateOrCreate(
             [
-                "card_id" => $lesson_id,
+                "card_id" => $card_id,
                 "user_id" => $user_id
             ]
             );
-            return redirect()->route('oneBoard', ['board_id'=>$board_id]); 
+            return response()->json();
+    }
+
+    public function getLessonCardInfo($card_id){
+        $response = LessonCard::where('id', $card_id)->get();
+
+        return response()->json($response);
     }
 }

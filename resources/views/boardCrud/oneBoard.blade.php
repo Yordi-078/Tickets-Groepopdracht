@@ -124,13 +124,13 @@ $user_id = Auth::user()->id;
     <div class="flex-row" id="board-lesson-content-box" >
         @foreach($lessonCards as $lessonCard)
  
-        <a onclick="showPopup('myModalLesson{{$lessonCard['id']}}',{{$thisBoard['id']}})" class="toggle cards flex-row">{{$lessonCard["name"]}}<button class="card-popup-button"><i class="far fa-eye"></i></button></a> 
-        
+        <a onclick="showPopup({{$lessonCard['id']}})" class="toggle cards flex-row">{{$lessonCard["name"]}}<button class="card-popup-button"><i class="far fa-eye"></i></button></a> 
+        @endforeach
         <!-- The Modal -->
 
         
       
-        <div id="myModalLesson{{$lessonCard['id']}}" class="modal">
+        <div id="myModalLesson" class="modal">
         
             <!-- Modal content -->
     
@@ -139,21 +139,20 @@ $user_id = Auth::user()->id;
               <form class="card-info-popup">
                     <fieldset id="general" class="card-info-border">
                         <span><i class="fas fa-align-left"></i></span>
-                        <textarea type="text" id="" class="title" name="name" maxlength="300" required></textarea>
+                        <textarea type="text" id="lessoncard-title" class="title" name="name" maxlength="300" required></textarea>
                         <span>description: </span>
-                        <textarea type="text" id="" class="description" name="description" maxlength="665" required></textarea>
+                        <textarea type="text" id="lessoncard-description" class="description" name="description" maxlength="665" required></textarea>
                     </fieldset>
 
                     <fieldset id="image-uploader" class="card-info-border">
                         <input id="upload-image" type="file">
                     </fieldset>
                     <a id="lesson-card-info-test"></a>
-                    <a href="{{ url('storeLessonUpVote', [$lessonCard['id'], $thisBoard['id']]) }}" class="home-buttons">Upvote</a>
+                    <a id="lesson-upvote" class="home-buttons">Upvote</a>
               </form>
             </div>
         </div>
 
-    @endforeach
     </div>
 </div>
 @endsection
