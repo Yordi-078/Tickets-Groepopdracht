@@ -8,7 +8,7 @@
     <form method="POST" action="{{ url('storeLessonCard', $board_id) }}">
     @csrf
         <div>
-            <label class="label" for="name">Name: </label>    
+            <label class="label" for="name">name: </label>    
             <input class="input @error('name') is-danger @enderror" type="text" name="name" id="" value="{{ old('name') }}">
             
             @error('name')
