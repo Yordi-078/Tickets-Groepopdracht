@@ -13,26 +13,26 @@
         <link rel="stylesheet" href="{{asset('css/style.css')}}">
 
     </head>
-    <body class="antialiased">
+    <body>
         <div class="welcome-content-box">
-            <div class="headertext">Tick-It</div>
-            <div class="stripes">—————— ★ ——————</div>
-            <div class="login-buttons">
+            <h1 class="welcome-header-text">Tick-It</h1>
+            <div class="welcome-header-line"><hr>★<hr></div>
+            <div class="welcome-login-buttons">
                 @if (Route::has('login'))
                     @auth
                     <div>
-                        <a href="{{ url('/home') }}" class="buttons landing-page-buttons">Home</a>
-                        <hr class="focus-border">
+                        <a href="{{ url('/home') }}" class="welcome-button">Home</a>
+                        <hr class="welcome-button-line">
                     </div>
-                    @else
+                @else
                     <div>
-                        <a href="{{ route('login') }}" class="buttons landing-page-buttons">Log-in</a>
-                        <hr class="focus-border">
+                        <a href="{{ route('login') }}" class="welcome-button">Log-in</a>
+                        <hr class="welcome-button-line">
                     </div>
                         @if (Route::has('register'))
                         <div>
-                            <a href="{{ route('register') }}" class="buttons landing-page-buttons">Register</a>
-                            <hr class="focus-border">
+                            <a href="{{ route('register') }}" class="welcome-button">Register</a>
+                            <hr class="welcome-button-line">
                         </div>
                         @endif
                     @endauth
