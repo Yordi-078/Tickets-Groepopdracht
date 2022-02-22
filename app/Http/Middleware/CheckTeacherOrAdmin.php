@@ -21,7 +21,7 @@ class CheckTeacherOrAdmin
             return redirect('/');
         }
 
-         else if (\Auth::user() && \Auth::user()->user_role == 'admin' || \Auth::user()->user_role == 'teacher') 
+         else if (\Auth::user() && \Auth::user()->user_role_id == 3 || \Auth::user()->user_role_id == 2) 
          {
              return $next($request);
          } 

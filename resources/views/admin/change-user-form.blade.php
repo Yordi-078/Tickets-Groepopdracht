@@ -14,7 +14,7 @@
     <div class="change-user-role-user-data">
         <a> name:{{ $user->name }} </a><br>
         <a> email:{{ $user->email }}</a><br>
-        <a> role:{{ $user->user_role }}</a><br>
+        <a> role:{{ $user->user_role_id }}</a><br>
     </div>
 
     
@@ -25,11 +25,11 @@
             @csrf
             @method('POST')
                 <label for="name" class="">User Role:</label>
-                <select name='user_role' class="" required>
+                <select name='user_role_id' class="" required>
                     <option selected disabled value="">Select a user role...</option>
-                    <option name="user_role" class="" value="{{ 1 }}" {{$user->user_role == 'student' ? 'selected' : ''}} autofocus>Student</option>
-                    <option name="user_role" class="" value="{{ 2 }}" {{$user->user_role == 'teacher' ? 'selected' : ''}} autofocus>Teacher</option>
-                    <option name="user_role" class="" value="{{ 3 }}" {{$user->user_role == 'admin'   ? 'selected' : ''}} autofocus>Admin</option>
+                    <option name="user_role_id" class="" value="{{ 1 }}" {{$user->user_role_id == 'student' ? 'selected' : ''}} autofocus>Student</option>
+                    <option name="user_role_id" class="" value="{{ 2 }}" {{$user->user_role_id == 'teacher' ? 'selected' : ''}} autofocus>Teacher</option>
+                    <option name="user_role_id" class="" value="{{ 3 }}" {{$user->user_role_id == 'admin'   ? 'selected' : ''}} autofocus>Admin</option>
                 </select>
                 <div>
                     <button type="submit" class="change-user-role-submit-button">UPDATE</button>

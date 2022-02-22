@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             CardSeeder::class,
             UserSeeder::class,
             BoardUserSeeder::class,
+            UserRoleSeeder::class,
         ]);
     }
 }

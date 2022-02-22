@@ -17,7 +17,7 @@ class UserController extends Controller
     public function changeUserRolesPage()
     {
         $users = User::all();
-        return view('admin/change-user-roles', compact('users'));
+        return view('admin/change-user-roles',  ['users'=>$users]);
     }
 
 
@@ -40,12 +40,12 @@ class UserController extends Controller
     public function updateUserRole(Request $request, $id)
     {
         $request->validate([
-            'user_role' => 'required'
+            'user_role_id' => 'required'
         ]);
 
         User::where('id', $id)
             ->update([
-                'user_role' => $request->input('user_role')
+                'user_role_id' => $request->input('user_role_id')
             ]);
         return redirect()->route('changeUserRoles');
     }
