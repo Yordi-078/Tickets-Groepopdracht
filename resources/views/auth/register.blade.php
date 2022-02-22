@@ -11,9 +11,10 @@
         @csrf
 
         <!-- name -->
-        <label for="name" class="">{{ __('Name') }}</label>
-        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-        
+        <div class="form-input-container">
+            <label for="email"><i class="fas fa-user"></i></label>
+            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror form-input" name="name" value="{{ old('name') }}" placeholder="Full name" required autocomplete="name" autofocus>
+        </div>
         @error('name')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
@@ -21,9 +22,10 @@
         @enderror
 
         <!-- email -->
-        <label for="email" class="">{{ __('E-Mail Address') }}</label>
-        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
+        <div class="form-input-container">
+            <label for="email"><i class="fas fa-envelope"></i></label>
+            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror form-input" name="email" value="{{ old('email') }}" placeholder="Email address" required autocomplete="email">
+        </div>
         @error('email')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
@@ -31,9 +33,10 @@
         @enderror
 
         <!-- password -->
-        <label for="password" class="">{{ __('Password') }}</label>
-        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
+        <div class="form-input-container">
+            <label for="email"><i class="fas fa-lock"></i></label>
+            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror form-input" name="password" placeholder="Password" required autocomplete="current-password">
+        </div>
         @error('password')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
@@ -41,12 +44,13 @@
         @enderror
 
         <!-- confirm password -->
-        <label for="password-confirm" class="">{{ __('Confirm Password') }}</label>
-        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-
+        <div class="form-input-container">
+            <label for="email"><i class="fas fa-lock"></i></label>
+            <input id="password-confirm" type="password" class="form-control form-input" name="password_confirmation" placeholder="Confirm password" required autocomplete="new-password">
+        </div>
 
         <!-- submit and forgot password -->
-        <div class="">
+        <div class="form-submit">
             <button type="submit" class="form-submit-button">
                 {{ __('Register') }}
             </button>

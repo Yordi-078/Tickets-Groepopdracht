@@ -147,11 +147,11 @@ function setOwner(name, user_id, card_owner_id){
 
 }
 
-function showLessonData(data){
-console.log(data[0]['description'])
-document.getElementById('lessoncard-title').value = data[0]['name'];
-document.getElementById('lessoncard-description').value = data[0]['name'];
-}
+// function showLessonData(data){
+// document.getElementById('lessoncard-title').value = data[0]['name'];
+// document.getElementById('lessoncard-description').value = data[0]['name'];
+
+// }
 
 var storeLessonUpVote = function(card_id){
 var url = route('storeLessonUpVote', card_id)
@@ -248,6 +248,8 @@ function fillLessonPopup(data){
   lessonTitle.value = data[0]['name'];
   lessonDescription.value = data[0]['description'];
   lessonStartDate.innerText = data[0]['start_time'];
+  //Extra wat we willen is dat als de kaart ongoing is dat de kaart een andere kleur wordt zodat mensen zien dat die bezig is
+  lessonStartDate.innerText = data[0]['status'];
   // var i = 0;
   // if(data[0]['status'] == 'finished'){i = 1}
   // cardStatus.options[i].selected = true;
