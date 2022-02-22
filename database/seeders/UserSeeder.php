@@ -23,14 +23,14 @@ class UserSeeder extends Seeder
             'name' => 'admin-account',
             'email' => 'admin@admin.com',
             'password' => Hash::make('password'),
-            'user_role' => 'admin'
+            'user_role_id' => '3'
         ]);
 
         DB::table('users')->insert([
             'name' => 'admin2-account',
             'email' => 'admin2@admin.com',
             'password' => Hash::make('password'),
-            'user_role' => 'admin'
+            'user_role_id' => '3'
         ]);
 
         DB::table('users')->insert([
@@ -44,7 +44,7 @@ class UserSeeder extends Seeder
             'name' => 'student-account',
             'email' => 'student@student.com',
             'password' => Hash::make('password'),
-            'user_role' => 'student'
+            'user_role_id' => 'student'
         ]);
         // User::factory()->count(19)->create();
     }
