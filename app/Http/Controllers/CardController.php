@@ -108,6 +108,13 @@ class CardController extends Controller
           return response()->json($response);
     }
 
+    public function getUserInfo($user_id)
+    {
+        $response = User::where('id', $user_id)->get();
+
+          return response()->json($response[0]);
+    }
+
     public function saveHelper($card_id, $helperId)
     {
         Card::updateOrCreate(
