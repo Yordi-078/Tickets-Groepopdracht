@@ -21,7 +21,7 @@ class CheckAdmin
             return redirect('/');
         }
 
-        else if (\Auth::user() && \Auth::user()->user_role == 'admin') 
+        else if (\Auth::user() && \Auth::user()->user_role_id == 3) 
         {
             return $next($request);
         } 

@@ -37,14 +37,14 @@ class UserSeeder extends Seeder
             'name' => 'teacher-account',
             'email' => 'teacher@teacher.com',
             'password' => Hash::make('password'),
-            'user_role' => 'teacher'
+            'user_role_id' => '2'
         ]);
 
         DB::table('users')->insert([
             'name' => 'student-account',
             'email' => 'student@student.com',
             'password' => Hash::make('password'),
-            'user_role_id' => 'student'
+            'user_role_id' => '1'
         ]);
         // User::factory()->count(19)->create();
     }

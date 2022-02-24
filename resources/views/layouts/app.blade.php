@@ -50,7 +50,7 @@ use Illuminate\support\facades\Auth;
                             <a id="" class="" href="{{ route('viewUserPage', Auth::user()->id ) }}">
                                 {{ Auth::user()->name }}
                             </a>
-                            @if (Auth::user()->user_role == 'admin' )
+                            @if (Auth::user()->user_role_id == 3 )
                                 <a class="dropdown-item" href="{{ route('changeUserRoles') }}">
                                     {{ __('change user roles') }}
                                 </a>
