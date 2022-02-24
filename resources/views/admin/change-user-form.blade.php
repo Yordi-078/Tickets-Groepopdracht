@@ -13,8 +13,8 @@
 
     <div class="change-user-role-user-data">
         <a> name:{{ $user->name }} </a><br>
-        <a> email:{{ $user->email }}</a><br>
-        <a> role:{{ $user->user_role_id }}</a><br>
+        <a> email:{{$user->email }}</a><br>
+        <a> role:{{$user->user_role_id }}</a><br>
     </div>
 
     
