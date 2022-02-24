@@ -9,12 +9,12 @@ $user_id = Auth::user()->id;
 
 @section('content')
 <div class="main-button-bar">
-    @if (Auth::user()->user_role == 'teacher' || Auth::user()->user_role == 'admin' )
+    @if (Auth::user()->user_role_id == 2 || Auth::user()->user_role_id == 3 )
         <a id="add-student-button" class="main-button" href="{{ route('addStudentsToBoard', $thisBoard['id']) }}">
             {{ __('Add students') }}
         </a>
     @endif
-    @if (Auth::user()->user_role == 'teacher')
+    @if (Auth::user()->user_role_id == 2)
         <a id="add-student-button" class="main-button" href="{{ route('teacherDashboard',$thisBoard['id']) }}">
             {{ __('Teacher Dashboard') }}
         </a>
@@ -52,7 +52,7 @@ $user_id = Auth::user()->id;
     
     <div class="lesson-board-container">
         <div class="lesson-board-container-header">
-            @if (Auth::user()->user_role == 'teacher' || Auth::user()->user_role == 'admin')
+            @if (Auth::user()->user_role_id == 2 || Auth::user()->user_role_id == 3)
                 <a href="{{ url('boardCrud/createLessonCard', $thisBoard['id']) }}" class="home-board-buttons">Add Card</a>
             @endif
         </div>

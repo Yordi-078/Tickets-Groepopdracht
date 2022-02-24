@@ -47,6 +47,7 @@ class BoardController extends Controller
       $upvotes = LessonUpvotes::all();
       $cards = $board_id->cards;
       $lesCard = $board_id->lessoncards;
+      // $helperId = User::where("id", $cards["helper_id"])->get();
 
       for($i =0; $i < count($lesCard); $i++) {
         $lessonCard[$i]['id'] = $lesCard[$i]['id'];
@@ -74,11 +75,11 @@ class BoardController extends Controller
       return view('boardCrud.addStudentsToBoard' , ['board_id'=>$board_id]);
     }
 
-    public function search($board_id)
+    public function searchStudents($board_id)
     {
       $search_text = $_GET['query'];
       $search = User::where('name','LIKE', '%' .$search_text.'%')->get();
-      return view('boardCrud.zoeken', ['search'=>$search, 'board_id'=>$board_id]);     
+      return view('boardCrud.addStudentsToBoard', ['search'=>$search, 'board_id'=>$board_id]);     
     }
 
   public function addToBoard($board_id, $user_id)

@@ -37,6 +37,8 @@ const lessonModal = document.getElementById('lessonModal');
 const lessonSpan = document.getElementById("close-lesson-popup");
 const cardModal = document.getElementById('cardModal');
 const cardSpan = document.getElementById("close-popup");
+const userPopupEmail = document.getElementById("userPopupEmail");
+const userPopupRole = document.getElementById("userPopupRole");
 
 
 // uncatogorized 
@@ -276,17 +278,23 @@ function checkForOwner(user_id, card_owner_id){
   cardDownvoteQuestion.style.display = 'flex';
 }
 
-function showUserData(username, initials,color){
+var showUserData = function (data,color){
+  console.log(data['email'])
+  var initials = data['name'].match(/\b(\w)/g);
+  var acronym = initials.join('');
+
   if(userPopup.style.display == 'block'){
     userPopup.style.display = 'none'
     return
   }
   userPopup.style.display='block';
   userPopupBol.style.backgroundColor= 'gray'
-  userPopupBol.title= username
-  userPopupInit.innerText= username
-  userPopupName.title= username
-  userPopupAvatar.innerText= initials;
+  userPopupBol.title= data['name']
+  userPopupInit.innerText= data['name']
+  userPopupName.title= data['name']
+  userPopupEmail.innerText= data['email']
+  userPopupRole.innerText= data['user_role']
+  userPopupAvatar.innerText= acronym;
 
   // i need 
   //username
@@ -324,6 +332,8 @@ function eventListeners(card_id, helper_id, helper_name){
   cardUpvoteQuestion.addEventListener('click', saveCardUpvote.bind(event, card_id), false);
   //question downvote
   cardDownvoteQuestion.addEventListener('click', deleteCardUpvote.bind(event, card_id), false);
+  //avatar popup
+  cardHelperAvatar.addEventListener('click', getHelperInfo.bind(event, helper_id), false);
   //submit
   cardInfoPopup.addEventListener('submit', function(event){
     event.preventDefault();
@@ -528,6 +538,21 @@ function updateCard(card_id, card_name, card_description, card_status){
     method: 'GET',
     credentials: "same-origin",
   });
+}
+
+var getHelperInfo = function (helper_id){
+  var url = route('getUserInfo', helper_id);
+  
+  fetch(url, {
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json, text-plain, *//* only 1 line  ",
+      "X-Requested-With": "XMLHttpRequest"
+    },
+    method: 'GET',
+    credentials: "same-origin",
+  }) .then(response => response.json())
+  .then(data => showUserData(data) );
 }
 
 

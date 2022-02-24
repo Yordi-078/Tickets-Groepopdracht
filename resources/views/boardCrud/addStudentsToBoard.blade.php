@@ -1,12 +1,13 @@
-<form class="search" type="get" action="{{ route('search' , $board_id) }}">
-      @csrf     
-    <div class="input-group md-form form-sm form-1 pl-0">
-      <div class="input-group-prepend">
-        <span class="input-group-text purple lighten-3" id="basic-text1"><i class="fas fa-search text-danger"
-            aria-hidden="true"></i></span>
-      </div>
+@extends('layouts.app')
 
-      
-      <input class="form-control my-0 py-1" name="query" type="search" placeholder="Zoek" aria-label="Search">
-    </div>
-</form>
+<body class="searchStudents">
+
+  <form style="transform:translate(-50%, -50%);" action="{{ route('search' , $board_id) }}" type="get" class="search-bar">
+    <h1>Click here to search for students</h1>
+	  <input type="search" name="query" type="search" placeholder="Search" pattern=".*\S.*" required>
+  	<button class="search-btn" type="submit">
+		  <span><i class="fa-solid fa-magnifying-glass"></i></span>
+	  </button>
+  </form> 
+  
+</body>

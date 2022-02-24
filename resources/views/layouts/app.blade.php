@@ -43,7 +43,7 @@
                         <a id="" class="" href="#">
                             {{ Auth::user()->name }}
                         </a>
-                        @if (Auth::user()->user_role == 'teacher' || Auth::user()->user_role == 'admin' )
+                        @if (Auth::user()->user_role_id == 2 || Auth::user()->user_role_id == 3 )
                             <a class="dropdown-item" href="{{ route('changeUserRoles') }}">
                                 {{ __('change user roles') }}
                             </a>

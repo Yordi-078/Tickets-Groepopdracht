@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use App\Http\Middleware\Auth;
 
-class CheckTeacherOrAdmin
+class CheckLoggedIn
 {
     /**
      * Handle an incoming request.
@@ -19,15 +19,8 @@ class CheckTeacherOrAdmin
     {
         if ($request->user() == false){
             return redirect('/');
+        }else {
+            return $next($request);
         }
-
-         else if (\Auth::user() && \Auth::user()->user_role_id == 3 || \Auth::user()->user_role_id == 2) 
-         {
-             return $next($request);
-         } 
-         else 
-         {
-             return redirect('/');
-         }
     }
 }
