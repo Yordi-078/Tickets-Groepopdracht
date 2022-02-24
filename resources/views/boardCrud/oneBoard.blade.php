@@ -9,12 +9,12 @@ $user_id = Auth::user()->id;
 
 @section('content')
 <div class="board-page-header">
-    @if (Auth::user()->user_role == 2 || Auth::user()->user_role == 3 )
+    @if (Auth::user()->user_role_id == 2 || Auth::user()->user_role_id == 3 )
         <a id="add-student-button" class="dropdown-item" href="{{ route('addStudentsToBoard', $thisBoard['id']) }}">
             {{ __('Add students') }}
         </a>
     @endif
-    @if (Auth::user()->user_role == 2)
+    @if (Auth::user()->user_role_id == 2)
         <a id="add-student-button" class="dropdown-item" href="{{ route('teacherDashboard',$thisBoard['id']) }}">
             {{ __('Teacher Dashboard') }}
         </a>
