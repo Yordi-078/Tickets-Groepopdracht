@@ -142,7 +142,7 @@ $user_id = Auth::user()->id;
 </div>
 <div class="lesson-board-container">
     <div class="board-header">
-    @if (Auth::user()->user_role == 'teacher' || Auth::user()->user_role == 'admin')
+    @if (Auth::user()->user_role_id == 2 || Auth::user()->user_role_id == 3)
         <a href="{{ url('boardCrud/createLessonCard', $thisBoard['id']) }}" class="home-buttons">Add Card</a>
     @endif
     </div>
