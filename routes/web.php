@@ -31,7 +31,7 @@ Route::post('/home',  [BoardController::class, 'storeBoard'])->name('home')->mid
 Route::get('createBoard',  [BoardController::class, 'createBoardForm'])->name('createBoard')->middleware('CheckTeacherOrAdmin');
 Route::get('oneBoard/{board_id}', [BoardController::class, 'oneBoard'])->name('oneBoard');
 Route::get('addStudentsToBoard/{board_id}',  [BoardController::class, 'addStudentsToBoard'])->name('addStudentsToBoard')->middleware('CheckTeacherOrAdmin');
-Route::get('search/{board_id}', [BoardController::class, 'search'])->name('search')->middleware('CheckTeacherOrAdmin');
+Route::get('search/{board_id}', [BoardController::class, 'searchStudents'])->name('search')->middleware('CheckTeacherOrAdmin');
 Route::get('addToBoard/{board_id}/{user_id}',  [BoardController::class, 'addToBoard'])->name('addToBoard')->middleware('CheckTeacherOrAdmin');
 Route::get('viewUsersFromBoard/{board_id}', [BoardController::class, 'viewUsersFromBoard'])->name('viewUsersFromBoard');
 Route::get('viewUserPage/{user_id}', [BoardController::class, 'viewUserPage'])->name('viewUserPage');
@@ -73,6 +73,7 @@ Route::get('getLessonCardInfo/{card_id}',  [CardController::class, 'getLessonCar
 Route::get('saveCardUpvote/{card_id}',  [CardController::class, 'saveCardUpvote'])->name('saveCardUpvote');
 Route::get('deleteCardUpvote/{card_id}',  [CardController::class, 'deleteCardUpvote'])->name('deleteCardUpvote');
 Route::get('GetCardAvatars/{card_id}',  [CardController::class, 'GetCardAvatars'])->name('GetCardAvatars');
+Route::get('getUserInfo/{helper_id}',  [CardController::class, 'getUserInfo'])->name('getUserInfo');
 Route::get('updateCard/{card_id}/{card_name}/{card_description}/{card_status}',  [CardController::class, 'updateCard'])->name('updateCard');
 
 

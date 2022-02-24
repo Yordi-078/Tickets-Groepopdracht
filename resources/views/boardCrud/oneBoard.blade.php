@@ -97,13 +97,15 @@ $user_id = Auth::user()->id;
                             <legend id="helper">no one is helping this card</legend>
                             <input id="remove-helper-button" class="helper-buttons" type="button" value=" - ">
                             <input id="add-helper-button" class="helper-buttons" type="button"value=" + ">
-                            <div onclick="showUserData('Anthony Inocencio Ramos', 'AIR', 'navy')" title="" style="background-color:pink;" class="avatar" id="card-helper-avatar"><a id="card-helper-avatar-init" href="#"></a></div>
+                            <div title="" style="background-color:pink;" class="avatar" id="card-helper-avatar"><a id="card-helper-avatar-init" href="#"></a></div>
                         </fieldset>
 
                         <div id="userPopup">
                             <div class="user-popup-header">
                                 <div id="userPopupBol" title="" class="avatar user-popup-header-avatar"><a href="#" id="userPopupAvatar"></a></div>
                                 <div id="userPopupName" class="user-popup-header-username"><a href="#" id="userPopupInit"></a></div>
+                                <div id="userPopupEmail" class="user-popup-header-email"></div>
+                                <div id="userPopupRole" class="user-popup-header-role"></div>
                             </div>
                             <div id="userPopupProfilePage" class="user-popup-button"><a href="{{ route('viewUserPage', $user_id ) }}">profiel bekijken</a></div>
                             <hr>
