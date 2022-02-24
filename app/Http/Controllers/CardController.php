@@ -61,8 +61,8 @@ class CardController extends Controller
          $userID = LessonUpvotes::where('card_id', $lesson_id)->get('user_id');
          // loop door alle userID's en zet ze in 
          for ($i=0; $i < count($userID) ; $i++) { 
-            $users = User::where('id', $userID[$i]['user_id'])->get('name');
-            array_push($response, $users[0]['name']);
+            $users = User::where('id', $userID[$i]['user_id'])->get();
+            array_push($response, $users[0]);
          }
         
           return response()->json($response);
@@ -155,10 +155,31 @@ class CardController extends Controller
           return response()->json();
     }
 
+    public function saveLessonUpvote($card_id)
+    {
+        $user_id = Auth::user()->id;
+        LessonUpvotes::updateOrCreate(
+            [
+                "card_id" => $card_id,
+                "user_id" => $user_id
+            ]
+            );
+          return response()->json();
+    }
+
     public function deleteCardUpvote($card_id){
         $user_id = Auth::user()->id;
 
         $voter = CardUpvotes::where('card_id', $card_id)->where('user_id', $user_id);
+        $voter->delete();
+
+        return response()->json();
+    }
+
+    public function deleteLessonUpvote($card_id){
+        $user_id = Auth::user()->id;
+
+        $voter = LessonUpvotes::where('card_id', $card_id)->where('user_id', $user_id);
         $voter->delete();
 
         return response()->json();

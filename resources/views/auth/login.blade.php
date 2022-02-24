@@ -11,9 +11,10 @@
         @csrf
 
         <!-- email -->
-        <label for="email" class="">{{ __('E-Mail Address') }}</label>
-        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
+        <div class="form-input-container">
+            <label for="email"><i class="fas fa-user"></i></label>
+            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror form-input" name="email" value="{{ old('email') }}" placeholder="E-mail address" required autocomplete="email" autofocus>
+        </div>
         @error('email')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
@@ -21,9 +22,11 @@
         @enderror
 
         <!-- password -->
-        <label for="password" class="">{{ __('Password') }}</label>
-        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
+        <div class="form-input-container">
+            <label for="password"><i class="fas fa-lock"></i></label>
+            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror form-input" name="password" placeholder="Password" required autocomplete="current-password">
+        </div>
+        
         @error('password')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
@@ -39,14 +42,14 @@
         </div>
 
         <!-- submit and forgot password -->
-        <div class="">
+        <div class="form-submit">
             <button type="submit" class="form-submit-button">
                 {{ __('Login') }}
             </button>
             <br>
 
             @if (Route::has('password.request'))
-                <a class="" href="{{ route('password.request') }}">
+                <a class="form-bottom-text" href="{{ route('password.request') }}">
                     {{ __('Forgot Your Password?') }}
                 </a>
             @endif
