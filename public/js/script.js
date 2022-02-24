@@ -75,19 +75,17 @@ function setLoader(theModal){
 
 // single use functions
 function toggleBoard() {
-  var boards = document.getElementsByClassName("board");
+  var boards = document.getElementsByClassName("card");
   for (i = 0; i < boards.length; i++) {
-      boards[i].classList.toggle('board-row');
-      
+      boards[i].classList.toggle('card-row');
   }
-  if(document.getElementById("home-board-content-box").classList.contains("flex-row")){
-     document.getElementById("toggle-board").innerHTML = '<i class="fas fa-th"></i>'; 
+  if(document.getElementById("home-board-content").classList.contains("flex-rows")){
+     document.getElementById("toggle-board").innerHTML = '<i class="fas fa-bars"></i>'; 
   }
   else{
-      document.getElementById("toggle-board").innerHTML = '<i class="fas fa-bars"></i>'; 
+      document.getElementById("toggle-board").innerHTML = '<i class="fas fa-th"></i>'; 
   }
-  document.getElementById("home-board-content-box").classList.toggle("flex-row");
-  document.getElementById("home-board-content-box").classList.toggle("flex-column");
+  document.getElementById("home-board-content").classList.toggle("flex-rows");
 }
 
 function showQuestionPopup(card_owner_id, helper_id, user_id, user_name, card_id){
