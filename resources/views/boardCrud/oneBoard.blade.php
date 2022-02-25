@@ -15,11 +15,7 @@ $user_id = Auth::user()->id;
         </a>
     @endif
     @if (Auth::user()->user_role_id == 2)
-<<<<<<< HEAD
         <a id="add-student-button" class="main-button" href="{{ route('teacherDashboard',$thisBoard['id']) }}">
-=======
-        <a id="add-student-button" class="dropdown-item" href="{{ route('teacherDashboard',$thisBoard['id']) }}">
->>>>>>> 8c7e167d7209d48a432feae9c65b6067d224e121
             {{ __('Teacher Dashboard') }}
         </a>
     @endif
