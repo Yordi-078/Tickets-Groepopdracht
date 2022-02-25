@@ -1,0 +1,267 @@
+[33mcommit 8c7e167d7209d48a432feae9c65b6067d224e121[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: BerkanKaya <99059255@mydavinci.nl>
+Date:   Thu Feb 24 11:47:17 2022 +0100
+
+    heroku oneBoard
+
+[33mcommit 8d39d0aefc07a14eedbea3c215a6a47a5c6df7cb[m
+Merge: 1e20443 d201478
+Author: BerkanKaya <99059255@mydavinci.nl>
+Date:   Thu Feb 24 11:44:32 2022 +0100
+
+    Merge remote-tracking branch 'origin/main' into main
+
+[33mcommit 1e2044301f10ee30ebf43e3424d0b64c7db2e2a6[m
+Author: BerkanKaya <99059255@mydavinci.nl>
+Date:   Thu Feb 24 11:44:24 2022 +0100
+
+    heroku oneboard
+
+[33mcommit d2014787dd50b38fd572e490ca56e12ae76083fa[m
+Merge: fbca4e1 497fe63
+Author: Swen <99058148@mydavinci.nl>
+Date:   Thu Feb 24 11:32:36 2022 +0100
+
+    Merge remote-tracking branch 'origin/main' into main
+
+[33mcommit 497fe636b7f8a55dced0243017c4a2f785eaade7[m
+Merge: 1f40a3a 4cda9d2
+Author: Yordi <99056993@mydavinci.nl>
+Date:   Thu Feb 24 11:05:47 2022 +0100
+
+    Merge remote-tracking branch 'origin/main' into main
+
+[33mcommit 1f40a3aff2886cad389850cce80557e85b0a140e[m
+Author: Yordi <99056993@mydavinci.nl>
+Date:   Thu Feb 24 11:05:41 2022 +0100
+
+    middleware
+
+[33mcommit 4cda9d276b6eace3ebc9d8728c5e37c805bff52d[m
+Merge: ab03c33 ad9e598
+Author: BerkanKaya <99059255@mydavinci.nl>
+Date:   Thu Feb 24 10:40:36 2022 +0100
+
+    Merge remote-tracking branch 'origin/main' into main
+
+[33mcommit ab03c33cb94241d1d968dab4279563b954e5f0ed[m
+Author: BerkanKaya <99059255@mydavinci.nl>
+Date:   Thu Feb 24 10:40:18 2022 +0100
+
+    heroku
+
+[33mcommit ad9e5986f8c85915d54ed8e02bd091e2b4ed0030[m
+Author: Yordi <99056993@mydavinci.nl>
+Date:   Thu Feb 24 10:36:20 2022 +0100
+
+    user_role create lesson
+
+[33mcommit 3f3a94f9c26bb709f667371d73fa34fedb6ad2b0[m
+Author: Yordi <99056993@mydavinci.nl>
+Date:   Thu Feb 24 10:35:09 2022 +0100
+
+    user_role
+
+[33mcommit ec70b0419d8fc73a91f33f29442cc72d706ca8b6[m
+Merge: fece940 c51ac33
+Author: BerkanKaya <99059255@mydavinci.nl>
+Date:   Thu Feb 24 10:17:12 2022 +0100
+
+    Merge remote-tracking branch 'origin/main' into main
+
+[33mcommit c51ac33242c290a1d6f09dfcf0d0cc134b74c98f[m
+Merge: cd118cd 3b030a2
+Author: BerkanKaya <54977786+BerkanKaya@users.noreply.github.com>
+Date:   Thu Feb 24 10:15:04 2022 +0100
+
+    Merge pull request #7 from Yordi-078/feature-user-role
+    
+    Feature user role
+
+[33mcommit 3b030a29a3458e72f5ec099430ac2500f94029de[m[33m ([m[1;31morigin/feature-user-role[m[33m)[m
+Author: Yordi <99056993@mydavinci.nl>
+Date:   Thu Feb 24 09:51:07 2022 +0100
+
+    user_roles
+
+[33mcommit fbca4e161db98ab484b8e2d24a1969a5aae903ff[m
+Author: Swen <99058148@mydavinci.nl>
+Date:   Thu Feb 24 09:38:00 2022 +0100
+
+    Helper gegevens in popup
+    
+    Helper gegevens van een helper word laten zien in een popup in het kaartje.
+
+[33mcommit 899462ea635b67d24520bfea03d0eb8d5351aeee[m
+Author: Yordi <99056993@mydavinci.nl>
+Date:   Tue Feb 22 13:09:28 2022 +0100
+
+    edit user_role
+
+[33mcommit cd118cdf1634074960cbfc4351f3f0b0ddcde06c[m[33m ([m[1;31morigin/teacher-dashboard[m[33m)[m
+Merge: 052512c bf03409
+Author: BerkanKaya <54977786+BerkanKaya@users.noreply.github.com>
+Date:   Tue Feb 22 11:58:59 2022 +0100
+
+    Merge pull request #6 from Yordi-078/feature-user-role
+    
+    test user_role begin
+
+[33mcommit bf03409024560b8e3c16af0faf178e3ea9a77af8[m
+Author: Yordi <99056993@mydavinci.nl>
+Date:   Tue Feb 22 11:54:56 2022 +0100
+
+    test user_role begin
+
+[33mcommit fece940e0778df5d141d516c4aad6033760ed738[m
+Merge: 8d0bb0f 052512c
+Author: BerkanKaya <99059255@mydavinci.nl>
+Date:   Tue Feb 22 11:10:04 2022 +0100
+
+    Merge remote-tracking branch 'origin/main' into main
+
+[33mcommit 8d0bb0fe89ac804a92d94661cd0c6b900632f70b[m
+Author: BerkanKaya <99059255@mydavinci.nl>
+Date:   Tue Feb 22 11:09:59 2022 +0100
+
+    user migration test (heroku)
+
+[33mcommit 052512ce5117192e901da19c940017a054ada309[m
+Author: Anthony <99057187@mydavinci.nl>
+Date:   Tue Feb 15 09:29:16 2022 +0100
+
+    small placement and class names changes
+
+[33mcommit 4af8b8b558e2b18c5b7e120a84c548aac960848b[m
+Author: Yordi <99056993@mydavinci.nl>
+Date:   Fri Feb 11 14:02:17 2022 +0100
+
+    middleware aanpassingen
+
+[33mcommit 1ca589f52f18b919c2eb572ed57fbf7581e38c52[m
+Author: Anthony <99057187@mydavinci.nl>
+Date:   Thu Feb 10 12:55:07 2022 +0100
+
+    lesson card upvote, downvote and upvote count added.
+    loader color changed to Tick-it secondary green.
+    lesson upvote sorted in fieldset.
+
+[33mcommit 8a80ea4f10683ccc60a7ad6e361e9d428f026c78[m[33m ([m[1;33mtag: V0.1.0[m[33m)[m
+Merge: d2050f4 23ec5e5
+Author: Anthony <99057187@mydavinci.nl>
+Date:   Thu Feb 10 09:59:08 2022 +0100
+
+    Merge branch 'main' of https://github.com/Yordi-078/Tickets-Groepopdracht into main
+    
+    # Conflicts:
+    #       public/js/script.js
+    #       resources/views/boardCrud/oneBoard.blade.php
+    #       routes/web.php
+
+[33mcommit d2050f4372a89f301afb4dc8d89498438e837f05[m
+Merge: f12d931 48fd6f4
+Author: Anthony <99057187@mydavinci.nl>
+Date:   Thu Feb 10 09:57:32 2022 +0100
+
+    Merge branch 'main' of https://github.com/Yordi-078/Tickets-Groepopdracht into main
+    
+    # Conflicts:
+    #       resources/views/boardCrud/oneBoard.blade.php
+
+[33mcommit 23ec5e5e3becfafade7c2b496667acd49b40e83a[m
+Merge: 02dc2ac 617725d
+Author: Yordi <99056993@mydavinci.nl>
+Date:   Thu Feb 10 09:56:17 2022 +0100
+
+    lesson card description title
+
+[33mcommit 02dc2acbbb616f2b61b6d2f5c32c81b161a87c26[m
+Author: Yordi <99056993@mydavinci.nl>
+Date:   Thu Feb 10 09:31:36 2022 +0100
+
+    Info lesson card title description
+
+[33mcommit 617725d78ad8eabb86de1c7194a3cddcb409c2b0[m
+Author: BerkanKaya <99059255@mydavinci.nl>
+Date:   Tue Feb 8 14:07:35 2022 +0100
+
+    heroku
+
+[33mcommit f12d9313fc2a7632cd445d0c2cb17602db9f1255[m
+Author: Anthony <99057187@mydavinci.nl>
+Date:   Tue Feb 8 14:06:31 2022 +0100
+
+    no message
+
+[33mcommit 48fd6f45e7df40cdada1d5a5cc9aa5b56cbf2d0c[m
+Author: BerkanKaya <99059255@mydavinci.nl>
+Date:   Tue Feb 8 13:58:45 2022 +0100
+
+    heroku
+
+[33mcommit 7721b61f424371cbeb91dde51889fadbf9035c7c[m
+Author: BerkanKaya <99059255@mydavinci.nl>
+Date:   Tue Feb 8 13:56:29 2022 +0100
+
+    heroku
+
+[33mcommit d75353ab9e54b6de8c6fea86c2b555584ccff8df[m
+Author: BerkanKaya <99059255@mydavinci.nl>
+Date:   Tue Feb 8 13:54:36 2022 +0100
+
+    app
+
+[33mcommit d9b9dbe68f8b81d1f8c0dccfe1f29aa7886e04ea[m
+Author: BerkanKaya <99059255@mydavinci.nl>
+Date:   Tue Feb 8 13:53:06 2022 +0100
+
+    Auto stash before merge of "main" and "origin/main"
+
+[33mcommit f1596f6db0327455031281e754ab4513536ebdc9[m
+Merge: 9eca56c 87b7d51
+Author: Anthony <99057187@mydavinci.nl>
+Date:   Tue Feb 8 13:33:55 2022 +0100
+
+    Merge branch 'main' of https://github.com/Yordi-078/Tickets-Groepopdracht into main
+
+[33mcommit 9eca56c9fa8289e80b2fa91e7ff956746454199c[m
+Author: Anthony <99057187@mydavinci.nl>
+Date:   Tue Feb 8 13:33:51 2022 +0100
+
+    popup is more clear, upvote and downvote work.
+
+[33mcommit 87b7d5195b888932f9d1d9ad990fd103add6d26e[m
+Merge: 5d86b71 1fab183
+Author: Robin-Broekhof <99059076@mydavinci.nl>
+Date:   Tue Feb 8 12:43:06 2022 +0100
+
+    Merge branch 'main' of https://github.com/Yordi-078/Tickets-Groepopdracht into main
+
+[33mcommit 5d86b71e91272af2fd0741349fb8dac038fa579a[m
+Author: Robin-Broekhof <99059076@mydavinci.nl>
+Date:   Tue Feb 8 12:43:04 2022 +0100
+
+    teacher dashboard werkt
+
+[33mcommit 1fab1830e1dd95337d462be90770d67477c8feda[m
+Author: Swen <99058148@mydavinci.nl>
+Date:   Tue Feb 8 12:35:07 2022 +0100
+
+    Bug fixed
+    
+    Bug gefixed zodat je op het hele kaartje kan klikken om een kaartje te openen ipv alleen op het oogje.
+
+[33mcommit 8b8bd6f2c892437e616a93fd5ccc6bd3cab9b1a2[m
+Merge: dc0192b f8d0359
+Author: Swen <99058148@mydavinci.nl>
+Date:   Tue Feb 8 12:29:26 2022 +0100
+
+    Merge remote-tracking branch 'origin/main' into main
+
+[33mcommit dc0192b3a512d5add8f62f591f5933e9418e06f8[m
+Author: Swen <99058148@mydavinci.nl>
+Date:   Tue Feb 8 12:29:05 2022 +0100
+
+    user-profile-page
+    
+    User profile page gemaakt. Als je in een kaartje op een profieltje klikt en klikt profiel bekijken ga je naar een 
