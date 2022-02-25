@@ -31,7 +31,7 @@
       <tr class="">
         <td class="">{{ $user->name }}</td>
         <td class="">{{ $user->email }}</td>
-        <td  class="">{{ $user->user_role_id }}</td>
+        <td  class="">{{ $user->userRole->role }}</td>
         <td class=""><a href="{{ route('changeUserForm', [$user->id]) }}"> EDIT</a></td>
         <td class=""><a href="{{ route('destroyUserPage', [$user->id]) }}">DELETE</a></td>
       </tr>

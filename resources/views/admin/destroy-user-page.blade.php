@@ -15,7 +15,7 @@ destroy
     <div class="">
         <a> name:{{ $user->name }} </a><br>
         <a> email:{{ $user->email }}</a><br>
-        <a> role:{{ $user->user_role }}</a><br>
+        <a> role:{{ $user->userRole->role }}</a><br>
     </div>
 
     
