@@ -18,7 +18,7 @@ class CheckTeacher
     public function handle(Request $request, Closure $next)
     {
         if ($request->user() == false){
-            return redirect('/');
+            return redirect('login');
         }
 
         else if (\Auth::user() && \Auth::user()->user_role_id == 2) 
@@ -27,7 +27,7 @@ class CheckTeacher
         } 
         else 
         {
-            return redirect('/');
+            return redirect('login');
         }
     }
 }

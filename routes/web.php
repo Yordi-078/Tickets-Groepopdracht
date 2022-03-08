@@ -58,10 +58,10 @@ Route::get('getCardInfo/{lesson_id}',  [CardController::class, 'getCardInfo'])->
 // Route::get('storeCardUpVote/{card_id}/{board_id}',  [CardController::class, 'storeCardUpVote'])->name('storeCardUpVote');
 
 
-Route::get('boardCrud/createLessonCard/{board_id}',  [LessonCardController::class, 'createLessonCard'])->name('createLessonCard');
-Route::post('storeLessonCard/{board_id}',  [LessonCardController::class, 'storeLessonCard'])->name('storeLessonCard');
-Route::get('storeLessonUpVote/{card_id}',  [LessonCardController::class, 'storeLessonUpVote'])->name('storeLessonUpVote');
-Route::get('getLessonCardInfo/{card_id}',  [LessonCardController::class, 'getLessonCardInfo'])->name('getLessonCardInfo');
+Route::get('boardCrud/createLessonCard/{board_id}',  [LessonCardController::class, 'createLessonCard'])->name('createLessonCard')->middleware('CheckTeacherOrAdmin');
+Route::post('storeLessonCard/{board_id}',  [LessonCardController::class, 'storeLessonCard'])->name('storeLessonCard')->middleware('CheckTeacherOrAdmin');
+Route::get('storeLessonUpVote/{card_id}',  [LessonCardController::class, 'storeLessonUpVote'])->name('storeLessonUpVote')->middleware('CheckLoggedIn');
+Route::get('getLessonCardInfo/{card_id}',  [LessonCardController::class, 'getLessonCardInfo'])->name('getLessonCardInfo')->middleware('CheckLoggedIn');
 
 
 Route::get('getUsername/{user_id}/{helperId}',  [CardController::class, 'getUsername'])->name('getUsername')->middleware('CheckLoggedIn');
