@@ -12,6 +12,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/script.js') }}" defer></script>
+    @yield('second script')
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -43,7 +44,7 @@
                         <a id="" class="" href="#">
                             {{ Auth::user()->name }}
                         </a>
-                        @if (Auth::user()->user_role_id == 2 || Auth::user()->user_role_id == 3 )
+                        @if (Auth::user()->user_role_id == 3 )
                             <a class="dropdown-item" href="{{ route('changeUserRoles') }}">
                                 {{ __('change user roles') }}
                             </a>
@@ -63,7 +64,7 @@
 
         </nav>
 
-        <main class="py-4">
+        <main>
             @yield('content')
         </main>
     </div>

@@ -3,6 +3,7 @@
 @section('content')
 <div class="form-container">
     <div class="form-header">
+        <div class="form-header-image"><i class="fa fa-clipboard-list"></i></div>
         <h1>maak een lesson card aan</h1>
     </div>
     <form method="POST" action="{{ url('storeLessonCard', $board_id) }}">
@@ -26,7 +27,7 @@
         </div>
 
         <div>
-            <label class="label" for="start_time">start_time: </label>    
+            <label class="label" for="start_time">start time: </label>    
             <input class="input @error('description') is-danger @enderror" type="datetime-local" name="start_time" id="" value="{{ old('start_time') }}">
             
             @error('description')

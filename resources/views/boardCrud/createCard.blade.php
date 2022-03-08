@@ -3,13 +3,14 @@
 @section('content')
 <div class="form-container">
     <div class="form-header">
+        <div class="form-header-image"><i class="fa fa-clipboard-list"></i></div>
         <h1>maak een card aan</h1>
     </div>
-    <form method="POST" action="{{ url('storeCard', $board_id) }}">
+    <form class="make-card-form" method="POST" action="{{ url('storeCard', $board_id) }}">
     @csrf
         <div class="">
             <label class="label" for="name">name: </label>
-            <input class="input @error('name') is-danger @enderror" type="text" name="name" value="{{ old('name') }}">
+            <input class="form-input-container input @error('name') is-danger @enderror" type="text" name="name" value="{{ old('name') }}">
             
             @error('name')
                 <p class="help is-danger">{{ $errors->first('name') }}</p>
@@ -17,7 +18,7 @@
         </div>
         <div class="">
             <label class="label" for="description">description: </label>   
-            <input class="input @error('description') is-danger @enderror" type="text" name="description" value="{{ old('description') }}">
+            <textarea class="form-input-container input @error('description') is-danger @enderror" type="text" name="description" maxlength="69" value="{{ old('description') }}"></textarea>
             
             @error('description')
                 <p class="help is-danger">{{ $errors->first('description') }}</p>

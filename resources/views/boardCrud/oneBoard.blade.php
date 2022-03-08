@@ -39,13 +39,7 @@ $user_id = Auth::user()->id;
                 {{$card->status == "finished" ? "//" : ''}}
                 {{$card[""]}}
                 {{$card["name"]}}
-            </a>
-            <a onclick="showQuestionPopup('{{$card['user_id']}}','{{$card['helper_id']}}','{{Auth::user()->id}}','{{Auth::user()->name}}','{{$card['id']}}')" href="#" class="general-card card">
-                <i class="far fa-eye"></i>
-                {{$card->status == "finished" ? "//" : ''}}
-                {{$card[""]}}
-                {{$card["name"]}}
-            </a>    
+            </a>   
             @endforeach
         </div>
     </div>
@@ -99,7 +93,7 @@ $user_id = Auth::user()->id;
                     <legend>summary</legend>
                     <textarea type="text" id="card-title" class="title" name="name" maxlength="300" required></textarea>
                     <span>description: </span>
-                    <textarea type="text" id="card-description" class="description" name="description" maxlength="665" required></textarea>
+                    <textarea type="text" id="card-description" class="description" name="description" maxlength="69" required></textarea>
                 </fieldset>
 
                 <fieldset id="image-uploader" class="image-uploader-box card-info-border">
