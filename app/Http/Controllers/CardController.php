@@ -151,7 +151,7 @@ class CardController extends Controller
                 "card_id" => $card_id,
                 "user_id" => $user_id
             ]
-            );
+        );
           return response()->json();
     }
 

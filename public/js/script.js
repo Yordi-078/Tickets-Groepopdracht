@@ -1,5 +1,3 @@
-// const { isPlainObject } = require("jquery");
-// const { default: plugin } = require("tailwindcss/plugin");
 
 // all document.getElementById in const's
 const loaderScreen = document.getElementById('loader-screen');
@@ -77,19 +75,17 @@ function setLoader(theModal){
 
 // single use functions
 function toggleBoard() {
-  var boards = document.getElementsByClassName("board");
+  var boards = document.getElementsByClassName("card");
   for (i = 0; i < boards.length; i++) {
-      boards[i].classList.toggle('board-row');
-      
+      boards[i].classList.toggle('card-row');
   }
-  if(document.getElementById("home-board-content-box").classList.contains("flex-row")){
-     document.getElementById("toggle-board").innerHTML = '<i class="fas fa-th"></i>'; 
+  if(document.getElementById("home-board-content").classList.contains("flex-rows")){
+     document.getElementById("toggle-board").innerHTML = '<i class="fas fa-bars"></i>'; 
   }
   else{
-      document.getElementById("toggle-board").innerHTML = '<i class="fas fa-bars"></i>'; 
+      document.getElementById("toggle-board").innerHTML = '<i class="fas fa-th"></i>'; 
   }
-  document.getElementById("home-board-content-box").classList.toggle("flex-row");
-  document.getElementById("home-board-content-box").classList.toggle("flex-column");
+  document.getElementById("home-board-content").classList.toggle("flex-rows");
 }
 
 function showQuestionPopup(card_owner_id, helper_id, user_id, user_name, card_id){
@@ -97,9 +93,9 @@ function showQuestionPopup(card_owner_id, helper_id, user_id, user_name, card_id
   resetQuestionPopup();
   getQuestionCardInfo(card_id);
   checkForOwner(user_id, card_owner_id);
-  eventListeners(card_id, user_id, user_name);
+  eventListeners(card_id, user_id, user_name, user_id);
   getUsername(card_owner_id, helper_id, user_id);
-  getCardAvatars(card_id);
+  getCardAvatars(card_id, user_id, cardAvatarContainer);
   setLoader(cardModal);
 }
 
@@ -208,6 +204,11 @@ var addHelper = function(helperId, helperName, card_id){
   addHelperBtn.style.display = "none";
 }
 
+var addUpvote = function(card_id, user_id){
+  saveCardUpvote(card_id);
+  getCardAvatars(card_id, user_id, cardAvatarContainer);
+}
+
 var removeHelper = function(card_id){
   deleteHelper(card_id);
   helper.innerText = 'no one is helping this card';
@@ -217,6 +218,11 @@ var removeHelper = function(card_id){
   cardHelperAvatarInit.innerText= '';
   removeHelperBtn.style.display = "none";
   addHelperBtn.style.display = "inline";
+}
+
+var removeUpvote = function(card_id, user_id){
+  deleteCardUpvote(card_id);
+  getCardAvatars(card_id, user_id, cardAvatarContainer);
 }
 
 function resetQuestionPopup(){
@@ -277,7 +283,7 @@ function checkForOwner(user_id, card_owner_id){
   cardSubmitForm.style.display = 'none';
   //make eventListener enabled
   cardUpvoteQuestion.style.display = 'flex';
-  cardDownvoteQuestion.style.display = 'flex';
+  cardDownvoteQuestion.style.display = 'none';
 }
 
 var showUserData = function (data,color){
@@ -304,7 +310,10 @@ var showUserData = function (data,color){
   //user color
 }
 
-function showCardAvatars(data){
+function showCardAvatars(data, user_id, targetBox){
+  cardAvatarContainer.innerHTML = '';
+  cardUpvoteQuestion.style.display = "flex";
+  cardDownvoteQuestion.style.display = "none";
   for (let i = 0; i < data.length; i++) {
     var initials = data[i]['name'].match(/\b(\w)/g);
     var acronym = initials.join('');
@@ -314,26 +323,30 @@ function showCardAvatars(data){
     avatar.className = "avatar";
     avatar.title = data[i]['name'];
     avatar.style.backgroundColor = 'grey';
-    cardAvatarContainer.appendChild(avatar);
+    targetBox.appendChild(avatar);
 
     const avatarInit = document.createElement("a");
     avatarInit.id = "card-" + data[i]['id'] + "-upvote-avatar-init";
     avatarInit.innerText = acronym;
     avatar.appendChild(avatarInit);
+    if(user_id == data[i]['id']){
+      cardUpvoteQuestion.style.display = "none";
+      cardDownvoteQuestion.style.display = "flex";
+    }
   }
   questionUpvoteCount.innerText = data.length;
 }
 
-function eventListeners(card_id, helper_id, helper_name){
+function eventListeners(card_id, helper_id, helper_name, user_id){
   //remove helper
   // removeHelperBtn.addEventListener('click',destroyHelper, false);
   removeHelperBtn.addEventListener('click',removeHelper.bind(event,card_id), false);
   //add helper
   addHelperBtn.addEventListener('click',addHelper.bind(event,helper_id, helper_name, card_id), false);
   //question upvote
-  cardUpvoteQuestion.addEventListener('click', saveCardUpvote.bind(event, card_id), false);
+  cardUpvoteQuestion.addEventListener('click', addUpvote.bind(event, card_id, user_id), false);
   //question downvote
-  cardDownvoteQuestion.addEventListener('click', deleteCardUpvote.bind(event, card_id), false);
+  cardDownvoteQuestion.addEventListener('click', removeUpvote.bind(event, card_id, user_id), false);
   //avatar popup
   cardHelperAvatar.addEventListener('click', getHelperInfo.bind(event, helper_id), false);
   //submit
@@ -457,7 +470,7 @@ function getLessonCardInfo(card_id){
   .then(data => fillLessonPopup(data));
 }
 
-var saveCardUpvote = function (card_id){
+function saveCardUpvote(card_id){
   var url = route('saveCardUpvote', [card_id])
   
   fetch(url, {
@@ -485,7 +498,7 @@ var saveLessonUpvote = function (card_id){
   });
 }
 
-var deleteCardUpvote = function (card_id){
+function deleteCardUpvote(card_id){
   var url = route('deleteCardUpvote', [card_id])
   
   fetch(url, {
@@ -513,7 +526,7 @@ var deleteLessonUpvote = function (card_id){
   });
 }
 
-function getCardAvatars(card_id){
+function getCardAvatars(card_id, user_id, targetBox){
   var url = route('GetCardAvatars', card_id)
   
   fetch(url, {
@@ -525,7 +538,7 @@ function getCardAvatars(card_id){
     method: 'GET',
     credentials: "same-origin",
   }).then(response => response.json())
-  .then(data => showCardAvatars(data));
+  .then(data => showCardAvatars(data, user_id, targetBox));
 }
 
 function updateCard(card_id, card_name, card_description, card_status){

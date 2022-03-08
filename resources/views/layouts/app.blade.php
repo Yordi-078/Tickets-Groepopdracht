@@ -1,9 +1,3 @@
-<?php 
-
-use Illuminate\support\facades\Auth;
-
-?>
-
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -18,6 +12,7 @@ use Illuminate\support\facades\Auth;
 
     <!-- Scripts -->
     <script src="{{ asset('js/script.js') }}" defer></script>
+    @yield('second script')
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -30,47 +25,46 @@ use Illuminate\support\facades\Auth;
 </head>
 <body>
     <div id="app">
-            <nav class="navbar">
-                <a class="navbar-title" href="{{ url('/') }}">Tick-It</a>
-                
+        <nav class="app-navbar">
+            <a class="app-navbar-title" href="{{ url('/') }}">Tick-It</a>
 
-                <div class="user-info">
-                    <button class="dropdown-button"></button>
-                    <div class="dropdown-content">
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            @endif
+            <div class="app-navbar-user-info">
+                <button class="app-navbar-dropdown-button"></button>
+                <div class="app-navbar-dropdown-content">
+                    <!-- Authentication Links -->
+                    @guest
+                        @if (Route::has('login'))
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        @endif
 
-                            @if (Route::has('register'))
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                            @endif
-                        @else
-                            <a id="" class="" href="{{ route('viewUserPage', Auth::user()->id ) }}">
-                                {{ Auth::user()->name }}
+                        @if (Route::has('register'))
+                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                        @endif
+                    @else
+                        <a id="" class="" href="#">
+                            {{ Auth::user()->name }}
+                        </a>
+                        @if (Auth::user()->user_role_id == 3 )
+                            <a class="dropdown-item" href="{{ route('changeUserRoles') }}">
+                                {{ __('change user roles') }}
                             </a>
-                            @if (Auth::user()->user_role_id == 3 )
-                                <a class="dropdown-item" href="{{ route('changeUserRoles') }}">
-                                    {{ __('change user roles') }}
-                                </a>
-                            @endif
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
-                            </a>
+                        @endif
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }}
+                        </a>
 
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
-                        @endguest
-                    </div>    
-                </div>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    @endguest
+                </div>    
+            </div>
 
-            </nav>
+        </nav>
 
-        <main class="py-4">
+        <main>
             @yield('content')
         </main>
     </div>
