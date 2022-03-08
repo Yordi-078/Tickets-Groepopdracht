@@ -8,6 +8,7 @@ use App\Http\Controllers\LessonCardController;
 use App\Http\Middleware\CheckAdmin;
 use App\Http\Middleware\CheckTeacherOrAdmin;
 use App\Http\Middleware\CheckLoggedIn;
+use App\Http\Middleware\Authenticate;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,8 +25,7 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('CheckLoggedIn');
 /** board routes */
 Route::post('/home',  [BoardController::class, 'storeBoard'])->name('home')->middleware('CheckTeacherOrAdmin');
 Route::get('createBoard',  [BoardController::class, 'createBoardForm'])->name('createBoard')->middleware('CheckTeacherOrAdmin');
@@ -34,7 +34,7 @@ Route::get('addStudentsToBoard/{board_id}',  [BoardController::class, 'addStuden
 Route::get('search/{board_id}', [BoardController::class, 'searchStudents'])->name('search')->middleware('CheckTeacherOrAdmin');
 Route::get('addToBoard/{board_id}/{user_id}',  [BoardController::class, 'addToBoard'])->name('addToBoard')->middleware('CheckTeacherOrAdmin');
 Route::get('viewUsersFromBoard/{board_id}', [BoardController::class, 'viewUsersFromBoard'])->name('viewUsersFromBoard');
-Route::get('viewUserPage/{user_id}', [BoardController::class, 'viewUserPage'])->name('viewUserPage')->middleware('CheckLoggedIn');;
+Route::get('viewUserPage/{user_id}', [BoardController::class, 'viewUserPage'])->name('viewUserPage')->middleware('CheckLoggedIn');
 
 /** admin routes */
 Route::get('admin/user-overview',  [UserController::class, 'changeUserRolesPage'])->name('changeUserRoles')->middleware('CheckAdmin');

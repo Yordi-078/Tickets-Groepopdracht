@@ -27,7 +27,7 @@ class CheckAdmin
         } 
         else 
         {
-            return redirect('/');
+            return redirect('/'); 
         }
     }
 }
