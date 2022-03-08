@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+@section('second script')
+	<script src="{{ asset('js/secondScript.js') }}" defer></script>
+@endsection
 @section('content')
 
 <div class="user-list-container">
@@ -7,17 +10,13 @@
 		<h2>Click here to search for students</h2>
 	</div>
 	<div class="user-list-search-bar">
-		<form action="{{ route('search' , $board_id) }}" type="get" class="search-bar">
-			<input type="search" name="query" type="search" placeholder="Search" pattern=".*\S.*" required>
-			<button class="search-btn" type="submit">
-				<span><i class="fa fa-magnifying-glass"></i></span>
-			</button>
-		</form> 
+		<form id="user-list-form" class="search-bar">
+			<input id="user-search-input" placeholder="Search" required>
+			<input id="user-search-btn" type="submit" class="card-submit-button" value="{{$board_id}}">
+		</form>
 	</div>
-	<div class="user-list">
-		@foreach($search as $user)
-			<a href="{{ route('addToBoard' , [$board_id, $user['id']]) }}">{{$user['name']}}</a><br>
-		@endforeach
+	<div id="user-list" class="user-list">
+		
 	</div>
 </div>
 

@@ -75,11 +75,11 @@ class BoardController extends Controller
       return view('boardCrud.addStudentsToBoard' , ['board_id'=>$board_id]);
     }
 
-    public function searchStudents($board_id)
+    public function searchStudents($input, $board_id)
     {
-      $search_text = $_GET['query'];
-      $search = User::where('name','LIKE', '%' .$search_text.'%')->get();
-      return view('boardCrud.addStudentsToBoard', ['search'=>$search, 'board_id'=>$board_id]);     
+      $search = User::where('name','LIKE', '%' .$input.'%')->get();
+      
+      return response()->json($search);
     }
 
   public function addToBoard($board_id, $user_id)
