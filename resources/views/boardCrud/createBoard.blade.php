@@ -4,7 +4,7 @@
 <div class="form-container">
   <div class="form-header">
     <div class="form-header-image"><i class="fa fa-chalkboard"></i></div>
-    <h2>maak een board aan</h2>
+    <h2 style="margin-top:35px;">maak een board aan</h2>
   </div>
 
   <form  method="POST" action="{{url('/home')}}" class="create-board-form">
