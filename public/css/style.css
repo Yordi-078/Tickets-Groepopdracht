@@ -104,6 +104,10 @@ a{
     width: 3em;
 }
 
+.app-navbar-item:hover{
+    color: rgb(80, 80, 80);
+}
+
 .app-navbar-title:hover{
     font-weight: 550;
 }

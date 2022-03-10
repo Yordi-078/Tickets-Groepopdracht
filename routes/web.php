@@ -46,7 +46,6 @@ Route::get('admin/search-user', [UserController::class, 'searchAdminPage'])->nam
 
 /** teacher dashboard routes */
 route::get('teacher/dashboard/{board_id}', [UserController::class, 'teacherDashboard'])->name('teacherDashboard')->middleware('CheckTeacher');
-
 /** card routes */
 Route::get('boardCrud/createCard/{board_id}',  [CardController::class, 'addACard'])->name('addACard')->middleware('CheckLoggedIn');
 Route::post('storeCard/{board_id}',  [CardController::class, 'storeCard'])->name('storeCard')->middleware('CheckLoggedIn');
@@ -58,6 +57,7 @@ Route::get('getCardInfo/{lesson_id}',  [CardController::class, 'getCardInfo'])->
 // Route::get('storeCardUpVote/{card_id}/{board_id}',  [CardController::class, 'storeCardUpVote'])->name('storeCardUpVote');
 
 
+route::get('fetchAllUsers', [UserController::class, 'fetchAllUsers'])->name('fetchAllUsers')->middleware('CheckTeacherOrAdmin');
 Route::get('boardCrud/createLessonCard/{board_id}',  [LessonCardController::class, 'createLessonCard'])->name('createLessonCard')->middleware('CheckTeacherOrAdmin');
 Route::post('storeLessonCard/{board_id}',  [LessonCardController::class, 'storeLessonCard'])->name('storeLessonCard')->middleware('CheckTeacherOrAdmin');
 Route::get('storeLessonUpVote/{card_id}',  [LessonCardController::class, 'storeLessonUpVote'])->name('storeLessonUpVote')->middleware('CheckLoggedIn');
@@ -76,5 +76,6 @@ Route::get('deleteCardUpvote/{card_id}',  [CardController::class, 'deleteCardUpv
 Route::get('deleteLessonUpvote/{card_id}',  [CardController::class, 'deleteLessonUpvote'])->name('deleteLessonUpvote')->middleware('CheckLoggedIn');
 Route::get('GetCardAvatars/{card_id}',  [CardController::class, 'GetCardAvatars'])->name('GetCardAvatars')->middleware('CheckLoggedIn');
 Route::get('updateCard/{card_id}/{card_name}/{card_description}/{card_status}',  [CardController::class, 'updateCard'])->name('updateCard')->middleware('CheckLoggedIn');
+
 
 

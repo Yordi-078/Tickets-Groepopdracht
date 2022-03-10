@@ -27,7 +27,11 @@
     <div id="app">
         <nav class="app-navbar">
             <a class="app-navbar-title" href="{{ url('/') }}">Tick-It</a>
-
+            @guest
+            
+            @else
+                <a class="app-navbar-item" href="{{ url('home') }}"><i class="fa fa-house"></i></a>
+            @endguest
             <div class="app-navbar-user-info">
                 <button class="app-navbar-dropdown-button"></button>
                 <div class="app-navbar-dropdown-content">

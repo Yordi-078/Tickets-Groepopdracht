@@ -12,11 +12,13 @@
 	<div class="user-list-search-bar">
 		<form id="user-list-form" class="search-bar">
 			<input id="user-search-input" placeholder="Search" required>
-			<input id="user-search-btn" type="submit" class="card-submit-button" value="{{$board_id}}">
+			<input id="user-search-btn" type="submit" class="card-submit-button" value="search">
 		</form>
 	</div>
 	<div id="user-list" class="user-list">
 		
+	</div>
+	<div id="all-user-list" class="user-list">
 	</div>
 </div>
 
