@@ -24,6 +24,7 @@
     @routes
 </head>
 <body>
+
     <div id="app">
         <nav class="app-navbar">
             <a class="app-navbar-title" href="{{ url('/') }}">Tick-It</a>
@@ -45,7 +46,7 @@
                             <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                         @endif
                     @else
-                        <a id="" class="" href="#">
+                        <a id="" class="" href="{{ route('viewUserPage', Auth::user()->id) }} ">
                             {{ Auth::user()->name }}
                         </a>
                         @if (Auth::user()->user_role_id == 3 )
