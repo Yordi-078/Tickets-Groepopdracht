@@ -214,10 +214,12 @@ a{
     margin-left: 10%;
 }
 
-textarea{
+.form-container textarea{
     resize: none;
     overflow: hidden;
+    padding: 2% 4% !important;
 }
+
 .form-input-container{
     border-radius: 20px;
     background-color: rgb(232, 240, 254);
@@ -721,6 +723,28 @@ textarea{
 }
 
 @media only screen and (min-width: 1024px) {
+    .form-container{
+        background-color: var(--color-quaternary);
+        width:40%;
+        font-size: 1em;
+    }
+
+    .form-input-container{
+        min-height: 2em;
+    }
+
+    .form-submit-button, .form-check-input, .form-check-label {
+         font-size: 1em
+    }
+
+    .make-card-form textarea{
+        height: 4em;
+    }
+
+    .create-board-form > .form-submit-button{
+        width: 40%;
+    }
+
     .main-container{
         display: flex;
         justify-content: space-between;
@@ -747,6 +771,10 @@ textarea{
 
 
 @media only screen and (min-width: 1340px) {
+    .form-container{
+        width: 30%;
+    }
+
     .question-board-container{
         width:67%;
         height:100%;
