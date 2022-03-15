@@ -1,6 +1,24 @@
 
 const currentUrl = window.location.href;
 const board_id = currentUrl.substring(currentUrl.lastIndexOf("/") + 1, currentUrl.length);
+const userSearchIcon = document.getElementById('user-search-icon');
+const userSearchInput = document.getElementById('user-search-input');
+
+userSearchIcon.addEventListener('click', function(event){
+    event.preventDefault();
+    if(userSearchInput.classList.contains('retract')){
+        userSearchInput.classList.remove('retract');
+        userSearchInput.classList.add('extend');
+        
+    }
+    else{
+        userSearchInput.classList.remove('extend');
+        userSearchInput.classList.add('retract');
+        setTimeout(function() {
+            userSearchInput.value = "";
+        }, 1000);        
+    }
+});
 
 document.getElementById('user-list-form').addEventListener('submit', function(event){
     event.preventDefault();
@@ -18,26 +36,55 @@ function start(){
 }
 
 function showSearchResult(data, board_id){
-    var hr = document.createElement('hr');
-    hr.innerText = "search results";
-    document.getElementById('user-list').appendChild(hr);
     for (let i = 0; i < data.length; i++) {
-        var user = document.createElement('a');
-        user.innerText = data[i]['name'];
-        user.href = route('addToBoard', [board_id, data[i]['id']]);
-        document.getElementById('user-list').appendChild(user);
+        var div = document.createElement('div');
+        div.classList = 'four-columns';
+        var x = addUser.bind(event, board_id, data[i]['id']);
+        div.addEventListener('click', x, false);
+        // image
+        var a = document.createElement('a');
+        // div.innerText = data[i][''];
+        a.innerText = "image";
+        div.appendChild(a);
+        // name
+        var b = document.createElement('a');
+        b.innerText = data[i]['name'];
+        div.appendChild(b);
+        // email
+        var c = document.createElement('a');
+        c.innerText = data[i]['email'];
+        div.appendChild(c);
+        // role
+        var d = document.createElement('a');
+        d.innerText = data[i]['user_role_id'];
+        div.appendChild(d);
+        document.getElementById('user-list').appendChild(div);
     }
 }
 
 function showAllUsers(data){
-    var hr = document.createElement('hr');
-    hr.innerText = "all users";
-    document.getElementById('all-user-list').appendChild(hr);
     for (let i = 0; i < data.length; i++) {
-        var user = document.createElement('a');
-        user.innerText = data[i]['name'];
-        user.href = route('addToBoard', [board_id, data[i]['id']]);
-        document.getElementById('all-user-list').appendChild(user);
+        var div = document.createElement('div');
+        div.addEventListener('click', addUser.bind(event, board_id, data[i]['id']), false);
+        div.classList = 'four-columns';
+        // image
+        var a = document.createElement('a');
+        // div.innerText = data[i][''];
+        a.innerText = "image";
+        div.appendChild(a);
+        // name
+        var b = document.createElement('a');
+        b.innerText = data[i]['name'];
+        div.appendChild(b);
+        // email
+        var c = document.createElement('a');
+        c.innerText = data[i]['email'];
+        div.appendChild(c);
+        // role
+        var d = document.createElement('a');
+        d.innerText = data[i]['user_role_id'];
+        div.appendChild(d);
+        document.getElementById('all-user-list').appendChild(div);
     }
 }
 
@@ -71,4 +118,9 @@ var searchUser = function(board_id, input){
     .then(data => showSearchResult(data, board_id) );
 }
 
+var addUser = function(board_id, data){
+    window.location = route('addToBoard', [board_id, data]);
+}
+
 allUsers()
+
