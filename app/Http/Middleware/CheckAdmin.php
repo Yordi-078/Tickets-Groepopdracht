@@ -18,7 +18,7 @@ class CheckAdmin
     public function handle(Request $request, Closure $next)
     {
         if ($request->user() == false){
-            return redirect('login');
+            return redirect('/');
         }
 
         else if (\Auth::user() && \Auth::user()->user_role_id == 3) 
@@ -27,7 +27,7 @@ class CheckAdmin
         } 
         else 
         {
-            return redirect('login'); 
+            return redirect('/'); 
         }
     }
 }

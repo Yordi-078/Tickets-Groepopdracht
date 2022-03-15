@@ -86,6 +86,13 @@ class UserController extends Controller
      * page where you see the search result
      *
      */
+    public function fetchAllUsers()
+    {
+        $users = User::where('user_role_id', '!=' , 3)->get();
+
+        return response()->json($users);
+    }
+
     public function searchAdminPage()
     {
         $search_text = $_GET['query'];

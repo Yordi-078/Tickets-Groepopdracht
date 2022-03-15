@@ -77,7 +77,7 @@ class BoardController extends Controller
 
     public function searchStudents($input, $board_id)
     {
-      $search = User::where('name','LIKE', '%' .$input.'%')->get();
+      $search = User::where('name','LIKE', '%' .$input.'%')->where('user_role_id', '!=' , 3)->get();
       
       return response()->json($search);
     }
