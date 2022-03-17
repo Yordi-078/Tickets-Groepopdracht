@@ -99,6 +99,13 @@ class UserController extends Controller
         $search = User::where('name','LIKE', '%' .$search_text.'%')->get();
         return view('admin.search-user', ['search'=>$search]);   
     }
+
+    public function searchUser($input)
+    {
+        $search = User::where('name','LIKE', '%' .$input.'%')->get();
+        
+        return response()->json($search);   
+    }
     /**
      * teacher dashboard page
      */

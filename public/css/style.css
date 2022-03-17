@@ -373,6 +373,14 @@ a{
     background-color: var(--color-secondary);
 }
 
+.user-list{
+    width: 100%;
+}
+
+.link{
+    cursor: pointer;
+}
+
 .user-list-content{
     height: 85%;
     padding: 2% 0 0 0;

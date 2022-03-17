@@ -38,9 +38,9 @@ function start(){
 function showSearchResult(data, board_id){
     for (let i = 0; i < data.length; i++) {
         var div = document.createElement('div');
-        div.classList = 'four-columns';
         var x = addUser.bind(event, board_id, data[i]['id']);
         div.addEventListener('click', x, false);
+        div.classList = 'four-columns link';
         // image
         var a = document.createElement('a');
         // div.innerText = data[i][''];
@@ -66,7 +66,7 @@ function showAllUsers(data){
     for (let i = 0; i < data.length; i++) {
         var div = document.createElement('div');
         div.addEventListener('click', addUser.bind(event, board_id, data[i]['id']), false);
-        div.classList = 'four-columns';
+        div.classList = 'four-columns link';
         // image
         var a = document.createElement('a');
         // div.innerText = data[i][''];
