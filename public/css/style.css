@@ -722,6 +722,11 @@ a{
     flex-direction: column;
 }
 
+.date-columns li {
+    list-style: none;
+    margin-left: 0;
+}
+
 @media only screen and (min-width: 1024px) {
     .form-container{
         background-color: var(--color-quaternary);
