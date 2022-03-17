@@ -24,10 +24,15 @@
     @routes
 </head>
 <body>
+
     <div id="app">
         <nav class="app-navbar">
             <a class="app-navbar-title" href="{{ url('/') }}">Tick-It</a>
-
+            @guest
+            
+            @else
+                <a class="app-navbar-item" href="{{ url('home') }}"><i class="fa fa-house"></i></a>
+            @endguest
             <div class="app-navbar-user-info">
                 <button class="app-navbar-dropdown-button"></button>
                 <div class="app-navbar-dropdown-content">
@@ -41,7 +46,7 @@
                             <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                         @endif
                     @else
-                        <a id="" class="" href="#">
+                        <a id="" class="" href="{{ route('viewUserPage', Auth::user()->id) }} ">
                             {{ Auth::user()->name }}
                         </a>
                         @if (Auth::user()->user_role_id == 3 )

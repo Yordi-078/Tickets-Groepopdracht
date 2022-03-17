@@ -18,7 +18,7 @@ class CheckLoggedIn
     public function handle(Request $request, Closure $next)
     {
         if ($request->user() == false){
-            return redirect('login');
+            return redirect('/');
         }else {
             return $next($request);
         }

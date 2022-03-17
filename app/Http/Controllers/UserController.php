@@ -86,11 +86,25 @@ class UserController extends Controller
      * page where you see the search result
      *
      */
+    public function fetchAllUsers()
+    {
+        $users = User::where('user_role_id', '!=' , 3)->get();
+
+        return response()->json($users);
+    }
+
     public function searchAdminPage()
     {
         $search_text = $_GET['query'];
         $search = User::where('name','LIKE', '%' .$search_text.'%')->get();
         return view('admin.search-user', ['search'=>$search]);   
+    }
+
+    public function searchUser($input)
+    {
+        $search = User::where('name','LIKE', '%' .$input.'%')->get();
+        
+        return response()->json($search);   
     }
     /**
      * teacher dashboard page
