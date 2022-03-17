@@ -916,3 +916,8 @@ a{
         width: min(47.5%, 260px);
     }
 }
+
+#createBoardText{
+    position: relative;
+    bottom: 20px;
+}
