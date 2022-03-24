@@ -127,7 +127,7 @@ var addUser = function(board_id, data){
 function checkpage(){
     var url = window.location.href;
     console.log(url)
-    var page = url.split('/')[5];
+    var page = url.split('/')[3];
     console.log(page)
     var page2 = url.split('/')[4];
     console.log(page2)
