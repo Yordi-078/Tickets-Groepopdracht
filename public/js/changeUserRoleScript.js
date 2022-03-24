@@ -1,6 +1,4 @@
 
-const currentUrl = window.location.href;
-const board_id = currentUrl.substring(currentUrl.lastIndexOf("/") + 1, currentUrl.length);
 const userSearchIcon = document.getElementById('user-search-icon');
 const userSearchInput = document.getElementById('user-search-input');
 
@@ -32,64 +30,71 @@ function emptyAll(){
 
 function start(){
     var input = document.getElementById('user-search-input').value
-    searchUser(board_id, input);
-}
-
-function showSearchResult(data, board_id){
-    for (let i = 0; i < data.length; i++) {
-        var div = document.createElement('div');
-        var x = addUser.bind(event, board_id, data[i]['id']);
-        div.addEventListener('click', x, false);
-        div.classList = 'four-columns link';
-        // image
-        var a = document.createElement('a');
-        // div.innerText = data[i][''];
-        a.innerText = "image";
-        div.appendChild(a);
-        // name
-        var b = document.createElement('a');
-        b.innerText = data[i]['name'];
-        div.appendChild(b);
-        // email
-        var c = document.createElement('a');
-        c.innerText = data[i]['email'];
-        div.appendChild(c);
-        // role
-        var d = document.createElement('a');
-        d.innerText = data[i]['user_role_id'];
-        div.appendChild(d);
-        document.getElementById('user-list').appendChild(div);
-    }
+    searchUser(input);
 }
 
 function showAllUsers(data){
     for (let i = 0; i < data.length; i++) {
         var div = document.createElement('div');
-        div.addEventListener('click', addUser.bind(event, board_id, data[i]['id']), false);
-        div.classList = 'four-columns link';
-        // image
-        var a = document.createElement('a');
-        // div.innerText = data[i][''];
-        a.innerText = "image";
-        div.appendChild(a);
-        // name
-        var b = document.createElement('a');
-        b.innerText = data[i]['name'];
-        div.appendChild(b);
+        div.classList = 'four-columns';
         // email
-        var c = document.createElement('a');
-        c.innerText = data[i]['email'];
-        div.appendChild(c);
+        var a = document.createElement('a');
+        a.innerText = data[i]['email'];
+        div.appendChild(a);
         // role
+        var b = document.createElement('a');
+        b.innerText = data[i]['user_role_id'];
+        div.appendChild(b);
+        // edit
+        var c = document.createElement('a');
+        c.innerText = "edit";
+        var x = changeUser.bind(event, data[i]['id']);
+        c.addEventListener('click', x, false);
+        c.classList = 'link';
+        div.appendChild(c);
+        // delete
         var d = document.createElement('a');
-        d.innerText = data[i]['user_role_id'];
+        d.innerText = "delete";
+        var x = deleteUser.bind(event, data[i]['id']);
+        d.addEventListener('click', x, false);
+        d.classList = 'link';
         div.appendChild(d);
         document.getElementById('all-user-list').appendChild(div);
     }
 }
 
-function allUsers(location){
-    var url = route(location, board_id);
+function showSearchResult(data){
+    for (let i = 0; i < data.length; i++) {
+        var div = document.createElement('div');
+        div.classList = 'four-columns';
+        // email
+        var a = document.createElement('a');
+        a.innerText = data[i]['email'];
+        div.appendChild(a);
+        // role
+        var b = document.createElement('a');
+        b.innerText = data[i]['user_role_id'];
+        div.appendChild(b);
+        // edit
+        var c = document.createElement('a');
+        c.innerText = "edit";
+        var x = changeUser.bind(event, data[i]['id']);
+        c.addEventListener('click', x, false);
+        c.classList = 'link';
+        div.appendChild(c);
+        // delete
+        var d = document.createElement('a');
+        d.innerText = "delete";
+        var x = deleteUser.bind(event, data[i]['id']);
+        d.addEventListener('click', x, false);
+        d.classList = 'link';
+        div.appendChild(d);
+        document.getElementById('user-list').appendChild(div);
+    }
+}
+
+function allUsers(){
+    var url = route('fetchAllUsers');
   
     fetch(url, {
       headers: {
@@ -103,8 +108,8 @@ function allUsers(location){
     .then(data => showAllUsers(data) );
 }
 
-var searchUser = function(board_id, input){
-    var url = route('search', [input, board_id]);
+var searchUser = function(input){
+    var url = route('searchUser', input );
   
     fetch(url, {
       headers: {
@@ -115,30 +120,15 @@ var searchUser = function(board_id, input){
       method: 'GET',
       credentials: "same-origin",
     }) .then(response => response.json())
-    .then(data => showSearchResult(data, board_id) );
+    .then(data => showSearchResult(data) );
 }
 
-var addUser = function(board_id, data){
-    window.location = route('addToBoard', [board_id, data]);
+var changeUser = function(user_id){
+    window.location = route('changeUserForm', [user_id]);
 }
 
-function checkpage(){
-    var url = window.location.href;
-    console.log(url)
-    var page = url.split('/')[3];
-    var location = '';
-
-    if(page == 'addStudentsToBoard'){
-        location = 'fetchAllUsers';
-    }
-    else if(page == 'allBoardUsers'){
-        location = 'viewUsersFromBoard';
-    }
-    else{
-        alert('warning url is incorrect');
-    }
-    return location
+var deleteUser = function(user_id){
+    window.location = route('destroyUserPage', [user_id]);
 }
 
-allUsers(checkpage());
-
+allUsers()
