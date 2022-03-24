@@ -115,4 +115,10 @@ class UserController extends Controller
         return view('teacherDashboard.index', compact('cards', 'board_id'));
     }
 
+    public function dateSelected($board_id, $selectedDate)
+    {
+        $cards = Card::all()->where('status', 'finished')->where("helper_id", auth()->id())->sortBy('updated_at');
+        return view('teacherDashboard.index2', compact('cards', 'board_id', 'selectedDate'));
+    }
+
 }

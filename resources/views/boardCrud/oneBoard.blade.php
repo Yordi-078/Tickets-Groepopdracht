@@ -115,7 +115,7 @@ $user_id = Auth::user()->id;
                     <legend id="helper">no one is helping this card</legend>
                     <input id="remove-helper-button" class="helper-buttons" type="button" value=" - ">
                     <input id="add-helper-button" class="helper-buttons" type="button"value=" + ">
-                    <div title="" style="background-color:pink;" class="avatar" id="card-helper-avatar"><a id="card-helper-avatar-init" href="#"></a></div>
+                    <div title="" style="background-color:pink;" class="avatar" id="card-helper-avatar"><a id="card-helper-avatar-init" href="#" onclick="showUserData('{{ $card['helper_id'] }}')"></a></div>
                 </fieldset>
 
                 <div id="userPopup" class="home-user-popup">

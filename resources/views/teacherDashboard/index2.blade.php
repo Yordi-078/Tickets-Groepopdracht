@@ -19,12 +19,16 @@
 
 
 @foreach ($cards as $card)
-        <a>
-            {{ $card->updated_at->isoFormat('DD-MM-YYYY') }}
-        </a>
+    @if ($card->updated_at->isoFormat('DD-MM-YYYY') == $selectedDate)
+        <a>{{ $card->name}}{{ $card->updated_at->isoFormat('DD-MM-YYYY') }}</a>
+        <br>
+    @else
+        
+    @endif
     
 @endforeach
 
+<br><br><br>
 
 <div>
     <a>{{ $calendarMonth }}</a>
@@ -36,7 +40,7 @@
     
 
 
-        <a href="{{ route('dateSelected', [$board_id , $firstDay->isoFormat('DD-MM-YYYY')]) }}"> {{ $firstDay->isoFormat('DD') }} </a>
+        <a href="{{ route('dateSelected', ['board_id' => $board_id, 'selectedDate' => $firstDay->isoFormat('DD-MM-YYYY')]) }}"> {{ $firstDay->isoFormat('DD') }} </a>
         <br>
     @endfor
 </div>

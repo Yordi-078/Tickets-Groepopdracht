@@ -47,6 +47,8 @@ Route::get('admin/search-user', [UserController::class, 'searchAdminPage'])->nam
 
 /** teacher dashboard routes */
 route::get('teacher/dashboard/{board_id}', [UserController::class, 'teacherDashboard'])->name('teacherDashboard')->middleware('CheckTeacher');
+route::get('teacher/dashboard/{board_id}/date/{selectedDate}', [UserController::class, 'dateSelected'])->name('dateSelected')->middleware('CheckTeacher');
+
 /** card routes */
 Route::get('boardCrud/createCard/{board_id}',  [CardController::class, 'addACard'])->name('addACard')->middleware('CheckLoggedIn');
 Route::post('storeCard/{board_id}',  [CardController::class, 'storeCard'])->name('storeCard')->middleware('CheckLoggedIn');
