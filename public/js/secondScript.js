@@ -90,6 +90,7 @@ function showAllUsers(data){
 }
 
 function allUsers(location){
+    console.log(location);
     var url = route(location, board_id);
   
     fetch(url, {
@@ -125,7 +126,8 @@ var addUser = function(board_id, data){
 
 function checkpage(){
     var url = window.location.href;
-    var page = url.split('/')[3];
+    console.log(url)
+    var page = url.split('/')[2];
     var location = '';
 
     if(page == 'addStudentsToBoard'){

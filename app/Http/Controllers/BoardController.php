@@ -104,7 +104,7 @@ class BoardController extends Controller
       array_push($users, $user[0]);
     }
     return response()->json($users);
-    // return view('boardCrud.allUsersFromBoard', ['boardUsers' => $users]);
+
   }
 
   public function allBoardUsers($board_id){
