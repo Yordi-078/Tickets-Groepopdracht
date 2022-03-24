@@ -19,7 +19,7 @@ $user_id = Auth::user()->id;
             {{ __('Teacher Dashboard') }}
         </a>
     @endif
-    <a href="{{ route('viewUsersFromBoard', $thisBoard['id']) }}" class="main-button" id="add-student-button">View all users from this board</a>
+    <a href="{{ route('allBoardUsers', $thisBoard['id']) }}" class="main-button" id="add-student-button">all board users</a>
 </div>
 
 <div class="main-container">
@@ -115,7 +115,7 @@ $user_id = Auth::user()->id;
                     <legend id="helper">no one is helping this card</legend>
                     <input id="remove-helper-button" class="helper-buttons" type="button" value=" - ">
                     <input id="add-helper-button" class="helper-buttons" type="button"value=" + ">
-                    <div title="" class="avatar" id="card-helper-avatar"><a id="card-helper-avatar-init" href="#" onclick="showUserData('{{ $card['helper_id'] }}')"></a></div>
+                    <div title="" class="avatar" id="card-helper-avatar"><a id="card-helper-avatar-init" href="#"></a></div>
                 </fieldset>
 
                 <div id="userPopup" class="home-user-popup">
