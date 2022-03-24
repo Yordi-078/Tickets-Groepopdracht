@@ -63,6 +63,7 @@ function showSearchResult(data, board_id){
 }
 
 function showAllUsers(data){
+    console.log(data)
     for (let i = 0; i < data.length; i++) {
         var div = document.createElement('div');
         div.addEventListener('click', addUser.bind(event, board_id, data[i]['id']), false);
@@ -124,7 +125,6 @@ var addUser = function(board_id, data){
 
 function checkpage(){
     var url = window.location.href;
-    console.log(url)
     var page = url.split('/')[3];
     var location = '';
 

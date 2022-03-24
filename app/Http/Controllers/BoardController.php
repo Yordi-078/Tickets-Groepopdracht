@@ -101,7 +101,7 @@ class BoardController extends Controller
     $users = [];
     for ($i=0; $i < count($user_ids); $i++) { 
       $user = User::where('id', $user_ids[$i]['user_id'])->get();
-      array_push($users, $user);
+      array_push($users, $user[0]);
     }
     return response()->json($users);
     // return view('boardCrud.allUsersFromBoard', ['boardUsers' => $users]);
