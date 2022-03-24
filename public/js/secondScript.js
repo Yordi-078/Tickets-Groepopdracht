@@ -127,7 +127,7 @@ var addUser = function(board_id, data){
 function checkpage(){
     var url = window.location.href;
     console.log(url)
-    var page = url.split('/')[2];
+    var page = url.split('/')[4];
     var location = '';
 
     if(page == 'addStudentsToBoard'){
