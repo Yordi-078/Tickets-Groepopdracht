@@ -13,22 +13,10 @@
     $firstDay = Carbon\Carbon::now()->startOfMonth();
     $lastDay = Carbon\Carbon::now()->lastOfMonth();
     $countDaysInMonth = $calendar->daysInMonth;
-    $calendarMonth = $calendar->isoFormat('MMMM');
+    $calendarMonth = $calendar->isoFormat('MMMM-YYYY');
 @endphp
 
 @section('content')
-
-
-@foreach ($cards as $card)
-    <a>{{ $card->updated_at->isoFormat('DD-MM-YYYY') }}</a>
-@endforeach
-
-@foreach ($lessonCards as $lessonCard)
-    <a>{{ $lessonCard->name }}</a>
-@endforeach
-
-
-
 
 
 <div class="calendar">
