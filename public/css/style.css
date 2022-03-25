@@ -927,6 +927,46 @@ a{
     bottom: 20px;
 }
 
+
+.calendar-today {
+    color: red;
+}
+
+.calendar {
+        position: relative;
+        margin: 0 auto;
+        width: 300px;
+        background-color: #fff;
+        box-sizing: border-box;
+        box-shadow: 0 5px 50px rgba(#000, 0.5);
+        border-radius: 8px;
+        border: black 1px solid;
+    }
+
+    .calendar-date {
+        padding: 20px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(25px, 1fr));
+        grid-gap: 10px;
+        box-sizing: border-box;
+    }
+
+    .calendar-day {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 25px;
+        font-weight: 600;
+        color: #262626;
+    }
+
+    .calendar-number {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 25px;
+        color: #262626;
+    }
 #userPopup{
     background-color:#55add5;
     margin-left:-310px;
