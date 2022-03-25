@@ -129,10 +129,6 @@ function checkpage(){
     console.log(url)
     var page = url.split('/')[3];
     console.log(page)
-    var page2 = url.split('/')[4];
-    console.log(page2)
-    var page3 = url.split('/')[0];
-    console.log(page3)
     var location = '';
 
     if(page == 'addStudentsToBoard'){
