@@ -723,7 +723,7 @@ a{
 
 .avatar a , .user-popup-header-username a{
     text-decoration: none;
-    color: white;
+    color: black;
 }
 
 .user-list-container{
@@ -965,3 +965,22 @@ a{
         height: 25px;
         color: #262626;
     }
+#userPopup{
+    background-color:#55add5;
+    margin-left:-310px;
+    margin-top:120px;
+    width:300px;
+    height:120px;
+    border-radius:25px;
+    color:black;
+  }
+  
+  #userPopup>div{
+    margin-left:80px;
+    font-size:16px;
+  }
+  
+  #userPopupBol{
+    margin-left:50px;
+    margin-top:10px;
+  }

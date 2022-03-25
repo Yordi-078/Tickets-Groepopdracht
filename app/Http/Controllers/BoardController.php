@@ -103,8 +103,13 @@ class BoardController extends Controller
       $user = User::where('id', $user_ids[$i]['user_id'])->get();
       array_push($users, $user[0]);
     }
-  
-    return view('boardCrud.allUsersFromBoard', ['allUsers' => $users]);
+    return response()->json($users);
+
+  }
+
+  public function allBoardUsers($board_id){
+    
+    return view('boardCrud.allUsersFromBoard');
   }
 
   public function viewUserPage($user_id){
