@@ -926,3 +926,8 @@ a{
     position: relative;
     bottom: 20px;
 }
+
+
+.calendar-today {
+    color: red;
+}

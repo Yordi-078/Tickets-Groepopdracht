@@ -13,6 +13,7 @@
     <!-- Scripts -->
     <script src="{{ asset('js/script.js') }}" defer></script>
     @yield('second script')
+    @yield('calendar_script')
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">

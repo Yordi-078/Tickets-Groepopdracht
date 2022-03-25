@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Card;
+use App\Models\LessonCard;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -112,7 +113,8 @@ class UserController extends Controller
     public function teacherDashboard(User $board_id)
     {
         $cards = Card::all()->where('status', 'finished')->where("helper_id", auth()->id())->sortBy('updated_at');
-        return view('teacherDashboard.index', compact('cards', 'board_id'));
+        $lessonCards = LessonCard::all()->where('status', 'finished')->where('user_id', auth()->id());
+        return view('teacherDashboard.index', compact('cards', 'board_id', 'lessonCards'));
     }
 
     public function dateSelected($board_id, $selectedDate)
