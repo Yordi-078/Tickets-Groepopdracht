@@ -98,7 +98,9 @@ $user_id = Auth::user()->id;
 
                 <fieldset id="image-uploader" class="image-uploader-box card-info-border">
                     <legend>image</legend>
-                    <input id="card-upload-image" type="file">
+                    <input id="card-upload-image" type="file"  accept="image/*" name="image" onchange="loadFile(event)" accept=".gif,.jpg,.jpeg,.png">
+                    <div id='test-image'></div>
+                    <p><img id="output" width="200" /></p>
                 </fieldset>
 
                 <fieldset class="progress-info card-info-border">

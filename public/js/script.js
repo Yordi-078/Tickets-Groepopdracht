@@ -570,6 +570,11 @@ var getHelperInfo = function (helper_id){
   .then(data => showUserData(data) );
 }
 
+var loadFile = function(event) {
+  var image = document.getElementById('output');
+  image.src = URL.createObjectURL(event.target.files[0]);
+};
+
 
 // to do
 // function for randomizing color of avatar bal and remembering color for next use
