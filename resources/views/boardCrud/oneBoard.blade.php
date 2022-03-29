@@ -19,6 +19,12 @@ $user_id = Auth::user()->id;
             {{ __('Teacher Dashboard') }}
         </a>
     @endif
+    @if (Auth::user()->user_role_id == 2 || Auth::user()->user_role_id == 3 )
+    <a id="add-student-button" class="main-button" href="{{ route('addTagsForm', $thisBoard['id']) }}">
+        {{ __('Tags') }}
+    </a>
+    @endif
+    
     <a href="{{ route('allBoardUsers', $thisBoard['id']) }}" class="main-button" id="add-student-button">all board users</a>
 </div>
 

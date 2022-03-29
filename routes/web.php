@@ -36,6 +36,9 @@ Route::get('addToBoard/{board_id}/{user_id}',  [BoardController::class, 'addToBo
 Route::get('viewUsersFromBoard/{board_id}', [BoardController::class, 'viewUsersFromBoard'])->name('viewUsersFromBoard');
 Route::get('allBoardUsers/{board_id}', [BoardController::class, 'allBoardUsers'])->name('allBoardUsers');
 Route::get('viewUserPage/{user_id}', [BoardController::class, 'viewUserPage'])->name('viewUserPage')->middleware('CheckLoggedIn');
+Route::get('addTagsForm/{board_id}',  [BoardController::class, 'addTagsForm'])->name('addTagsForm')->middleware('CheckTeacherOrAdmin');
+Route::post('storeTag/{board_id}',  [BoardController::class, 'storeTag'])->name('storeTag')->middleware('CheckTeacherOrAdmin');
+
 
 /** admin routes */
 Route::get('admin/user-overview',  [UserController::class, 'changeUserRolesPage'])->name('changeUserRoles')->middleware('CheckAdmin');
@@ -80,6 +83,5 @@ Route::get('deleteLessonUpvote/{card_id}',  [CardController::class, 'deleteLesso
 Route::get('GetCardAvatars/{card_id}',  [CardController::class, 'GetCardAvatars'])->name('GetCardAvatars')->middleware('CheckLoggedIn');
 Route::get('updateCard/{card_id}/{card_name}/{card_description}/{card_status}',  [CardController::class, 'updateCard'])->name('updateCard')->middleware('CheckLoggedIn');
 Route::get('getUserInfo/{user_id}',  [CardController::class, 'getUserInfo'])->name('getUserInfo')->middleware('CheckLoggedIn');
-
 
 
