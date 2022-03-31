@@ -934,13 +934,16 @@ a{
 
 .calendar {
         position: relative;
-        margin: 0 auto;
+        display: none;
+        left:80px;
+        top: 75px;
         width: 300px;
         background-color: #fff;
         box-sizing: border-box;
         box-shadow: 0 5px 50px rgba(#000, 0.5);
         border-radius: 8px;
         border: black 1px solid;
+        
     }
 
     .calendar-date {
@@ -986,3 +989,4 @@ a{
     margin-left:50px;
     margin-top:10px;
   }
+

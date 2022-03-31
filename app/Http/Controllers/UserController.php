@@ -112,16 +112,24 @@ class UserController extends Controller
      */
     public function teacherDashboard(User $board_id)
     {
-        $cards = Card::all()->where('status', 'finished')->where("helper_id", auth()->id())->sortBy('updated_at');
-        $lessonCards = LessonCard::all()->where('status', 'finished')->where('user_id', auth()->id());
-        return view('teacherDashboard.index', compact('cards', 'board_id', 'lessonCards'));
+        $selectedDate = false;
+        $cards = Card::where('status', 'finished')->where("helper_id", auth()->id())->get()->sortBy('updated_at');
+        $lessonCards = LessonCard::where('status', 'finished')->where('user_id', auth()->id())->get();
+        return view('teacherDashboard.index', compact('cards', 'board_id', 'selectedDate', 'lessonCards'));
     }
 
+    /**
+     * Undocumented function
+     *
+     * @param [type] $board_id
+     * @param [type] $selectedDate
+     * @return void
+     */
     public function dateSelected($board_id, $selectedDate)
     {
-        $cards = Card::all()->where('status', 'finished')->where("helper_id", auth()->id())->sortBy('updated_at');
-        $lessonCards = LessonCard::all()->where('status', 'finished')->where('user_id', auth()->id());
-        return view('teacherDashboard.index2', compact('cards', 'board_id', 'selectedDate', 'lessonCards'));
+        $cards = Card::where('status', 'finished')->where("helper_id", auth()->id())->get()->sortBy('updated_at');
+        $lessonCards = LessonCard::where('status', 'finished')->where('user_id', auth()->id())->get();
+        return view('teacherDashboard.index', compact('cards', 'board_id', 'selectedDate', 'lessonCards'));
     }
 
 }

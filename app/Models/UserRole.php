@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserRole extends Model
 {
+    const TEACHER_ROLE = 2;
+    
+
     protected $table = 'user_roles';
     public $timestamps = true;
     protected $fillable = [
