@@ -11,11 +11,21 @@
     $array0 = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
     $array1 = ['Ma', 'Di', 'Wo', 'Do', 'Vr', 'Za', 'Zo'];
     $dateFormat = false;
+
     $calendar = Carbon\Carbon::now();
+    //    $calendar->sub(1, 'month');
+
     $firstDay = Carbon\Carbon::now()->startOfMonth();
+    //    $firstDay->sub(1, 'month');
+
     $lastDay = Carbon\Carbon::now()->lastOfMonth();
-    $countDaysInMonth = $calendar->daysInMonth+1;
+    //    $lastDay->sub(1, 'month');
+
+    $countDaysInMonth = $calendar->daysInMonth;
     $calendarMonth = $calendar->locale('nl')->isoFormat('MMMM-YYYY');
+
+
+
 ?>
 
 @section('content')
@@ -209,13 +219,20 @@
         @endfor
         @for ($i = 0; $i < $countDaysInMonth; $i++)
             @if($dateFormat == false)
-                @if($firstDay->isoFormat('dd') == $array0[$i])
-                    @php
-                        $dateFormat = true
-                    @endphp
-                @else
-                    <div class="calendar-number"></div>
-                @endif
+            @php $j=0; @endphp
+                @while ($dateFormat == false)
+                    
+                
+                    @if($firstDay->isoFormat('dd') == $array0[$j])
+                        @php
+                            $dateFormat = true
+                        @endphp
+                    @else
+                        <div class="calendar-number"></div>
+                    @endif
+                
+                    @php $j++; @endphp
+                @endwhile
             @endif
 
             <div class="calendar-number">
@@ -224,7 +241,7 @@
 
             @if ($dateFormat !== false)
                 @php
-                    $firstDay->add(1, 'day')       
+                    $firstDay->add(1, 'day')
                 @endphp
             @endif
         @endfor
