@@ -701,7 +701,7 @@ a{
 }
     
 .card-info-border{
-    border: 3px solid#D3D3D3;
+    border: 3px solid #D3D3D3;
     border-radius:10px;
     padding: 5px;
 }
@@ -719,6 +719,8 @@ a{
     align-items: center;
     justify-content: center;
     margin-left: -3px;
+    border: 1px solid darkgray;
+    box-shadow: 3px 4px 4px 0px rgb(0 0 0 / 25%);
 }
 
 .avatar a , .user-popup-header-username a{
@@ -967,14 +969,15 @@ a{
         height: 25px;
         color: #262626;
     }
-#userPopup{
-    background-color:#55add5;
-    margin-left:-310px;
-    margin-top:120px;
-    width:300px;
-    height:120px;
-    border-radius:25px;
-    color:black;
+
+  #userPopup{
+      background-color:#55add5;
+      margin-left:-310px;
+      margin-top:120px;
+      width:300px;
+      height:120px;
+      border-radius:25px;
+      color:black;
   }
   
   #userPopup>div{
@@ -985,4 +988,10 @@ a{
   #userPopupBol{
     margin-left:50px;
     margin-top:10px;
+  }
+
+  .card-avatar-container{
+    display: flex;
+    flex-direction: row;
+    margin-left:21px;
   }
