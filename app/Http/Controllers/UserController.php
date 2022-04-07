@@ -93,7 +93,9 @@ class UserController extends Controller
 
         return response()->json($users);
     }
-
+    /**
+     * search a user will a inputted string in the admin page
+     */
     public function searchAdminPage()
     {
         $search_text = $_GET['query'];
@@ -103,25 +105,34 @@ class UserController extends Controller
 
     public function searchUser($input)
     {
-        $search = User::where('name','LIKE', '%' .$input.'%')->get();
-        
+        $search = User::where('name','LIKE', '%' .$input.'%')->get();        
         return response()->json($search);   
     }
+
     /**
-     * teacher dashboard page
+     * teacher dashboard page shows the cards of the current date
+     * 
+     * @param [int] $board_id = id of current board
      */
-    public function teacherDashboard(User $board_id)
+    public function teacherDashboard(User $board_id )
     {
-        $cards = Card::all()->where('status', 'finished')->where("helper_id", auth()->id())->sortBy('updated_at');
-        $lessonCards = LessonCard::all()->where('status', 'finished')->where('user_id', auth()->id());
-        return view('teacherDashboard.index', compact('cards', 'board_id', 'lessonCards'));
+        $selectedDate = false;
+        $cards = Card::where('status', 'finished')->where("helper_id", auth()->id())->get()->sortBy('updated_at');
+        $lessonCards = LessonCard::where('status', 'finished')->where('user_id', auth()->id())->get();
+        return view('teacherDashboard.index', compact('cards', 'board_id', 'selectedDate', 'lessonCards'));
     }
 
+    /**
+     * teacher dashboard page when a date is selected in the calendar
+     *
+     * @param [int] $board_id  = id of current board
+     * @param [string] $selectedDate = the date selected in the calendar
+     */
     public function dateSelected($board_id, $selectedDate)
     {
-        $cards = Card::all()->where('status', 'finished')->where("helper_id", auth()->id())->sortBy('updated_at');
-        $lessonCards = LessonCard::all()->where('status', 'finished')->where('user_id', auth()->id());
-        return view('teacherDashboard.index2', compact('cards', 'board_id', 'selectedDate', 'lessonCards'));
+        $cards = Card::where('status', 'finished')->where("helper_id", auth()->id())->get()->sortBy('updated_at');
+        $lessonCards = LessonCard::where('status', 'finished')->where('user_id', auth()->id())->get();
+        return view('teacherDashboard.index', compact('cards', 'board_id', 'selectedDate', 'lessonCards'));
     }
 
 }

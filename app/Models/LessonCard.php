@@ -7,9 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class LessonCard extends Model
 {
-    
+    //protected $casts = [ 'finished_date' => 'datetime', ];
+    protected $dates = ['finished_date'];
+
     protected $table = 'lesson_cards';
-    public $timestamps = false;
+    public $timestamps = true;
     protected $fillable = [
      'name', 'user_id', 'board_id','description','status','start_time','finished_date'
     ];
