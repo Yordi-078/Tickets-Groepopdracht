@@ -1,39 +1,20 @@
 @extends('layouts.app')
-
-
 @section('calendar_script')
     <script src="{{ asset('js/calendar_script.js') }}" defer></script>
 @endsection
-
 <?php 
     use Illuminate\support\facades\Auth;
     $user_id = Auth::user()->id;
     $array0 = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
     $array1 = ['Ma', 'Di', 'Wo', 'Do', 'Vr', 'Za', 'Zo'];
     $dateFormat = false;
-
     $calendar = Carbon\Carbon::now();
-    //    $calendar->sub(1, 'month');
-
     $firstDay = Carbon\Carbon::now()->startOfMonth();
-    //    $firstDay->sub(1, 'month');
-
     $lastDay = Carbon\Carbon::now()->lastOfMonth();
-    //    $lastDay->sub(1, 'month');
-
     $countDaysInMonth = $calendar->daysInMonth;
-    $calendarMonth = $calendar->locale('nl')->isoFormat('MMMM-YYYY');
-
-
-
+    $calendarMonth = $calendar->locale('nl')->isoFormat('MMMM YYYY');
 ?>
-
 @section('content')
-
-
-
-
-
 
 <div class="main-button-bar">
     <button btn id="calendar_popup" class="main-button">
@@ -41,13 +22,9 @@
     </button>
 </div>
 
-
-
-
 <div class="main-container">
     <div class="question-board-container">
         <div class="question-board-container-header">
-
         </div>
         
         <div class="question-board-content" id="board-question-content-box" >

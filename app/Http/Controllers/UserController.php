@@ -93,7 +93,9 @@ class UserController extends Controller
 
         return response()->json($users);
     }
-
+    /**
+     * search a user will a inputted string in the admin page
+     */
     public function searchAdminPage()
     {
         $search_text = $_GET['query'];
@@ -103,14 +105,16 @@ class UserController extends Controller
 
     public function searchUser($input)
     {
-        $search = User::where('name','LIKE', '%' .$input.'%')->get();
-        
+        $search = User::where('name','LIKE', '%' .$input.'%')->get();        
         return response()->json($search);   
     }
+
     /**
-     * teacher dashboard page
+     * teacher dashboard page shows the cards of the current date
+     * 
+     * @param [int] $board_id = id of current board
      */
-    public function teacherDashboard(User $board_id)
+    public function teacherDashboard(User $board_id )
     {
         $selectedDate = false;
         $cards = Card::where('status', 'finished')->where("helper_id", auth()->id())->get()->sortBy('updated_at');
@@ -119,11 +123,10 @@ class UserController extends Controller
     }
 
     /**
-     * Undocumented function
+     * teacher dashboard page when a date is selected in the calendar
      *
-     * @param [type] $board_id
-     * @param [type] $selectedDate
-     * @return void
+     * @param [int] $board_id  = id of current board
+     * @param [string] $selectedDate = the date selected in the calendar
      */
     public function dateSelected($board_id, $selectedDate)
     {
