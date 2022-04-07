@@ -993,9 +993,45 @@ a{
     margin-top:10px;
   }
 
-  .card-avatar-container{
-    display: flex;
-    flex-direction: row;
-    margin-left:21px;
+  #reviewTitle{
+      position: relative;
+      display: flex; 
+      justify-content: center;
+      top: 100px;
+      left: 2%;
   }
 
+  .reviewForm{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    top: 170px;
+    right: 140px;
+    height: 200px;
+  }
+
+  #reviewText{
+    position: relative;
+    bottom: 40px;
+    left:70px;
+  }
+
+  #bad{
+    color: red;
+  }
+
+  #neutral{
+    color: yellow;
+  }
+
+  #good{
+    color: green;
+  }
+
+  #smileys{
+    position: relative;
+    display: flex;
+    justify-content: space-evenly;
+    right: 10%;
+    top: 150px;
+  }

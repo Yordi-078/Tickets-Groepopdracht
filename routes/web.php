@@ -81,5 +81,6 @@ Route::get('GetCardAvatars/{card_id}',  [CardController::class, 'GetCardAvatars'
 Route::get('updateCard/{card_id}/{card_name}/{card_description}/{card_status}',  [CardController::class, 'updateCard'])->name('updateCard')->middleware('CheckLoggedIn');
 Route::get('getUserInfo/{user_id}',  [CardController::class, 'getUserInfo'])->name('getUserInfo')->middleware('CheckLoggedIn');
 
-
+Route::get('giveReview/{lessoncard_id}',  [LessonCardController::class, 'giveReview'])->name('giveReview')->middleware('CheckLoggedIn');
+Route::get('allReviews/{lessonCard_id}',  [LessonCardController::class, 'allReviews'])->name('allReviews')->middleware('CheckLoggedIn');
 

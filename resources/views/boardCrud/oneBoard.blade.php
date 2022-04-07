@@ -11,15 +11,15 @@ $user_id = Auth::user()->id;
 <div class="main-button-bar">
     @if (Auth::user()->user_role_id == 2 || Auth::user()->user_role_id == 3 )
         <a id="add-student-button" class="main-button" href="{{ route('addStudentsToBoard', $thisBoard['id']) }}">
-            {{ __('Add students') }}
+            {{ __('Voeg student toe') }}
         </a>
     @endif
     @if (Auth::user()->user_role_id == 2)
         <a id="add-student-button" class="main-button" href="{{ route('teacherDashboard',$thisBoard['id']) }}">
-            {{ __('Teacher Dashboard') }}
+            {{ __('Docentendashboard') }}
         </a>
     @endif
-    <a href="{{ route('allBoardUsers', $thisBoard['id']) }}" class="main-button" id="add-student-button">all board users</a>
+    <a href="{{ route('allBoardUsers', $thisBoard['id']) }}" class="main-button" id="add-student-button">Alle deelnemers</a>
 </div>
 
 <div class="main-container">
@@ -27,7 +27,7 @@ $user_id = Auth::user()->id;
         <div class="question-board-container-header">
 
             <button id="toggle-board" class="home-board-buttons" onclick="toggleBoard()"><i class="fas fa-bars"></i></button>
-            <a href="{{ url('boardCrud/createCard', $thisBoard['id']) }}" class="home-board-buttons">Add Card</a>
+            <a href="{{ url('boardCrud/createCard', $thisBoard['id']) }}" class="home-board-buttons">Kaart toevoegen</a>
 
         </div>
         
@@ -47,7 +47,7 @@ $user_id = Auth::user()->id;
     <div class="lesson-board-container">
         <div class="lesson-board-container-header">
             @if (Auth::user()->user_role_id == 2 || Auth::user()->user_role_id == 3)
-                <a href="{{ url('boardCrud/createLessonCard', $thisBoard['id']) }}" class="home-board-buttons">Add Card</a>
+                <a href="{{ url('boardCrud/createLessonCard', $thisBoard['id']) }}" class="home-board-buttons">Kaart toevoegen</a>
             @endif
         </div>
     
@@ -68,12 +68,10 @@ $user_id = Auth::user()->id;
     <div class="loader-screen">
         <div class="loader-wrap">
           <span class="loader letter-1">l</span>
-          <span class="loader letter-2">o</span>
-          <span class="loader letter-3">a</span>
-          <span class="loader letter-4">d</span>
-          <span class="loader letter-5">i</span>
-          <span class="loader letter-6">n</span>
-          <span class="loader letter-7">g</span>
+          <span class="loader letter-2">a</span>
+          <span class="loader letter-3">d</span>
+          <span class="loader letter-4">e</span>
+          <span class="loader letter-5">n</span>
           <span class="loader letter-8">.</span>
           <span class="loader letter-9">.</span>
           <span class="loader letter-10">.</span>
@@ -90,31 +88,29 @@ $user_id = Auth::user()->id;
                       
                 @csrf
                 <fieldset class="general card-info-border">
-                    <legend>summary</legend>
+                    <legend>Overzicht: </legend>
                     <textarea type="text" id="card-title" class="title" name="name" maxlength="300" required></textarea>
-                    <span>description: </span>
+                    <span>Beschrijving: </span>
                     <textarea type="text" id="card-description" class="description" name="description" maxlength="69" required></textarea>
                 </fieldset>
 
                 <fieldset id="image-uploader" class="image-uploader-box card-info-border">
-                    <legend>image</legend>
-                    <input id="card-upload-image" type="file"  accept="image/*" name="image" onchange="loadFile(event)" accept=".gif,.jpg,.jpeg,.png">
-                    <div id='test-image'></div>
-                    <p><img id="output" width="200" /></p>
+                    <legend>Afbeelding</legend>
+                    <input id="card-upload-image" type="file">
                 </fieldset>
 
                 <fieldset class="progress-info card-info-border">
-                    <legend>card info</legend>
+                    <legend>Kaart info</legend>
                     <p id="card-created-at"></p>
 
                     <select name="status" id="card-status" class="card-status">
-                        <option name='status' value="in_progress" >in progress</option>
-                        <option name='status' value="finished" >finished</option>
+                        <option name='status' value="in_progress" >Aan de gang</option>
+                        <option name='status' value="finished" >Afgerond</option>
                     </select>
                 </fieldset>
 
                 <fieldset id="helper-box" class="helper-box card-info-border">
-                    <legend id="helper">no one is helping this card</legend>
+                    <legend id="helper">Niemand is aan het helpen</legend>
                     <input id="remove-helper-button" class="helper-buttons" type="button" value=" - ">
                     <input id="add-helper-button" class="helper-buttons" type="button"value=" + ">
                     <div title="" class="avatar" id="card-helper-avatar"><a id="card-helper-avatar-init" href="#"></a></div>
@@ -136,7 +132,7 @@ $user_id = Auth::user()->id;
                         
                         
                 <fieldset class="avatarContainer card-info-border">
-                    <legend>upvoters</legend>
+                    <legend>Upvoters</legend>
                     <div class="vote-container">
                         <a id="card-upvote-question" class="vote-thumb"><i class="fas fa-thumbs-up"></i></a>
                         <a id="question-upvote-count" class="vote-count">-</a>
@@ -157,14 +153,14 @@ $user_id = Auth::user()->id;
 
         <form class="card-info-popup">
             <fieldset id="general" class="general card-info-border">
-                <legend>summary</legend>
+                <legend>Overzicht: </legend>
                 <textarea type="text" id="lesson-title" class="title" name="name" maxlength="300" required></textarea>
-                <span>description: </span>
+                <span>Beschrijving: </span>
                 <textarea type="text" id="lesson-description" class="description" name="description" maxlength="665" required></textarea>
             </fieldset>
 
             <fieldset id="image-uploader" class="image-uploader-box card-info-border">
-                <legend>lesson date</legend>
+                <legend>Lesdatum</legend>
                 <p>datum van lesson komt hier.</p>
                 <p id="lesson-start-date" ></p>
             </fieldset>
@@ -176,9 +172,10 @@ $user_id = Auth::user()->id;
                     <a id="card-downvote-lesson" class="vote-thumb"><i class="fas fa-thumbs-down"></i></a>
                 </div>
                 <div id="lessonAvatarContainer" class="card-avatar-container">
-
                 </div>
             </fieldset>
+            <a id="reviewLink"> Laat een review achter </a>
+            <a id="allReviewsLink"> Alle Reviews </a>
         </form>
     </div>
 </div>

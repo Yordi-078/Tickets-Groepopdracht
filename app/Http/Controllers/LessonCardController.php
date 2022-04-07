@@ -65,9 +65,15 @@ class LessonCardController extends Controller
             return response()->json();
     }
 
-    public function getLessonCardInfo($card_id){
-        $response = LessonCard::where('id', $card_id)->get();
+    public function getLessonCardInfo(LessonCard $card){
+        return response()->json($card);
+    }
+    
+    function giveReview($lessonCard_id){
+        return view('review.giveReview');
+    }
 
-        return response()->json($response);
+    function allReviews($lessonCard_id){
+        return view('review.allReviews');
     }
 }

@@ -37,8 +37,8 @@ const cardModal = document.getElementById('cardModal');
 const cardSpan = document.getElementById("close-popup");
 const userPopupEmail = document.getElementById("userPopupEmail");
 const userPopupRole = document.getElementById("userPopupRole");
-
-
+const review = document.getElementById('reviewLink');
+const allReviews = document.getElementById('allReviewsLink');
 // uncatogorized 
 
 cardSpan.onclick = function() {
@@ -125,7 +125,7 @@ function setHelperAndOwner(name, user_id, card_owner_id){
     var initials = name[1]['name'].match(/\b(\w)/g);
     var acronym = initials.join('');
     
-    helper.innerText = name[1]['name'] + ' is helping this card.';
+    helper.innerText = name[1]['name'] + ' is aan het helpen.';
     cardHelperAvatar.style.display = 'flex';
     cardHelperAvatar.style.backgroundColor= 'gray'
     cardHelperAvatar.title= name[1]['name']
@@ -194,7 +194,7 @@ var addHelper = function(helperId, helperName, card_id){
   var initials = helperName.match(/\b(\w)/g);
   var acronym = initials.join('');
 
-  helper.innerText = helperName + ' is helping this card.';
+  helper.innerText = helperName + ' is aan het helpen.';
   cardHelperAvatar.style.display = 'flex'
   cardHelperAvatar.style.backgroundColor= 'gray'
   cardHelperAvatar.title= helperName
@@ -211,7 +211,7 @@ var addUpvote = function(card_id, user_id){
 
 var removeHelper = function(card_id){
   deleteHelper(card_id);
-  helper.innerText = 'no one is helping this card';
+  helper.innerText = 'Niemand is aan het helpen.';
   cardHelperAvatar.style.display = 'none';
   cardHelperAvatar.style.backgroundColor= '';
   cardHelperAvatar.title= '';
@@ -228,7 +228,7 @@ var removeUpvote = function(card_id, user_id){
 function resetQuestionPopup(){
   cardAvatarContainer.innerHTML = '';
   cardOwner.innerText = '';
-  helper.innerText = 'no one is helping this card';
+  helper.innerText = 'Niemand is aan het helpen';
   cardHelperAvatar.style.display = 'none';
   cardHelperAvatar.style.backgroundColor= '';
   cardHelperAvatar.title= '';
@@ -363,6 +363,14 @@ function lessonEventListeners(card_id){
   cardUpvoteLesson.addEventListener('click', saveLessonUpvote.bind(event, card_id), false);
 
   cardDownvoteLesson.addEventListener('click', deleteLessonUpvote.bind(event, card_id), false);
+
+  review.addEventListener('click', function(){
+    window.location.href = route('giveReview', card_id);
+  });
+
+  allReviews.addEventListener('click', function(){
+    window.location.href = route('allReviews', card_id);
+  });
 }
 
 // fetch requests
@@ -569,12 +577,6 @@ var getHelperInfo = function (helper_id){
   }) .then(response => response.json())
   .then(data => showUserData(data) );
 }
-
-var loadFile = function(event) {
-  var image = document.getElementById('output');
-  image.src = URL.createObjectURL(event.target.files[0]);
-};
-
 
 // to do
 // function for randomizing color of avatar bal and remembering color for next use

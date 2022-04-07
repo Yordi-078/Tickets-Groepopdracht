@@ -25,10 +25,4 @@ class LessonCard extends Model
       return $this->belongToMany(User::class);
     }
 
-
-    public function sfdg()
-    {
-      
-    }
-
 }
