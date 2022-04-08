@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use App\Http\Middleware\Auth;
+use App\Models\UserRole;
 
 class CheckTeacher
 {
@@ -21,7 +22,7 @@ class CheckTeacher
             return redirect('/');
         }
 
-        else if (\Auth::user() && \Auth::user()->user_role_id == 2) 
+        else if (\Auth::user() && \Auth::user()->user_role_id == UserRole::TEACHER_ROLE) // user_role_id 2=teacher account
         {
             return $next($request);
         } 

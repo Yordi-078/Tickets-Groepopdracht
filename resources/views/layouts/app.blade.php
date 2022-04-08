@@ -12,7 +12,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/script.js') }}" defer></script>
-    @yield('second script')
+    @yield('second_script')
     @yield('calendar_script')
 
     <!-- Fonts -->

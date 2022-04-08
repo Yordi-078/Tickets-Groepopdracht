@@ -701,13 +701,16 @@ a{
 }
     
 .card-info-border{
-    border: 3px solid#D3D3D3;
+    border: 3px solid #D3D3D3;
     border-radius:10px;
     padding: 5px;
 }
 
 .home-user-popup{
     display: none;
+    position: relative;
+    /* top: 5vw; */
+    z-index: 3;
 }
 
 .avatar{
@@ -719,6 +722,8 @@ a{
     align-items: center;
     justify-content: center;
     margin-left: -3px;
+    border: 1px solid darkgray;
+    box-shadow: 3px 4px 4px 0px rgb(0 0 0 / 25%);
 }
 
 .avatar a , .user-popup-header-username a{
@@ -934,13 +939,16 @@ a{
 
 .calendar {
         position: relative;
-        margin: 0 auto;
+        display: none;
+        left:80px;
+        top: 75px;
         width: 300px;
         background-color: #fff;
         box-sizing: border-box;
         box-shadow: 0 5px 50px rgba(#000, 0.5);
         border-radius: 8px;
         border: black 1px solid;
+        
     }
 
     .calendar-date {
@@ -967,23 +975,10 @@ a{
         height: 25px;
         color: #262626;
     }
-    
-#userPopup{
-    background-color:#55add5;
-    margin-left:-310px;
-    margin-top:120px;
-    width:300px;
-    height:120px;
-    border-radius:25px;
-    color:black;
+
+  .card-avatar-container{
+    display: flex;
+    flex-direction: row;
+    margin-left:21px;
   }
-  
-  #userPopup>div{
-    margin-left:80px;
-    font-size:16px;
-  }
-  
-  #userPopupBol{
-    margin-left:50px;
-    margin-top:10px;
-  }
+
