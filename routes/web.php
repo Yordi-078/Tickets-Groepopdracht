@@ -83,4 +83,4 @@ Route::get('getUserInfo/{user_id}',  [CardController::class, 'getUserInfo'])->na
 
 Route::get('giveReview/{lessoncard_id}',  [LessonCardController::class, 'giveReview'])->name('giveReview')->middleware('CheckLoggedIn');
 Route::get('allReviews/{lessonCard_id}',  [LessonCardController::class, 'allReviews'])->name('allReviews')->middleware('CheckLoggedIn');
-
+Route::post('storeReview/{board_id}',  [LessonCardController::class, 'storeReview'])->name('storeReview')->middleware('CheckLoggedIn');

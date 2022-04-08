@@ -9,7 +9,7 @@ class Review extends Model
 {
     use HasFactory;
     protected $table = 'reviews';
-    public $timestamps = false;
+    public $timestamps = true;
     protected $fillable = [
         'text'
     ];

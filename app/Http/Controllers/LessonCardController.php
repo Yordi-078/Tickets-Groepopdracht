@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Board;
 use App\Models\LessonCard;
 use App\Models\LessonUpvotes;
+use App\Models\Review;
 use Illuminate\Support\Facades\Auth;
 
 class LessonCardController extends Controller
@@ -69,11 +70,26 @@ class LessonCardController extends Controller
         return response()->json($card);
     }
     
-    function giveReview($lessonCard_id){
-        return view('review.giveReview');
+    function giveReview($board_id){
+        return view('review.giveReview', ['board_id'=>$board_id]);
     }
 
     function allReviews($lessonCard_id){
         return view('review.allReviews');
+    }
+
+    function storeReview(Request $request, $board_id){
+        $this->validateReview();
+        $review = new Review(request(['text']));
+        $review->save();
+        
+        return redirect()->route('oneBoard', ['board_id'=>$board_id]); // check hoe je board_id meestuurt
+    }
+
+    protected function validateReview() 
+    {
+        return request()->validate([
+            'text' => ['required', 'min:1', 'max:80']
+        ]);
     }
 }
