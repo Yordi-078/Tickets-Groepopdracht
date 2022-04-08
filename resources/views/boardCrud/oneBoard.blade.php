@@ -131,7 +131,7 @@ $user_id = Auth::user()->id;
                         <div id="userPopupEmail" class="user-popup-header-email"></div>
                         <div id="userPopupRole" class="user-popup-header-role"></div>
                     </div>
-                </div>
+                </div>                
                         
                 <fieldset id="card-submit-form" class="card-submit-form card-info-border">
                     <input type="submit" class="card-submit-button" value="submit">
