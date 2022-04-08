@@ -37,6 +37,7 @@ const cardModal = document.getElementById('cardModal');
 const cardSpan = document.getElementById("close-popup");
 const userPopupEmail = document.getElementById("userPopupEmail");
 const userPopupRole = document.getElementById("userPopupRole");
+const UploadedCardImage = document.getElementById("uploaded-card-image")
 
 
 // uncatogorized 
@@ -199,7 +200,6 @@ var addHelper = function(helperId, helperName, card_id){
   cardHelperAvatar.style.backgroundColor= 'gray'
   cardHelperAvatar.title= helperName
   cardHelperAvatarInit.innerText= acronym
-  // document.getElementById('card-' + card_id + '-helper-avatar').onclick= showUserData('jan pieter son', 'jps', 'green');
   removeHelperBtn.style.display = "inline";
   addHelperBtn.style.display = "none";
 }
@@ -233,6 +233,7 @@ function resetQuestionPopup(){
   cardHelperAvatar.style.backgroundColor= '';
   cardHelperAvatar.title= '';
   cardHelperAvatarInit.innerText= '';
+  UploadedCardImage.src = '';
   removeHelperBtn.style.display = "none";
   addHelperBtn.style.display = "none";
 }
@@ -243,13 +244,15 @@ function resetLessonPopup(){
 }
 
 function fillQuestionPopup(data){
+  console.log(data);
   cardTitle.value = data[0]['name'];
   cardDescription.value = data[0]['description'];
   cardCreatedAt.innerText = data[0]['created_at'];
   var i = 0;
   if(data[0]['status'] == 'finished'){i = 1}
   cardStatus.options[i].selected = true;
-  //image
+  if(data[0]['image'] == '') return
+  UploadedCardImage.src = "{{ asset('images/' " + data[0]['image'] + ") }}";
 }
 
 function fillLessonPopup(data){
@@ -349,13 +352,18 @@ function eventListeners(card_id, helper_id, helper_name, user_id){
   cardDownvoteQuestion.addEventListener('click', removeUpvote.bind(event, card_id, user_id), false);
   //avatar popup
   cardHelperAvatar.addEventListener('click', getHelperInfo.bind(event, helper_id), false);
+  //deleteImage
+  var deleteImage = document.getElementById('deleteImage');
+  deleteImage.addEventListener('click', deleteCardImage.bind(event, 41), false);
   //submit
   cardInfoPopup.addEventListener('submit', function(event){
     event.preventDefault();
     var card_name = cardTitle.value
     var card_description = cardDescription.value
     var card_status = cardStatus.selectedOptions[0].value
+    saveImage(event, card_id);
     updateCard(card_id, card_name, card_description, card_status);
+    cardModal.style.display = "none";
   });
 }
 
@@ -555,6 +563,20 @@ function updateCard(card_id, card_name, card_description, card_status){
   });
 }
 
+function updateCardImage(card_id, image_id){
+  var url = route('updateCardImage', [card_id, image_id])
+    
+  fetch(url, {
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json, text-plain, *//* only 1 line  ",
+      "X-Requested-With": "XMLHttpRequest"
+    },
+    method: 'GET',
+    credentials: "same-origin",
+  });
+}
+
 var getHelperInfo = function (helper_id){
   var url = route('getUserInfo', helper_id);
   
@@ -569,12 +591,48 @@ var getHelperInfo = function (helper_id){
   }) .then(response => response.json())
   .then(data => showUserData(data) );
 }
+var deleteCardImage = function (image_id){
+  var url = route('deleteImage', image_id);
+  
+  fetch(url, {
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json, text-plain, *//* only 1 line  ",
+      "X-Requested-With": "XMLHttpRequest"
+    },
+    method: 'GET',
+    credentials: "same-origin",
+  });
+}
+/**
+ * uploaded images gets saved and map direction gets saved in the database
+ * 
+ * @param {} event gets form all data 
+ * @param {} meta gets meta key out of head
+ * @param {} formData makes a data object for image that can be send in the body for the post
+ */
+function saveImage(event, card_id){
+  var url = route('save')
+  var meta = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+  var formData = new FormData();
+  formData.append('image', event.target[5].files[0]);
+    
+  fetch(url, {
+    headers: {
+      'X-CSRF-TOKEN': meta,
+    },
+    method: 'POST',
+    credentials: "same-origin",
+    body: formData,
+    
+  }) .then(response => response.json())
+  .then(data => updateCardImage(card_id, data));
+}
 
 var loadFile = function(event) {
-  var image = document.getElementById('output');
-  image.src = URL.createObjectURL(event.target.files[0]);
+  unlink('public/images/tC6HJdYNUn58zQoDZJYjAaHszIlWCJFXZf6AmCo8.png');
+  UploadedCardImage.src = URL.createObjectURL(event.target.files[0]);
 };
-
 
 // to do
 // function for randomizing color of avatar bal and remembering color for next use

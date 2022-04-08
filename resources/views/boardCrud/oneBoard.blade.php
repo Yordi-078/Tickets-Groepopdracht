@@ -34,7 +34,7 @@ $user_id = Auth::user()->id;
         <div class="question-board-content" id="board-question-content-box" >
             @foreach($cards as $card)
             
-            <a onclick="showQuestionPopup('{{$card['user_id']}}','{{$card['helper_id']}}','{{Auth::user()->id}}','{{Auth::user()->name}}','{{$card['id']}}')" href="#" class="general-card card">
+            <a onclick="showQuestionPopup('{{$card['user_id']}}','{{$card['helper_id']}}','{{Auth::user()->id}}','{{Auth::user()->name}}','{{$card['id']}}')" class="general-card card">
                 <i class="far fa-eye"></i>
                 {{$card->status == "finished" ? "//" : ''}}
                 {{$card[""]}}
@@ -86,7 +86,7 @@ $user_id = Auth::user()->id;
         <span id="card-owner" class="card-info-owner"></span>
         <span id="close-popup" class="close">&times;</span>
                   
-            <form id="card-info-popup" class="card-info-popup">
+            <form id="card-info-popup" enctype="multipart/form-data" class="card-info-popup">
                       
                 @csrf
                 <fieldset class="general card-info-border">
@@ -98,9 +98,12 @@ $user_id = Auth::user()->id;
 
                 <fieldset id="image-uploader" class="image-uploader-box card-info-border">
                     <legend>image</legend>
-                    <input id="card-upload-image" type="file"  accept="image/*" name="image" onchange="loadFile(event)" accept=".gif,.jpg,.jpeg,.png">
-                    <div id='test-image'></div>
-                    <p><img id="output" width="200" /></p>
+                    <input type="file" name="image" placeholder="Choose image" id="card-upload-image" onchange="loadFile(event)" accept=".gif,.jpg,.jpeg,.png">
+                    @error('image')
+                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                    @enderror
+                    <p><img id="uploaded-card-image" width="150"/></p>
+                    <a id="deleteImage">delete</a>
                 </fieldset>
 
                 <fieldset class="progress-info card-info-border">

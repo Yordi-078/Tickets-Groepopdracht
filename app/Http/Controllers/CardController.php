@@ -10,6 +10,7 @@ use App\Models\CardUpvotes;
 use App\Models\LessonUpvotes;
 use App\Models\BoardUser;
 use App\Models\Card;
+use App\Models\Photo;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
@@ -115,6 +116,16 @@ class CardController extends Controller
           return response()->json($response[0]);
     }
 
+    public function updateCardImage($card_id, $image_id){
+        Card::updateOrCreate(
+            [
+                "id" => $card_id
+            ],[
+                "image" => $image_id,
+            ]
+        );
+    }
+
     public function saveHelper($card_id, $helperId)
     {
         Card::updateOrCreate(
@@ -199,6 +210,7 @@ class CardController extends Controller
 
     function getQuestionCardInfo($card_id){
         $response = Card::where('id', $card_id)->get();
+        $response[0]['image'] = Photo::find($response[0]['image'])->getImageUrl();
 
         return response()->json($response);
     }
