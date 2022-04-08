@@ -11,7 +11,7 @@ class Review extends Model
     protected $table = 'reviews';
     public $timestamps = true;
     protected $fillable = [
-        'text'
+        'lessonCard_id', 'text' 
     ];
 
     public function LessonCard()

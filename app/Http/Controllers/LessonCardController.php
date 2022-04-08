@@ -79,10 +79,14 @@ class LessonCardController extends Controller
     }
 
     function storeReview(Request $request, $board_id, $lessonCard_id){
-        dd($lessonCard_id);
+        var_dump($lessonCard_id);
         $this->validateReview();
-        $review = new Review(request(['text']));
-        $review->save();
+        Review::updateOrCreate(
+            [
+                "lessonCard_id" => $lessonCard_id, 
+                "text" => $request->input('text'),
+            ]
+        );
         
         return redirect()->route('oneBoard', ['board_id'=>$board_id]);
     }
