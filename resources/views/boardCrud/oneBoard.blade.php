@@ -21,7 +21,7 @@ $user_id = Auth::user()->id;
     @endif
     @if (Auth::user()->user_role_id == 2 || Auth::user()->user_role_id == 3 )
     <a id="add-student-button" class="main-button" href="{{ route('addTagsForm', $thisBoard['id']) }}">
-        {{ __('Tags') }}
+        {{ __('Tags Toevoegen') }}
     </a>
     @endif
     

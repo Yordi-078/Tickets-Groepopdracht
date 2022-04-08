@@ -10,6 +10,7 @@ use App\Models\CardUpvotes;
 use App\Models\LessonUpvotes;
 use App\Models\BoardUser;
 use App\Models\Card;
+use App\Models\Tags;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,27 +20,26 @@ class CardController extends Controller
     public function addACard($board_id)
     {
         $board = Board::where('id', $board_id)->get();
-        return view('boardCrud.createCard', ['board'=>$board, 'board_id'=>$board_id]);
+        $tags = Tags::where('board_id', $board_id)->get();
+        return view('boardCrud.createCard', ['board'=>$board, 'board_id'=>$board_id, 'tags'=>$tags]);
     }
 
     public function storeCard(Request $request, $board_id)
     { 
         $this->validateCard();
-
-        $name = $request->input('name');
-        $description = $request->input('description');
         $user_id = Auth::user()->id;
-
         date_default_timezone_set('Europe/Amsterdam');
-        
-        $card = new Card();
-        $card->name = $name;
-        $card->description = $description;
-        $card->user_id = $user_id;
-        $card->board_id = $board_id;
-        $card->created_at = Carbon::now();
-        $card->status = 'in_progress';
-        $card->save();
+
+        Card::updateOrCreate(
+            [
+                "name" => $request->name,
+                "user_id" => $user_id,
+                "board_id" => $board_id,
+                "description" => $request->description,
+                "created_at" => Carbon::now(),
+                "status" => "in_progress"
+            ]
+            );
 
         return redirect()->route('oneBoard', ['board_id'=>$board_id]);
     }

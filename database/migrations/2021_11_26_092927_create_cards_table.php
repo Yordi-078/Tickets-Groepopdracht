@@ -19,6 +19,7 @@ class CreateCardsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('board_id');
             $table->unsignedBigInteger('helper_id')->nullable();
+            $table->unsignedBigInteger('tag_id')->nullable();
             $table->text('description');
             $table->enum('status', ['in_progress', 'finished']);
             $table->string('image')->nullable();
