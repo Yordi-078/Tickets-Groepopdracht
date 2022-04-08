@@ -70,20 +70,21 @@ class LessonCardController extends Controller
         return response()->json($card);
     }
     
-    function giveReview($board_id){
-        return view('review.giveReview', ['board_id'=>$board_id]);
+    function giveReview($lessonCard_id, $board_id){
+        return view('review.giveReview', ['board_id'=>$board_id , 'lessonCard_id'=>$lessonCard_id]);
     }
 
     function allReviews($lessonCard_id){
         return view('review.allReviews');
     }
 
-    function storeReview(Request $request, $board_id){
+    function storeReview(Request $request, $board_id, $lessonCard_id){
+        dd($lessonCard_id);
         $this->validateReview();
         $review = new Review(request(['text']));
         $review->save();
         
-        return redirect()->route('oneBoard', ['board_id'=>$board_id]); // check hoe je board_id meestuurt
+        return redirect()->route('oneBoard', ['board_id'=>$board_id]);
     }
 
     protected function validateReview() 

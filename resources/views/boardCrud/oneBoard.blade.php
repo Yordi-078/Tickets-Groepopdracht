@@ -54,7 +54,7 @@ $user_id = Auth::user()->id;
         <div class="lesson-board-content" id="board-lesson-content-box" >
             @foreach($lessonCards as $lessonCard)
  
-                <a onclick="showPopup('{{$lessonCard['id']}}', '{{$lessonCard['user_id']}}', '{{Auth::user()->id}}')" class="toggle card general-card">
+                <a onclick="showPopup('{{$lessonCard['id']}}', '{{$lessonCard['user_id']}}', '{{Auth::user()->id}}', '{{$thisBoard['id']}}')" class="toggle card general-card">
                     <i class="far fa-eye"></i>
                     {{$lessonCard["name"]}}
                 </a> 

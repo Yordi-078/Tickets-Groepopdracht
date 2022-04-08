@@ -4,7 +4,8 @@
 
 <h2 id="reviewTitle" style="color:green;"> Wat vond u van de les? </h2>
 
-<form id="reviewForm" class="make-card-form" method="POST" action="{{ url('storeReview', $board_id) }}">
+<form id="reviewForm" class="make-card-form" method="POST" action="{{ url('storeReview', $board_id, $lessonCard_id) }}">
+
     @csrf
     <div id="smileys">
         <i id="bad" class="fa-regular fa-face-frown fa-6x"></i>

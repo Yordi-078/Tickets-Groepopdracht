@@ -13,4 +13,9 @@ class Review extends Model
     protected $fillable = [
         'text'
     ];
+
+    public function LessonCard()
+    {
+      return $this->belongsTo(LessonCard::class);
+    }
 }

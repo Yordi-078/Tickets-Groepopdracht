@@ -99,11 +99,11 @@ function showQuestionPopup(card_owner_id, helper_id, user_id, user_name, card_id
   setLoader(cardModal);
 }
 
-function showPopup(card_id, card_owner_id, user_id){
+function showPopup(card_id, card_owner_id, user_id, board_id){
   resetLessonPopup();
   getLessonCardInfo(card_id);
   //checkForDocent
-  lessonEventListeners(card_id);
+  lessonEventListeners(card_id, board_id);
   getLessonOwner(card_owner_id, user_id);
   getCardInfo(card_id);
   setLoader(lessonModal);
@@ -359,13 +359,13 @@ function eventListeners(card_id, helper_id, helper_name, user_id){
   });
 }
 
-function lessonEventListeners(card_id){
+function lessonEventListeners(card_id, board_id){
   cardUpvoteLesson.addEventListener('click', saveLessonUpvote.bind(event, card_id), false);
 
   cardDownvoteLesson.addEventListener('click', deleteLessonUpvote.bind(event, card_id), false);
 
   review.addEventListener('click', function(){
-    window.location.href = route('giveReview', card_id);
+    window.location.href = route('giveReview', [card_id, board_id]);
   });
 
   allReviews.addEventListener('click', function(){
