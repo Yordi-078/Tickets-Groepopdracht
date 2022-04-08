@@ -40,11 +40,11 @@
                     <!-- Authentication Links -->
                     @guest
                         @if (Route::has('login'))
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('Inloggen') }}</a>
                         @endif
 
                         @if (Route::has('register'))
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            <a class="nav-link" href="{{ route('register') }}">{{ __('Registreren') }}</a>
                         @endif
                     @else
                         <a id="" class="" href="{{ route('viewUserPage', Auth::user()->id) }} ">
@@ -52,13 +52,13 @@
                         </a>
                         @if (Auth::user()->user_role_id == 3 )
                             <a class="dropdown-item" href="{{ route('changeUserRoles') }}">
-                                {{ __('change user roles') }}
+                                {{ __('Gebruikersrollen wijzigen') }}
                             </a>
                         @endif
                         <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">
-                            {{ __('Logout') }}
+                            {{ __('Uitloggen') }}
                         </a>
 
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

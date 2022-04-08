@@ -4,7 +4,7 @@
 <div class="form-container">
   <div class="form-header">
     <div class="form-header-image"><i class="fa fa-chalkboard"></i></div>
-    <h2 style="margin-top:35px;">maak een board aan</h2>
+    <h2 style="margin-top:35px;">Bord aanmaken</h2>
   </div>
 
   <form  method="POST" action="{{url('/home')}}" class="create-board-form">
@@ -23,7 +23,7 @@
       <label for="description"><i class="fa fa-align-center"></i></label>
       <textarea type="description" id="description" name="description" class="form-input" maxlength="200"></textarea>
     </div>
-    <button type="submit" class="form-submit-button">Maak board aan</button>
+    <button type="submit" class="form-submit-button">Aanmaken</button>
   </form>
   
 </div>

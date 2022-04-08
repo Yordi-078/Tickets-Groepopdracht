@@ -16,17 +16,17 @@
 			</div>
 		</div>
 		<div class="user-list-collumn-indic four-columns">
-			<a>images</a>
-			<a>name</a>
-			<a>email</a>
-			<a>role</a>
+			<a>Afbeelding</a>
+			<a>Naam</a>
+			<a>E-mail</a>
+			<a>Rol</a>
 		</div>
 		<!-- <h1>search for users</h1> -->
 		<div class="user-list-content">
-			<div class="user-list-split">searched users</div>
+			<div class="user-list-split">Gezochte gebruikers</div>
 			<div id="user-list" class="user-list">
 			</div>
-			<div class="user-list-split">all users</div>
+			<div class="user-list-split">Alle gebruikers</div>
 			<div id="all-user-list" class="user-list">
 			</div>
 		</div>

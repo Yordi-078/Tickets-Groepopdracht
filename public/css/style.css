@@ -976,9 +976,65 @@ a{
         color: #262626;
     }
 
-  .card-avatar-container{
-    display: flex;
-    flex-direction: row;
-    margin-left:21px;
+  #userPopup{
+      background-color:#55add5;
+      margin-left:-310px;
+      margin-top:120px;
+      width:300px;
+      height:120px;
+      border-radius:25px;
+      color:black;
+  }
+  
+  #userPopup>div{
+    margin-left:80px;
+    font-size:16px;
+  }
+  
+  #userPopupBol{
+    margin-left:50px;
+    margin-top:10px;
   }
 
+  #reviewTitle{
+      position: relative;
+      display: flex; 
+      justify-content: center;
+      top: 100px;
+      left: 2%;
+  }
+
+  .reviewForm{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    top: 170px;
+    right: 140px;
+    height: 200px;
+  }
+
+  #reviewText{
+    position: relative;
+    bottom: 40px;
+    left:70px;
+  }
+
+  #bad{
+    color: red;
+  }
+
+  #neutral{
+    color: yellow;
+  }
+
+  #good{
+    color: green;
+  }
+
+  #smileys{
+    position: relative;
+    display: flex;
+    justify-content: space-evenly;
+    right: 10%;
+    top: 150px;
+  }

@@ -37,6 +37,8 @@ const cardModal = document.getElementById('cardModal');
 const cardSpan = document.getElementById("close-popup");
 const userPopupEmail = document.getElementById("userPopupEmail");
 const userPopupRole = document.getElementById("userPopupRole");
+const review = document.getElementById('reviewLink');
+const allReviews = document.getElementById('allReviewsLink');
 const UploadedCardImage = document.getElementById("uploaded-card-image")
 
 
@@ -100,11 +102,11 @@ function showQuestionPopup(card_owner_id, helper_id, user_id, user_name, card_id
   setLoader(cardModal);
 }
 
-function showPopup(card_id, card_owner_id, user_id){
+function showPopup(card_id, card_owner_id, user_id, board_id){
   resetLessonPopup();
   getLessonCardInfo(card_id);
   //checkForDocent
-  lessonEventListeners(card_id);
+  lessonEventListeners(card_id, board_id);
   getLessonOwner(card_owner_id, user_id);
   getCardInfo(card_id);
   setLoader(lessonModal);
@@ -126,7 +128,7 @@ function setHelperAndOwner(name, user_id, card_owner_id){
     var initials = name[1]['name'].match(/\b(\w)/g);
     var acronym = initials.join('');
     
-    helper.innerText = name[1]['name'] + ' is helping this card.';
+    helper.innerText = name[1]['name'] + ' is aan het helpen.';
     cardHelperAvatar.style.display = 'flex';
     cardHelperAvatar.style.backgroundColor= 'gray'
     cardHelperAvatar.title= name[1]['name']
@@ -195,7 +197,7 @@ var addHelper = function(helperId, helperName, card_id){
   var initials = helperName.match(/\b(\w)/g);
   var acronym = initials.join('');
 
-  helper.innerText = helperName + ' is helping this card.';
+  helper.innerText = helperName + ' is aan het helpen.';
   cardHelperAvatar.style.display = 'flex'
   cardHelperAvatar.style.backgroundColor= 'gray'
   cardHelperAvatar.title= helperName
@@ -211,7 +213,7 @@ var addUpvote = function(card_id, user_id){
 
 var removeHelper = function(card_id){
   deleteHelper(card_id);
-  helper.innerText = 'no one is helping this card';
+  helper.innerText = 'Niemand is aan het helpen.';
   cardHelperAvatar.style.display = 'none';
   cardHelperAvatar.style.backgroundColor= '';
   cardHelperAvatar.title= '';
@@ -228,7 +230,7 @@ var removeUpvote = function(card_id, user_id){
 function resetQuestionPopup(){
   cardAvatarContainer.innerHTML = '';
   cardOwner.innerText = '';
-  helper.innerText = 'no one is helping this card';
+  helper.innerText = 'Niemand is aan het helpen';
   cardHelperAvatar.style.display = 'none';
   cardHelperAvatar.style.backgroundColor= '';
   cardHelperAvatar.title= '';
@@ -367,10 +369,18 @@ function eventListeners(card_id, helper_id, helper_name, user_id){
   });
 }
 
-function lessonEventListeners(card_id){
+function lessonEventListeners(card_id, board_id){
   cardUpvoteLesson.addEventListener('click', saveLessonUpvote.bind(event, card_id), false);
 
   cardDownvoteLesson.addEventListener('click', deleteLessonUpvote.bind(event, card_id), false);
+
+  review.addEventListener('click', function(){
+    window.location.href = route('giveReview', [card_id, board_id]);
+  });
+
+  allReviews.addEventListener('click', function(){
+    window.location.href = route('allReviews', card_id);
+  });
 }
 
 // fetch requests
