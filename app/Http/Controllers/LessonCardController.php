@@ -79,7 +79,6 @@ class LessonCardController extends Controller
     }
 
     function storeReview(Request $request, $board_id, $lessonCard_id){
-        var_dump($lessonCard_id);
         $this->validateReview();
         Review::updateOrCreate(
             [
