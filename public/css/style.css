@@ -708,6 +708,9 @@ a{
 
 .home-user-popup{
     display: none;
+    position: relative;
+    /* top: 5vw; */
+    z-index: 3;
 }
 
 .avatar{
