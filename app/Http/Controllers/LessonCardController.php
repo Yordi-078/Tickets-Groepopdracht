@@ -75,7 +75,8 @@ class LessonCardController extends Controller
     }
 
     function allReviews($lessonCard_id){
-        return view('review.allReviews');
+        $review = Review::where('lessonCard_id', $lessonCard_id)->get();
+        return view('review.allReviews', ['reviews'=>$review, 'lessonCard'=>$lessonCard_id]);
     }
 
     function storeReview(Request $request, $board_id, $lessonCard_id){
