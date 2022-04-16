@@ -41,6 +41,13 @@ const review = document.getElementById('reviewLink');
 const allReviews = document.getElementById('allReviewsLink');
 const UploadedCardImage = document.getElementById("uploaded-card-image")
 
+const upvoteUserPopup = document.getElementById("upvotesContainer");
+const upvoterPopupBol = document.getElementById("upvoteUserAvatar");
+const upvoterPopupName = document.getElementById("upvoteUserPopupName");
+const upvoterPopupEmail = document.getElementById("upvoteUserPopupEmail");
+const upvoterPopupRole = document.getElementById("upvoteUserPopupRole");
+const upvoteUserAvatar = document.getElementById("card-upvoter-avatar");
+const upvoteUserPopupBol = document.getElementById("upvoteUserPopupBol");
 
 // uncatogorized 
 
@@ -97,6 +104,7 @@ function showQuestionPopup(card_owner_id, helper_id, user_id, user_name, card_id
   getQuestionCardInfo(card_id);
   checkForOwner(user_id, card_owner_id);
   eventListeners(card_id, user_id, user_name, user_id);
+  getUpvoters(card_id);
   getUsername(card_owner_id, helper_id, user_id);
   getCardAvatars(card_id, user_id, cardAvatarContainer);
   setLoader(cardModal);
@@ -125,20 +133,36 @@ function setHelperAndOwner(name, user_id, card_owner_id){
   }
 
   else{
-    var initials = name[1]['name'].match(/\b(\w)/g);
-    var acronym = initials.join('');
     
     helper.innerText = name[1]['name'] + ' is aan het helpen.';
     cardHelperAvatar.style.display = 'flex';
     cardHelperAvatar.style.backgroundColor= 'gray'
     cardHelperAvatar.title= name[1]['name']
     cardHelperAvatarInit.innerText= acronym
+    fillAvatarPopup(name[1]);
+    helper.innerText = name[1]['name'] + ' is aan het helpen.';
 
     if(user_id == name[1]['id'] || user_id == card_owner_id){
       removeHelperBtn.style.display = "inline";
     }
 
     addHelperBtn.style.display = 'none';
+  }
+}
+
+function fillAvatarPopup(data){
+  var initials = data['name'].match(/\b(\w)/g);
+    var acronym = initials.join('');
+
+    cardHelperAvatar.style.display = 'flex';
+    cardHelperAvatar.style.backgroundColor= 'gray'
+    cardHelperAvatar.title= data['name']
+    cardHelperAvatarInit.innerText= acronym
+}
+
+function avatarEventListener(data){
+  for (let i = 0; i < data.length; i++) {
+    document.getElementById("card-" + data[i]["id"] + "-upvote-avatar-init").addEventListener('click', fillAvatarPopup.bind(event, data), false);
   }
 }
 
@@ -292,7 +316,6 @@ function checkForOwner(user_id, card_owner_id){
 }
 
 var showUserData = function (data,color){
-  console.log(data['email'])
   var initials = data['name'].match(/\b(\w)/g);
   var acronym = initials.join('');
 
@@ -306,8 +329,31 @@ var showUserData = function (data,color){
   userPopupInit.innerText= data['name']
   userPopupName.title= data['name']
   userPopupEmail.innerText= data['email']
-  userPopupRole.innerText= data['user_role']
+  userPopupRole.innerText= data['user_role_id']
   userPopupAvatar.innerText= acronym;
+
+  // i need 
+  //username
+  //user id
+  //user color
+}
+
+var showUpvoterData = function (data,color){
+  var initials = data['name'].match(/\b(\w)/g);
+  var acronym = initials.join('');
+
+  if(upvoteUserPopup.style.display == 'block'){
+    upvoteUserPopup.style.display = 'none'
+    return
+  }
+  upvoteUserPopup.style.display='block';
+  upvoteUserPopupBol.style.backgroundColor= 'gray'
+  upvoteUserPopupBol.title= data['name']
+  userPopupInit.innerText= data['name']
+  upvoterPopupName.title= data['name']
+  upvoterPopupEmail.innerText= data['email']
+  upvoterPopupRole.innerText= data['user_role_id']
+  upvoterPopupBol.innerText= acronym;
 
   // i need 
   //username
@@ -637,6 +683,36 @@ function saveImage(event, card_id){
     
   }) .then(response => response.json())
   .then(data => updateCardImage(card_id, data));
+}
+
+var getUpvoterInfo = function (upvoter_id){
+  var url = route('getUpvoterInfo', upvoter_id);
+  
+  fetch(url, {
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json, text-plain, *//* only 1 line  ",
+      "X-Requested-With": "XMLHttpRequest"
+    },
+    method: 'GET',
+    credentials: "same-origin",
+  }) .then(response => response.json())
+  .then(data => showUpvoterData(data) );
+}
+
+var getUpvoters = function (card_id){
+  var url = route('getUpvoters', card_id);
+  
+  fetch(url, {
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json, text-plain, *//* only 1 line  ",
+      "X-Requested-With": "XMLHttpRequest"
+    },
+    method: 'GET',
+    credentials: "same-origin",
+  }) .then(response => response.json())
+  .then(data => avatarEventListener(data));
 }
 
 var loadFile = function(event) {
