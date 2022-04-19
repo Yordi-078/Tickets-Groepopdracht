@@ -119,15 +119,6 @@ $user_id = Auth::user()->id;
                     <input id="remove-helper-button" class="helper-buttons" type="button" value=" - ">
                     <input id="add-helper-button" class="helper-buttons" type="button"value=" + ">
                     <div title="" class="avatar" id="card-helper-avatar"><a id="card-helper-avatar-init" href="#"></a></div>
-                    <div id="userPopup" class="home-user-popup">
-                        <div class="user-popup-header">
-                            <div id="userPopupBol" title="" class="avatar user-popup-header-avatar"><a href="#" id="userPopupAvatar"></a></div>
-                            <br>
-                            <div id="userPopupName" class="user-popup-header-username"><a href="{{ route('viewUserPage', $user_id ) }}" id="userPopupInit"></a></div>
-                            <div id="userPopupEmail" class="user-popup-header-email"></div>
-                            <div id="userPopupRole" class="user-popup-header-role"></div>
-                        </div>
-                    </div>
                 </fieldset>
 
                 <div id="userPopup" class="home-user-popup">
