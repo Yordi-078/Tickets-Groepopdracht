@@ -1,5 +1,6 @@
-
-// all document.getElementById in const's
+/**
+ * all the const are created at the top for easy access 
+ */
 const loaderScreen = document.getElementById('loader-screen');
 const cardOwner = document.getElementById('card-owner');
 const removeHelperBtn = document.getElementById('remove-helper-button');
@@ -41,9 +42,9 @@ const review = document.getElementById('reviewLink');
 const allReviews = document.getElementById('allReviewsLink');
 const UploadedCardImage = document.getElementById("uploaded-card-image")
 
-
-// uncatogorized 
-
+/**
+ * open and close card and or lesson modal
+ */
 cardSpan.onclick = function() {
   cardModal.style.display = "none";
 }
@@ -62,12 +63,22 @@ window.onclick = function(event) {
 }
 
 
-// multiple use functions
+/**
+ * get random number between min and max
+ * @param {minimum number of random number} min 
+ * @param {maximum number of random number} max 
+ * @returns random number
+ */
 function randomNumber(min, max){
   var number = Math.floor(Math.random() * max) + min
   return number
 }
 
+/**
+ * show the loader for 700 to 800 seconds
+ * and show 'theModal' after loader
+ * @param {the modal that should be displayed after loader} theModal 
+ */
 function setLoader(theModal){
   loaderScreen.style.display = 'block';
   setTimeout(() => {
@@ -76,21 +87,34 @@ function setLoader(theModal){
   }, randomNumber(700, 800));
 }
 
-// single use functions
-function toggleBoard() {
+
+/**
+ * toggle the cards of target to row or blocks
+ * @param {the id of the parent element} target 
+ * @param {the id of the toggle button} button 
+ */
+function toggleBoard(target, button) {
   var boards = document.getElementsByClassName("card");
   for (i = 0; i < boards.length; i++) {
       boards[i].classList.toggle('card-row');
   }
-  if(document.getElementById("home-board-content").classList.contains("flex-rows")){
-     document.getElementById("toggle-board").innerHTML = '<i class="fas fa-bars"></i>'; 
+  if(document.getElementById(target).classList.contains("flex-rows")){
+     document.getElementById(button).innerHTML = '<i class="fas fa-bars"></i>'; 
   }
   else{
-      document.getElementById("toggle-board").innerHTML = '<i class="fas fa-th"></i>'; 
+      document.getElementById(button).innerHTML = '<i class="fas fa-th"></i>'; 
   }
-  document.getElementById("home-board-content").classList.toggle("flex-rows");
+  document.getElementById(target).classList.toggle("flex-rows");
 }
 
+/**
+ * all functions for questionpopup
+ * @param {int} card_owner_id
+ * @param {int} helper_id 
+ * @param {int} user_id 
+ * @param {string} user_name 
+ * @param {int} card_id 
+ */
 function showQuestionPopup(card_owner_id, helper_id, user_id, user_name, card_id){
   if(!helper_id) {helper_id = 'empty'}
   resetQuestionPopup();
@@ -102,6 +126,13 @@ function showQuestionPopup(card_owner_id, helper_id, user_id, user_name, card_id
   setLoader(cardModal);
 }
 
+/**
+ * all functions for lessonpopup
+ * @param {int} card_id 
+ * @param {int} card_owner_id 
+ * @param {int} user_id 
+ * @param {int} board_id 
+ */
 function showPopup(card_id, card_owner_id, user_id, board_id){
   resetLessonPopup();
   getLessonCardInfo(card_id);
@@ -125,14 +156,8 @@ function setHelperAndOwner(name, user_id, card_owner_id){
   }
 
   else{
-    var initials = name[1]['name'].match(/\b(\w)/g);
-    var acronym = initials.join('');
-    
+    fillAvatarPopup(name[1]);
     helper.innerText = name[1]['name'] + ' is aan het helpen.';
-    cardHelperAvatar.style.display = 'flex';
-    cardHelperAvatar.style.backgroundColor= 'gray'
-    cardHelperAvatar.title= name[1]['name']
-    cardHelperAvatarInit.innerText= acronym
 
     if(user_id == name[1]['id'] || user_id == card_owner_id){
       removeHelperBtn.style.display = "inline";
@@ -146,6 +171,16 @@ function setOwner(name, user_id, card_owner_id){
   console.log(name)
   lessonOwner.innerText = name[0]['name'];
 
+}
+
+function fillAvatarPopup(data){
+  var initials = data['name'].match(/\b(\w)/g);
+    var acronym = initials.join('');
+    
+    cardHelperAvatar.style.display = 'flex';
+    cardHelperAvatar.style.backgroundColor= 'gray'
+    cardHelperAvatar.title= data['name']
+    cardHelperAvatarInit.innerText= acronym
 }
 
 // function showLessonData(data){
@@ -246,7 +281,7 @@ function resetLessonPopup(){
 }
 
 function fillQuestionPopup(data){
-  console.log(data);
+
   cardTitle.value = data[0]['name'];
   cardDescription.value = data[0]['description'];
   cardCreatedAt.innerText = data[0]['created_at'];
@@ -254,7 +289,10 @@ function fillQuestionPopup(data){
   if(data[0]['status'] == 'finished'){i = 1}
   cardStatus.options[i].selected = true;
   if(data[0]['image'] == '') return
+  // <===================================================================================>
+  // de volgende regel werkt niet de afbeelding wordt nog niet opgehaald
   UploadedCardImage.src = "{{ asset('images/' " + data[0]['image'] + ") }}";
+  // <===================================================================================>
 }
 
 function fillLessonPopup(data){

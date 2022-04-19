@@ -403,7 +403,7 @@ a{
 }
 
 .card-row{
-    width:100% !important;
+    width:96% !important;
 }
 
 .general-card{
@@ -492,7 +492,6 @@ a{
     top:12%;
 }
 
-
 .loader-wrap {
 	position: absolute;
 	left: 50%;
@@ -524,31 +523,31 @@ a{
     }
   }
 
-.letter-2{
+.letter-1{
   animation-delay:.1s;
 }
-.letter-3{
+.letter-2{
   animation-delay:.2s;
 }
-.letter-4{
+.letter-3{
   animation-delay:.3s;
 }
-.letter-5{
+.letter-4{
   animation-delay:.4s;
 }
-.letter-6{
+.letter-5{
   animation-delay:.5s;
 }
-.letter-7{
+.letter-6{
   animation-delay:.6s;
 }
-.letter-8{
+.letter-7{
   animation-delay:.7s;
 }
-.letter-9{
+.letter-8{
   animation-delay:.8s;
 }
-.letter-10{
+.letter-9{
   animation-delay:.9s;
 }
 /* end loader styling */
@@ -975,26 +974,6 @@ a{
         height: 25px;
         color: #262626;
     }
-
-  #userPopup{
-      background-color:#55add5;
-      margin-left:-310px;
-      margin-top:120px;
-      width:300px;
-      height:120px;
-      border-radius:25px;
-      color:black;
-  }
-  
-  #userPopup>div{
-    margin-left:80px;
-    font-size:16px;
-  }
-  
-  #userPopupBol{
-    margin-left:50px;
-    margin-top:10px;
-  }
 
   #reviewTitle{
       position: relative;

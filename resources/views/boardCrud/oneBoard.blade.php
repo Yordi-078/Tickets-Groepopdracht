@@ -26,7 +26,7 @@ $user_id = Auth::user()->id;
     <div class="question-board-container">
         <div class="question-board-container-header">
 
-            <button id="toggle-board" class="home-board-buttons" onclick="toggleBoard()"><i class="fas fa-bars"></i></button>
+            <button id="toggle-card" class="home-board-buttons" onclick="toggleBoard('board-question-content-box', 'toggle-card')"><i class="fas fa-bars"></i></button>
             <a href="{{ url('boardCrud/createCard', $thisBoard['id']) }}" class="home-board-buttons">Kaart toevoegen</a>
 
         </div>
@@ -67,14 +67,14 @@ $user_id = Auth::user()->id;
 <div id="loader-screen" class="modal">
     <div class="loader-screen">
         <div class="loader-wrap">
-          <span class="loader letter-1">l</span>
-          <span class="loader letter-2">a</span>
-          <span class="loader letter-3">d</span>
-          <span class="loader letter-4">e</span>
-          <span class="loader letter-5">n</span>
+          <span class="loader letter-0">l</span>
+          <span class="loader letter-1">a</span>
+          <span class="loader letter-2">d</span>
+          <span class="loader letter-3">e</span>
+          <span class="loader letter-4">n</span>
+          <span class="loader letter-5">.</span>
           <span class="loader letter-8">.</span>
           <span class="loader letter-9">.</span>
-          <span class="loader letter-10">.</span>
         </div>
     </div>
 </div>
@@ -119,6 +119,15 @@ $user_id = Auth::user()->id;
                     <input id="remove-helper-button" class="helper-buttons" type="button" value=" - ">
                     <input id="add-helper-button" class="helper-buttons" type="button"value=" + ">
                     <div title="" class="avatar" id="card-helper-avatar"><a id="card-helper-avatar-init" href="#"></a></div>
+                    <div id="userPopup" class="home-user-popup">
+                        <div class="user-popup-header">
+                            <div id="userPopupBol" title="" class="avatar user-popup-header-avatar"><a href="#" id="userPopupAvatar"></a></div>
+                            <br>
+                            <div id="userPopupName" class="user-popup-header-username"><a href="{{ route('viewUserPage', $user_id ) }}" id="userPopupInit"></a></div>
+                            <div id="userPopupEmail" class="user-popup-header-email"></div>
+                            <div id="userPopupRole" class="user-popup-header-role"></div>
+                        </div>
+                    </div>
                 </fieldset>
 
                 <div id="userPopup" class="home-user-popup">
