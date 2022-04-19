@@ -125,6 +125,26 @@ class CardController extends Controller
             ]
         );
     }
+    
+    public function getUpvoterInfo($user_id)
+    {
+        $response = User::where('id', $user_id)->get();
+
+        return response()->json($response[0]);
+    }
+
+    public function getUpvoters($card_id)
+    {
+        $upvoters_ids = CardUpvotes::where('card_id', $card_id)->get('user_id');
+        $upvoters = [];
+
+        for ($i=0; $i < count($upvoters_ids); $i++) { 
+           $upvoter = User::where('id', $upvoters_ids[$i]['user_id'])->get();
+           array_push($upvoters, $upvoter[0]);
+        }
+
+        return response()->json($upvoters);
+    }
 
     public function saveHelper($card_id, $helperId)
     {

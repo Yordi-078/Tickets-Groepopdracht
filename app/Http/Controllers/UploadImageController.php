@@ -38,7 +38,6 @@ class UploadImageController extends Controller
     }
 
     public function deleteImage($image_id){
-        var_dump('dit is de functie die je zoekt.');
         $image = Photo::where('id', $image_id)->get();
 
         var_dump('dit is de image 0 path die je zoekt.');
