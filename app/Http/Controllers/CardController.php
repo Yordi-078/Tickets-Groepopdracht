@@ -123,9 +123,9 @@ class CardController extends Controller
             ],[
                 "image" => $image_id,
             ]
-            );
+        );
     }
-
+    
     public function getUpvoterInfo($user_id)
     {
         $response = User::where('id', $user_id)->get();
