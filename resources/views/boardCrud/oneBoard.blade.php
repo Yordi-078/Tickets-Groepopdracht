@@ -132,11 +132,15 @@ $user_id = Auth::user()->id;
 
                 <div id="userPopup" class="home-user-popup">
                     <div class="user-popup-header">
-                        <div id="userPopupBol" title="" class="avatar user-popup-header-avatar"><a href="#" id="userPopupAvatar"></a></div>
+                        <div id="userPopupBol" title="" class="avatar user-popup-header-avatar"><a id="userPopupAvatar"></a></div>
                         <br>
-                        <div id="userPopupName" class="user-popup-header-username"><a href="{{ route('viewUserPage', $user_id ) }}" id="userPopupInit"></a></div>
-                        <div id="userPopupEmail" class="user-popup-header-email"></div>
+                        <div id="userPopupName" class="user-popup-header-username"><a id="userPopupInit"></a></div>
                         <div id="userPopupRole" class="user-popup-header-role"></div>
+                        <br><br>
+                        <a href="{{ route('viewUserPage', $user_id ) }}">Profiel Pagina</a>
+                        <hr>
+                        <div id="userPopupEmail" class="user-popup-header-email"></div> 
+                        <hr>
                     </div>
                 </div>                
                         
@@ -151,8 +155,15 @@ $user_id = Auth::user()->id;
                         <a id="card-upvote-question" class="vote-thumb"><i class="fas fa-thumbs-up"></i></a>
                         <a id="question-upvote-count" class="vote-count">-</a>
                         <a id="card-downvote-question" class="vote-thumb"><i class="fas fa-thumbs-down"></i></a>
+                        <div title="" class="avatar" id="card-upvoter-avatar"><a id="card-upvoter-avatar-init" href="#"></a></div>
                     </div>
-                    <div id="cardAvatarContainer" class="card-avatar-container"></div>
+                    
+                    <div id="cardAvatarContainer" class="card-avatar-container">
+                        <div id="upvoteUserPopupBol" title="" class="upvote-user-popup-bol"><a href="#" id="upvoteUserAvatar"></a></div>
+                        <div id="upvoteUserPopupName" class="upvote-user-popup-username"><a href="{{ route('viewUserPage', $user_id ) }}">Name</a></div>
+                        <div id="upvoteUserPopupEmail" class="upvote-user-popup-email"><p>Email</p></div>
+                        <div id="upvoteUserPopupRole" class="upvote-user-popup-role"><p>Role</p></div>
+                    </div>
                 </fieldset>
 
             </form>
