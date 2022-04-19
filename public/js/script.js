@@ -127,9 +127,9 @@ function showQuestionPopup(card_owner_id, helper_id, user_id, user_name, card_id
   getQuestionCardInfo(card_id);
   checkForOwner(user_id, card_owner_id);
   eventListeners(card_id, user_id, user_name, user_id);
-  getUpvoters(card_id);
   getUsername(card_owner_id, helper_id, user_id);
   getCardAvatars(card_id, user_id, cardAvatarContainer);
+  getUpvoters(card_id);
   setLoader(cardModal);
 }
 
@@ -163,6 +163,9 @@ function setHelperAndOwner(name, user_id, card_owner_id){
   }
 
   else{
+
+    var initials = name[1]['name'].match(/\b(\w)/g);
+    var acronym = initials.join('');
     
     helper.innerText = name[1]['name'] + ' is aan het helpen.';
     cardHelperAvatar.style.display = 'flex';
@@ -180,19 +183,10 @@ function setHelperAndOwner(name, user_id, card_owner_id){
   }
 }
 
-function fillAvatarPopup(data){
-  var initials = data['name'].match(/\b(\w)/g);
-    var acronym = initials.join('');
-
-    cardHelperAvatar.style.display = 'flex';
-    cardHelperAvatar.style.backgroundColor= 'gray'
-    cardHelperAvatar.title= data['name']
-    cardHelperAvatarInit.innerText= acronym
-}
 
 function avatarEventListener(data){
   for (let i = 0; i < data.length; i++) {
-    document.getElementById("card-" + data[i]["id"] + "-upvoter-avatar-init").addEventListener('click', fillAvatarPopup.bind(event, data), false);
+    document.getElementById("card-" + data[i]['id'] + "-upvote-avatar-init").addEventListener('click', showUserData.bind(event, data[i]), false);
   }
 }
 
@@ -205,13 +199,12 @@ function setOwner(name, user_id, card_owner_id){
 function fillAvatarPopup(data){
   var initials = data['name'].match(/\b(\w)/g);
     var acronym = initials.join('');
-    
+
     cardHelperAvatar.style.display = 'flex';
     cardHelperAvatar.style.backgroundColor= 'gray'
     cardHelperAvatar.title= data['name']
     cardHelperAvatarInit.innerText= acronym
 }
-
 // function showLessonData(data){
 // document.getElementById('lessoncard-title').value = data[0]['name'];
 // document.getElementById('lessoncard-description').value = data[0]['name'];
@@ -373,11 +366,6 @@ var showUserData = function (data,color){
   userPopupEmail.innerText= data['email']
   userPopupRole.innerText= data['user_role_id']
   userPopupAvatar.innerText= acronym;
-
-  // i need 
-  //username
-  //user id
-  //user color
 }
 
 var showUpvoterData = function (data,color){

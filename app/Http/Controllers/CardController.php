@@ -230,7 +230,9 @@ class CardController extends Controller
 
     function getQuestionCardInfo($card_id){
         $response = Card::where('id', $card_id)->get();
-        $response[0]['image'] = Photo::find($response[0]['image'])->getImageUrl();
+        if($response[0]['image'] != NULL){
+           $response[0]['image'] = Photo::find($response[0]['image'])->getImageUrl(); 
+        }
 
         return response()->json($response);
     }
