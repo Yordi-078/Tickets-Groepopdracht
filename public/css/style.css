@@ -1019,7 +1019,7 @@ a{
     left:70px;
   }
 
-  #bad{
+  /* #bad{
     color: red;
   }
 
@@ -1037,7 +1037,7 @@ a{
     justify-content: space-evenly;
     right: 10%;
     top: 150px;
-  }
+  } */
 
   /* .review{
     position: relative;
@@ -1152,4 +1152,84 @@ a{
     .comment{
     width:68%;
     float:right;
+    
     }
+    
+    form 
+        #smileys 
+            input[type="radio"] {
+                -webkit-appearance: none;
+                position: relative;
+                top: 120px;
+                left: 340px;
+                width: 90px;
+                height: 90px;
+                border: none;
+                cursor: pointer;
+                transition: border .2s ease;
+                filter: grayscale(100%);
+                margin: 0 5px;
+                transition: all .2s ease;
+            }
+            form #smileys input[type="radio"]:hover,
+            form #smileys input[type="radio"]:checked {
+                    filter:	grayscale(100%);
+                }
+                
+                form #smileys input[type="radio"]:focus {
+                    outline: 0;
+                }
+                
+                form #smileys input[type="radio"].happy {
+                    background: url('https://res.cloudinary.com/turdlife/image/upload/v1492864443/happy_ampvnc.svg') center;
+                    background-size: cover;
+                }
+                form #smileys input[type="radio"].happy:focus,
+                form #smileys input[type="radio"].happy:hover,
+                form #smileys input[type="radio"].happy:checked{
+                    filter: invert(39%) sepia(16%) saturate(614%) hue-rotate(316deg) brightness(97%) contrast(89%);
+                }
+                form #smileys input[type="radio"].neutral {
+                    background: url('https://res.cloudinary.com/turdlife/image/upload/v1492864443/neutral_t3q8hz.svg') center;
+                    background-size: cover;
+                }
+                form #smileys input[type="radio"].neutral:focus,
+                form #smileys input[type="radio"].neutral:hover,
+                form #smileys input[type="radio"].neutral:checked{
+                    filter: invert(0%) sepia(1%) saturate(914%) hue-rotate(240deg) brightness(97%) contrast(100%);
+                }
+                form #smileys input[type="radio"].sad {
+                    background: url('https://res.cloudinary.com/turdlife/image/upload/v1492864443/sad_bj1tuj.svg') center;
+                    background-size: cover;
+                }
+                form #smileys input[type="radio"].sad:focus, 
+                form #smileys input[type="radio"].sad:hover,
+                form #smileys input[type="radio"].sad:checked{
+                    filter: invert(39%) sepia(16%) saturate(614%) hue-rotate(156deg) brightness(97%) contrast(89%);
+                }
+        
+        form #smileys input[type="radio"]:hover {
+            color: #666;
+        }
+        span {
+            color: #c0392b;
+        }
+
+#reviewLink{
+    position: relative;
+    top: 10px;
+}
+
+#allReviewsLink{
+    position: relative;
+    top: 35px;
+    right: 150px;
+}
+
+#reviewLink:hover{
+    color: green;
+}
+
+#allReviewsLink:hover{
+    color: green;
+}
