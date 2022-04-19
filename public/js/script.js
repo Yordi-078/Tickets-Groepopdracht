@@ -192,7 +192,7 @@ function fillAvatarPopup(data){
 
 function avatarEventListener(data){
   for (let i = 0; i < data.length; i++) {
-    document.getElementById("card-" + data[i]["id"] + "-upvote-avatar-init").addEventListener('click', fillAvatarPopup.bind(event, data), false);
+    document.getElementById("card-" + data[i]["id"] + "-upvoter-avatar-init").addEventListener('click', fillAvatarPopup.bind(event, data), false);
   }
 }
 
@@ -310,7 +310,6 @@ function resetLessonPopup(){
 }
 
 function fillQuestionPopup(data){
-
   cardTitle.value = data[0]['name'];
   cardDescription.value = data[0]['description'];
   cardCreatedAt.innerText = data[0]['created_at'];
