@@ -1039,7 +1039,7 @@ a{
     left:70px;
   }
 
-  #bad{
+  /* #bad{
     color: red;
   }
 
@@ -1057,7 +1057,203 @@ a{
     justify-content: space-evenly;
     right: 10%;
     top: 150px;
-  }
+  } */
+
+  /* .review{
+    position: relative;
+    top: 100px;
+    left: 100px;
+    top: 30px;
+    font-size: 50px;
+  } */
+
+  .main-section{
+    background:#FFFFFF;
+    width:80%;
+    margin: 0 auto;
+    padding: 10px;
+    margin-top:50px;
+    box-shadow:0px 2px 7px 1px #aa9191;
+    }
+    .hedding-title h1{
+    margin:0px;
+    padding:0px 0px 10px 0px;
+    font-size:25px;
+    }
+    .average-rating{
+    float:left;
+    text-align: center;
+    width:30%;
+    }
+    .average-rating h2{
+    margin:0px;
+    font-size:80px;
+    }
+    .average-rating p{
+    margin:0px;
+    font-size:20px;
+    }
+    .fa-star,.fa-star-o,.fa-star-half-o{
+    color:#FDC91B;
+    font-size:25px !important;
+    }
+    .progress,.progress-2,.progress-3,.progress-4,.progress-5{
+    background:#F5F5F5;
+    border-radius: 13px;
+    height:18px;
+    width:97%;
+    padding:3px;
+    margin:5px 0px 3px 0px;
+    }
+    .progress:after,.progress-2:after,.progress-3:after,.progress-4:after,.progress-5:after{
+    content: '';
+    display: block;
+    background: #337AB7;
+    width:80%;
+    height: 100%;
+    border-radius: 9px;
+    }
+    .progress-2:after{
+    width: 60%;
+    }
+    .progress-3:after{
+    width:40%;
+    }
+    .progress-4:after{
+    width:20%;
+    }
+    .progress-5:after{
+    width:10%;
+    }
+    .loder-ratimg{
+    display: inline-block;
+    width:40%;
+    }
+    .start-part{
+    float:right;
+    width:30%;
+    text-align: center;
+    }
+    .start-part span{
+    color:#337AB7;
+    font-size:23px;
+    }
+    .reviews h1{
+    margin:10px 0px 20px 30px;
+    }
+    .user-img img{
+    height: 80px;
+    width: 80px;
+    border:1px solid blue;
+    border-radius: 50%;
+    }
+    .user-img-part{
+    width:30%;
+    float:left;
+    }
+    .user-img{
+    width:48%;
+    float:left;
+    text-align: center;
+    }
+    .user-text{
+    float:left;
+    }
+    .user-text h4,.user-text p{
+    margin:0px 0px 5px 0px;
+    }
+    .user-text p{
+    font-size: 20px;
+    font-weight: bold;
+    }
+    .user-text h4,.user-text span{
+    color:#B3B5B4;
+    }
+    .comment{
+    width:68%;
+    float:right;
+    
+    }
+    
+    form 
+        #smileys 
+            input[type="radio"] {
+                -webkit-appearance: none;
+                position: relative;
+                top: 120px;
+                left: 340px;
+                width: 90px;
+                height: 90px;
+                border: none;
+                cursor: pointer;
+                transition: border .2s ease;
+                filter: grayscale(100%);
+                margin: 0 5px;
+                transition: all .2s ease;
+            }
+            form #smileys input[type="radio"]:hover,
+            form #smileys input[type="radio"]:checked {
+                    filter:	grayscale(100%);
+                }
+                
+                form #smileys input[type="radio"]:focus {
+                    outline: 0;
+                }
+                
+                form #smileys input[type="radio"].happy {
+                    background: url('https://res.cloudinary.com/turdlife/image/upload/v1492864443/happy_ampvnc.svg') center;
+                    background-size: cover;
+                }
+                form #smileys input[type="radio"].happy:focus,
+                form #smileys input[type="radio"].happy:hover,
+                form #smileys input[type="radio"].happy:checked{
+                    filter: invert(39%) sepia(16%) saturate(614%) hue-rotate(316deg) brightness(97%) contrast(89%);
+                }
+                form #smileys input[type="radio"].neutral {
+                    background: url('https://res.cloudinary.com/turdlife/image/upload/v1492864443/neutral_t3q8hz.svg') center;
+                    background-size: cover;
+                }
+                form #smileys input[type="radio"].neutral:focus,
+                form #smileys input[type="radio"].neutral:hover,
+                form #smileys input[type="radio"].neutral:checked{
+                    filter: invert(0%) sepia(1%) saturate(914%) hue-rotate(240deg) brightness(97%) contrast(100%);
+                }
+                form #smileys input[type="radio"].sad {
+                    background: url('https://res.cloudinary.com/turdlife/image/upload/v1492864443/sad_bj1tuj.svg') center;
+                    background-size: cover;
+                }
+                form #smileys input[type="radio"].sad:focus, 
+                form #smileys input[type="radio"].sad:hover,
+                form #smileys input[type="radio"].sad:checked{
+                    filter: invert(39%) sepia(16%) saturate(614%) hue-rotate(156deg) brightness(97%) contrast(89%);
+                }
+        
+        form #smileys input[type="radio"]:hover {
+            color: #666;
+        }
+        span {
+            color: #c0392b;
+        }
+
+#reviewLink{
+    position: relative;
+    top: 10px;
+}
+
+#allReviewsLink{
+    position: relative;
+    top: 35px;
+    right: 150px;
+}
+
+#reviewLink:hover{
+    color: green;
+}
+
+#allReviewsLink:hover{
+    color: green;
+}
+
 .card-avatar-container{
     display: flex;
     flex-direction: row;

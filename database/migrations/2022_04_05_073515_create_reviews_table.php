@@ -16,8 +16,13 @@ class CreateReviewsTable extends Migration
         Schema::create('reviews', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('lessonCard_id');
+            $table->integer('rating');
             $table->text('text');
             $table->timestamps();
+            $table->foreign('lessonCard_id')
+                ->references('id')
+                ->on('lesson_cards')
+                ->onDelete('cascade');
         });
     }
 

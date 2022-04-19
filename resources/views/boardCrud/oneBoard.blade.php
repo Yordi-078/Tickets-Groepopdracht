@@ -190,8 +190,12 @@ $user_id = Auth::user()->id;
                 <div id="lessonAvatarContainer" class="card-avatar-container">
                 </div>
             </fieldset>
+
+            <fieldset class="card-info-border">
+            <legend>Reviews</legend>
             <a id="reviewLink"> Laat een review achter </a>
             <a id="allReviewsLink"> Alle Reviews </a>
+            </fieldset>
         </form>
     </div>
 </div>

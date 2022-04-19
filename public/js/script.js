@@ -51,6 +51,10 @@ const upvoteUserPopupBol = document.getElementById("upvoteUserPopupBol");
 
 // uncatogorized 
 
+const INPUTS = document.querySelectorAll('#smileys input');
+const updateValue = e => document.querySelector('#result').innerHTML = e.target.value;
+INPUTS.forEach(el => el.addEventListener('click', e => updateValue(e)));
+
 cardSpan.onclick = function() {
   cardModal.style.display = "none";
 }
