@@ -1231,9 +1231,6 @@ a{
         form #smileys input[type="radio"]:hover {
             color: #666;
         }
-        span {
-            color: #c0392b;
-        }
 
 #reviewLink{
     position: relative;
