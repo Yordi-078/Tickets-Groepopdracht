@@ -10,6 +10,8 @@ use App\Models\CardUpvotes;
 use App\Models\LessonUpvotes;
 use App\Models\BoardUser;
 use App\Models\Card;
+use App\Models\CardTags;
+
 use App\Models\Tags;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -29,8 +31,8 @@ class CardController extends Controller
         $this->validateCard();
         $user_id = Auth::user()->id;
         date_default_timezone_set('Europe/Amsterdam');
-
-        Card::updateOrCreate(
+        
+        $object = Card::updateOrCreate(
             [
                 "name" => $request->name,
                 "user_id" => $user_id,
@@ -41,7 +43,27 @@ class CardController extends Controller
             ]
             );
 
+            $card_id = $object->id;
+
+            
+
+            $this->storeCardTag($request->tag_id, $card_id, $board_id);
+            
+        
+        
         return redirect()->route('oneBoard', ['board_id'=>$board_id]);
+    }
+
+    public function storeCardTag($tag_id, $card_id, $board_id){
+        for($i =0; $i < count($tag_id); $i++) {
+             CardTags::updateOrCreate(
+                 [
+                    "tag_id" => $tag_id[$i],
+                    "card_id" => $card_id,
+                    "board_id" => $board_id, 
+                 ]
+                 );
+                 }
     }
 
     protected function validateCard() 
