@@ -408,6 +408,7 @@ function showCardAvatars(data, user_id, targetBox){
     avatar.className = "avatar";
     avatar.title = data[i]['name'];
     avatar.style.backgroundColor = 'grey';
+    avatar.addEventListener('click', showUserData.bind(event, data[i]), false);
     targetBox.appendChild(avatar);
 
     const avatarInit = document.createElement("a");
