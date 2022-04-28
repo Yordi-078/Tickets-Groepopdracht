@@ -24,6 +24,7 @@ const lessonOwner = document.getElementById('lesson-owner');
 const lessonTitle = document.getElementById('lesson-title');
 const lessonDescription = document.getElementById('lesson-description');
 const lessonStartDate = document.getElementById('lesson-start-date');
+const lessonCardSubmitForm = document.getElementById('lessonCard-submit-form');
 const userPopup = document.getElementById('userPopup');
 const userPopupBol = document.getElementById('userPopupBol');
 const userPopupInit = document.getElementById('userPopupInit');
@@ -144,13 +145,14 @@ function showQuestionPopup(card_owner_id, helper_id, user_id, user_name, card_id
  * @param {int} user_id 
  * @param {int} board_id 
  */
-function showPopup(card_id, card_owner_id, user_id, board_id){
+function showPopup(lessonCard_id, card_owner_id, user_id, board_id){
   resetLessonPopup();
-  getLessonCardInfo(card_id);
+  getLessonCardInfo(lessonCard_id);
   //checkForDocent
-  lessonEventListeners(card_id, board_id);
   getLessonOwner(card_owner_id, user_id);
-  getCardInfo(card_id);
+  checkforLessonCardOwner(user_id, card_owner_id);
+  getCardInfo(lessonCard_id);
+  lessonEventListeners(lessonCard_id, board_id);
   setLoader(lessonModal);
 }
 
@@ -352,6 +354,21 @@ function checkForOwner(user_id, card_owner_id){
   //make eventListener enabled
   cardUpvoteQuestion.style.display = 'flex';
   cardDownvoteQuestion.style.display = 'none';
+
+}
+
+function checkforLessonCardOwner(user_id, card_owner_id){
+  lessonTitle.readOnly = false;
+  lessonDescription.readOnly = false;
+  //make eventListener enabled
+  lessonCardSubmitForm.style.display = 'grid';
+  //make eventListener disabled
+  if(user_id == card_owner_id) return
+  lessonTitle.readOnly = true;
+  lessonDescription.readOnly = true;
+  //make eventListener disabled
+  lessonCardSubmitForm.style.display = 'none';
+  //make eventListener enabled
 }
 
 var showUserData = function (data,color){
@@ -449,18 +466,21 @@ function eventListeners(card_id, helper_id, helper_name, user_id){
   });
 }
 
-function lessonEventListeners(card_id, board_id){
-  cardUpvoteLesson.addEventListener('click', saveLessonUpvote.bind(event, card_id), false);
+function lessonEventListeners(lessonCard_id, board_id){
+  cardUpvoteLesson.addEventListener('click', saveLessonUpvote.bind(event, lessonCard_id), false);
 
-  cardDownvoteLesson.addEventListener('click', deleteLessonUpvote.bind(event, card_id), false);
+  cardDownvoteLesson.addEventListener('click', deleteLessonUpvote.bind(event, lessonCard_id), false);
 
   review.addEventListener('click', function(){
-    window.location.href = route('giveReview', [card_id, board_id]);
+    window.location.href = route('giveReview', [lessonCard_id, board_id]);
   });
 
   allReviews.addEventListener('click', function(){
-    window.location.href = route('allReviews', card_id);
+    window.location.href = route('allReviews', lessonCard_id);
   });
+  var lessonCard_name = lessonTitle.value
+  var lessonCard_description = lessonDescription.value
+  updateLessonCard(lessonCard_id, lessonCard_name, lessonCard_description);
 }
 
 // fetch requests
@@ -641,6 +661,21 @@ function getCardAvatars(card_id, user_id, targetBox){
 
 function updateCard(card_id, card_name, card_description, card_status){
   var url = route('updateCard', [card_id, card_name, card_description, card_status])
+    
+  fetch(url, {
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json, text-plain, *//* only 1 line  ",
+      "X-Requested-With": "XMLHttpRequest"
+    },
+    method: 'GET',
+    credentials: "same-origin",
+  });
+}
+
+function updateLessonCard(lessonCard_id, lessonCard_name, lessonCard_description){
+  console.log(lessonCard_name)
+  var url = route('updateLessonCard', [lessonCard_id, lessonCard_name, lessonCard_description])
     
   fetch(url, {
     headers: {

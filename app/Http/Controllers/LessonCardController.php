@@ -42,6 +42,21 @@ class LessonCardController extends Controller
             return redirect()->route('oneBoard', ['board_id'=>$board_id]);
     }
 
+    public function updateLessonCard($lessonCard_id, $lessonCard_name, $lessonCard_description)
+    { 
+        $user_id = Auth::user()->id;
+
+        LessonCard::updateOrCreate(
+            [
+                "id" => $lessonCard_id
+            ],
+            [
+                "name" => $lessonCard_name,
+                "description" => $lessonCard_description,
+            ]
+        );
+        return response()->json();
+    }
 
     protected function validateLessonCard() 
     {
@@ -51,8 +66,6 @@ class LessonCardController extends Controller
             'start_time' => ['required']
         ]);
     }
-    
-
 
     public function storeLessonUpVote($card_id)
     {
@@ -107,7 +120,7 @@ class LessonCardController extends Controller
     protected function validateReview() 
     {
         return request()->validate([
-            'text' => ['required', 'min:1', 'max:80']
+            'text' => ['required', 'min:1', 'max:100']
         ]);
     }
 }
