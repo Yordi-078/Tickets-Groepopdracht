@@ -193,8 +193,12 @@ $user_id = Auth::user()->id;
 
             <fieldset class="card-info-border">
             <legend>Reviews</legend>
-            <a id="reviewLink"> Laat een review achter </a>
-            <a id="allReviewsLink"> Alle Reviews </a>
+            <a id="reviewLink"> Geef uw mening </a>
+            <a id="allReviewsLink"> Alle beoordelingen </a>
+            </fieldset>
+
+            <fieldset id="lessonCard-submit-form" class="card-submit-form card-info-border">
+                    <input type="submit" class="card-submit-button" value="submit">
             </fieldset>
         </form>
     </div>

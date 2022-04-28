@@ -14,7 +14,7 @@
     </div>
 
         <div class="reviewForm">
-            <label class="label" for="text" style="font-weight:600; font-size:20px; color:green;" id="reviewText">Review: </label>
+            <label class="label" for="text" style="font-weight:600; font-size:20px; color:green;" id="reviewText">Beoordeling: </label>
             <input class="form-input-container input @error('text') is-danger @enderror" type="text" name="text" value="{{ old('text') }}">
             
             @error('text')

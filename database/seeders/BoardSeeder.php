@@ -22,7 +22,7 @@ class BoardSeeder extends Seeder
             'madeby_id' => 1,
             'description' => 'Programeer groep voor vragen en lessen',
         ]);
-        for($i=1; $i < 10; $i++){
+        for($i=1; $i < 5; $i++){
             DB::table('board_user')->insert([
                 'board_id' => 1,
                 'user_id' => $i,

@@ -69,7 +69,7 @@ class CardController extends Controller
           return response()->json($response);
     }
 
-    public function updateCard( $card_id, $card_name, $card_description, $card_status)
+    public function updateCard($card_id, $card_name, $card_description, $card_status)
     { 
         $user_id = Auth::user()->id;
 
