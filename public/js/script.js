@@ -76,8 +76,8 @@ window.onclick = function(event) {
 
 /**
  * get random number between min and max
- * @param {minimum number of random number} min 
- * @param {maximum number of random number} max 
+ * @param {int} min minimum number of random number
+ * @param {int} max maximum number of random number
  * @returns random number
  */
 function randomNumber(min, max){
@@ -101,8 +101,8 @@ function setLoader(theModal){
 
 /**
  * toggle the cards of target to row or blocks
- * @param {the id of the parent element} target 
- * @param {the id of the toggle button} button 
+ * @param {int} target the id of the parent element
+ * @param {int} button the id of the toggle button
  */
 function toggleBoard(target, button) {
   var boards = document.getElementsByClassName("card");
@@ -425,6 +425,7 @@ function showCardAvatars(data, user_id, targetBox){
     avatar.className = "avatar";
     avatar.title = data[i]['name'];
     avatar.style.backgroundColor = 'grey';
+    avatar.addEventListener('click', showUserData.bind(event, data[i]), false);
     targetBox.appendChild(avatar);
 
     const avatarInit = document.createElement("a");

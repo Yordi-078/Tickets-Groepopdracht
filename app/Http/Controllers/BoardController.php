@@ -106,7 +106,6 @@ class BoardController extends Controller
       }
     }
     return response()->json($users);
-    // return view('boardCrud.allUsersFromBoard', ['boardUsers' => $users]);
   }
 
   public function allBoardUsers($board_id){
