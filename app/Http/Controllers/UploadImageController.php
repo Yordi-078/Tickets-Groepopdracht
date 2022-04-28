@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Photo;
+
  
  
 class UploadImageController extends Controller
@@ -46,4 +51,57 @@ class UploadImageController extends Controller
 
         $image->delete();
     }
+
+    public function displayImage($image_id){
+        $filename = Photo::where('id', $image_id)->get();
+
+        $path = $filename[0]['path'];
+        if (!Storage::exists($path)) {
+            abort(404);
+        }
+        $file = Storage::get($path);
+    
+        $type = Storage::mimeType($path);
+        $response = Response::make($file, 200);
+        
+    
+        $response->header("Content-Type", $type);
+
+        // dd($response);
+        return $response;
+        // return response()->json($response);
+    }
 }
+
+        // $filename = Photo::where('id', $image_id)->get();
+
+        // $path = $filename[0]['path'];
+        // if (!Storage::exists($path)) {
+        //     abort(404);
+        // }
+        // $file = Storage::get($path);
+    
+        // $type = Storage::mimeType($path);
+        // $response = Response::make($file, 200);
+    
+        // $response->header("Content-Type", $type);
+
+        // dd($response);
+
+        
+        // $filename = Photo::where('id', $image_id)->get();
+
+        // $path = $filename[0]['path'];
+        // if (!Storage::exists($path)) {
+        //     abort(404);
+        // }
+        // $file = Storage::get($path);
+    
+        // $type = Storage::mimeType($path);
+        // $response = JsonResponse::fromJsonString($file, 200);
+    
+        // $response->header("Content-Type", $type);
+
+        // dd($response);
+        // // return $response;
+        // return response()->json($response);

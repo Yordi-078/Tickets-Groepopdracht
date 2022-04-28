@@ -125,7 +125,7 @@ class CardController extends Controller
             ]
         );
     }
-    
+
     public function getUpvoterInfo($user_id)
     {
         $response = User::where('id', $user_id)->get();
@@ -230,9 +230,6 @@ class CardController extends Controller
 
     function getQuestionCardInfo($card_id){
         $response = Card::where('id', $card_id)->get();
-        if($response[0]['image'] != NULL){
-           $response[0]['image'] = Photo::find($response[0]['image'])->getImageUrl(); 
-        }
 
         return response()->json($response);
     }

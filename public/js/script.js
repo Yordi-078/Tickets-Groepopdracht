@@ -72,6 +72,20 @@ window.onclick = function(event) {
   }
 }
 
+window.addEventListener('resize', function(event){
+  var intFrameWidth = window.innerWidth;
+  console.log(intFrameWidth);
+  if (intFrameWidth <= 1024){
+    console.log('hello');
+  }
+  else if(intFrameWidth <= 1340){
+    console.log('hey');
+  }
+  else if(intFrameWidth > 1340){
+    console.log('bye');
+  }
+});
+
 
 /**
  * get random number between min and max
@@ -314,10 +328,10 @@ function fillQuestionPopup(data){
   if(data[0]['status'] == 'finished'){i = 1}
   cardStatus.options[i].selected = true;
   if(data[0]['image'] == '') return
-  // <===================================================================================>
-  // de volgende regel werkt niet de afbeelding wordt nog niet opgehaald
-  UploadedCardImage.src = "{{ asset('images/' " + data[0]['image'] + ") }}";
-  // <===================================================================================>
+  console.log(data);
+  if(data[0]['image'] != null){
+    UploadedCardImage.src = '/getImage/' + data[0]['image'];
+  }
 }
 
 function fillLessonPopup(data){
@@ -751,7 +765,6 @@ var getUpvoters = function (card_id){
 }
 
 var loadFile = function(event) {
-  unlink('public/images/tC6HJdYNUn58zQoDZJYjAaHszIlWCJFXZf6AmCo8.png');
   UploadedCardImage.src = URL.createObjectURL(event.target.files[0]);
 };
 
