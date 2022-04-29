@@ -468,7 +468,7 @@ function eventListeners(card_id, helper_id, helper_name, user_id){
   cardHelperAvatar.addEventListener('click', getHelperInfo.bind(event, helper_id), false);
   //deleteImage
   var deleteImage = document.getElementById('deleteImage');
-  deleteImage.addEventListener('click', deleteCardImage.bind(event, 41), false);
+  // deleteImage.addEventListener('click', deleteCardImage.bind(event, 41), false);
   //submit
   cardInfoPopup.addEventListener('submit', function(event){
     event.preventDefault();

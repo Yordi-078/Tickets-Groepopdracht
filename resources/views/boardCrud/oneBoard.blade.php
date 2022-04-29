@@ -100,8 +100,9 @@ $user_id = Auth::user()->id;
                     @error('image')
                         <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                     @enderror
+                    {{-- <a id="deleteImage">verwijder</a> --}}
                     <p><img id="uploaded-card-image" width="150"/></p>
-                    <a id="deleteImage">verwijder</a>
+                    
                 </fieldset>
 
                 <fieldset class="progress-info card-info-border">
