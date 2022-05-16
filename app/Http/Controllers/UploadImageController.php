@@ -41,6 +41,22 @@ class UploadImageController extends Controller
         return response()->json($save->id);
     }
 
+    public function deleteUserImage(){
+        $user = User::where('id', auth()->id())->get();
+        $image = Photo::where('id', $user[0]['image'])->get();
+
+        $path = $image[0]['path'];
+        Storage::disk('local')->delete('' .$path); 
+        Photo::where('id', $user[0]['image'])->delete();
+        User::updateOrCreate(
+            [
+                "id" => auth()->id()
+            ],[
+                "image" => NULL,
+            ]
+        );
+    }
+
     public function deleteImage($card_id){
         $card = Card::where('id', $card_id)->get();
         $image = Photo::where('id', $card[0]['image'])->get();

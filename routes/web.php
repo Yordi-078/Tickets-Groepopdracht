@@ -55,7 +55,7 @@ Route::get('boardCrud/createCard/{board_id}',  [CardController::class, 'addACard
 Route::post('storeCard/{board_id}',  [CardController::class, 'storeCard'])->name('storeCard')->middleware('CheckLoggedIn');
 Route::get('searchUser/{input}', [UserController::class, 'searchUser'])->name('searchUser')->middleware('CheckTeacherOrAdmin');
 Route::get('boardCrud/createLessCard/{board_id}',  [CardController::class, 'createLessCard'])->name('createLessCard')->middleware('CheckLoggedIn');
-Route::get('updateImage/{card_id}/{imga}',  [CardController::class, 'updateImage'])->name('updateImage')->middleware('CheckLoggedIn');
+Route::get('updateImage/{card_id}/{imga}',  [CardController::class, 'updateCardImage'])->name('updateImage')->middleware('CheckLoggedIn');
 Route::post('storeLessonCard/{board_id}',  [CardController::class, 'storeLessonCard'])->name('storeLessonCard')->middleware('CheckLoggedIn');
 Route::get('storeLessonUpVote/{lesson_id}/{board_id}',  [CardController::class, 'storeLessonUpVote'])->name('storeLessonUpVote');
 Route::get('getCardInfo/{lesson_id}',  [CardController::class, 'getCardInfo'])->name('getCardInfo')->middleware('CheckLoggedIn');
@@ -94,3 +94,7 @@ Route::get('allReviews/{lessonCard_id}',  [LessonCardController::class, 'allRevi
 Route::get('updateLessonCard/{lessonCard_id}/{lessonCard_name}/{lessonCard_description}',  [LessonCardController::class, 'updateLessonCard'])->name('updateLessonCard')->middleware('CheckLoggedIn');
 Route::post('storeReview/{board_id}/{lessonCard_id}',  [LessonCardController::class, 'storeReview'])->name('storeReview')->middleware('CheckLoggedIn');
 Route::get('getImage/{image_id}',  [UploadImageController::class, 'displayImage'])->name('getImage')->middleware('CheckLoggedIn');
+
+Route::get('editUserProfile',  [UserController::class, 'editUserProfile'])->name('editUserProfile')->middleware('CheckLoggedIn');
+Route::get('updateUserImage/{image_id}',  [UserController::class, 'updateUserImage'])->name('updateUserImage')->middleware('CheckLoggedIn');
+Route::get('getUserImage',  [UserController::class, 'getUserImage'])->name('getUserImage')->middleware('CheckLoggedIn');
