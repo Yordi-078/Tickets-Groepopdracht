@@ -100,7 +100,7 @@ $user_id = Auth::user()->id;
                     @error('image')
                         <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                     @enderror
-                    {{-- <a id="deleteImage">verwijder</a> --}}
+                    <a class="delete-card-image-button" id="deleteImage">verwijder</a>
                     <p><img id="uploaded-card-image" width="150"/></p>
                     
                 </fieldset>
@@ -147,7 +147,6 @@ $user_id = Auth::user()->id;
                         <a id="card-upvote-question" class="vote-thumb"><i class="fas fa-thumbs-up"></i></a>
                         <a id="question-upvote-count" class="vote-count">-</a>
                         <a id="card-downvote-question" class="vote-thumb"><i class="fas fa-thumbs-down"></i></a>
-                        <div title="" class="avatar" id="card-upvoter-avatar"><a id="card-upvoter-avatar-init" href="#"></a></div>
                     </div>
                     
                     <div id="cardAvatarContainer" class="card-avatar-container">

@@ -121,12 +121,19 @@ a{
 }
 
 .app-navbar-dropdown-button {
-    background-color:var(--color-quinary);
+    background-color:white;
     width:4vh;
     height:4vh;
     border-radius:50%;
     border: none;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.app-navbar-dropdown-button > img{
+    width:4vh;
 }
 
 .app-navbar-dropdown-content {
@@ -855,6 +862,17 @@ a{
 .date-columns li {
     list-style: none;
     margin-left: 0;
+}
+
+.delete-card-image-button{
+    cursor: pointer;
+    border: 1px solid black;
+    padding: 1px 5px;
+    background-color: #dddddd;
+}
+
+.delete-card-image-button:hover{
+    background-color: #b8b5b5;
 }
 
 @media only screen and (min-width: 1024px) {

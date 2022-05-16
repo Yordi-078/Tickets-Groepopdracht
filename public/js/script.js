@@ -75,15 +75,24 @@ window.onclick = function(event) {
 
 window.addEventListener('resize', function(event){
   var intFrameWidth = window.innerWidth;
-  console.log(intFrameWidth);
-  if (intFrameWidth <= 1024){
-    console.log('hello');
+  console.log(event);
+  if (intFrameWidth < 1024){
+    document.getElementById('toggle-card').style.display = 'none';
+    var boards = document.getElementsByClassName("card");
+    for (i = 0; i < boards.length; i++) {
+        boards[i].classList.add('card-row');
+    }
+    document.getElementById('board-question-content-box').classList.add("flex-rows");
   }
-  else if(intFrameWidth <= 1340){
-    console.log('hey');
+  else if(intFrameWidth < 1340){
+    document.getElementById('toggle-card').style.display = 'flex';
+    var boards = document.getElementsByClassName("card");
+    for (i = 0; i < boards.length; i++) {
+        boards[i].classList.remove('card-row');
+    }
+    document.getElementById('board-question-content-box').classList.remove("flex-rows");
   }
   else if(intFrameWidth > 1340){
-    console.log('bye');
   }
 });
 
@@ -102,7 +111,7 @@ function randomNumber(min, max){
 /**
  * show the loader for 700 to 800 seconds
  * and show 'theModal' after loader
- * @param {the modal that should be displayed after loader} theModal 
+ * @param {const} theModal the modal that should be displayed after loader
  */
 function setLoader(theModal){
   loaderScreen.style.display = 'block';
@@ -468,7 +477,7 @@ function eventListeners(card_id, helper_id, helper_name, user_id){
   cardHelperAvatar.addEventListener('click', getHelperInfo.bind(event, helper_id), false);
   //deleteImage
   var deleteImage = document.getElementById('deleteImage');
-  // deleteImage.addEventListener('click', deleteCardImage.bind(event, 41), false);
+  deleteImage.addEventListener('click', deleteCardImage.bind(event, card_id), false);
   //submit
   cardInfoPopup.addEventListener('submit', function(event){
     event.preventDefault();
@@ -731,8 +740,8 @@ var getHelperInfo = function (helper_id){
   }) .then(response => response.json())
   .then(data => showUserData(data) );
 }
-var deleteCardImage = function (image_id){
-  var url = route('deleteImage', image_id);
+var deleteCardImage = function (card_id){
+  var url = route('deleteImage', card_id);
   
   fetch(url, {
     headers: {
@@ -743,6 +752,7 @@ var deleteCardImage = function (image_id){
     method: 'GET',
     credentials: "same-origin",
   });
+  UploadedCardImage.src = '';
 }
 /**
  * uploaded images gets saved and map direction gets saved in the database
@@ -752,7 +762,7 @@ var deleteCardImage = function (image_id){
  * @param {} formData makes a data object for image that can be send in the body for the post
  */
 function saveImage(event, card_id){
-  var url = route('save')
+  var url = route('saveImage')
   var meta = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
   var formData = new FormData();
   formData.append('image', event.target[5].files[0]);
@@ -765,7 +775,7 @@ function saveImage(event, card_id){
     credentials: "same-origin",
     body: formData,
     
-  }) .then(response => response.json())
+  }).then(response => response.json())
   .then(data => updateCardImage(card_id, data));
 }
 

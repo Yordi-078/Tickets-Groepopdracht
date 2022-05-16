@@ -62,8 +62,8 @@ Route::get('getCardInfo/{lesson_id}',  [CardController::class, 'getCardInfo'])->
 // Route::get('storeCardUpVote/{card_id}/{board_id}',  [CardController::class, 'storeCardUpVote'])->name('storeCardUpVote');
 
 Route::get('upload-image', [UploadImageController::class, 'index'])->name('upload-image')->middleware('CheckLoggedIn');
-Route::post('save', [UploadImageController::class, 'save'])->name('save')->middleware('CheckLoggedIn');
-Route::get('deleteImage/{image_id}', [UploadImageController::class, 'deleteImage'])->name('deleteImage')->middleware('CheckLoggedIn');
+Route::post('saveImage', [UploadImageController::class, 'saveImage'])->name('saveImage')->middleware('CheckLoggedIn');
+Route::get('deleteImage/{card_id}', [UploadImageController::class, 'deleteImage'])->name('deleteImage')->middleware('CheckLoggedIn');
 
 route::get('fetchAllUsers', [UserController::class, 'fetchAllUsers'])->name('fetchAllUsers')->middleware('CheckTeacherOrAdmin');
 Route::get('boardCrud/createLessonCard/{board_id}',  [LessonCardController::class, 'createLessonCard'])->name('createLessonCard')->middleware('CheckTeacherOrAdmin');

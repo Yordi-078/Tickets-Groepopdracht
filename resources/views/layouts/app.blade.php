@@ -11,6 +11,7 @@
     <link rel="icon" href="{{ asset('css/images/logo.png') }}" type="image/x-icon">
 
     <!-- Scripts -->
+    <script src="{{ asset('js/header.js') }}" defer></script>
     <script src="{{ asset('js/script.js') }}" defer></script>
     @yield('second_script')
     @yield('calendar_script')
@@ -35,7 +36,7 @@
                 <a class="app-navbar-item" href="{{ url('home') }}"><i class="fa fa-house"></i></a>
             @endguest
             <div class="app-navbar-user-info">
-                <button class="app-navbar-dropdown-button"></button>
+                <button class="app-navbar-dropdown-button"><img id="avatarImage" src="/getImage/13"></button>
                 <div class="app-navbar-dropdown-content">
                     <!-- Authentication Links -->
                     @guest
