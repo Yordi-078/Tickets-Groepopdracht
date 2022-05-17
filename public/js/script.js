@@ -151,11 +151,11 @@ function toggleBoard(target, button) {
  * @param {string} user_name 
  * @param {int} card_id 
  */
-function showQuestionPopup(card_owner_id, helper_id, user_id, user_name, card_id){
+function showQuestionPopup(card_owner_id, helper_id, user_id, user_name, card_id, user_role_id){
   if(!helper_id) {helper_id = 'empty'}
   resetQuestionPopup();
   getQuestionCardInfo(card_id);
-  checkForOwner(user_id, card_owner_id);
+  checkForOwner(user_id, card_owner_id, user_role_id);
   eventListeners(card_id, user_id, user_name, user_id);
   getUsername(card_owner_id, helper_id, user_id);
   getCardAvatars(card_id, user_id, cardAvatarContainer);
@@ -358,7 +358,7 @@ function fillLessonPopup(data){
   //image
 }
 
-function checkForOwner(user_id, card_owner_id){
+function checkForOwner(user_id, card_owner_id, user_role_id){
   cardTitle.readOnly = false;
   cardDescription.readOnly = false;
   cardStatus.disabled = false;
@@ -368,13 +368,14 @@ function checkForOwner(user_id, card_owner_id){
   //make eventListener disabled
   cardUpvoteQuestion.style.display = 'none';
   cardDownvoteQuestion.style.display = 'none';
+  if(user_id == card_owner_id || user_role_id != 2){
+  cardStatus.disabled = true
+  cardSubmitForm.style.display = 'none';
+  }
   if(user_id == card_owner_id) return
   cardTitle.readOnly = true;
   cardDescription.readOnly = true;
-  cardStatus.disabled = true;
   cardUploadImage.disabled = true;
-  //make eventListener disabled
-  cardSubmitForm.style.display = 'none';
   //make eventListener enabled
   cardUpvoteQuestion.style.display = 'flex';
   cardDownvoteQuestion.style.display = 'none';
