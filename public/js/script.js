@@ -24,6 +24,7 @@ const lessonOwner = document.getElementById('lesson-owner');
 const lessonTitle = document.getElementById('lesson-title');
 const lessonDescription = document.getElementById('lesson-description');
 const lessonStartDate = document.getElementById('lesson-start-date');
+const lessonStatus = document.getElementById('lesson-card-status');
 const lessonCardSubmitForm = document.getElementById('lessonCard-submit-form');
 const userPopup = document.getElementById('userPopup');
 const userPopupBol = document.getElementById('userPopupBol');
@@ -33,6 +34,7 @@ const userPopupAvatar = document.getElementById('userPopupAvatar');
 const questionUpvoteCount = document.getElementById('question-upvote-count');
 const lessonUpvoteCount = document.getElementById('lesson-upvote-count');
 const cardInfoPopup = document.getElementById('card-info-popup');
+const lessonInfoPopup = document.getElementById('lesson-info-popup');
 const lessonModal = document.getElementById('lessonModal');
 const lessonSpan = document.getElementById("close-lesson-popup");
 const cardModal = document.getElementById('cardModal');
@@ -349,11 +351,10 @@ function fillLessonPopup(data){
   lessonTitle.value = data[0]['name'];
   lessonDescription.value = data[0]['description'];
   lessonStartDate.innerText = data[0]['start_time'];
-  //Extra wat we willen is dat als de kaart ongoing is dat de kaart een andere kleur wordt zodat mensen zien dat die bezig is
   lessonStartDate.innerText = data[0]['status'];
-  // var i = 0;
-  // if(data[0]['status'] == 'finished'){i = 1}
-  // cardStatus.options[i].selected = true;
+  var i = 0;
+  if(data[0]['status'] == 'finished'){i = 1}
+  lessonStatus.options[i].selected = true;
   //image
 }
 
@@ -502,9 +503,15 @@ function lessonEventListeners(lessonCard_id, board_id){
   allReviews.addEventListener('click', function(){
     window.location.href = route('allReviews', lessonCard_id);
   });
-  var lessonCard_name = lessonTitle.value
-  var lessonCard_description = lessonDescription.value
-  updateLessonCard(lessonCard_id, lessonCard_name, lessonCard_description);
+  
+  lessonInfoPopup.addEventListener('submit', function(event){
+    event.preventDefault();
+    var lessonCard_name = lessonTitle.value
+    var lessonCard_description = lessonDescription.value
+    var lessonCard_status = lessonStatus.value
+    updateLessonCard(lessonCard_id, lessonCard_name, lessonCard_description, lessonCard_status);
+    lessonModal.style.display = "none";
+  });
 }
 
 // fetch requests
@@ -697,18 +704,23 @@ function updateCard(card_id, card_name, card_description, card_status){
   });
 }
 
-function updateLessonCard(lessonCard_id, lessonCard_name, lessonCard_description){
-  console.log(lessonCard_name)
-  var url = route('updateLessonCard', [lessonCard_id, lessonCard_name, lessonCard_description])
-    
+function updateLessonCard(lessonCard_id, lessonCard_name, lessonCard_description, lessonCard_status){
+  var url = route('updateLessonCard');
+  var meta = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+  var formData = new FormData();
+  formData.append('lessonCard_id', lessonCard_id );
+  formData.append('lessonCard_name', lessonCard_name );
+  formData.append('lessonCard_description', lessonCard_description );
+  formData.append('lessonCard_status', lessonCard_status ); 
+
   fetch(url, {
     headers: {
-      "Content-Type": "application/json",
-      "Accept": "application/json, text-plain, *//* only 1 line  ",
-      "X-Requested-With": "XMLHttpRequest"
+      'X-CSRF-TOKEN': meta,
     },
-    method: 'GET',
+    method: 'POST',
     credentials: "same-origin",
+    body: formData,
+    
   });
 }
 

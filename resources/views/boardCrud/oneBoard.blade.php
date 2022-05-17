@@ -83,9 +83,8 @@ $user_id = Auth::user()->id;
     <div class="modal-content">
         <span id="card-owner" class="card-info-owner"></span>
         <span id="close-popup" class="close">&times;</span>
-                  
+
             <form id="card-info-popup" enctype="multipart/form-data" class="card-info-popup">
-                      
                 @csrf
                 <fieldset class="general card-info-border">
                     <legend>Overzicht: </legend>
@@ -104,17 +103,16 @@ $user_id = Auth::user()->id;
                     <p><img id="uploaded-card-image" width="150"/></p>
                     
                 </fieldset>
-
+            
                 <fieldset class="progress-info card-info-border">
                     <legend>Kaart info</legend>
                     <p id="card-created-at"></p>
-
                     <select name="status" id="card-status" class="card-status">
                         <option name='status' value="in_progress" >Aan de gang</option>
                         <option name='status' value="finished" >Afgerond</option>
                     </select>
                 </fieldset>
-
+                
                 <fieldset id="helper-box" class="helper-box card-info-border">
                     <legend id="helper">Niemand is aan het helpen</legend>
                     <input id="remove-helper-button" class="helper-buttons" type="button" value=" - ">
@@ -162,12 +160,13 @@ $user_id = Auth::user()->id;
     </div>
 </div>
 
+
 <div id="lessonModal" class="modal">
     <div class="modal-content">
         <span id="lesson-owner" class="card-info-owner"></span>
         <span id="close-lesson-popup" class="close">&times;</span>
 
-        <form class="card-info-popup">
+        <form id='lesson-info-popup' enctype="multipart/form-data" class="card-info-popup">
             <fieldset id="general" class="general card-info-border">
                 <legend>Overzicht: </legend>
                 <textarea type="text" id="lesson-title" class="title" name="name" maxlength="300" required></textarea>
@@ -190,6 +189,15 @@ $user_id = Auth::user()->id;
                 <div id="lessonAvatarContainer" class="card-avatar-container">
                 </div>
             </fieldset>
+
+            <fieldset class="progress-info card-info-border">
+                    <legend>Kaart status</legend>
+                    <p id="card-created-at"></p>
+                    <select name="status" id="lesson-card-status" class="lesson-card-status">
+                        <option name='status' value="in_progress" >Aan de gang</option>
+                        <option name='status' value="finished" >Afgerond</option>
+                    </select>
+                </fieldset>
 
             <fieldset class="card-info-border">
             <legend>Reviews</legend>

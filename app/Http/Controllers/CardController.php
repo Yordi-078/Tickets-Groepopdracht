@@ -77,6 +77,7 @@ class CardController extends Controller
             [
                 "id" => $card_id
             ],
+            
             [
                 "name" => $card_name,
                 "description" => $card_description,
