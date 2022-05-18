@@ -167,7 +167,7 @@ $user_id = Auth::user()->id;
         <span id="lesson-owner" class="card-info-owner"></span>
         <span id="close-lesson-popup" class="close">&times;</span>
 
-        <form class="card-info-popup">
+        <form enctype="multipart/form-data"  class="card-info-popup">
             <fieldset id="general" class="general card-info-border">
                 <legend>Overzicht: </legend>
                 <textarea type="text" id="lesson-title" class="title" name="name" maxlength="300" required></textarea>
@@ -195,6 +195,7 @@ $user_id = Auth::user()->id;
             <legend>Reviews</legend>
             <a id="reviewLink"> Geef uw mening </a>
             <a id="allReviewsLink"> Alle beoordelingen </a>
+            <a id="send-email">send email</a>
             </fieldset>
 
             <fieldset id="lessonCard-submit-form" class="card-submit-form card-info-border">

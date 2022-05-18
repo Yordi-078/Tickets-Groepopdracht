@@ -147,7 +147,7 @@ class UserController extends Controller
             ]);
     }
     public function getUserImage(){
-        $image = User::where('id', auth()->id())->get('image');
+        $image = User::where('id', auth()->id())->get();
         return response()->json($image);
     }
 }

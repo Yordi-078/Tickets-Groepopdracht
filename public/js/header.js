@@ -16,11 +16,16 @@ function getUserImage(){
       method: 'GET',
       credentials: "same-origin",
     }).then(response => response.json())
-    .then(data => showImage(data[0]['image']));
+    .then(data => showImage(data[0]));
   }
 
   function showImage(data){
-    if(data != null){
-        AVATARIMAGE.src = '/getImage/' + data;
+    if(data['image'] != null){
+        AVATARIMAGE.src = '/getImage/' + data['image'];
+    }
+    else{
+        var initials = data['name'].match(/\b(\w)/g);
+        var acronym = initials.join('');
+        document.getElementById('user-image').innerHTML = acronym;
     }
   }

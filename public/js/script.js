@@ -495,6 +495,11 @@ function lessonEventListeners(lessonCard_id, board_id){
 
   cardDownvoteLesson.addEventListener('click', deleteLessonUpvote.bind(event, lessonCard_id), false);
 
+  document.getElementById('send-email').addEventListener('click', function(){
+    console.log('starting mail process');
+    sendReviewLinks(lessonCard_id);
+  });
+
   review.addEventListener('click', function(){
     window.location.href = route('giveReview', [lessonCard_id, board_id]);
   });
@@ -508,6 +513,24 @@ function lessonEventListeners(lessonCard_id, board_id){
 }
 
 // fetch requests
+function sendReviewLinks(lessonCard_id){
+  console.log(lessonCard_id);
+  var url = route('sendReviewLinks')
+  var meta = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+  var formData = new FormData();
+  formData.append('lessonCard_id', lessonCard_id);
+    
+  fetch(url, {
+    headers: {
+      'X-CSRF-TOKEN': meta,
+    },
+    method: 'POST',
+    credentials: "same-origin",
+    body: formData,
+    
+  }).then(response => response.json())
+  .then(data => console.log(data));
+}
 
 function getUsername(card_owner_id, helper_id, user_id){
   var url = route('getUsername', [card_owner_id, helper_id]);

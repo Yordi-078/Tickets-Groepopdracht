@@ -27,12 +27,17 @@ function getUserImage(){
       method: 'GET',
       credentials: "same-origin",
     }).then(response => response.json())
-    .then(data => showImage(data[0]['image']));
+    .then(data => showImageOrInit(data[0]));
   }
 
-  function showImage(data){
-    if(data != null){
-        EDITUPLOADEDIMAGE.src = '/getImage/' + data;
+  function showImageOrInit(data){
+    if(data['image'] != null){
+        EDITUPLOADEDIMAGE.src = '/getImage/' + data['image'];
+    }
+    else{
+        var initials = data['name'].match(/\b(\w)/g);
+        var acronym = initials.join('');
+        document.getElementById('user-image').innerHTML = acronym;
     }
   }
   /**

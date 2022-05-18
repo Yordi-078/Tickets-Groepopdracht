@@ -36,7 +36,7 @@
                 <a class="app-navbar-item" href="{{ url('home') }}"><i class="fa fa-house"></i></a>
             @endguest
             <div class="app-navbar-user-info">
-                <button class="app-navbar-dropdown-button"><img id="avatarImage" src="/getImage/13"></button>
+                <button class="app-navbar-dropdown-button" id="user-image"><img id="avatarImage"></button>
                 <div class="app-navbar-dropdown-content">
                     <!-- Authentication Links -->
                     @guest
