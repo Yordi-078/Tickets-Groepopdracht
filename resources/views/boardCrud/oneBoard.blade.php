@@ -170,6 +170,7 @@ $user_id = Auth::user()->id;
 
         <form id='lesson-info-popup' enctype="multipart/form-data" class="card-info-popup">
             <fieldset id="general" class="general card-info-border">
+                <input type="hidden" name="lesson_id" id="lesson-id">
                 <legend>Overzicht: </legend>
                 <textarea type="text" id="lesson-title" class="title" name="name" maxlength="300" required></textarea>
                 <span>Beschrijving: </span>

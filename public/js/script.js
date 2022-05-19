@@ -354,6 +354,7 @@ function fillQuestionPopup(data){
 }
 
 function fillLessonPopup(data){
+  document.getElementById('lesson-id').value = data[0]['id'];
   lessonTitle.value = data[0]['name'];
   lessonDescription.value = data[0]['description'];
   lessonStartDate.innerText = data[0]['start_time'];
@@ -518,10 +519,7 @@ function lessonEventListeners(lessonCard_id, board_id){
   
   lessonInfoPopup.addEventListener('submit', function(event){
     event.preventDefault();
-    var lessonCard_name = lessonTitle.value
-    var lessonCard_description = lessonDescription.value
-    var lessonCard_status = lessonStatus.value
-    updateLessonCard(lessonCard_id, lessonCard_name, lessonCard_description, lessonCard_status);
+    updateLessonCard(event);
     lessonModal.style.display = "none";
   });
 }
@@ -737,14 +735,11 @@ function updateCard(event){
   });
 }
 
-function updateLessonCard(lessonCard_id, lessonCard_name, lessonCard_description, lessonCard_status){
+function updateLessonCard(event){
   var url = route('updateLessonCard');
   var meta = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-  var formData = new FormData();
-  formData.append('lessonCard_id', lessonCard_id );
-  formData.append('lessonCard_name', lessonCard_name );
-  formData.append('lessonCard_description', lessonCard_description );
-  formData.append('lessonCard_status', lessonCard_status ); 
+  var formData = new FormData(event.target);
+
 
   fetch(url, {
     headers: {
