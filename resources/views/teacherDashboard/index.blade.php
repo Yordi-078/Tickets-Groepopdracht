@@ -13,6 +13,9 @@
     $lastDay = Carbon\Carbon::now()->lastOfMonth();
     $countDaysInMonth = $calendar->daysInMonth;
     $calendarMonth = $calendar->locale('nl')->isoFormat('MMMM YYYY');
+    if($selectedDate == false){
+        $selectedDate = Carbon\Carbon::now()->isoFormat('DD-MM-YYYY');
+    }
 ?>
 @section('content')
 

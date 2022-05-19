@@ -16,7 +16,7 @@ $user_id = Auth::user()->id;
     @endif
     @if (Auth::user()->user_role_id == 2)
         <a id="add-student-button" class="main-button" href="{{ route('teacherDashboard',$thisBoard['id']) }}">
-            {{ __('Teacher Dashboard') }}
+            {{ __('Docenten Overzicht') }}
         </a>
     @endif
     <a href="{{ route('allBoardUsers', $thisBoard['id']) }}" class="main-button" id="add-student-button">all board users</a>
