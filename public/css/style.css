@@ -1296,3 +1296,11 @@ a{
     left: 30px;
     font-size: 30px;
 }
+
+.avatarContainer{
+    position: absolute;
+    top:235px;
+    left:900px;
+    width:300px;
+    height:110px;
+}

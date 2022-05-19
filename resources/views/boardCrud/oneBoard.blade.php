@@ -121,6 +121,7 @@ $user_id = Auth::user()->id;
                 </fieldset>
 
                 <div id="userPopup" class="home-user-popup">
+                <span id="close-upvoter-popup" class="close">&times;</span>
                     <div class="user-popup-header">
                         <div id="userPopupBol" title="" class="avatar user-popup-header-avatar"><a id="userPopupAvatar"></a></div>
                         <br>
