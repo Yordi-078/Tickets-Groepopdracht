@@ -39,6 +39,7 @@ const lessonModal = document.getElementById('lessonModal');
 const lessonSpan = document.getElementById("close-lesson-popup");
 const cardModal = document.getElementById('cardModal');
 const cardSpan = document.getElementById("close-popup");
+const closeUpvoterPopup = document.getElementById("close-upvoter-popup");
 const userPopupEmail = document.getElementById("userPopupEmail");
 const userPopupRole = document.getElementById("userPopupRole");
 const review = document.getElementById('reviewLink');
@@ -60,6 +61,10 @@ INPUTS.forEach(el => el.addEventListener('click', e => updateValue(e)));
 
 cardSpan.onclick = function() {
   cardModal.style.display = "none";
+}
+
+closeUpvoterPopup.onclick = function(){
+  userPopup.style.display = "none";
 }
 
 lessonSpan.onclick = function() {
