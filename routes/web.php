@@ -84,7 +84,7 @@ Route::get('saveLessonUpvote/{card_id}',  [CardController::class, 'saveLessonUpv
 Route::get('deleteCardUpvote/{card_id}',  [CardController::class, 'deleteCardUpvote'])->name('deleteCardUpvote')->middleware('CheckLoggedIn');
 Route::get('deleteLessonUpvote/{card_id}',  [CardController::class, 'deleteLessonUpvote'])->name('deleteLessonUpvote')->middleware('CheckLoggedIn');
 Route::get('GetCardAvatars/{card_id}',  [CardController::class, 'GetCardAvatars'])->name('GetCardAvatars')->middleware('CheckLoggedIn');
-Route::get('updateCard/{card_id}/{card_name}/{card_description}/{card_status}',  [CardController::class, 'updateCard'])->name('updateCard')->middleware('CheckLoggedIn');
+Route::post('updateCard',  [CardController::class, 'updateCard'])->name('updateCard')->middleware('CheckLoggedIn');
 Route::get('updateCardImage/{card_id}/{image_id}',  [CardController::class, 'updateCardImage'])->name('updateCardImage')->middleware('CheckLoggedIn');
 Route::get('getUserInfo/{user_id}',  [CardController::class, 'getUserInfo'])->name('getUserInfo')->middleware('CheckLoggedIn');
 Route::get('getUpvoterInfo/{user_id}',  [CardController::class, 'getUpvoterInfo'])->name('getUpvoterInfo')->middleware('CheckLoggedIn');

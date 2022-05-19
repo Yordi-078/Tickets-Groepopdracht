@@ -339,6 +339,7 @@ function resetLessonPopup(){
 }
 
 function fillQuestionPopup(data){
+  document.getElementById('card-id').value = data[0]['id'];
   cardTitle.value = data[0]['name'];
   cardDescription.value = data[0]['description'];
   cardCreatedAt.innerText = data[0]['created_at'];
@@ -373,7 +374,7 @@ function checkForOwner(user_id, card_owner_id, user_role_id){
   //make eventListener disabled
   cardUpvoteQuestion.style.display = 'none';
   cardDownvoteQuestion.style.display = 'none';
-  if(user_id == card_owner_id || user_role_id != 2){
+  if(user_id != card_owner_id || user_role_id == 2){
   cardStatus.disabled = true
   cardSubmitForm.style.display = 'none';
   }
@@ -491,8 +492,8 @@ function eventListeners(card_id, helper_id, helper_name, user_id){
     var card_name = cardTitle.value
     var card_description = cardDescription.value
     var card_status = cardStatus.selectedOptions[0].value
-    saveImage(event, card_id);
-    updateCard(card_id, card_name, card_description, card_status);
+    // saveImage(event, card_id);
+    updateCard(event);
     cardModal.style.display = "none";
   });
 }
@@ -719,17 +720,20 @@ function getCardAvatars(card_id, user_id, targetBox){
   .then(data => showCardAvatars(data, user_id, targetBox));
 }
 
-function updateCard(card_id, card_name, card_description, card_status){
-  var url = route('updateCard', [card_id, card_name, card_description, card_status])
-    
+function updateCard(event){
+  var url = route('updateCard')
+  var meta = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+  console.log(event.target);
+  var formData = new FormData(event.target);
+
   fetch(url, {
     headers: {
-      "Content-Type": "application/json",
-      "Accept": "application/json, text-plain, *//* only 1 line  ",
-      "X-Requested-With": "XMLHttpRequest"
+      'X-CSRF-TOKEN': meta,
     },
-    method: 'GET',
+    method: 'POST',
     credentials: "same-origin",
+    body: formData,
+    
   });
 }
 

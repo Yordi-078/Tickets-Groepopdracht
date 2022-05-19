@@ -69,19 +69,18 @@ class CardController extends Controller
           return response()->json($response);
     }
 
-    public function updateCard($card_id, $card_name, $card_description, $card_status)
+    public function updateCard(Request $request)
     { 
-        $user_id = Auth::user()->id;
-
+        
         Card::updateOrCreate(
             [
-                "id" => $card_id
+                "id" => $request['card_id']
             ],
             
             [
-                "name" => $card_name,
-                "description" => $card_description,
-                "status" => $card_status,
+                "name" => $request['name'],
+                "description" => $request['description'],
+                "status" => $request['status'],
             ]
         );
         

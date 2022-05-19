@@ -24,11 +24,6 @@ class ContactController extends Controller
             $user = User::where('id' , $user_ids[$i]['user_id'])->get();
             array_push($users, $user[0]);
         }
-        
-        // Mail::raw('it works! http://127.0.0.1:8000/giveReview/1/1', function ($message){
-        //     $message->to('99057187@mydavinci.nl')
-        //         ->subject('hello there.');
-        // });
 
         Mail::to($users[0]['email'])
         ->send(new LeaveReview($users[0], $lesson[0]));

@@ -86,6 +86,7 @@ $user_id = Auth::user()->id;
 
             <form id="card-info-popup" enctype="multipart/form-data" class="card-info-popup">
                 @csrf
+                <input name="card_id" type="hidden" id="card-id">
                 <fieldset class="general card-info-border">
                     <legend>Overzicht: </legend>
                     <textarea type="text" id="card-title" class="title" name="name" maxlength="300" required></textarea>
