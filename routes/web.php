@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BoardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CardController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\LessonCardController;
 use App\Http\Controllers\UploadImageController;
 use App\Http\Middleware\CheckAdmin;
@@ -98,3 +99,7 @@ Route::get('getImage/{image_id}',  [UploadImageController::class, 'displayImage'
 Route::get('editUserProfile',  [UserController::class, 'editUserProfile'])->name('editUserProfile')->middleware('CheckLoggedIn');
 Route::get('updateUserImage/{image_id}',  [UserController::class, 'updateUserImage'])->name('updateUserImage')->middleware('CheckLoggedIn');
 Route::get('getUserImage',  [UserController::class, 'getUserImage'])->name('getUserImage')->middleware('CheckLoggedIn');
+
+Route::post('sendReviewLinks',  [ContactController::class, 'sendReviewLinks'])->name('sendReviewLinks')->middleware('CheckLoggedIn');
+
+

@@ -204,6 +204,7 @@ $user_id = Auth::user()->id;
             <legend>Reviews</legend>
             <a id="reviewLink"> Geef uw mening </a>
             <a id="allReviewsLink"> Alle beoordelingen </a>
+            <a id="send-email">send email</a>
             </fieldset>
 
             <fieldset id="lessonCard-submit-form" class="card-submit-form card-info-border">

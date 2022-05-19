@@ -9,7 +9,7 @@
 
         <!-- profile image -->
         <div class="edit-user-form-header">
-            <div class="form-header-image"><img id="edit-uploaded-card-image" width="87"/></div>
+            <div class="form-header-image" id="user-image"><img id="edit-uploaded-card-image" width="87"/></div>
             <input type="file" name="image" placeholder="Choose image" id="card-upload-image" onchange="loadImage(event)" accept=".gif,.jpg,.jpeg,.png">
             <a class="delete-card-image-button" id="deleteImage">verwijder</a>
         </div>
@@ -17,7 +17,7 @@
         <!-- name -->
         <div class="form-input-container">
             <label for="name"><i class="fas fa-user"></i></label>
-            <input id="name" type="name" class="form-control form-input" name="name" value="{{ old('name') }}" placeholder="Naam" required autofocus>
+            <input id="name" type="name" class="form-control form-input" name="name" value="{{ old('name') }}" placeholder="Naam" autofocus>
         </div>
 
         <!-- email -->
