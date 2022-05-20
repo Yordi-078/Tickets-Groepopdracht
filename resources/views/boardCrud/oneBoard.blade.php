@@ -16,7 +16,7 @@ $user_id = Auth::user()->id;
     @endif
     @if (Auth::user()->user_role_id == 2)
         <a id="add-student-button" class="main-button" href="{{ route('teacherDashboard',$thisBoard['id']) }}">
-            {{ __('Docentendashboard') }}
+            {{ __('Docenten Overzicht') }}
         </a>
     @endif
     <a href="{{ route('allBoardUsers', $thisBoard['id']) }}" class="main-button" id="add-student-button">Alle deelnemers</a>
@@ -86,6 +86,7 @@ $user_id = Auth::user()->id;
 
             <form id="card-info-popup" enctype="multipart/form-data" class="card-info-popup">
                 @csrf
+                <input name="card_id" type="hidden" id="card-id">
                 <fieldset class="general card-info-border">
                     <legend>Overzicht: </legend>
                     <textarea type="text" id="card-title" class="title" name="name" maxlength="300" required></textarea>
@@ -169,6 +170,7 @@ $user_id = Auth::user()->id;
 
         <form id='lesson-info-popup' enctype="multipart/form-data" class="card-info-popup">
             <fieldset id="general" class="general card-info-border">
+                <input type="hidden" name="lesson_id" id="lesson-id">
                 <legend>Overzicht: </legend>
                 <textarea type="text" id="lesson-title" class="title" name="name" maxlength="300" required></textarea>
                 <span>Beschrijving: </span>

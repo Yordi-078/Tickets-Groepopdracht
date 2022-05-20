@@ -42,17 +42,16 @@ class LessonCardController extends Controller
             return redirect()->route('oneBoard', ['board_id'=>$board_id]);
     }
 
-    public function updateLessonCard()
+    public function updateLessonCard(Request $request)
     { 
         $user_id = Auth::user()->id;
 
-        LessonCard::where("id" , request('lessonCard_id'))
+        LessonCard::where("id" , $request['lessonCard_id'])
         ->update([
-            "name" => request('lessonCard_name'),
-            "description" => request('lessonCard_description'),
-            "status" => request('lessonCard_status')
+            "name" => $request['lessonCard_name'],
+            "description" => $request['lessonCard_description'],
+            "status" => $request['lessonCard_status']
         ]);
-        var_dump(request('lessonCard_name'));
         
         return response()->json();
     }
