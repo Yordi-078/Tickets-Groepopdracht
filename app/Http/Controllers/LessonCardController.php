@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Board;
 use App\Models\LessonCard;
 use App\Models\LessonUpvotes;
+use App\Models\Review;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class LessonCardController extends Controller
@@ -40,6 +42,19 @@ class LessonCardController extends Controller
             return redirect()->route('oneBoard', ['board_id'=>$board_id]);
     }
 
+    public function updateLessonCard(Request $request)
+    { 
+        $user_id = Auth::user()->id;
+
+        LessonCard::where("id" , $request['lessonCard_id'])
+        ->update([
+            "name" => $request['lessonCard_name'],
+            "description" => $request['lessonCard_description'],
+            "status" => $request['lessonCard_status']
+        ]);
+        
+        return response()->json();
+    }
 
     protected function validateLessonCard() 
     {
@@ -49,8 +64,6 @@ class LessonCardController extends Controller
             'start_time' => ['required']
         ]);
     }
-    
-
 
     public function storeLessonUpVote($card_id)
     {
@@ -65,9 +78,47 @@ class LessonCardController extends Controller
             return response()->json();
     }
 
-    public function getLessonCardInfo($card_id){
-        $response = LessonCard::where('id', $card_id)->get();
+    public function getLessonCardInfo(LessonCard $card){
+        return response()->json($card);
+    }
 
-        return response()->json($response);
+    //weergeef giveReview page
+    //stuur 2 variabelen mee
+    function giveReview($lessonCard_id, $board_id){
+        return view('review.giveReview', ['board_id'=>$board_id , 'lessonCard_id'=>$lessonCard_id]);
+    }
+
+    //weergeef AllReviews page
+    //stuur 2 variabelen mee
+    function allReviews($lessonCard_id){
+        $review = Review::where('lessonCard_id', $lessonCard_id)->get();
+        $lessonCard = LessonCard::find($lessonCard_id);
+        // $user_id = Auth::user()->id;
+        // $user = User::where('id', $user_id)->get();
+        
+        return view('review.allReviews', ['reviews' => $review, 'lessonCard' => $lessonCard_id, 'lessonsCard' => $lessonCard]);
+    }
+
+    // Functie voor het aanmaken van een nieuwe review
+    function storeReview(Request $request, $board_id, $lessonCard_id){
+        $user_id = Auth::user()->id;
+        $this->validateReview();
+        Review::updateOrCreate(
+            [
+                "lessonCard_id" => $lessonCard_id, 
+                "text" => $request->input('text'),
+                "rating" => $request->input('rating')
+            ]
+        );
+        
+        return redirect()->route('oneBoard', ['board_id'=>$board_id]);
+    }
+
+    //Valideren of het Review form wordt ingevuld
+    protected function validateReview() 
+    {
+        return request()->validate([
+            'text' => ['required', 'min:1', 'max:100']
+        ]);
     }
 }

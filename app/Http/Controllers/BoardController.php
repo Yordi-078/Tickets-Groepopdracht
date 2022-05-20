@@ -27,10 +27,10 @@ class BoardController extends Controller
 
     protected function validateBoard(){
       return request()->validate([
-        'name' => ['required', 'min:1', 'max:20'],
+        'name' => ['required', 'min:1', 'max:40'],
         'madeby_id' => ['required'],
         'description' => ['required', 'min:1', 'max:50']
-                                 ]);
+      ]);
     }
 
     public function addBoardUsers($board_id, $user_id)
@@ -106,7 +106,6 @@ class BoardController extends Controller
       }
     }
     return response()->json($users);
-    // return view('boardCrud.allUsersFromBoard', ['boardUsers' => $users]);
   }
 
   public function allBoardUsers($board_id){

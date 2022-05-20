@@ -1,5 +1,6 @@
-
-// all document.getElementById in const's
+/**
+ * all the const are created at the top for easy access 
+ */
 const loaderScreen = document.getElementById('loader-screen');
 const cardOwner = document.getElementById('card-owner');
 const removeHelperBtn = document.getElementById('remove-helper-button');
@@ -23,6 +24,8 @@ const lessonOwner = document.getElementById('lesson-owner');
 const lessonTitle = document.getElementById('lesson-title');
 const lessonDescription = document.getElementById('lesson-description');
 const lessonStartDate = document.getElementById('lesson-start-date');
+const lessonStatus = document.getElementById('lesson-card-status');
+const lessonCardSubmitForm = document.getElementById('lessonCard-submit-form');
 const userPopup = document.getElementById('userPopup');
 const userPopupBol = document.getElementById('userPopupBol');
 const userPopupInit = document.getElementById('userPopupInit');
@@ -31,18 +34,37 @@ const userPopupAvatar = document.getElementById('userPopupAvatar');
 const questionUpvoteCount = document.getElementById('question-upvote-count');
 const lessonUpvoteCount = document.getElementById('lesson-upvote-count');
 const cardInfoPopup = document.getElementById('card-info-popup');
+const lessonInfoPopup = document.getElementById('lesson-info-popup');
 const lessonModal = document.getElementById('lessonModal');
 const lessonSpan = document.getElementById("close-lesson-popup");
 const cardModal = document.getElementById('cardModal');
 const cardSpan = document.getElementById("close-popup");
+const closeUpvoterPopup = document.getElementById("close-upvoter-popup");
 const userPopupEmail = document.getElementById("userPopupEmail");
 const userPopupRole = document.getElementById("userPopupRole");
-
+const review = document.getElementById('reviewLink');
+const allReviews = document.getElementById('allReviewsLink');
+const UploadedCardImage = document.getElementById("uploaded-card-image")
+const upvoteUserPopup = document.getElementById("upvotesContainer");
+const upvoterPopupBol = document.getElementById("upvoteUserAvatar");
+const upvoterPopupName = document.getElementById("upvoteUserPopupName");
+const upvoterPopupEmail = document.getElementById("upvoteUserPopupEmail");
+const upvoterPopupRole = document.getElementById("upvoteUserPopupRole");
+const upvoteUserAvatar = document.getElementById("card-upvoter-avatar");
+const upvoteUserPopupBol = document.getElementById("upvoteUserPopupBol");
 
 // uncatogorized 
 
+const INPUTS = document.querySelectorAll('#smileys input');
+const updateValue = e => document.querySelector('#result').innerHTML = e.target.value;
+INPUTS.forEach(el => el.addEventListener('click', e => updateValue(e)));
+
 cardSpan.onclick = function() {
   cardModal.style.display = "none";
+}
+
+closeUpvoterPopup.onclick = function(){
+  userPopup.style.display = "none";
 }
 
 lessonSpan.onclick = function() {
@@ -58,13 +80,46 @@ window.onclick = function(event) {
   }
 }
 
+window.addEventListener('resize', function(event){
+  var intFrameWidth = window.innerWidth;
+  console.log(event);
+  if (intFrameWidth < 1024){
+    document.getElementById('toggle-card').style.display = 'none';
+    var boards = document.getElementsByClassName("card");
+    for (i = 0; i < boards.length; i++) {
+        boards[i].classList.add('card-row');
+    }
+    document.getElementById('board-question-content-box').classList.add("flex-rows");
+  }
+  else if(intFrameWidth < 1340){
+    document.getElementById('toggle-card').style.display = 'flex';
+    var boards = document.getElementsByClassName("card");
+    for (i = 0; i < boards.length; i++) {
+        boards[i].classList.remove('card-row');
+    }
+    document.getElementById('board-question-content-box').classList.remove("flex-rows");
+  }
+  else if(intFrameWidth > 1340){
+  }
+});
 
-// multiple use functions
+
+/**
+ * get random number between min and max
+ * @param {int} min minimum number of random number
+ * @param {int} max maximum number of random number
+ * @returns random number
+ */
 function randomNumber(min, max){
   var number = Math.floor(Math.random() * max) + min
   return number
 }
 
+/**
+ * show the loader for 700 to 800 seconds
+ * and show 'theModal' after loader
+ * @param {const} theModal the modal that should be displayed after loader
+ */
 function setLoader(theModal){
   loaderScreen.style.display = 'block';
   setTimeout(() => {
@@ -73,39 +128,61 @@ function setLoader(theModal){
   }, randomNumber(700, 800));
 }
 
-// single use functions
-function toggleBoard() {
+
+/**
+ * toggle the cards of target to row or blocks
+ * @param {int} target the id of the parent element
+ * @param {int} button the id of the toggle button
+ */
+function toggleBoard(target, button) {
   var boards = document.getElementsByClassName("card");
   for (i = 0; i < boards.length; i++) {
       boards[i].classList.toggle('card-row');
   }
-  if(document.getElementById("home-board-content").classList.contains("flex-rows")){
-     document.getElementById("toggle-board").innerHTML = '<i class="fas fa-bars"></i>'; 
+  if(document.getElementById(target).classList.contains("flex-rows")){
+     document.getElementById(button).innerHTML = '<i class="fas fa-bars"></i>'; 
   }
   else{
-      document.getElementById("toggle-board").innerHTML = '<i class="fas fa-th"></i>'; 
+      document.getElementById(button).innerHTML = '<i class="fas fa-th"></i>'; 
   }
-  document.getElementById("home-board-content").classList.toggle("flex-rows");
+  document.getElementById(target).classList.toggle("flex-rows");
 }
 
-function showQuestionPopup(card_owner_id, helper_id, user_id, user_name, card_id){
+/**
+ * all functions for questionpopup
+ * @param {int} card_owner_id
+ * @param {int} helper_id 
+ * @param {int} user_id 
+ * @param {string} user_name 
+ * @param {int} card_id 
+ */
+function showQuestionPopup(card_owner_id, helper_id, user_id, user_name, card_id, user_role_id){
   if(!helper_id) {helper_id = 'empty'}
   resetQuestionPopup();
   getQuestionCardInfo(card_id);
-  checkForOwner(user_id, card_owner_id);
+  checkForOwner(user_id, card_owner_id, user_role_id);
   eventListeners(card_id, user_id, user_name, user_id);
   getUsername(card_owner_id, helper_id, user_id);
   getCardAvatars(card_id, user_id, cardAvatarContainer);
+  getUpvoters(card_id);
   setLoader(cardModal);
 }
 
-function showPopup(card_id, card_owner_id, user_id){
+/**
+ * all functions for lessonpopup
+ * @param {int} card_id 
+ * @param {int} card_owner_id 
+ * @param {int} user_id 
+ * @param {int} board_id 
+ */
+function showPopup(lessonCard_id, card_owner_id, user_id, board_id){
   resetLessonPopup();
-  getLessonCardInfo(card_id);
+  getLessonCardInfo(lessonCard_id);
   //checkForDocent
-  lessonEventListeners(card_id);
   getLessonOwner(card_owner_id, user_id);
-  getCardInfo(card_id);
+  checkforLessonCardOwner(user_id, card_owner_id);
+  getCardInfo(lessonCard_id);
+  lessonEventListeners(lessonCard_id, board_id);
   setLoader(lessonModal);
 }
 
@@ -122,14 +199,17 @@ function setHelperAndOwner(name, user_id, card_owner_id){
   }
 
   else{
+
     var initials = name[1]['name'].match(/\b(\w)/g);
     var acronym = initials.join('');
     
-    helper.innerText = name[1]['name'] + ' is helping this card.';
+    helper.innerText = name[1]['name'] + ' is aan het helpen.';
     cardHelperAvatar.style.display = 'flex';
     cardHelperAvatar.style.backgroundColor= 'gray'
     cardHelperAvatar.title= name[1]['name']
     cardHelperAvatarInit.innerText= acronym
+    fillAvatarPopup(name[1]);
+    helper.innerText = name[1]['name'] + ' is aan het helpen.';
 
     if(user_id == name[1]['id'] || user_id == card_owner_id){
       removeHelperBtn.style.display = "inline";
@@ -139,12 +219,28 @@ function setHelperAndOwner(name, user_id, card_owner_id){
   }
 }
 
+
+function avatarEventListener(data){
+  for (let i = 0; i < data.length; i++) {
+    document.getElementById("card-" + data[i]['id'] + "-upvote-avatar-init").addEventListener('click', showUserData.bind(event, data[i]), false);
+  }
+}
+
 function setOwner(name, user_id, card_owner_id){
   console.log(name)
   lessonOwner.innerText = name[0]['name'];
 
 }
 
+function fillAvatarPopup(data){
+  var initials = data['name'].match(/\b(\w)/g);
+    var acronym = initials.join('');
+
+    cardHelperAvatar.style.display = 'flex';
+    cardHelperAvatar.style.backgroundColor= 'gray'
+    cardHelperAvatar.title= data['name']
+    cardHelperAvatarInit.innerText= acronym
+}
 // function showLessonData(data){
 // document.getElementById('lessoncard-title').value = data[0]['name'];
 // document.getElementById('lessoncard-description').value = data[0]['name'];
@@ -194,12 +290,11 @@ var addHelper = function(helperId, helperName, card_id){
   var initials = helperName.match(/\b(\w)/g);
   var acronym = initials.join('');
 
-  helper.innerText = helperName + ' is helping this card.';
+  helper.innerText = helperName + ' is aan het helpen.';
   cardHelperAvatar.style.display = 'flex'
   cardHelperAvatar.style.backgroundColor= 'gray'
   cardHelperAvatar.title= helperName
   cardHelperAvatarInit.innerText= acronym
-  // document.getElementById('card-' + card_id + '-helper-avatar').onclick= showUserData('jan pieter son', 'jps', 'green');
   removeHelperBtn.style.display = "inline";
   addHelperBtn.style.display = "none";
 }
@@ -211,7 +306,7 @@ var addUpvote = function(card_id, user_id){
 
 var removeHelper = function(card_id){
   deleteHelper(card_id);
-  helper.innerText = 'no one is helping this card';
+  helper.innerText = 'Niemand is aan het helpen.';
   cardHelperAvatar.style.display = 'none';
   cardHelperAvatar.style.backgroundColor= '';
   cardHelperAvatar.title= '';
@@ -228,11 +323,12 @@ var removeUpvote = function(card_id, user_id){
 function resetQuestionPopup(){
   cardAvatarContainer.innerHTML = '';
   cardOwner.innerText = '';
-  helper.innerText = 'no one is helping this card';
+  helper.innerText = 'Niemand is aan het helpen';
   cardHelperAvatar.style.display = 'none';
   cardHelperAvatar.style.backgroundColor= '';
   cardHelperAvatar.title= '';
   cardHelperAvatarInit.innerText= '';
+  UploadedCardImage.src = '';
   removeHelperBtn.style.display = "none";
   addHelperBtn.style.display = "none";
 }
@@ -243,28 +339,33 @@ function resetLessonPopup(){
 }
 
 function fillQuestionPopup(data){
+  document.getElementById('card-id').value = data[0]['id'];
   cardTitle.value = data[0]['name'];
   cardDescription.value = data[0]['description'];
   cardCreatedAt.innerText = data[0]['created_at'];
   var i = 0;
   if(data[0]['status'] == 'finished'){i = 1}
   cardStatus.options[i].selected = true;
-  //image
+  if(data[0]['image'] == '') return
+  console.log(data);
+  if(data[0]['image'] != null){
+    UploadedCardImage.src = '/getImage/' + data[0]['image'];
+  }
 }
 
 function fillLessonPopup(data){
+  document.getElementById('lesson-id').value = data[0]['id'];
   lessonTitle.value = data[0]['name'];
   lessonDescription.value = data[0]['description'];
   lessonStartDate.innerText = data[0]['start_time'];
-  //Extra wat we willen is dat als de kaart ongoing is dat de kaart een andere kleur wordt zodat mensen zien dat die bezig is
   lessonStartDate.innerText = data[0]['status'];
-  // var i = 0;
-  // if(data[0]['status'] == 'finished'){i = 1}
-  // cardStatus.options[i].selected = true;
+  var i = 0;
+  if(data[0]['status'] == 'finished'){i = 1}
+  lessonStatus.options[i].selected = true;
   //image
 }
 
-function checkForOwner(user_id, card_owner_id){
+function checkForOwner(user_id, card_owner_id, user_role_id){
   cardTitle.readOnly = false;
   cardDescription.readOnly = false;
   cardStatus.disabled = false;
@@ -274,20 +375,35 @@ function checkForOwner(user_id, card_owner_id){
   //make eventListener disabled
   cardUpvoteQuestion.style.display = 'none';
   cardDownvoteQuestion.style.display = 'none';
+  if(user_id != card_owner_id || user_role_id == 2){
+  cardStatus.disabled = true
+  cardSubmitForm.style.display = 'none';
+  }
   if(user_id == card_owner_id) return
   cardTitle.readOnly = true;
   cardDescription.readOnly = true;
-  cardStatus.disabled = true;
   cardUploadImage.disabled = true;
-  //make eventListener disabled
-  cardSubmitForm.style.display = 'none';
   //make eventListener enabled
   cardUpvoteQuestion.style.display = 'flex';
   cardDownvoteQuestion.style.display = 'none';
+
+}
+
+function checkforLessonCardOwner(user_id, card_owner_id){
+  lessonTitle.readOnly = false;
+  lessonDescription.readOnly = false;
+  //make eventListener enabled
+  lessonCardSubmitForm.style.display = 'grid';
+  //make eventListener disabled
+  if(user_id == card_owner_id) return
+  lessonTitle.readOnly = true;
+  lessonDescription.readOnly = true;
+  //make eventListener disabled
+  lessonCardSubmitForm.style.display = 'none';
+  //make eventListener enabled
 }
 
 var showUserData = function (data,color){
-  console.log(data['email'])
   var initials = data['name'].match(/\b(\w)/g);
   var acronym = initials.join('');
 
@@ -301,8 +417,26 @@ var showUserData = function (data,color){
   userPopupInit.innerText= data['name']
   userPopupName.title= data['name']
   userPopupEmail.innerText= data['email']
-  userPopupRole.innerText= data['user_role']
+  userPopupRole.innerText= data['user_role_id']
   userPopupAvatar.innerText= acronym;
+}
+
+var showUpvoterData = function (data,color){
+  var initials = data['name'].match(/\b(\w)/g);
+  var acronym = initials.join('');
+
+  if(upvoteUserPopup.style.display == 'block'){
+    upvoteUserPopup.style.display = 'none'
+    return
+  }
+  upvoteUserPopup.style.display='block';
+  upvoteUserPopupBol.style.backgroundColor= 'gray'
+  upvoteUserPopupBol.title= data['name']
+  userPopupInit.innerText= data['name']
+  upvoterPopupName.title= data['name']
+  upvoterPopupEmail.innerText= data['email']
+  upvoterPopupRole.innerText= data['user_role_id']
+  upvoterPopupBol.innerText= acronym;
 
   // i need 
   //username
@@ -323,6 +457,7 @@ function showCardAvatars(data, user_id, targetBox){
     avatar.className = "avatar";
     avatar.title = data[i]['name'];
     avatar.style.backgroundColor = 'grey';
+    avatar.addEventListener('click', showUserData.bind(event, data[i]), false);
     targetBox.appendChild(avatar);
 
     const avatarInit = document.createElement("a");
@@ -349,23 +484,65 @@ function eventListeners(card_id, helper_id, helper_name, user_id){
   cardDownvoteQuestion.addEventListener('click', removeUpvote.bind(event, card_id, user_id), false);
   //avatar popup
   cardHelperAvatar.addEventListener('click', getHelperInfo.bind(event, helper_id), false);
+  //deleteImage
+  var deleteImage = document.getElementById('deleteImage');
+  deleteImage.addEventListener('click', deleteCardImage.bind(event, card_id), false);
   //submit
   cardInfoPopup.addEventListener('submit', function(event){
     event.preventDefault();
     var card_name = cardTitle.value
     var card_description = cardDescription.value
     var card_status = cardStatus.selectedOptions[0].value
-    updateCard(card_id, card_name, card_description, card_status);
+    // saveImage(event, card_id);
+    updateCard(event);
+    cardModal.style.display = "none";
   });
 }
 
-function lessonEventListeners(card_id){
-  cardUpvoteLesson.addEventListener('click', saveLessonUpvote.bind(event, card_id), false);
+function lessonEventListeners(lessonCard_id, board_id){
+  cardUpvoteLesson.addEventListener('click', saveLessonUpvote.bind(event, lessonCard_id), false);
 
-  cardDownvoteLesson.addEventListener('click', deleteLessonUpvote.bind(event, card_id), false);
+  cardDownvoteLesson.addEventListener('click', deleteLessonUpvote.bind(event, lessonCard_id), false);
+
+  document.getElementById('send-email').addEventListener('click', function(){
+    console.log('starting mail process');
+    sendReviewLinks(lessonCard_id);
+  });
+
+  review.addEventListener('click', function(){
+    window.location.href = route('giveReview', [lessonCard_id, board_id]);
+  });
+
+  allReviews.addEventListener('click', function(){
+    window.location.href = route('allReviews', lessonCard_id);
+  });
+  
+  lessonInfoPopup.addEventListener('submit', function(event){
+    event.preventDefault();
+    updateLessonCard(event);
+    lessonModal.style.display = "none";
+  });
 }
 
 // fetch requests
+function sendReviewLinks(lessonCard_id){
+  console.log(lessonCard_id);
+  var url = route('sendReviewLinks')
+  var meta = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+  var formData = new FormData();
+  formData.append('lessonCard_id', lessonCard_id);
+    
+  fetch(url, {
+    headers: {
+      'X-CSRF-TOKEN': meta,
+    },
+    method: 'POST',
+    credentials: "same-origin",
+    body: formData,
+    
+  }).then(response => response.json())
+  .then(data => console.log(data));
+}
 
 function getUsername(card_owner_id, helper_id, user_id){
   var url = route('getUsername', [card_owner_id, helper_id]);
@@ -541,8 +718,42 @@ function getCardAvatars(card_id, user_id, targetBox){
   .then(data => showCardAvatars(data, user_id, targetBox));
 }
 
-function updateCard(card_id, card_name, card_description, card_status){
-  var url = route('updateCard', [card_id, card_name, card_description, card_status])
+function updateCard(event){
+  var url = route('updateCard')
+  var meta = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+  console.log(event.target);
+  var formData = new FormData(event.target);
+
+  fetch(url, {
+    headers: {
+      'X-CSRF-TOKEN': meta,
+    },
+    method: 'POST',
+    credentials: "same-origin",
+    body: formData,
+    
+  });
+}
+
+function updateLessonCard(event){
+  var url = route('updateLessonCard');
+  var meta = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+  var formData = new FormData(event.target);
+
+
+  fetch(url, {
+    headers: {
+      'X-CSRF-TOKEN': meta,
+    },
+    method: 'POST',
+    credentials: "same-origin",
+    body: formData,
+    
+  });
+}
+
+function updateCardImage(card_id, image_id){
+  var url = route('updateCardImage', [card_id, image_id])
     
   fetch(url, {
     headers: {
@@ -569,12 +780,78 @@ var getHelperInfo = function (helper_id){
   }) .then(response => response.json())
   .then(data => showUserData(data) );
 }
+var deleteCardImage = function (card_id){
+  var url = route('deleteImage', card_id);
+  
+  fetch(url, {
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json, text-plain, *//* only 1 line  ",
+      "X-Requested-With": "XMLHttpRequest"
+    },
+    method: 'GET',
+    credentials: "same-origin",
+  });
+  UploadedCardImage.src = '';
+}
+/**
+ * uploaded images gets saved and map direction gets saved in the database
+ * 
+ * @param {} event gets form all data 
+ * @param {} meta gets meta key out of head
+ * @param {} formData makes a data object for image that can be send in the body for the post
+ */
+function saveImage(event, card_id){
+  var url = route('saveImage')
+  var meta = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+  var formData = new FormData();
+  formData.append('image', event.target[5].files[0]);
+    
+  fetch(url, {
+    headers: {
+      'X-CSRF-TOKEN': meta,
+    },
+    method: 'POST',
+    credentials: "same-origin",
+    body: formData,
+    
+  }).then(response => response.json())
+  .then(data => updateCardImage(card_id, data));
+}
+
+var getUpvoterInfo = function (upvoter_id){
+  var url = route('getUpvoterInfo', upvoter_id);
+  
+  fetch(url, {
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json, text-plain, *//* only 1 line  ",
+      "X-Requested-With": "XMLHttpRequest"
+    },
+    method: 'GET',
+    credentials: "same-origin",
+  }) .then(response => response.json())
+  .then(data => showUpvoterData(data) );
+}
+
+var getUpvoters = function (card_id){
+  var url = route('getUpvoters', card_id);
+  
+  fetch(url, {
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json, text-plain, *//* only 1 line  ",
+      "X-Requested-With": "XMLHttpRequest"
+    },
+    method: 'GET',
+    credentials: "same-origin",
+  }) .then(response => response.json())
+  .then(data => avatarEventListener(data));
+}
 
 var loadFile = function(event) {
-  var image = document.getElementById('output');
-  image.src = URL.createObjectURL(event.target.files[0]);
+  UploadedCardImage.src = URL.createObjectURL(event.target.files[0]);
 };
-
 
 // to do
 // function for randomizing color of avatar bal and remembering color for next use

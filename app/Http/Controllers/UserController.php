@@ -135,4 +135,19 @@ class UserController extends Controller
         return view('teacherDashboard.index', compact('cards', 'board_id', 'selectedDate', 'lessonCards'));
     }
 
+    public function editUserProfile(){
+        $user = User::where('id', auth()->id())->get();
+        return view('auth.edit', compact('user'));
+    }
+
+    public function updateUserImage($image_id){
+        User::where('id', auth()->id())
+            ->update([
+                'image' => $image_id
+            ]);
+    }
+    public function getUserImage(){
+        $image = User::where('id', auth()->id())->get();
+        return response()->json($image);
+    }
 }

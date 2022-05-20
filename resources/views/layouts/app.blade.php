@@ -11,6 +11,7 @@
     <link rel="icon" href="{{ asset('css/images/logo.png') }}" type="image/x-icon">
 
     <!-- Scripts -->
+    <script src="{{ asset('js/header.js') }}" defer></script>
     <script src="{{ asset('js/script.js') }}" defer></script>
     @yield('second_script')
     @yield('calendar_script')
@@ -35,16 +36,16 @@
                 <a class="app-navbar-item" href="{{ url('home') }}"><i class="fa fa-house"></i></a>
             @endguest
             <div class="app-navbar-user-info">
-                <button class="app-navbar-dropdown-button"></button>
+                <button class="app-navbar-dropdown-button" id="user-image"><img id="avatarImage"></button>
                 <div class="app-navbar-dropdown-content">
                     <!-- Authentication Links -->
                     @guest
                         @if (Route::has('login'))
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('Inloggen') }}</a>
                         @endif
 
                         @if (Route::has('register'))
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            <a class="nav-link" href="{{ route('register') }}">{{ __('Registreren') }}</a>
                         @endif
                     @else
                         <a id="" class="" href="{{ route('viewUserPage', Auth::user()->id) }} ">
@@ -52,13 +53,13 @@
                         </a>
                         @if (Auth::user()->user_role_id == 3 )
                             <a class="dropdown-item" href="{{ route('changeUserRoles') }}">
-                                {{ __('change user roles') }}
+                                {{ __('Gebruikersrollen wijzigen') }}
                             </a>
                         @endif
                         <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">
-                            {{ __('Logout') }}
+                            {{ __('Uitloggen') }}
                         </a>
 
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

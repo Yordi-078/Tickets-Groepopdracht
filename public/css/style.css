@@ -121,12 +121,19 @@ a{
 }
 
 .app-navbar-dropdown-button {
-    background-color:var(--color-quinary);
+    background-color:white;
     width:4vh;
     height:4vh;
     border-radius:50%;
     border: none;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.app-navbar-dropdown-button > img{
+    width:4vh;
 }
 
 .app-navbar-dropdown-content {
@@ -158,6 +165,18 @@ a{
 }
 
     /* end app navbar styling */
+.edit-user-form-header{
+    margin-bottom: 5%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center
+}
+.edit-user-form-header > .form-header-image{
+    width:3em;
+    height:3em;
+    overflow:hidden;
+}
     /* reussable form */
 
 .form-container{
@@ -403,7 +422,7 @@ a{
 }
 
 .card-row{
-    width:100% !important;
+    width:96% !important;
 }
 
 .general-card{
@@ -492,7 +511,6 @@ a{
     top:12%;
 }
 
-
 .loader-wrap {
 	position: absolute;
 	left: 50%;
@@ -524,31 +542,31 @@ a{
     }
   }
 
-.letter-2{
+.letter-1{
   animation-delay:.1s;
 }
-.letter-3{
+.letter-2{
   animation-delay:.2s;
 }
-.letter-4{
+.letter-3{
   animation-delay:.3s;
 }
-.letter-5{
+.letter-4{
   animation-delay:.4s;
 }
-.letter-6{
+.letter-5{
   animation-delay:.5s;
 }
-.letter-7{
+.letter-6{
   animation-delay:.6s;
 }
-.letter-8{
+.letter-7{
   animation-delay:.7s;
 }
-.letter-9{
+.letter-8{
   animation-delay:.8s;
 }
-.letter-10{
+.letter-9{
   animation-delay:.9s;
 }
 /* end loader styling */
@@ -708,6 +726,9 @@ a{
 
 .home-user-popup{
     display: none;
+    position: relative;
+    /* top: 5vw; */
+    z-index: 3;
 }
 
 .avatar{
@@ -719,8 +740,7 @@ a{
     align-items: center;
     justify-content: center;
     margin-left: -3px;
-    border: 1px solid darkgray;
-    box-shadow: 3px 4px 4px 0px rgb(0 0 0 / 25%);
+    box-shadow:0px 8px 16px 0px rgba(0, 0, 0, 0.3);
 }
 
 .avatar a , .user-popup-header-username a{
@@ -856,6 +876,17 @@ a{
     margin-left: 0;
 }
 
+.delete-card-image-button{
+    cursor: pointer;
+    border: 1px solid black;
+    padding: 1px 5px;
+    background-color: #dddddd;
+}
+
+.delete-card-image-button:hover{
+    background-color: #b8b5b5;
+}
+
 @media only screen and (min-width: 1024px) {
     .form-container{
         background-color: var(--color-quaternary);
@@ -948,54 +979,328 @@ a{
         
     }
 
-    .calendar-date {
-        padding: 20px;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(25px, 1fr));
-        grid-gap: 10px;
-        box-sizing: border-box;
-    }
+.calendar-date {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25px, 1fr));
+    grid-gap: 10px;
+    box-sizing: border-box;
+}
 
-    .calendar-day {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 25px;
-        font-weight: 600;
-        color: #262626;
-    }
+.calendar-day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 25px;
+    font-weight: 600;
+    color: #262626;
+}
 
-    .calendar-number {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 25px;
-        color: #262626;
-    }
+.calendar-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 25px;
+    color: #262626;
+}
 
-  #userPopup{
-      background-color:#55add5;
-      margin-left:-310px;
-      margin-top:120px;
-      width:300px;
-      height:120px;
-      border-radius:25px;
-      color:black;
-  }
+#userPopup{
+    background-color:whitesmoke;
+    margin-left:-430px;
+    margin-top:-220px;
+    width:300px;
+    height:340px;
+    border-radius:25px;
+    color:black;
+    z-index:3;
+    box-shadow:3px 6px 8px 2px rgb(0 0 0 /25%);
+}
+    
+#userPopup>div{
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+    
+#userPopupBol{
+    margin-top:25px;
+    width:100px;
+    height:100px;
+    border-radius:55px;
+    font-size:2em;
+}
   
-  #userPopup>div{
-    margin-left:80px;
-    font-size:16px;
-  }
+#userPopupName{
+    margin-left:-10px;
+    font-size:25px;
+}
   
-  #userPopupBol{
-    margin-left:50px;
-    margin-top:10px;
+#userPopupEmail{
+    font-size:20px;
+    margin-left:-10px;
+}
+  
+#userPopupRole{
+    font-size:20px;
+}
+
+  #reviewTitle{
+      position: relative;
+      display: flex; 
+      justify-content: center;
+      top: 100px;
+      left: 2%;
   }
 
-  .card-avatar-container{
+  .reviewForm{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    top: 170px;
+    right: 140px;
+    height: 200px;
+  }
+
+  #reviewText{
+    position: relative;
+    bottom: 40px;
+    left:110px;
+  }
+
+  /* #bad{
+    color: red;
+  }
+
+  #neutral{
+    color: yellow;
+  }
+
+  #good{
+    color: green;
+  }
+
+  #smileys{
+    position: relative;
+    display: flex;
+    justify-content: space-evenly;
+    right: 10%;
+    top: 150px;
+  } */
+
+  /* .review{
+    position: relative;
+    top: 100px;
+    left: 100px;
+    top: 30px;
+    font-size: 50px;
+  } */
+
+  .main-section{
+    background:#FFFFFF;
+    width:80%;
+    margin: 0 auto;
+    padding: 10px;
+    margin-top:60px;
+    box-shadow:0px 2px 7px 1px #aa9191;
+    }
+    .hedding-title h1{
+    margin:0px;
+    padding:0px 0px 10px 0px;
+    font-size:25px;
+    }
+    .average-rating{
+    float:left;
+    text-align: center;
+    width:30%;
+    }
+    .average-rating h2{
+    margin:0px;
+    font-size:80px;
+    }
+    .average-rating p{
+    margin:0px;
+    font-size:20px;
+    }
+    .fa-star,.fa-star-o,.fa-star-half-o{
+    color:#FDC91B;
+    font-size:25px !important;
+    }
+    .progress,.progress-2,.progress-3,.progress-4,.progress-5{
+    background:#F5F5F5;
+    border-radius: 13px;
+    height:18px;
+    width:97%;
+    padding:3px;
+    margin:5px 0px 3px 0px;
+    }
+    .progress:after,.progress-2:after,.progress-3:after,.progress-4:after,.progress-5:after{
+    content: '';
+    display: block;
+    background: #337AB7;
+    width:80%;
+    height: 100%;
+    border-radius: 9px;
+    }
+    .progress-2:after{
+    width: 60%;
+    }
+    .progress-3:after{
+    width:40%;
+    }
+    .progress-4:after{
+    width:20%;
+    }
+    .progress-5:after{
+    width:10%;
+    }
+    .loder-ratimg{
+    display: inline-block;
+    width:40%;
+    }
+    .start-part{
+    float:right;
+    width:30%;
+    text-align: center;
+    }
+    .start-part span{
+    color:#337AB7;
+    font-size:23px;
+    }
+    .reviews h1{
+    margin:10px 0px 20px 30px;
+    }
+    .user-img img{
+    height: 80px;
+    width: 80px;
+    border:1px solid blue;
+    border-radius: 50%;
+    }
+    .user-img-part{
+    width:30%;
+    float:left;
+    }
+    .user-img{
+    width:48%;
+    float:left;
+    text-align: center;
+    }
+    .user-text{
+    float:left;
+    }
+    .user-text h4,.user-text p{
+    margin:0px 0px 5px 0px;
+    }
+    .user-text p{
+    font-size: 20px;
+    font-weight: bold;
+    }
+    .user-text h4,.user-text span{
+    color:#B3B5B4;
+    }
+    .comment{
+    width:68%;
+    float:right;
+    
+    }
+    
+    form 
+        #smileys 
+            input[type="radio"] {
+                -webkit-appearance: none;
+                position: relative;
+                top: 120px;
+                left: 340px;
+                width: 90px;
+                height: 90px;
+                border: none;
+                cursor: pointer;
+                transition: border .2s ease;
+                filter: grayscale(100%);
+                margin: 0 5px;
+                transition: all .2s ease;
+            }
+            form #smileys input[type="radio"]:hover,
+            form #smileys input[type="radio"]:checked {
+                    filter:	grayscale(100%);
+                }
+                
+                form #smileys input[type="radio"]:focus {
+                    outline: 0;
+                }
+                
+                form #smileys input[type="radio"].happy {
+                    background: url('https://res.cloudinary.com/turdlife/image/upload/v1492864443/happy_ampvnc.svg') center;
+                    background-size: cover;
+                }
+                form #smileys input[type="radio"].happy:focus,
+                form #smileys input[type="radio"].happy:hover,
+                form #smileys input[type="radio"].happy:checked{
+                    filter: invert(39%) sepia(16%) saturate(614%) hue-rotate(316deg) brightness(97%) contrast(89%);
+                }
+                form #smileys input[type="radio"].neutral {
+                    background: url('https://res.cloudinary.com/turdlife/image/upload/v1492864443/neutral_t3q8hz.svg') center;
+                    background-size: cover;
+                }
+                form #smileys input[type="radio"].neutral:focus,
+                form #smileys input[type="radio"].neutral:hover,
+                form #smileys input[type="radio"].neutral:checked{
+                    filter: invert(0%) sepia(1%) saturate(914%) hue-rotate(240deg) brightness(97%) contrast(100%);
+                }
+                form #smileys input[type="radio"].sad {
+                    background: url('https://res.cloudinary.com/turdlife/image/upload/v1492864443/sad_bj1tuj.svg') center;
+                    background-size: cover;
+                }
+                form #smileys input[type="radio"].sad:focus, 
+                form #smileys input[type="radio"].sad:hover,
+                form #smileys input[type="radio"].sad:checked{
+                    filter: invert(39%) sepia(16%) saturate(614%) hue-rotate(156deg) brightness(97%) contrast(89%);
+                }
+        
+        form #smileys input[type="radio"]:hover {
+            color: #666;
+        }
+
+#reviewLink{
+    position: relative;
+    top: 10px;
+}
+
+#allReviewsLink{
+    position: relative;
+    top: 35px;
+    right: 112px;
+}
+
+#reviewLink:hover{
+    color: green;
+}
+
+#allReviewsLink:hover{
+    color: green;
+}
+
+.card-avatar-container{
     display: flex;
     flex-direction: row;
     margin-left:21px;
-  }
+}
 
+.user-popup-header hr{
+    width:80%;
+}
+
+.emptyReview{
+    position: relative;
+    left: 30px;
+    font-size: 30px;
+}
+
+.avatarContainer{
+    position: absolute;
+    top:235px;
+    left:900px;
+    width:300px;
+    height:110px;
+}

@@ -47,14 +47,14 @@ function showAllUsers(data){
         div.appendChild(b);
         // edit
         var c = document.createElement('a');
-        c.innerText = "edit";
+        c.innerText = "Bewerk";
         var x = changeUser.bind(event, data[i]['id']);
         c.addEventListener('click', x, false);
         c.classList = 'link';
         div.appendChild(c);
         // delete
         var d = document.createElement('a');
-        d.innerText = "delete";
+        d.innerText = "Verwijder";
         var x = deleteUser.bind(event, data[i]['id']);
         d.addEventListener('click', x, false);
         d.classList = 'link';
@@ -77,14 +77,14 @@ function showSearchResult(data){
         div.appendChild(b);
         // edit
         var c = document.createElement('a');
-        c.innerText = "edit";
+        c.innerText = "Bewerk";
         var x = changeUser.bind(event, data[i]['id']);
         c.addEventListener('click', x, false);
         c.classList = 'link';
         div.appendChild(c);
         // delete
         var d = document.createElement('a');
-        d.innerText = "delete";
+        d.innerText = "Verwijder";
         var x = deleteUser.bind(event, data[i]['id']);
         d.addEventListener('click', x, false);
         d.classList = 'link';

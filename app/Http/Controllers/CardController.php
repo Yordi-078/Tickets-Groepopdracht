@@ -10,6 +10,7 @@ use App\Models\CardUpvotes;
 use App\Models\LessonUpvotes;
 use App\Models\BoardUser;
 use App\Models\Card;
+use App\Models\Photo;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
@@ -68,18 +69,18 @@ class CardController extends Controller
           return response()->json($response);
     }
 
-    public function updateCard( $card_id, $card_name, $card_description, $card_status)
+    public function updateCard(Request $request)
     { 
-        $user_id = Auth::user()->id;
-
+        
         Card::updateOrCreate(
             [
-                "id" => $card_id
+                "id" => $request['card_id']
             ],
+            
             [
-                "name" => $card_name,
-                "description" => $card_description,
-                "status" => $card_status,
+                "name" => $request['name'],
+                "description" => $request['description'],
+                "status" => $request['status'],
             ]
         );
         
@@ -113,6 +114,36 @@ class CardController extends Controller
         $response = User::where('id', $user_id)->get();
 
           return response()->json($response[0]);
+    }
+
+    public function updateCardImage($card_id, $image_id){
+        Card::updateOrCreate(
+            [
+                "id" => $card_id
+            ],[
+                "image" => $image_id,
+            ]
+        );
+    }
+
+    public function getUpvoterInfo($user_id)
+    {
+        $response = User::where('id', $user_id)->get();
+
+        return response()->json($response[0]);
+    }
+
+    public function getUpvoters($card_id)
+    {
+        $upvoters_ids = CardUpvotes::where('card_id', $card_id)->get('user_id');
+        $upvoters = [];
+
+        for ($i=0; $i < count($upvoters_ids); $i++) { 
+           $upvoter = User::where('id', $upvoters_ids[$i]['user_id'])->get();
+           array_push($upvoters, $upvoter[0]);
+        }
+
+        return response()->json($upvoters);
     }
 
     public function saveHelper($card_id, $helperId)

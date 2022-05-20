@@ -26,12 +26,12 @@
                     </div>
                 @else
                     <div>
-                        <a href="{{ route('login') }}" class="welcome-button">Log-in</a>
+                        <a href="{{ route('login') }}" class="welcome-button">Inloggen</a>
                         <hr class="welcome-button-line">
                     </div>
                         @if (Route::has('register'))
                         <div>
-                            <a href="{{ route('register') }}" class="welcome-button">Register</a>
+                            <a href="{{ route('register') }}" class="welcome-button">Registreren</a>
                             <hr class="welcome-button-line">
                         </div>
                         @endif
