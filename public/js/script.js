@@ -526,7 +526,6 @@ function lessonEventListeners(lessonCard_id, board_id){
 
 // fetch requests
 function sendReviewLinks(lessonCard_id){
-  console.log(lessonCard_id);
   var url = route('sendReviewLinks')
   var meta = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
   var formData = new FormData();
