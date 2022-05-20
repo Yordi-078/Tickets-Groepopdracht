@@ -181,7 +181,7 @@ $user_id = Auth::user()->id;
                 <p id="lesson-start-date" ></p>
             </fieldset>
 
-            <fieldset class="avatarContainer card-info-border">
+            <fieldset class="lessonAvatarContainer card-info-border">
                 <div class="vote-container">
                     <a id="card-upvote-lesson" class="vote-thumb"><i class="fas fa-thumbs-up"></i></a>
                     <a id="lesson-upvote-count" class="vote-count">-</a>
