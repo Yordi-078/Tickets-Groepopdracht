@@ -375,9 +375,13 @@ function checkForOwner(user_id, card_owner_id, user_role_id){
   //make eventListener disabled
   cardUpvoteQuestion.style.display = 'none';
   cardDownvoteQuestion.style.display = 'none';
-  if(user_id != card_owner_id || user_role_id == 2){
+  if(user_id != card_owner_id){
   cardStatus.disabled = true
   cardSubmitForm.style.display = 'none';
+  }
+  if( user_role_id != 2 ){
+    cardStatus.disabled = false
+    cardSubmitForm.style.display = 'grid';
   }
   if(user_id == card_owner_id) return
   cardTitle.readOnly = true;
@@ -386,7 +390,6 @@ function checkForOwner(user_id, card_owner_id, user_role_id){
   //make eventListener enabled
   cardUpvoteQuestion.style.display = 'flex';
   cardDownvoteQuestion.style.display = 'none';
-
 }
 
 function checkforLessonCardOwner(user_id, card_owner_id){
@@ -520,6 +523,10 @@ function lessonEventListeners(lessonCard_id, board_id){
   lessonInfoPopup.addEventListener('submit', function(event){
     event.preventDefault();
     updateLessonCard(event);
+    console.log(event['target'][7].value);
+    if(event['target'][7].value == 'finished'){
+        sendReviewLinks(lessonCard_id);  
+    }
     lessonModal.style.display = "none";
   });
 }
