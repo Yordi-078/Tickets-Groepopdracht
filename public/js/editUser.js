@@ -4,6 +4,7 @@ const SUBMITCHANGES = document.getElementById('Submit-changes-button');
 
 window.onload = function() {
     getUserImage();
+    getUserAvatar();
 };
 
 EDITUSERFORM.addEventListener('submit', function(event){

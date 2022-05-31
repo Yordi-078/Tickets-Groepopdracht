@@ -1,10 +1,11 @@
 const AVATARIMAGE = document.getElementById('avatarImage');
 
 window.onload = function() {
-    getUserImage();
+  console.log('begin');
+    getUserAvatar();
 };
 
-function getUserImage(){
+function getUserAvatar(){
     var url = route('getUserImage')
       
     fetch(url, {
@@ -20,6 +21,7 @@ function getUserImage(){
   }
 
   function showImage(data){
+    console.log('done');
     if(data['image'] != null){
         AVATARIMAGE.src = '/getImage/' + data['image'];
     }
