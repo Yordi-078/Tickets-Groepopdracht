@@ -52,6 +52,7 @@ const UPVOTERPOPUPEMAIL = document.getElementById("upvoteUserPopupEmail");
 const UPVOTERPOPUPROLE = document.getElementById("upvoteUserPopupRole");
 const UPVOTEUSERAVATAR = document.getElementById("card-upvoter-avatar");
 const UPVOTEUSERPOPUPBOL = document.getElementById("upvoteUserPopupBol");
+const USERMODAL = document.getElementById('user-modal');
 
 // uncatogorized 
 
@@ -64,7 +65,8 @@ CARDSPAN.onclick = function() {
 }
 
 CLOSEUPVOTERPOPUP.onclick = function(){
-  USERPOPUP.style.display = "none";
+  USERMODAL.style.display = "none";
+  // USERPOPUP.style.display = "none";
 }
 
 LESSONSPAN.onclick = function() {
@@ -72,11 +74,15 @@ LESSONSPAN.onclick = function() {
 }
 
 window.onclick = function(event) {
+  console.log(event.target);
   if (event.target == LESSONMODAL) {
     LESSONMODAL.style.display = "none";
   }
   else if( event.target == CARDMODAL){
     CARDMODAL.style.display = "none";
+  }
+  else if( event.target == USERMODAL){
+    USERMODAL.style.display = "none";
   }
 }
 
@@ -372,21 +378,23 @@ function checkForOwner(user_id, card_owner_id, user_role_id){
   //make eventListener disabled
   CARDUPVOTEQUESTION.style.display = 'none';
   CARDDOWNVOTEQUESTION.style.display = 'none';
-  if(user_id != card_owner_id){
-    CARDSTATUS.disabled = true
-    CARDSUBMITFORM.style.display = 'none';
-  }
-  if( user_role_id != 2 ){
-    CARDSTATUS.disabled = false
-    CARDSUBMITFORM.style.display = 'grid';
-  }
+  // if(user_id != card_owner_id){
+  //   CARDSTATUS.disabled = true
+  //   CARDSUBMITFORM.style.display = 'none';
+  // }
   if(user_id == card_owner_id) return
+  CARDSTATUS.disabled = true
+  CARDSUBMITFORM.style.display = 'none';
   CARDTITLE.readOnly = true;
   CARDDESCRIPTION.readOnly = true;
   CARDUPLOADIMAGE.disabled = true;
   //make eventListener enabled
   CARDUPVOTEQUESTION.style.display = 'flex';
   CARDDOWNVOTEQUESTION.style.display = 'none';
+  if( user_role_id == 2 ){
+    CARDSTATUS.disabled = false
+    CARDSUBMITFORM.style.display = 'grid';
+  }
 }
 
 function checkforLessonCardOwner(user_id, card_owner_id){
@@ -407,11 +415,13 @@ var showUserData = function (data,color){
   var initials = data['name'].match(/\b(\w)/g);
   var acronym = initials.join('');
 
-  if(USERPOPUP.style.display == 'block'){
-    USERPOPUP.style.display = 'none'
+  if(USERMODAL.style.display == 'block'){
+    USERMODAL.style.display = "none";
+    // USERPOPUP.style.display = 'none';
     return
   }
-  USERPOPUP.style.display='block';
+  USERMODAL.style.display = "block";
+  // USERPOPUP.style.display='block';
   USERPOPUPBOL.style.backgroundColor= 'gray'
   USERPOPUPBOL.title= data['name']
   USERPOPUPINIT.innerText= data['name']

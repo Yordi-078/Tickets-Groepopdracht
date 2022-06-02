@@ -121,18 +121,20 @@ $user_id = Auth::user()->id;
                     <div title="" class="avatar" id="card-helper-avatar"><a id="card-helper-avatar-init" href="#"></a></div>
                 </fieldset>
 
-                <div id="userPopup" class="home-user-popup">
-                <span id="close-upvoter-popup" class="close">&times;</span>
-                    <div class="user-popup-header">
-                        <div id="userPopupBol" title="" class="avatar user-popup-header-avatar"><a id="userPopupAvatar"></a></div>
-                        <br>
-                        <div id="userPopupName" class="user-popup-header-username"><a id="userPopupInit"></a></div>
-                        <div id="userPopupRole" class="user-popup-header-role"></div>
-                        <br><br>
-                        <a href="{{ route('viewUserPage', $user_id ) }}">Profiel Pagina</a>
-                        <hr>
-                        <div id="userPopupEmail" class="user-popup-header-email"></div> 
-                        <hr>
+                <div id="user-modal" class="modal">
+                    <div id="userPopup" class="home-user-popup">
+                    <span id="close-upvoter-popup" class="close">&times;</span>
+                        <div class="user-popup-header">
+                            <div id="userPopupBol" title="" class="avatar user-popup-header-avatar"><a id="userPopupAvatar"></a></div>
+                            <br>
+                            <div id="userPopupName" class="user-popup-header-username"><a id="userPopupInit"></a></div>
+                            <div id="userPopupRole" class="user-popup-header-role"></div>
+                            <br><br>
+                            <a href="{{ route('viewUserPage', $user_id ) }}">Profiel Pagina</a>
+                            <hr>
+                            <div id="userPopupEmail" class="user-popup-header-email"></div> 
+                            <hr>
+                        </div>
                     </div>
                 </div>                
                         
