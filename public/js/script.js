@@ -1,57 +1,57 @@
 /**
  * all the const are created at the top for easy access 
  */
-const loaderScreen = document.getElementById('loader-screen');
-const cardOwner = document.getElementById('card-owner');
-const removeHelperBtn = document.getElementById('remove-helper-button');
-const addHelperBtn = document.getElementById('add-helper-button');
-const cardHelperAvatar =document.getElementById('card-helper-avatar');
-const helper = document.getElementById('helper');
-const cardHelperAvatarInit = document.getElementById('card-helper-avatar-init');
-const cardAvatarContainer = document.getElementById('cardAvatarContainer');
-const lessonAvatarContainer = document.getElementById('lessonAvatarContainer');
-const cardTitle = document.getElementById('card-title');
-const cardDescription = document.getElementById('card-description');
-const cardCreatedAt = document.getElementById('card-created-at');
-const cardStatus = document.getElementById('card-status');
-const cardUploadImage = document.getElementById('card-upload-image');
-const cardSubmitForm = document.getElementById('card-submit-form');
-const cardUpvoteQuestion = document.getElementById('card-upvote-question');
-const cardDownvoteQuestion = document.getElementById('card-downvote-question');
-const cardUpvoteLesson = document.getElementById('card-upvote-lesson');
-const cardDownvoteLesson = document.getElementById('card-downvote-lesson');
-const lessonOwner = document.getElementById('lesson-owner');
-const lessonTitle = document.getElementById('lesson-title');
-const lessonDescription = document.getElementById('lesson-description');
-const lessonStartDate = document.getElementById('lesson-start-date');
-const lessonStatus = document.getElementById('lesson-card-status');
-const lessonCardSubmitForm = document.getElementById('lessonCard-submit-form');
-const userPopup = document.getElementById('userPopup');
-const userPopupBol = document.getElementById('userPopupBol');
-const userPopupInit = document.getElementById('userPopupInit');
-const userPopupName = document.getElementById('userPopupName');
-const userPopupAvatar = document.getElementById('userPopupAvatar');
-const questionUpvoteCount = document.getElementById('question-upvote-count');
-const lessonUpvoteCount = document.getElementById('lesson-upvote-count');
-const cardInfoPopup = document.getElementById('card-info-popup');
-const lessonInfoPopup = document.getElementById('lesson-info-popup');
-const lessonModal = document.getElementById('lessonModal');
-const lessonSpan = document.getElementById("close-lesson-popup");
-const cardModal = document.getElementById('cardModal');
-const cardSpan = document.getElementById("close-popup");
-const closeUpvoterPopup = document.getElementById("close-upvoter-popup");
-const userPopupEmail = document.getElementById("userPopupEmail");
-const userPopupRole = document.getElementById("userPopupRole");
-const review = document.getElementById('reviewLink');
-const allReviews = document.getElementById('allReviewsLink');
-const UploadedCardImage = document.getElementById("uploaded-card-image")
-const upvoteUserPopup = document.getElementById("upvotesContainer");
-const upvoterPopupBol = document.getElementById("upvoteUserAvatar");
-const upvoterPopupName = document.getElementById("upvoteUserPopupName");
-const upvoterPopupEmail = document.getElementById("upvoteUserPopupEmail");
-const upvoterPopupRole = document.getElementById("upvoteUserPopupRole");
-const upvoteUserAvatar = document.getElementById("card-upvoter-avatar");
-const upvoteUserPopupBol = document.getElementById("upvoteUserPopupBol");
+const LOADERSCREEN = document.getElementById('loader-screen');
+const CARDOWNER = document.getElementById('card-owner');
+const REMOVEHELPERBTN = document.getElementById('remove-helper-button');
+const ADDHELPERBTN = document.getElementById('add-helper-button');
+const CARDHELPERAVATAR =document.getElementById('card-helper-avatar');
+const HELPER = document.getElementById('helper');
+const CARDHELPERAVATARINIT = document.getElementById('card-helper-avatar-init');
+const CARDAVATARCONTAINER = document.getElementById('cardAvatarContainer');
+const LESSONAVATARCONTAINER = document.getElementById('lessonAvatarContainer');
+const CARDTITLE = document.getElementById('card-title');
+const CARDDESCRIPTION = document.getElementById('card-description');
+const CARDCREATEDAT = document.getElementById('card-created-at');
+const CARDSTATUS = document.getElementById('card-status');
+const CARDUPLOADIMAGE = document.getElementById('card-upload-image');
+const CARDSUBMITFORM = document.getElementById('card-submit-form');
+const CARDUPVOTEQUESTION = document.getElementById('card-upvote-question');
+const CARDDOWNVOTEQUESTION = document.getElementById('card-downvote-question');
+const CARDUPVOTELESSON = document.getElementById('card-upvote-lesson');
+const CARDDOWNVOTELESSON = document.getElementById('card-downvote-lesson');
+const LESSONOWNER = document.getElementById('lesson-owner');
+const LESSONTITLE = document.getElementById('lesson-title');
+const LESSONDESCRIPTION = document.getElementById('lesson-description');
+const LESSONSTARTDATE = document.getElementById('lesson-start-date');
+const LESSONSTATUS = document.getElementById('lesson-card-status');
+const LESSONCARDSUBMITFORM = document.getElementById('lessonCard-submit-form');
+const USERPOPUP = document.getElementById('userPopup');
+const USERPOPUPBOL = document.getElementById('userPopupBol');
+const USERPOPUPINIT = document.getElementById('userPopupInit');
+const USERPOPUPNAME = document.getElementById('userPopupName');
+const USERPOPUPAVATAR = document.getElementById('userPopupAvatar');
+const QUESTIONUPVOTECOUNT = document.getElementById('question-upvote-count');
+const LESSONUPVOTECOUNT = document.getElementById('lesson-upvote-count');
+const CARDINFOPOPUP = document.getElementById('card-info-popup');
+const LESSONINFOPOPUP = document.getElementById('lesson-info-popup');
+const LESSONMODAL = document.getElementById('lessonModal');
+const LESSONSPAN = document.getElementById("close-lesson-popup");
+const CARDMODAL = document.getElementById('cardModal');
+const CARDSPAN = document.getElementById("close-popup");
+const CLOSEUPVOTERPOPUP = document.getElementById("close-upvoter-popup");
+const USERPOPUPEMAIL = document.getElementById("userPopupEmail");
+const USERPOPUPROLE = document.getElementById("userPopupRole");
+const REVIEW = document.getElementById('reviewLink');
+const ALLREVIEWS = document.getElementById('allReviewsLink');
+const UPLOADEDCARDIMAGE = document.getElementById("uploaded-card-image")
+const UPVOTEUSERPOPUP = document.getElementById("upvotesContainer");
+const UPVOTERPOPUPBOL = document.getElementById("upvoteUserAvatar");
+const UPVOTERPOPUPNAME = document.getElementById("upvoteUserPopupName");
+const UPVOTERPOPUPEMAIL = document.getElementById("upvoteUserPopupEmail");
+const UPVOTERPOPUPROLE = document.getElementById("upvoteUserPopupRole");
+const UPVOTEUSERAVATAR = document.getElementById("card-upvoter-avatar");
+const UPVOTEUSERPOPUPBOL = document.getElementById("upvoteUserPopupBol");
 
 // uncatogorized 
 
@@ -59,30 +59,29 @@ const INPUTS = document.querySelectorAll('#smileys input');
 const updateValue = e => document.querySelector('#result').innerHTML = e.target.value;
 INPUTS.forEach(el => el.addEventListener('click', e => updateValue(e)));
 
-cardSpan.onclick = function() {
-  cardModal.style.display = "none";
+CARDSPAN.onclick = function() {
+  CARDMODAL.style.display = "none";
 }
 
-closeUpvoterPopup.onclick = function(){
-  userPopup.style.display = "none";
+CLOSEUPVOTERPOPUP.onclick = function(){
+  USERPOPUP.style.display = "none";
 }
 
-lessonSpan.onclick = function() {
-  lessonModal.style.display = "none";
+LESSONSPAN.onclick = function() {
+  LESSONMODAL.style.display = "none";
 }
 
 window.onclick = function(event) {
-  if (event.target == lessonModal) {
-    lessonModal.style.display = "none";
+  if (event.target == LESSONMODAL) {
+    LESSONMODAL.style.display = "none";
   }
-  else if( event.target == cardModal){
-    cardModal.style.display = "none";
+  else if( event.target == CARDMODAL){
+    CARDMODAL.style.display = "none";
   }
 }
 
 window.addEventListener('resize', function(event){
   var intFrameWidth = window.innerWidth;
-  console.log(event);
   if (intFrameWidth < 1024){
     document.getElementById('toggle-card').style.display = 'none';
     var boards = document.getElementsByClassName("card");
@@ -121,9 +120,9 @@ function randomNumber(min, max){
  * @param {const} theModal the modal that should be displayed after loader
  */
 function setLoader(theModal){
-  loaderScreen.style.display = 'block';
+  LOADERSCREEN.style.display = 'block';
   setTimeout(() => {
-    loaderScreen.style.display = 'none';
+    LOADERSCREEN.style.display = 'none';
     theModal.style.display = 'block';
   }, randomNumber(700, 800));
 }
@@ -163,9 +162,9 @@ function showQuestionPopup(card_owner_id, helper_id, user_id, user_name, card_id
   checkForOwner(user_id, card_owner_id, user_role_id);
   eventListeners(card_id, user_id, user_name, user_id);
   getUsername(card_owner_id, helper_id, user_id);
-  getCardAvatars(card_id, user_id, cardAvatarContainer);
+  getCardAvatars(card_id, user_id, CARDAVATARCONTAINER);
   getUpvoters(card_id);
-  setLoader(cardModal);
+  setLoader(CARDMODAL);
 }
 
 /**
@@ -183,18 +182,18 @@ function showPopup(lessonCard_id, card_owner_id, user_id, board_id){
   checkforLessonCardOwner(user_id, card_owner_id);
   getCardInfo(lessonCard_id);
   lessonEventListeners(lessonCard_id, board_id);
-  setLoader(lessonModal);
+  setLoader(LESSONMODAL);
 }
 
 function setHelperAndOwner(name, user_id, card_owner_id){
-  cardOwner.innerText = name[0]['name'];
+  CARDOWNER.innerText = name[0]['name'];
 
   if(name[1] == 'empty'){
-    removeHelperBtn.style.display = "none";
-    cardHelperAvatar.style.display = 'none'
+    REMOVEHELPERBTN.style.display = "none";
+    CARDHELPERAVATAR.style.display = 'none'
 
     if(user_id != card_owner_id){
-      addHelperBtn.style.display = 'inline';
+      ADDHELPERBTN.style.display = 'inline';
     }
   }
 
@@ -203,19 +202,19 @@ function setHelperAndOwner(name, user_id, card_owner_id){
     var initials = name[1]['name'].match(/\b(\w)/g);
     var acronym = initials.join('');
     
-    helper.innerText = name[1]['name'] + ' is aan het helpen.';
-    cardHelperAvatar.style.display = 'flex';
-    cardHelperAvatar.style.backgroundColor= 'gray'
-    cardHelperAvatar.title= name[1]['name']
-    cardHelperAvatarInit.innerText= acronym
+    HELPER.innerText = name[1]['name'] + ' is aan het helpen.';
+    CARDHELPERAVATAR.style.display = 'flex';
+    CARDHELPERAVATAR.style.backgroundColor= 'gray'
+    CARDHELPERAVATAR.title= name[1]['name']
+    CARDHELPERAVATARINIT.innerText= acronym
     fillAvatarPopup(name[1]);
-    helper.innerText = name[1]['name'] + ' is aan het helpen.';
+    HELPER.innerText = name[1]['name'] + ' is aan het helpen.';
 
     if(user_id == name[1]['id'] || user_id == card_owner_id){
-      removeHelperBtn.style.display = "inline";
+      REMOVEHELPERBTN.style.display = "inline";
     }
 
-    addHelperBtn.style.display = 'none';
+    ADDHELPERBTN.style.display = 'none';
   }
 }
 
@@ -227,8 +226,7 @@ function avatarEventListener(data){
 }
 
 function setOwner(name, user_id, card_owner_id){
-  console.log(name)
-  lessonOwner.innerText = name[0]['name'];
+  LESSONOWNER.innerText = name[0]['name'];
 
 }
 
@@ -236,10 +234,10 @@ function fillAvatarPopup(data){
   var initials = data['name'].match(/\b(\w)/g);
     var acronym = initials.join('');
 
-    cardHelperAvatar.style.display = 'flex';
-    cardHelperAvatar.style.backgroundColor= 'gray'
-    cardHelperAvatar.title= data['name']
-    cardHelperAvatarInit.innerText= acronym
+    CARDHELPERAVATAR.style.display = 'flex';
+    CARDHELPERAVATAR.style.backgroundColor= 'gray'
+    CARDHELPERAVATAR.title= data['name']
+    CARDHELPERAVATARINIT.innerText= acronym
 }
 // function showLessonData(data){
 // document.getElementById('lessoncard-title').value = data[0]['name'];
@@ -268,19 +266,19 @@ function showData(data){
     var initials = data[i]['name'].match(/\b(\w)/g);
     var acronym = initials.join('');
     
-    const avatar = document.createElement("div");
-    avatar.id = "lesson-" + data[i]['id'] + "-upvote-avatar";
-    avatar.className = "avatar";
-    avatar.title = data[i]['name'];
-    avatar.style.backgroundColor = 'grey';
-    lessonAvatarContainer.appendChild(avatar);
+    const AVATAR = document.createElement("div");
+    AVATAR.id = "lesson-" + data[i]['id'] + "-upvote-avatar";
+    AVATAR.className = "avatar";
+    AVATAR.title = data[i]['name'];
+    AVATAR.style.backgroundColor = 'grey';
+    LESSONAVATARCONTAINER.appendChild(AVATAR);
 
-    const avatarInit = document.createElement("a");
-    avatarInit.id = "lesson-" + data[i]['id'] + "-upvote-avatar-init";
-    avatarInit.innerText = acronym;
-    avatar.appendChild(avatarInit);
+    const AVATARINIT = document.createElement("a");
+    AVATARINIT.id = "lesson-" + data[i]['id'] + "-upvote-avatar-init";
+    AVATARINIT.innerText = acronym;
+    AVATAR.appendChild(AVATARINIT);
   }
-  lessonUpvoteCount.innerText = data.length;
+  LESSONUPVOTECOUNT.innerText = data.length;
 }
 
 var addHelper = function(helperId, helperName, card_id){
@@ -290,119 +288,118 @@ var addHelper = function(helperId, helperName, card_id){
   var initials = helperName.match(/\b(\w)/g);
   var acronym = initials.join('');
 
-  helper.innerText = helperName + ' is aan het helpen.';
-  cardHelperAvatar.style.display = 'flex'
-  cardHelperAvatar.style.backgroundColor= 'gray'
-  cardHelperAvatar.title= helperName
-  cardHelperAvatarInit.innerText= acronym
-  removeHelperBtn.style.display = "inline";
-  addHelperBtn.style.display = "none";
+  HELPER.innerText = helperName + ' is aan het helpen.';
+  CARDHELPERAVATAR.style.display = 'flex'
+  CARDHELPERAVATAR.style.backgroundColor= 'gray'
+  CARDHELPERAVATAR.title= helperName
+  CARDHELPERAVATARINIT.innerText= acronym
+  REMOVEHELPERBTN.style.display = "inline";
+  ADDHELPERBTN.style.display = "none";
 }
 
 var addUpvote = function(card_id, user_id){
   saveCardUpvote(card_id);
-  getCardAvatars(card_id, user_id, cardAvatarContainer);
+  getCardAvatars(card_id, user_id, CARDAVATARCONTAINER);
 }
 
 var removeHelper = function(card_id){
   deleteHelper(card_id);
-  helper.innerText = 'Niemand is aan het helpen.';
-  cardHelperAvatar.style.display = 'none';
-  cardHelperAvatar.style.backgroundColor= '';
-  cardHelperAvatar.title= '';
-  cardHelperAvatarInit.innerText= '';
-  removeHelperBtn.style.display = "none";
-  addHelperBtn.style.display = "inline";
+  HELPER.innerText = 'Niemand is aan het helpen.';
+  CARDHELPERAVATAR.style.display = 'none';
+  CARDHELPERAVATAR.style.backgroundColor= '';
+  CARDHELPERAVATAR.title= '';
+  CARDHELPERAVATARINIT.innerText= '';
+  REMOVEHELPERBTN.style.display = "none";
+  ADDHELPERBTN.style.display = "inline";
 }
 
 var removeUpvote = function(card_id, user_id){
   deleteCardUpvote(card_id);
-  getCardAvatars(card_id, user_id, cardAvatarContainer);
+  getCardAvatars(card_id, user_id, CARDAVATARCONTAINER);
 }
 
 function resetQuestionPopup(){
-  cardAvatarContainer.innerHTML = '';
-  cardOwner.innerText = '';
-  helper.innerText = 'Niemand is aan het helpen';
-  cardHelperAvatar.style.display = 'none';
-  cardHelperAvatar.style.backgroundColor= '';
-  cardHelperAvatar.title= '';
-  cardHelperAvatarInit.innerText= '';
-  UploadedCardImage.src = '';
-  removeHelperBtn.style.display = "none";
-  addHelperBtn.style.display = "none";
+  CARDAVATARCONTAINER.innerHTML = '';
+  CARDOWNER.innerText = '';
+  HELPER.innerText = 'Niemand is aan het helpen';
+  CARDHELPERAVATAR.style.display = 'none';
+  CARDHELPERAVATAR.style.backgroundColor= '';
+  CARDHELPERAVATAR.title= '';
+  CARDHELPERAVATARINIT.innerText= '';
+  UPLOADEDCARDIMAGE.src = '';
+  REMOVEHELPERBTN.style.display = "none";
+  ADDHELPERBTN.style.display = "none";
 }
 
 function resetLessonPopup(){
-  lessonAvatarContainer.innerHTML = '';
-  lessonOwner.innerText = '';
+  LESSONAVATARCONTAINER.innerHTML = '';
+  LESSONOWNER.innerText = '';
 }
 
 function fillQuestionPopup(data){
   document.getElementById('card-id').value = data[0]['id'];
-  cardTitle.value = data[0]['name'];
-  cardDescription.value = data[0]['description'];
-  cardCreatedAt.innerText = data[0]['created_at'];
+  CARDTITLE.value = data[0]['name'];
+  CARDDESCRIPTION.value = data[0]['description'];
+  CARDCREATEDAT.innerText = data[0]['created_at'];
   var i = 0;
   if(data[0]['status'] == 'finished'){i = 1}
-  cardStatus.options[i].selected = true;
+  CARDSTATUS.options[i].selected = true;
   if(data[0]['image'] == '') return
-  console.log(data);
   if(data[0]['image'] != null){
-    UploadedCardImage.src = '/getImage/' + data[0]['image'];
+    UPLOADEDCARDIMAGE.src = '/getImage/' + data[0]['image'];
   }
 }
 
 function fillLessonPopup(data){
   document.getElementById('lesson-id').value = data[0]['id'];
-  lessonTitle.value = data[0]['name'];
-  lessonDescription.value = data[0]['description'];
-  lessonStartDate.innerText = data[0]['start_time'];
-  lessonStartDate.innerText = data[0]['status'];
+  LESSONTITLE.value = data[0]['name'];
+  LESSONDESCRIPTION.value = data[0]['description'];
+  LESSONSTARTDATE.innerText = data[0]['start_time'];
+  LESSONSTARTDATE.innerText = data[0]['status'];
   var i = 0;
   if(data[0]['status'] == 'finished'){i = 1}
-  lessonStatus.options[i].selected = true;
+  LESSONSTATUS.options[i].selected = true;
   //image
 }
 
 function checkForOwner(user_id, card_owner_id, user_role_id){
-  cardTitle.readOnly = false;
-  cardDescription.readOnly = false;
-  cardStatus.disabled = false;
-  cardUploadImage.disabled = false;
+  CARDTITLE.readOnly = false;
+  CARDDESCRIPTION.readOnly = false;
+  CARDSTATUS.disabled = false;
+  CARDUPLOADIMAGE.disabled = false;
   //make eventListener enabled
-  cardSubmitForm.style.display = 'grid';
+  CARDSUBMITFORM.style.display = 'grid';
   //make eventListener disabled
-  cardUpvoteQuestion.style.display = 'none';
-  cardDownvoteQuestion.style.display = 'none';
+  CARDUPVOTEQUESTION.style.display = 'none';
+  CARDDOWNVOTEQUESTION.style.display = 'none';
   if(user_id != card_owner_id){
-  cardStatus.disabled = true
-  cardSubmitForm.style.display = 'none';
+    CARDSTATUS.disabled = true
+    CARDSUBMITFORM.style.display = 'none';
   }
   if( user_role_id != 2 ){
-    cardStatus.disabled = false
-    cardSubmitForm.style.display = 'grid';
+    CARDSTATUS.disabled = false
+    CARDSUBMITFORM.style.display = 'grid';
   }
   if(user_id == card_owner_id) return
-  cardTitle.readOnly = true;
-  cardDescription.readOnly = true;
-  cardUploadImage.disabled = true;
+  CARDTITLE.readOnly = true;
+  CARDDESCRIPTION.readOnly = true;
+  CARDUPLOADIMAGE.disabled = true;
   //make eventListener enabled
-  cardUpvoteQuestion.style.display = 'flex';
-  cardDownvoteQuestion.style.display = 'none';
+  CARDUPVOTEQUESTION.style.display = 'flex';
+  CARDDOWNVOTEQUESTION.style.display = 'none';
 }
 
 function checkforLessonCardOwner(user_id, card_owner_id){
-  lessonTitle.readOnly = false;
-  lessonDescription.readOnly = false;
+  LESSONTITLE.readOnly = false;
+  LESSONDESCRIPTION.readOnly = false;
   //make eventListener enabled
-  lessonCardSubmitForm.style.display = 'grid';
+  LESSONCARDSUBMITFORM.style.display = 'grid';
   //make eventListener disabled
   if(user_id == card_owner_id) return
-  lessonTitle.readOnly = true;
-  lessonDescription.readOnly = true;
+  LESSONTITLE.readOnly = true;
+  LESSONDESCRIPTION.readOnly = true;
   //make eventListener disabled
-  lessonCardSubmitForm.style.display = 'none';
+  LESSONCARDSUBMITFORM.style.display = 'none';
   //make eventListener enabled
 }
 
@@ -410,36 +407,36 @@ var showUserData = function (data,color){
   var initials = data['name'].match(/\b(\w)/g);
   var acronym = initials.join('');
 
-  if(userPopup.style.display == 'block'){
-    userPopup.style.display = 'none'
+  if(USERPOPUP.style.display == 'block'){
+    USERPOPUP.style.display = 'none'
     return
   }
-  userPopup.style.display='block';
-  userPopupBol.style.backgroundColor= 'gray'
-  userPopupBol.title= data['name']
-  userPopupInit.innerText= data['name']
-  userPopupName.title= data['name']
-  userPopupEmail.innerText= data['email']
-  userPopupRole.innerText= data['user_role_id']
-  userPopupAvatar.innerText= acronym;
+  USERPOPUP.style.display='block';
+  USERPOPUPBOL.style.backgroundColor= 'gray'
+  USERPOPUPBOL.title= data['name']
+  USERPOPUPINIT.innerText= data['name']
+  USERPOPUPNAME.title= data['name']
+  USERPOPUPEMAIL.innerText= data['email']
+  USERPOPUPROLE.innerText= data['user_role_id']
+  USERPOPUPAVATAR.innerText= acronym;
 }
 
 var showUpvoterData = function (data,color){
   var initials = data['name'].match(/\b(\w)/g);
   var acronym = initials.join('');
 
-  if(upvoteUserPopup.style.display == 'block'){
-    upvoteUserPopup.style.display = 'none'
+  if(UPVOTEUSERPOPUP.style.display == 'block'){
+    UPVOTEUSERPOPUP.style.display = 'none'
     return
   }
-  upvoteUserPopup.style.display='block';
-  upvoteUserPopupBol.style.backgroundColor= 'gray'
-  upvoteUserPopupBol.title= data['name']
-  userPopupInit.innerText= data['name']
-  upvoterPopupName.title= data['name']
-  upvoterPopupEmail.innerText= data['email']
-  upvoterPopupRole.innerText= data['user_role_id']
-  upvoterPopupBol.innerText= acronym;
+  UPVOTEUSERPOPUP.style.display='block';
+  UPVOTEUSERPOPUPBOL.style.backgroundColor= 'gray'
+  UPVOTEUSERPOPUPBOL.title= data['name']
+  USERPOPUPINIT.innerText= data['name']
+  UPVOTERPOPUPNAME.title= data['name']
+  UPVOTERPOPUPEMAIL.innerText= data['email']
+  UPVOTERPOPUPROLE.innerText= data['user_role_id']
+  UPVOTERPOPUPBOL.innerText= acronym;
 
   // i need 
   //username
@@ -448,86 +445,80 @@ var showUpvoterData = function (data,color){
 }
 
 function showCardAvatars(data, user_id, targetBox){
-  cardAvatarContainer.innerHTML = '';
-  cardUpvoteQuestion.style.display = "flex";
-  cardDownvoteQuestion.style.display = "none";
+  CARDAVATARCONTAINER.innerHTML = '';
+  CARDUPVOTEQUESTION.style.display = "flex";
+  CARDDOWNVOTEQUESTION.style.display = "none";
   for (let i = 0; i < data.length; i++) {
     var initials = data[i]['name'].match(/\b(\w)/g);
     var acronym = initials.join('');
     
-    const avatar = document.createElement("div");
-    avatar.id = "card-" + data[i]['id'] + "-upvote-avatar";
-    avatar.className = "avatar";
-    avatar.title = data[i]['name'];
-    avatar.style.backgroundColor = 'grey';
-    avatar.addEventListener('click', showUserData.bind(event, data[i]), false);
-    targetBox.appendChild(avatar);
+    const AVATAR = document.createElement("div");
+    AVATAR.id = "card-" + data[i]['id'] + "-upvote-avatar";
+    AVATAR.className = "avatar";
+    AVATAR.title = data[i]['name'];
+    AVATAR.style.backgroundColor = 'grey';
+    AVATAR.addEventListener('click', showUserData.bind(event, data[i]), false);
+    targetBox.appendChild(AVATAR);
 
-    const avatarInit = document.createElement("a");
-    avatarInit.id = "card-" + data[i]['id'] + "-upvote-avatar-init";
-    avatarInit.innerText = acronym;
-    avatar.appendChild(avatarInit);
+    const AVATARINIT = document.createElement("a");
+    AVATARINIT.id = "card-" + data[i]['id'] + "-upvote-avatar-init";
+    AVATARINIT.innerText = acronym;
+    AVATAR.appendChild(AVATARINIT);
     if(user_id == data[i]['id']){
-      cardUpvoteQuestion.style.display = "none";
-      cardDownvoteQuestion.style.display = "flex";
+      CARDUPVOTEQUESTION.style.display = "none";
+      CARDDOWNVOTEQUESTION.style.display = "flex";
     }
   }
-  questionUpvoteCount.innerText = data.length;
+  QUESTIONUPVOTECOUNT.innerText = data.length;
 }
 
 function eventListeners(card_id, helper_id, helper_name, user_id){
   //remove helper
   // removeHelperBtn.addEventListener('click',destroyHelper, false);
-  removeHelperBtn.addEventListener('click',removeHelper.bind(event,card_id), false);
+  REMOVEHELPERBTN.addEventListener('click',removeHelper.bind(event,card_id), false);
   //add helper
-  addHelperBtn.addEventListener('click',addHelper.bind(event,helper_id, helper_name, card_id), false);
+  ADDHELPERBTN.addEventListener('click',addHelper.bind(event,helper_id, helper_name, card_id), false);
   //question upvote
-  cardUpvoteQuestion.addEventListener('click', addUpvote.bind(event, card_id, user_id), false);
+  CARDUPVOTEQUESTION.addEventListener('click', addUpvote.bind(event, card_id, user_id), false);
   //question downvote
-  cardDownvoteQuestion.addEventListener('click', removeUpvote.bind(event, card_id, user_id), false);
+  CARDDOWNVOTEQUESTION.addEventListener('click', removeUpvote.bind(event, card_id, user_id), false);
   //avatar popup
-  cardHelperAvatar.addEventListener('click', getHelperInfo.bind(event, helper_id), false);
+  CARDHELPERAVATAR.addEventListener('click', getHelperInfo.bind(event, helper_id), false);
   //deleteImage
   var deleteImage = document.getElementById('deleteImage');
   deleteImage.addEventListener('click', deleteCardImage.bind(event, card_id), false);
   //submit
-  cardInfoPopup.addEventListener('submit', function(event){
+  CARDINFOPOPUP.addEventListener('submit', function(event){
     event.preventDefault();
-    var card_name = cardTitle.value
-    var card_description = cardDescription.value
-    var card_status = cardStatus.selectedOptions[0].value
+    var card_name = CARDTITLE.value
+    var card_description = CARDDESCRIPTION.value
+    var card_status = CARDSTATUS.selectedOptions[0].value
     // saveImage(event, card_id);
     updateCard(event);
-    cardModal.style.display = "none";
+    CARDMODAL.style.display = "none";
   });
 }
 
 function lessonEventListeners(lessonCard_id, board_id){
-  cardUpvoteLesson.addEventListener('click', saveLessonUpvote.bind(event, lessonCard_id), false);
+  CARDUPVOTELESSON.addEventListener('click', saveLessonUpvote.bind(event, lessonCard_id), false);
 
-  cardDownvoteLesson.addEventListener('click', deleteLessonUpvote.bind(event, lessonCard_id), false);
+  CARDDOWNVOTELESSON.addEventListener('click', deleteLessonUpvote.bind(event, lessonCard_id), false);
 
-  document.getElementById('send-email').addEventListener('click', function(){
-    console.log('starting mail process');
-    sendReviewLinks(lessonCard_id);
-  });
-
-  review.addEventListener('click', function(){
+  REVIEW.addEventListener('click', function(){
     window.location.href = route('giveReview', [lessonCard_id, board_id]);
   });
 
-  allReviews.addEventListener('click', function(){
+  ALLREVIEWS.addEventListener('click', function(){
     window.location.href = route('allReviews', lessonCard_id);
   });
   
-  lessonInfoPopup.addEventListener('submit', function(event){
+  LESSONINFOPOPUP.addEventListener('submit', function(event){
     event.preventDefault();
     updateLessonCard(event);
-    console.log(event['target'][7].value);
     if(event['target'][7].value == 'finished'){
         sendReviewLinks(lessonCard_id);  
     }
-    lessonModal.style.display = "none";
+    LESSONMODAL.style.display = "none";
   });
 }
 
@@ -546,8 +537,7 @@ function sendReviewLinks(lessonCard_id){
     credentials: "same-origin",
     body: formData,
     
-  }).then(response => response.json())
-  .then(data => console.log(data));
+  });
 }
 
 function getUsername(card_owner_id, helper_id, user_id){
@@ -727,7 +717,6 @@ function getCardAvatars(card_id, user_id, targetBox){
 function updateCard(event){
   var url = route('updateCard')
   var meta = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-  console.log(event.target);
   var formData = new FormData(event.target);
 
   fetch(url, {
@@ -798,7 +787,7 @@ var deleteCardImage = function (card_id){
     method: 'GET',
     credentials: "same-origin",
   });
-  UploadedCardImage.src = '';
+  UPLOADEDCARDIMAGE.src = '';
 }
 /**
  * uploaded images gets saved and map direction gets saved in the database
@@ -856,7 +845,7 @@ var getUpvoters = function (card_id){
 }
 
 var loadFile = function(event) {
-  UploadedCardImage.src = URL.createObjectURL(event.target.files[0]);
+  UPLOADEDCARDIMAGE.src = URL.createObjectURL(event.target.files[0]);
 };
 
 // to do
