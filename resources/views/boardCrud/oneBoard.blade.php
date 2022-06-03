@@ -34,7 +34,7 @@ $user_id = Auth::user()->id;
         <div class="question-board-content" id="board-question-content-box" >
             @foreach($cards as $card)
             
-            <a onclick="showQuestionPopup('{{$card['user_id']}}','{{$card['helper_id']}}','{{Auth::user()->id}}','{{Auth::user()->name}}','{{$card['id']}}','{{Auth::user()->user_role_id}}')" class="general-card card">
+            <a id="card-{{$card['id']}}" onclick="showQuestionPopup('{{$card['user_id']}}','{{$card['helper_id']}}','{{Auth::user()->id}}','{{Auth::user()->name}}','{{$card['id']}}','{{Auth::user()->user_role_id}}')" class="general-card card">
                 <i class="far fa-eye"></i>
                 {{$card->status == "finished" ? "//" : ''}}
                 {{$card[""]}}
@@ -54,7 +54,7 @@ $user_id = Auth::user()->id;
         <div class="lesson-board-content" id="board-lesson-content-box" >
             @foreach($lessonCards as $lessonCard)
  
-                <a onclick="showPopup('{{$lessonCard['id']}}', '{{$lessonCard['user_id']}}', '{{Auth::user()->id}}', '{{$thisBoard['id']}}')" class="toggle card general-card">
+                <a id="LessonCard-{{$lessonCard['id']}}" onclick="showPopup('{{$lessonCard['id']}}', '{{$lessonCard['user_id']}}', '{{Auth::user()->id}}', '{{$thisBoard['id']}}')" class="toggle card general-card">
                     <i class="far fa-eye"></i>
                     {{$lessonCard["name"]}}
                 </a> 

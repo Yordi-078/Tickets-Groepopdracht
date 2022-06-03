@@ -46,11 +46,11 @@ class LessonCardController extends Controller
     { 
         $user_id = Auth::user()->id;
 
-        LessonCard::where("id" , $request['lessonCard_id'])
+        LessonCard::where("id" , $request['lesson_id'])
         ->update([
-            "name" => $request['lessonCard_name'],
-            "description" => $request['lessonCard_description'],
-            "status" => $request['lessonCard_status']
+            "name" => $request['name'],
+            "description" => $request['description'],
+            "status" => $request['status']
         ]);
         
         return response()->json();

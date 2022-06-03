@@ -500,9 +500,11 @@ function eventListeners(card_id, helper_id, helper_name, user_id){
   //submit
   CARDINFOPOPUP.addEventListener('submit', function(event){
     event.preventDefault();
-    var card_name = CARDTITLE.value
-    var card_description = CARDDESCRIPTION.value
-    var card_status = CARDSTATUS.selectedOptions[0].value
+    var name = CARDTITLE.value;
+    if(CARDSTATUS.selectedOptions[0].value == "finished"){
+      name = "// " + CARDTITLE.value;
+    }
+    document.getElementById('card-' + card_id).innerText = name;
     // saveImage(event, card_id);
     updateCard(event);
     CARDMODAL.style.display = "none";
@@ -525,9 +527,13 @@ function lessonEventListeners(lessonCard_id, board_id){
   LESSONINFOPOPUP.addEventListener('submit', function(event){
     event.preventDefault();
     updateLessonCard(event);
+    var name = LESSONTITLE.value;
     if(event['target'][7].value == 'finished'){
-        sendReviewLinks(lessonCard_id);  
+        sendReviewLinks(lessonCard_id);
+        name = "// " + LESSONTITLE.value;  
     }
+    console.log('the name is: ' + name);
+    document.getElementById('LessonCard-' + lessonCard_id).innerText = name;
     LESSONMODAL.style.display = "none";
   });
 }
@@ -857,6 +863,3 @@ var getUpvoters = function (card_id){
 var loadFile = function(event) {
   UPLOADEDCARDIMAGE.src = URL.createObjectURL(event.target.files[0]);
 };
-
-// to do
-// function for randomizing color of avatar bal and remembering color for next use
