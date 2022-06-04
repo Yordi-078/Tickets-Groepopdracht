@@ -1,7 +1,6 @@
 const AVATARIMAGE = document.getElementById('avatarImage');
 
 window.onload = function() {
-  console.log('begin');
     getUserAvatar();
 };
 
@@ -21,7 +20,6 @@ function getUserAvatar(){
   }
 
   function showImage(data){
-    console.log('done');
     if(data['image'] != null){
         AVATARIMAGE.src = '/getImage/' + data['image'];
     }

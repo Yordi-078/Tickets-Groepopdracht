@@ -118,7 +118,7 @@ $user_id = Auth::user()->id;
                     <legend id="helper">Niemand is aan het helpen</legend>
                     <input id="remove-helper-button" class="helper-buttons" type="button" value=" - ">
                     <input id="add-helper-button" class="helper-buttons" type="button"value=" + ">
-                    <div title="" class="avatar" id="card-helper-avatar"><a id="card-helper-avatar-init" href="#"></a></div>
+                    <div title="" class="avatar" id="card-helper-avatar"><a id="card-helper-avatar-init"></a></div>
                 </fieldset>
 
                 <div id="user-modal" class="modal">
@@ -130,7 +130,7 @@ $user_id = Auth::user()->id;
                             <div id="userPopupName" class="user-popup-header-username"><a id="userPopupInit"></a></div>
                             <div id="userPopupRole" class="user-popup-header-role"></div>
                             <br><br>
-                            <a href="{{ route('viewUserPage', $user_id ) }}">Profiel Pagina</a>
+                            <a id="profielPageButton">Profiel Pagina</a>
                             <hr>
                             <div id="userPopupEmail" class="user-popup-header-email"></div> 
                             <hr>
@@ -152,7 +152,7 @@ $user_id = Auth::user()->id;
                     </div>
                     
                     <div id="cardAvatarContainer" class="card-avatar-container">
-                        <div id="upvoteUserPopupBol" title="" class="upvote-user-popup-bol"><a href="#" id="upvoteUserAvatar"></a></div>
+                        <div id="upvoteUserPopupBol" title="" class="upvote-user-popup-bol"><a id="upvoteUserAvatar"></a></div>
                         <div id="upvoteUserPopupName" class="upvote-user-popup-username"><a href="{{ route('viewUserPage', $user_id ) }}">Name</a></div>
                         <div id="upvoteUserPopupEmail" class="upvote-user-popup-email"><p>Email</p></div>
                         <div id="upvoteUserPopupRole" class="upvote-user-popup-role"><p>Role</p></div>
@@ -194,6 +194,23 @@ $user_id = Auth::user()->id;
                 <div id="lessonAvatarContainer" class="card-avatar-container">
                 </div>
             </fieldset>
+
+            <div id="lesson-user-modal" class="modal">
+                <div id="userPopup" class="home-user-popup">
+                <span id="close-lesson-upvoter-popup" class="close">&times;</span>
+                    <div class="user-popup-header">
+                        <div id="userLessonPopupBol" title="" class="avatar user-popup-header-avatar"><a id="userLessonPopupAvatar"></a></div>
+                        <br>
+                        <div id="userLessonPopupName" class="user-popup-header-username"><a id="userLessonPopupInit"></a></div>
+                        <div id="userLessonPopupRole" class="user-popup-header-role"></div>
+                        <br><br>
+                        <a id="LessonProfielPageButton">Profiel Pagina</a>
+                        <hr>
+                        <div id="userLessonPopupEmail" class="user-popup-header-email"></div> 
+                        <hr>
+                    </div>
+                </div>
+            </div>
 
             <fieldset class="progress-info card-info-border">
                     <legend>Kaart status</legend>

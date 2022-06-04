@@ -126,13 +126,6 @@ class CardController extends Controller
         );
     }
 
-    public function getUpvoterInfo($user_id)
-    {
-        $response = User::where('id', $user_id)->get();
-
-        return response()->json($response[0]);
-    }
-
     public function getUpvoters($card_id)
     {
         $upvoters_ids = CardUpvotes::where('card_id', $card_id)->get('user_id');
