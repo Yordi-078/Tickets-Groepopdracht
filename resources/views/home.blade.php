@@ -14,9 +14,15 @@
             @endif
         </div>
         <div class="home-board-content" id="home-board-content">
-            @foreach($allBoard as $board)
+            @forelse($allBoard as $board)
                 <a href="{{ Route('oneBoard', $board['id']) }}" class="general-card card">{{$board["name"]}}</a>    
-            @endforeach
+                @empty
+                @section('second_script')
+	                <script src="{{ asset('js/noBoard.js') }}" defer></script>
+                @endsection
+                    <canvas id="canvas"></canvas>
+                
+            @endforelse
         </div>
     </div>
 </div>

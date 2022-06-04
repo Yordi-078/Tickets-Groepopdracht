@@ -36,6 +36,15 @@ a{
     color:black;
     text-decoration: none;
 }
+
+canvas{
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40%;
+}
     /* end tag styling */
     /* welcome page styling */
 .welcome-content-box{
@@ -1006,7 +1015,7 @@ a{
     color: #262626;
 }
 
-#userPopup{
+#userPopup, #userLessonPopup{
     display: block;
     background-color:whitesmoke;
     top:50%;
@@ -1021,7 +1030,7 @@ a{
     box-shadow:3px 6px 8px 2px rgb(0 0 0 /25%);
 }
     
-#userPopup>div{
+#userPopup>div, #userLessonPopup>div{
     font-size: 18px;
     display: flex;
     justify-content: center;
@@ -1029,7 +1038,7 @@ a{
     align-items: center;
 }
     
-#userPopupBol{
+#userPopupBol,#userLessonPopupBol{
     margin-top:25px;
     width:100px;
     height:100px;
@@ -1037,17 +1046,17 @@ a{
     font-size:2em;
 }
   
-#userPopupName{
+#userPopupName, #userLessonPopupName{
     margin-left:-10px;
     font-size:25px;
 }
   
-#userPopupEmail{
+#userPopupEmail, #userLessonPopupRole{
     font-size:20px;
     margin-left:-10px;
 }
   
-#userPopupRole{
+#userPopupRole, #userLessonPopupRole{
     font-size:20px;
 }
 
