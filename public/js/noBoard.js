@@ -28,7 +28,7 @@ class Character {
  */
     show(){
         c.imageSmoothingEnabled = true;
-        c.drawImage(panda, this.xFrame * 100, this.yFrame, 100, 128, this.x, this.y, 60, 96)
+        c.drawImage(panda, this.xFrame * 100, this.yFrame, 100, 128, this.x, this.y, 50, 96)
     }
 
     update(){

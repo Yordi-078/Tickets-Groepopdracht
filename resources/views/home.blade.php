@@ -17,11 +17,10 @@
             @forelse($allBoard as $board)
                 <a href="{{ Route('oneBoard', $board['id']) }}" class="general-card card">{{$board["name"]}}</a>    
                 @empty
-                @section('second_script')
-	                <script src="{{ asset('js/noBoard.js') }}" defer></script>
-                @endsection
+                    @section('second_script')
+	                    <script src="{{ asset('js/noBoard.js') }}" defer></script>
+                    @endsection
                     <canvas id="canvas"></canvas>
-                
             @endforelse
         </div>
     </div>
