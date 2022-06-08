@@ -427,7 +427,7 @@ function checkforLessonCardOwner(user_id, card_owner_id){
 
 //de upvoter modal
 var showUserData = function (data,modal,color){
-  console.log(data);
+  console.log("show user data test, data: " + data);
   var initials = data['name'].match(/\b(\w)/g);
   var acronym = initials.join('');
 
@@ -438,19 +438,20 @@ var showUserData = function (data,modal,color){
   modal.style.display = "block";
 
   if(modal == LESSONUSERMODAL){
+    console.log("lesson modal test");
     USERLESSONPOPUPBOL.style.backgroundColor= 'gray'
     USERLESSONPOPUPBOL.title= data['name']
     USERLESSONPOPUPINIT.innerText= data['name']
     USERLESSONPOPUPNAME.title= data['name']
     USERLESSONPOPUPEMAIL.innerText= data['email']
     USERLESSONPOPUPROLE.innerText= data['user_role_id']
-    console.log(document.getElementById('LessonProfielPageButton'));
     document.getElementById('LessonProfielPageButton').addEventListener('click', function(){
       window.location.href = route('viewUserPage', data['id']);
     });
     USERLESSONPOPUPAVATAR.innerText= acronym;
   }
   else{
+    console.log("lesson modal test");
     USERPOPUPBOL.style.backgroundColor= 'gray'
     USERPOPUPBOL.title= data['name']
     USERPOPUPINIT.innerText= data['name']
@@ -516,8 +517,9 @@ function eventListeners(card_id, helper_id, helper_name, user_id){
     if(CARDSTATUS.selectedOptions[0].value == "finished"){
       name = "// " + CARDTITLE.value;
     }
+    console.log("submit test, name: " + name);
     document.getElementById('card-' + card_id).innerText = name;
-    // saveImage(event, card_id);
+    saveImage(event, card_id);
     updateCard(event);
     CARDMODAL.style.display = "none";
   });
@@ -789,6 +791,7 @@ function updateCardImage(card_id, image_id){
 }
 
 var getHelperInfo = function (helper_id){
+  console.log("card helper test");
   var url = route('getUserInfo', helper_id);
   
   fetch(url, {
@@ -827,7 +830,7 @@ function saveImage(event, card_id){
   var url = route('saveImage')
   var meta = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
   var formData = new FormData();
-  formData.append('image', event.target[5].files[0]);
+  formData.append('image', event.target[6].files[0]);
     
   fetch(url, {
     headers: {
