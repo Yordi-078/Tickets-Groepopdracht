@@ -29,12 +29,12 @@
                 <p class="help is-danger">{{ $errors->first('description') }}</p>
             @enderror
       
-
+            <label class="label" for="description">tags: </label>  
         <div class="">
-        <select class="selectpicker" name="tag_id[]" id="tag_id" multiple>
-            @foreach ($tags as $tag)
-            <option  value="{{$tag->id}}"> {{$tag->name}}</option>
-            @endforeach 
+            <select class="selectpicker input" name="tag_id[]" id="tag_id" multiple>
+                @foreach ($tags as $tag)
+                    <option value="{{$tag->id}}"> {{$tag->name}}</option>
+                @endforeach 
             </select>
         </div>
         <button class="form-submit-button is-link" type="submit">Aanmaken</button> 
