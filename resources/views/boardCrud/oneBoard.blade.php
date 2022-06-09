@@ -19,7 +19,13 @@ $user_id = Auth::user()->id;
             {{ __('Docenten Overzicht') }}
         </a>
     @endif
-    <a href="{{ route('allBoardUsers', $thisBoard['id']) }}" class="main-button" id="add-student-button">Alle deelnemers</a>
+    @if (Auth::user()->user_role_id == 2 || Auth::user()->user_role_id == 3 )
+    <a id="add-student-button" class="main-button" href="{{ route('addTagsForm', $thisBoard['id']) }}">
+        {{ __('Tags Toevoegen') }}
+    </a>
+    @endif
+    
+    <a href="{{ route('allBoardUsers', $thisBoard['id']) }}" class="main-button" id="add-student-button">alle deelnemers</a>
 </div>
 
 <div class="main-container">
@@ -224,7 +230,7 @@ $user_id = Auth::user()->id;
             <fieldset class="card-info-border">
             <legend>Reviews</legend>
             <a id="reviewLink"> Geef uw mening </a>
-            <a id="allReviewsLink"> Alle beoordelingen </a>
+            <a id="allReviewsLink">Alle beoordelingen</a>
             </fieldset>
 
             <fieldset id="lessonCard-submit-form" class="card-submit-form card-info-border">

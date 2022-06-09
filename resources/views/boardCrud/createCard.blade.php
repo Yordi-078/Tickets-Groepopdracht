@@ -1,5 +1,10 @@
 @extends('layouts.app')
-
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+<style type="text/css"></style>
 @section('content')
 <div class="form-container">
     <div class="form-header">
@@ -23,8 +28,22 @@
             @error('description')
                 <p class="help is-danger">{{ $errors->first('description') }}</p>
             @enderror
+      
+            <label class="label" for="description">tags: </label>  
+        <div class="">
+            <select class="selectpicker input" name="tag_id[]" id="tag_id" multiple>
+                @foreach ($tags as $tag)
+                    <option value="{{$tag->id}}"> {{$tag->name}}</option>
+                @endforeach 
+            </select>
         </div>
         <button class="form-submit-button is-link" type="submit">Aanmaken</button> 
     </form>
 </div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('select').selectpicker();
+    });
+</script>
+
 @endsection

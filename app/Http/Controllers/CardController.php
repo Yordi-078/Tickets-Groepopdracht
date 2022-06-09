@@ -11,6 +11,8 @@ use App\Models\LessonUpvotes;
 use App\Models\BoardUser;
 use App\Models\Card;
 use App\Models\Photo;
+use App\Models\CardTags;
+use App\Models\Tags;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,29 +22,48 @@ class CardController extends Controller
     public function addACard($board_id)
     {
         $board = Board::where('id', $board_id)->get();
-        return view('boardCrud.createCard', ['board'=>$board, 'board_id'=>$board_id]);
+        $tags = Tags::where('board_id', $board_id)->get();
+        return view('boardCrud.createCard', ['board'=>$board, 'board_id'=>$board_id, 'tags'=>$tags]);
     }
 
     public function storeCard(Request $request, $board_id)
     { 
         $this->validateCard();
-
-        $name = $request->input('name');
-        $description = $request->input('description');
         $user_id = Auth::user()->id;
-
         date_default_timezone_set('Europe/Amsterdam');
         
-        $card = new Card();
-        $card->name = $name;
-        $card->description = $description;
-        $card->user_id = $user_id;
-        $card->board_id = $board_id;
-        $card->created_at = Carbon::now();
-        $card->status = 'in_progress';
-        $card->save();
+        $object = Card::updateOrCreate(
+            [
+                "name" => $request->name,
+                "user_id" => $user_id,
+                "board_id" => $board_id,
+                "description" => $request->description,
+                "created_at" => Carbon::now(),
+                "status" => "in_progress"
+            ]
+            );
 
+            $card_id = $object->id;
+
+            
+
+            $this->storeCardTag($request->tag_id, $card_id, $board_id);
+            
+        
+        
         return redirect()->route('oneBoard', ['board_id'=>$board_id]);
+    }
+
+    public function storeCardTag($tag_id, $card_id, $board_id){
+        for($i =0; $i < count($tag_id); $i++) {
+             CardTags::updateOrCreate(
+                 [
+                    "tag_id" => $tag_id[$i],
+                    "card_id" => $card_id,
+                    "board_id" => $board_id, 
+                 ]
+                 );
+                 }
     }
 
     protected function validateCard() 
