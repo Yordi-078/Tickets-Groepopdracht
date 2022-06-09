@@ -15,12 +15,19 @@
 
 @section('content')
 
+<form method="POST" action="{{ route('dateCreator',[$board_id] )}} ">
 <div class="main-button-bar">
-    <button btn id="calendar_popup" class="main-button">
-        {{ __('Selecteer een andere datum') }}
-        <input id="datepicker" style="width: 50px;">
-    </button>
+        @csrf
+
+        <button type="button" class="main-button">
+            <label>Selecteer een andere datum: <input type="text" id="datepicker" name="datepicker" autocomplete="off"></label>
+        </button>
+        
+        <button class="main-button" type="submit">Ga naar datum</button>
 </div>
+</form>
+
+
 
 <div class="main-container">
     <div class="question-board-container">

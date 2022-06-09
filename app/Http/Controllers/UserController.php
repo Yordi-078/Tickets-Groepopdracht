@@ -135,6 +135,11 @@ class UserController extends Controller
         return view('teacherDashboard.index', compact('cards', 'board_id', 'selectedDate', 'lessonCards'));
     }
 
+    public function dateCreator(Request $request, $board_id){
+        $par2 = $request->input('datepicker');
+        return redirect()->route('dateSelected', [$board_id, $par2]);
+    }
+
     public function editUserProfile(){
         $user = User::where('id', auth()->id())->get();
         return view('auth.edit', compact('user'));

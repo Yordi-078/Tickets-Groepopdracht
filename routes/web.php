@@ -49,6 +49,7 @@ Route::get('admin/search-user', [UserController::class, 'searchAdminPage'])->nam
 
 /** teacher dashboard routes */
 route::get('teacher/dashboard/{board_id}', [UserController::class, 'teacherDashboard'])->name('teacherDashboard')->middleware('CheckTeacher');
+route::post('teacher/dashboard/{board_id}/date', [UserController::class, 'dateCreator'])->name('dateCreator')->middleware('CheckTeacher');
 route::get('teacher/dashboard/{board_id}/date/{selectedDate}', [UserController::class, 'dateSelected'])->name('dateSelected')->middleware('CheckTeacher');
 
 /** card routes */
