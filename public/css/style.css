@@ -1283,8 +1283,8 @@ canvas{
 
 #allReviewsLink{
     position: relative;
-    top: 35px;
-    right: 112px;
+    top: 20px;
+    display: block;
 }
 
 #reviewLink:hover{
@@ -1309,20 +1309,4 @@ canvas{
     position: relative;
     left: 30px;
     font-size: 30px;
-}
-
-.avatarContainer{
-    position: absolute;
-    top:53.5%;
-    left:77.5%;
-    width:288px;
-    height:110px;
-}
-
-.lessonAvatarContainer{
-    position: absolute;
-    top:82%;
-    left:51.3%;
-    width:288px;
-    height:110px;
 }

@@ -178,7 +178,7 @@ function showQuestionPopup(card_owner_id, helper_id, user_id, user_name, card_id
   resetQuestionPopup();
   getQuestionCardInfo(card_id);
   checkForOwner(user_id, card_owner_id, user_role_id);
-  eventListeners(card_id, user_id, user_name, user_id);
+  eventListeners(card_id, helper_id, user_name, user_id);
   getUsername(card_owner_id, helper_id, user_id);
   getCardAvatars(card_id, user_id, CARDAVATARCONTAINER);
   getUpvoters(card_id);
