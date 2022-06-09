@@ -122,6 +122,25 @@ class UserController extends Controller
         return view('teacherDashboard.index', compact('cards', 'board_id', 'selectedDate', 'lessonCards'));
     }
 
+
+    /**
+     * Get the form data and puts them as parameter into the route
+     *
+     * @param Request $request
+     * @param [int] $board_id  = id of current board
+     * @return void
+     */
+    public function dateCreator(Request $request, $board_id){
+
+        $request->validate([
+            'datepicker' => ['required']
+        ]);
+
+        $date = $request->input('datepicker');
+        return redirect()->route('dateSelected', [$board_id, $date]);
+    }
+
+    
     /**
      * teacher dashboard page when a date is selected in the calendar
      *
@@ -135,10 +154,7 @@ class UserController extends Controller
         return view('teacherDashboard.index', compact('cards', 'board_id', 'selectedDate', 'lessonCards'));
     }
 
-    public function dateCreator(Request $request, $board_id){
-        $par2 = $request->input('datepicker');
-        return redirect()->route('dateSelected', [$board_id, $par2]);
-    }
+    
 
     public function editUserProfile(){
         $user = User::where('id', auth()->id())->get();

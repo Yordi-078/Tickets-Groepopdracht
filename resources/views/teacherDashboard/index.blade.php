@@ -18,12 +18,15 @@
 <form method="POST" action="{{ route('dateCreator',[$board_id] )}} ">
 <div class="main-button-bar">
         @csrf
-
         <button type="button" class="main-button">
             <label>Selecteer een andere datum: <input type="text" id="datepicker" name="datepicker" autocomplete="off"></label>
         </button>
         
         <button class="main-button" type="submit">Ga naar datum</button>
+        
+        <a class="main-button" href="{{ route('oneBoard', $board_id) }}">
+            {{ __('<- Ga terug naar bord') }}
+        </a>
 </div>
 </form>
 
