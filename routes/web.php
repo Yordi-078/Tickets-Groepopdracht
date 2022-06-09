@@ -38,6 +38,9 @@ Route::get('addToBoard/{board_id}/{user_id}',  [BoardController::class, 'addToBo
 Route::get('viewUsersFromBoard/{board_id}', [BoardController::class, 'viewUsersFromBoard'])->name('viewUsersFromBoard');
 Route::get('allBoardUsers/{board_id}', [BoardController::class, 'allBoardUsers'])->name('allBoardUsers');
 Route::get('viewUserPage/{user_id}', [BoardController::class, 'viewUserPage'])->name('viewUserPage')->middleware('CheckLoggedIn');
+Route::get('addTagsForm/{board_id}',  [BoardController::class, 'addTagsForm'])->name('addTagsForm')->middleware('CheckTeacherOrAdmin');
+Route::post('storeTag/{board_id}',  [BoardController::class, 'storeTag'])->name('storeTag')->middleware('CheckTeacherOrAdmin');
+
 
 /** admin routes */
 Route::get('admin/user-overview',  [UserController::class, 'changeUserRolesPage'])->name('changeUserRoles')->middleware('CheckAdmin');
@@ -100,5 +103,4 @@ Route::get('updateUserImage/{image_id}',  [UserController::class, 'updateUserIma
 Route::get('getUserImage',  [UserController::class, 'getUserImage'])->name('getUserImage')->middleware('CheckLoggedIn');
 
 Route::post('sendReviewLinks',  [ContactController::class, 'sendReviewLinks'])->name('sendReviewLinks')->middleware('CheckLoggedIn');
-
 

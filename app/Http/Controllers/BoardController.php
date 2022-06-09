@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Models\Board;
 use App\Models\Card;
 use App\Models\User;
+use App\Models\Tags;
 use App\Models\BoardUser;
 use App\Models\LessonUpvotes;
 use Illuminate\Support\Facades\Auth;
@@ -116,6 +117,24 @@ class BoardController extends Controller
   public function viewUserPage($user_id){
       $userProfile = User::where('id', $user_id)->get();
       return view('boardCrud.userProfilePage', ['profileInfo' => $userProfile]);
+  }
+
+  public function addTagsForm($board_id){
+    return view('boardCrud.createTags' , ['board_id'=>$board_id]);
+  }
+
+  public function storeTag(Request $request, Board $board_id){
+    $cards = $board_id->cards;
+    $lessonCards = $board_id->lessoncards;
+
+    Tags::updateOrCreate(
+      [
+          "name" => $request->name,
+          "board_id" => $board_id->id
+      ]
+      );
+      return view('boardCrud.oneBoard', ['cards'=>$cards, 'thisBoard'=>$board_id, 'lessonCards'=>$lessonCards]);
+
   }
 
 }
