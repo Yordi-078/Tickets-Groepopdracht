@@ -51,5 +51,25 @@ class CardSeeder extends Seeder
             'status' => 'finished',
             'updated_at' => '2022-01-27 11:52:24'
         ]);
+
+        DB::table('cards')->insert([
+            'name' => 'test',
+            'user_id' => 1,
+            'board_id' => 1,
+            'helper_id' => 3,
+            'description' => 'geen beschrijving',
+            'status' => 'finished',
+            'updated_at' => '2022-06-09 11:52:24'
+        ]);
+
+        DB::table('cards')->insert([
+            'name' => 'test2',
+            'user_id' => 1,
+            'board_id' => 1,
+            'helper_id' => 3,
+            'description' => 'geen beschrijving',
+            'status' => 'finished',
+            'updated_at' => '2022-06-10 11:52:24'
+        ]);
     }
 }
