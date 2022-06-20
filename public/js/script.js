@@ -15,6 +15,7 @@ const CARDDESCRIPTION = document.getElementById('card-description');
 const CARDCREATEDAT = document.getElementById('card-created-at');
 const CARDSTATUS = document.getElementById('card-status');
 const CARDUPLOADIMAGE = document.getElementById('card-upload-image');
+const CARDUPLOADFILES = document.getElementById('card-upload-file');
 const CARDSUBMITFORM = document.getElementById('card-submit-form');
 const CARDUPVOTEQUESTION = document.getElementById('card-upvote-question');
 const CARDDOWNVOTEQUESTION = document.getElementById('card-downvote-question');
@@ -52,6 +53,7 @@ const USERLESSONPOPUPROLE = document.getElementById("userLessonPopupRole");
 const REVIEW = document.getElementById('reviewLink');
 const ALLREVIEWS = document.getElementById('allReviewsLink');
 const UPLOADEDCARDIMAGE = document.getElementById("uploaded-card-image")
+const UPLOADEDCARDFILE = document.getElementById("uploaded-card-file")
 const UPVOTERPOPUPBOL = document.getElementById("upvoteUserAvatar");
 const UPVOTERPOPUPNAME = document.getElementById("upvoteUserPopupName");
 const UPVOTERPOPUPEMAIL = document.getElementById("upvoteUserPopupEmail");
@@ -60,6 +62,7 @@ const UPVOTEUSERAVATAR = document.getElementById("card-upvoter-avatar");
 const UPVOTEUSERPOPUPBOL = document.getElementById("upvoteUserPopupBol");
 const USERMODAL = document.getElementById('user-modal');
 const LESSONUSERMODAL = document.getElementById('lesson-user-modal');
+const DELETEIMAGE = document.getElementById('deleteImage');
 
 // uncatogorized 
 
@@ -174,7 +177,9 @@ function toggleBoard(target, button) {
  * @param {int} card_id 
  */
 function showQuestionPopup(card_owner_id, helper_id, user_id, user_name, card_id, user_role_id){
+  console.count("showQuestionPopup");
   if(!helper_id) {helper_id = 'empty'}
+  resetEventListeners(card_id, helper_id, user_name, user_id);
   resetQuestionPopup();
   getQuestionCardInfo(card_id);
   checkForOwner(user_id, card_owner_id, user_role_id);
@@ -347,6 +352,9 @@ function resetQuestionPopup(){
   CARDHELPERAVATAR.title= '';
   CARDHELPERAVATARINIT.innerText= '';
   UPLOADEDCARDIMAGE.src = '';
+  UPLOADEDCARDIMAGE.style.display = "none";
+  UPLOADEDCARDFILE.src = '';
+  UPLOADEDCARDFILE.style.display = "none";
   REMOVEHELPERBTN.style.display = "none";
   ADDHELPERBTN.style.display = "none";
 }
@@ -364,9 +372,9 @@ function fillQuestionPopup(data){
   var i = 0;
   if(data[0]['status'] == 'finished'){i = 1}
   CARDSTATUS.options[i].selected = true;
-  if(data[0]['image'] == '') return
   if(data[0]['image'] != null){
     UPLOADEDCARDIMAGE.src = '/getImage/' + data[0]['image'];
+    UPLOADEDCARDIMAGE.style.display = "block";
   }
 }
 
@@ -387,6 +395,7 @@ function checkForOwner(user_id, card_owner_id, user_role_id){
   CARDDESCRIPTION.readOnly = false;
   CARDSTATUS.disabled = false;
   CARDUPLOADIMAGE.disabled = false;
+  CARDUPLOADFILES.disabled = false;
   //make eventListener enabled
   CARDSUBMITFORM.style.display = 'grid';
   //make eventListener disabled
@@ -402,6 +411,7 @@ function checkForOwner(user_id, card_owner_id, user_role_id){
   CARDTITLE.readOnly = true;
   CARDDESCRIPTION.readOnly = true;
   CARDUPLOADIMAGE.disabled = true;
+  CARDUPLOADFILES.disabled = true;
   //make eventListener enabled
   CARDUPVOTEQUESTION.style.display = 'flex';
   CARDDOWNVOTEQUESTION.style.display = 'none';
@@ -427,7 +437,6 @@ function checkforLessonCardOwner(user_id, card_owner_id){
 
 //de upvoter modal
 var showUserData = function (data,modal,color){
-  console.log("show user data test, data: " + data);
   var initials = data['name'].match(/\b(\w)/g);
   var acronym = initials.join('');
 
@@ -438,7 +447,6 @@ var showUserData = function (data,modal,color){
   modal.style.display = "block";
 
   if(modal == LESSONUSERMODAL){
-    console.log("lesson modal test");
     USERLESSONPOPUPBOL.style.backgroundColor= 'gray'
     USERLESSONPOPUPBOL.title= data['name']
     USERLESSONPOPUPINIT.innerText= data['name']
@@ -451,14 +459,12 @@ var showUserData = function (data,modal,color){
     USERLESSONPOPUPAVATAR.innerText= acronym;
   }
   else{
-    console.log("lesson modal test");
     USERPOPUPBOL.style.backgroundColor= 'gray'
     USERPOPUPBOL.title= data['name']
     USERPOPUPINIT.innerText= data['name']
     USERPOPUPNAME.title= data['name']
     USERPOPUPEMAIL.innerText= data['email']
     USERPOPUPROLE.innerText= data['user_role_id']
-    console.log(document.getElementById('profielPageButton'));
     document.getElementById('profielPageButton').addEventListener('click', function(){
       window.location.href = route('viewUserPage', data['id']);
     });
@@ -495,7 +501,25 @@ function showCardAvatars(data, user_id, targetBox){
   QUESTIONUPVOTECOUNT.innerText = data.length;
 }
 
+function resetEventListeners(card_id, helper_id, helper_name, user_id){
+  console.countReset("eventListeners");
+  console.countReset("helper");
+  CARDHELPERAVATAR.removeEventListener('click', getHelperInfo.bind(event, helper_id));
+  CARDHELPERAVATAR.removeEventListener('click', getHelperInfo.bind(event, helper_id));
+  CARDHELPERAVATAR.removeEventListener('click', getHelperInfo.bind(event, helper_id));
+  REMOVEHELPERBTN.removeEventListener('click',removeHelper.bind(event,card_id), false);
+  ADDHELPERBTN.removeEventListener('click',addHelper.bind(event,helper_id, helper_name, card_id), false);
+  CARDUPVOTEQUESTION.removeEventListener('click', addUpvote.bind(event, card_id, user_id), false);
+  CARDDOWNVOTEQUESTION.removeEventListener('click', removeUpvote.bind(event, card_id, user_id), false);
+  CARDHELPERAVATAR.removeEventListener('click', getHelperInfo.bind(event, helper_id), false);
+  DELETEIMAGE.removeEventListener('click', deleteCardImage.bind(event, card_id), false);
+  CARDINFOPOPUP.removeEventListener('submit', function(event){
+    event.preventDefault();
+  });
+}
+
 function eventListeners(card_id, helper_id, helper_name, user_id){
+  console.count("eventListeners")
   //remove helper
   // removeHelperBtn.addEventListener('click',destroyHelper, false);
   REMOVEHELPERBTN.addEventListener('click',removeHelper.bind(event,card_id), false);
@@ -506,20 +530,25 @@ function eventListeners(card_id, helper_id, helper_name, user_id){
   //question downvote
   CARDDOWNVOTEQUESTION.addEventListener('click', removeUpvote.bind(event, card_id, user_id), false);
   //avatar popup
-  CARDHELPERAVATAR.addEventListener('click', getHelperInfo.bind(event, helper_id), false);
+  CARDHELPERAVATAR.addEventListener('click', getHelperInfo.bind(event, helper_id), true);
+  CARDHELPERAVATAR.removeEventListener('click', getHelperInfo.bind(event, helper_id), true);
   //deleteImage
-  var deleteImage = document.getElementById('deleteImage');
-  deleteImage.addEventListener('click', deleteCardImage.bind(event, card_id), false);
+  DELETEIMAGE.addEventListener('click', deleteCardImage.bind(event, card_id), false);
   //submit
   CARDINFOPOPUP.addEventListener('submit', function(event){
     event.preventDefault();
     var name = CARDTITLE.value;
+    console.count("submit");
     if(CARDSTATUS.selectedOptions[0].value == "finished"){
       name = "// " + CARDTITLE.value;
     }
-    console.log("submit test, name: " + name);
+    // console.log("submit test, name: " + name);
+    console.log(document.getElementById('card-' + card_id));
     document.getElementById('card-' + card_id).innerText = name;
+    console.countReset("submit")
+    console.log("count has been reset")
     saveImage(event, card_id);
+    saveFile(event, card_id);
     updateCard(event);
     CARDMODAL.style.display = "none";
   });
@@ -791,7 +820,7 @@ function updateCardImage(card_id, image_id){
 }
 
 var getHelperInfo = function (helper_id){
-  console.log("card helper test");
+  console.count("helper");
   var url = route('getUserInfo', helper_id);
   
   fetch(url, {
@@ -818,6 +847,7 @@ var deleteCardImage = function (card_id){
     credentials: "same-origin",
   });
   UPLOADEDCARDIMAGE.src = '';
+  UPLOADEDCARDIMAGE.style.display = "none";
 }
 /**
  * uploaded images gets saved and map direction gets saved in the database
@@ -844,6 +874,24 @@ function saveImage(event, card_id){
   .then(data => updateCardImage(card_id, data));
 }
 
+function saveFile(event, card_id){
+  var url = route('saveFile')
+  var meta = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+  var formData = new FormData();
+  formData.append('file', event.target[8].files[0]);
+    
+  fetch(url, {
+    headers: {
+      'X-CSRF-TOKEN': meta,
+    },
+    method: 'POST',
+    credentials: "same-origin",
+    body: formData,
+    
+  }).then(response => response.json())
+  .then(data => console.log(data));
+}
+
 var getUpvoters = function (card_id){
   var url = route('getUpvoters', card_id);
   
@@ -859,6 +907,12 @@ var getUpvoters = function (card_id){
   .then(data => avatarEventListener(data));
 }
 
-var loadFile = function(event) {
+var loadImage = function(event) {
   UPLOADEDCARDIMAGE.src = URL.createObjectURL(event.target.files[0]);
+  UPLOADEDCARDIMAGE.style.display = "block";
+};
+
+var loadFile = function(event) {
+  UPLOADEDCARDFILE.src = URL.createObjectURL(event.target.files[0]);
+  UPLOADEDCARDFILE.style.display = "block";
 };

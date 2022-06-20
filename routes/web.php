@@ -7,6 +7,7 @@ use App\Http\Controllers\CardController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\LessonCardController;
 use App\Http\Controllers\UploadImageController;
+use App\Http\Controllers\FilesController;
 use App\Http\Middleware\CheckAdmin;
 use App\Http\Middleware\CheckTeacherOrAdmin;
 use App\Http\Middleware\CheckLoggedIn;
@@ -69,6 +70,8 @@ Route::get('getCardInfo/{lesson_id}',  [CardController::class, 'getCardInfo'])->
 Route::get('upload-image', [UploadImageController::class, 'index'])->name('upload-image')->middleware('CheckLoggedIn');
 Route::post('saveImage', [UploadImageController::class, 'saveImage'])->name('saveImage')->middleware('CheckLoggedIn');
 Route::get('deleteImage/{card_id}', [UploadImageController::class, 'deleteImage'])->name('deleteImage')->middleware('CheckLoggedIn');
+
+Route::post('saveFile', [FilesController::class, 'saveFile'])->name('saveFile')->middleware('CheckLoggedIn');
 
 route::get('fetchAllUsers', [UserController::class, 'fetchAllUsers'])->name('fetchAllUsers')->middleware('CheckTeacherOrAdmin');
 Route::get('boardCrud/createLessonCard/{board_id}',  [LessonCardController::class, 'createLessonCard'])->name('createLessonCard')->middleware('CheckTeacherOrAdmin');

@@ -8,6 +8,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Photo;
+use App\Models\Files;
 use App\Models\Card;
 
  
@@ -21,10 +22,10 @@ class UploadImageController extends Controller
  
     public function saveImage(Request $request)
     {
-        // $validatedData = $request->validate([
-        //  'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+        $validatedData = $request->validate([
+         'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
  
-        // ]);
+        ]);
  
         $name = $request->file('image')->getClientOriginalName();
  
