@@ -599,7 +599,20 @@ canvas{
     position:absolute;
     font-size: 18px;
 }
+
+.card-tags-box{
+    position:absolute;
+    left:10vw;
+    font-size: 18px;
+}
     
+.card-tags-box a{
+    background-color: red;
+    border-radius: 15px;
+    padding: 2px 6px;
+    margin-right: 5px;
+}
+
 .close {
     color: #aaaaaa;
     float: right;
@@ -903,7 +916,7 @@ canvas{
     margin-left: 0;
 }
 
-.delete-card-image-button{
+.delete-card-image-button,.delete-card-file-button{
     cursor: pointer;
     border: 1px solid black;
     padding: 1px 5px;

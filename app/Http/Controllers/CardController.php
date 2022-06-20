@@ -243,7 +243,16 @@ class CardController extends Controller
     }
 
     function getQuestionCardInfo($card_id){
-        $response = Card::where('id', $card_id)->get();
+        $cardData = Card::where('id', $card_id)->get();
+
+        $cardTags = [];
+        $tags = CardTags::where('card_id', $card_id)->get();
+        for ($i=0; $i < count($tags); $i++) { 
+            $cardTag = Tags::where('id', $tags[$i]['tag_id'])->get();
+            array_push($cardTags, $cardTag[0]);
+        }
+
+        $response = [$cardData, $cardTags];
 
         return response()->json($response);
     }

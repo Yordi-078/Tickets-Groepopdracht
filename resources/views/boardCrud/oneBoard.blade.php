@@ -88,6 +88,7 @@ $user_id = Auth::user()->id;
 <div id="cardModal" class="modal">
     <div class="modal-content">
         <span id="card-owner" class="card-info-owner"></span>
+        <span id="card-tags" class="card-tags-box">tags: <a>laravel</a> <a>php</a></span>
         <span id="close-popup" class="close">&times;</span>
 
             <form id="card-info-popup" enctype="multipart/form-data" class="card-info-popup">

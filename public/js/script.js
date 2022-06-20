@@ -63,6 +63,7 @@ const UPVOTEUSERPOPUPBOL = document.getElementById("upvoteUserPopupBol");
 const USERMODAL = document.getElementById('user-modal');
 const LESSONUSERMODAL = document.getElementById('lesson-user-modal');
 const DELETEIMAGE = document.getElementById('deleteImage');
+const CARDTAGS = document.getElementById('card-tags');
 
 // uncatogorized 
 
@@ -344,6 +345,7 @@ var removeUpvote = function(card_id, user_id){
 }
 
 function resetQuestionPopup(){
+  CARDTAGS.innerText = "tags: "
   CARDAVATARCONTAINER.innerHTML = '';
   CARDOWNER.innerText = '';
   HELPER.innerText = 'Niemand is aan het helpen';
@@ -364,9 +366,17 @@ function resetLessonPopup(){
   LESSONOWNER.innerText = '';
 }
 
-function fillQuestionPopup(data){
+function fillQuestionPopup(data, tagsData){
   document.getElementById('card-id').value = data[0]['id'];
   CARDTITLE.value = data[0]['name'];
+  CARDTAGS.innerHTML = "tags: "
+  tagsData.forEach(element => {
+    const tag = document.createElement("a");
+    tag.title = element['name'];
+    tag.innerText = element['name'];
+    tag.style.backgroundColor = 'green';
+    CARDTAGS.appendChild(tag);
+  });
   CARDDESCRIPTION.value = data[0]['description'];
   CARDCREATEDAT.innerText = data[0]['created_at'];
   var i = 0;
@@ -683,7 +693,7 @@ function getQuestionCardInfo(card_id){
     method: 'GET',
     credentials: "same-origin",
   }).then(response => response.json())
-  .then(data => fillQuestionPopup(data));
+  .then(data => fillQuestionPopup(data[0], data[1]));
 }
 
 function getLessonCardInfo(card_id){
