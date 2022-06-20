@@ -38,15 +38,18 @@ $user_id = Auth::user()->id;
         </div>
         
         <div class="question-board-content" id="board-question-content-box" >
-            @foreach($cards as $card)
-            
-            <a id="card-{{$card['id']}}" onclick="showQuestionPopup('{{$card['user_id']}}','{{$card['helper_id']}}','{{Auth::user()->id}}','{{Auth::user()->name}}','{{$card['id']}}','{{Auth::user()->user_role_id}}')" class="general-card card">
+            @for ($i = 0; $i < count($cards); $i++)
+            <a id="card-{{$cards[$i]['id']}}" onclick="showQuestionPopup('{{$cards[$i]['user_id']}}','{{$cards[$i]['helper_id']}}','{{Auth::user()->id}}','{{Auth::user()->name}}','{{$cards[$i]['id']}}','{{Auth::user()->user_role_id}}')" class="general-card card">
                 <i class="far fa-eye"></i>
-                {{$card->status == "finished" ? "//" : ''}}
-                {{$card[""]}}
-                {{$card["name"]}}
-            </a>   
-            @endforeach
+                {{$cards[$i]->status == "finished" ? "//" : ''}}
+                {{$cards[$i][""]}}
+                {{$cards[$i]["name"]}}
+                <br>
+                @foreach ($cardTags[$i] as $cardTag)
+                    <span class="cardTags">{{$cardTag['name']}}</span>
+                @endforeach 
+            </a> 
+            @endfor
         </div>
     </div>
     

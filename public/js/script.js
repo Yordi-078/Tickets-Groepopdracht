@@ -374,7 +374,6 @@ function fillQuestionPopup(data, tagsData){
     const tag = document.createElement("a");
     tag.title = element['name'];
     tag.innerText = element['name'];
-    tag.style.backgroundColor = 'green';
     CARDTAGS.appendChild(tag);
   });
   CARDDESCRIPTION.value = data[0]['description'];

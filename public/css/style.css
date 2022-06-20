@@ -607,10 +607,18 @@ canvas{
 }
     
 .card-tags-box a{
-    background-color: red;
+    background-color: var(--color-senary);
     border-radius: 15px;
     padding: 2px 6px;
     margin-right: 5px;
+}
+
+.cardTags{
+    display: inline;
+    background-color: var(--color-senary);
+    border-radius: 15px;
+    padding: 1px 5px;
+    font-size: .7em;
 }
 
 .close {

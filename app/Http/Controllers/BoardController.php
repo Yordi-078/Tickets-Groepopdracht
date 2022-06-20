@@ -6,6 +6,7 @@ use App\Models\Board;
 use App\Models\Card;
 use App\Models\User;
 use App\Models\Tags;
+use App\Models\CardTags;
 use App\Models\BoardUser;
 use App\Models\LessonUpvotes;
 use Illuminate\Support\Facades\Auth;
@@ -47,6 +48,17 @@ class BoardController extends Controller
       $lessonCard = array();
       $upvotes = LessonUpvotes::all();
       $cards = $board_id->cards;
+      $allCardTags = [];
+      foreach ($cards as $card) {
+        $cardTags = [];
+        $tags = CardTags::where('card_id', $card['id'])->get();
+        for ($i=0; $i < count($tags); $i++) { 
+            $cardTag = Tags::where('id', $tags[$i]['tag_id'])->get();
+            array_push($cardTags, $cardTag[0]);
+        }
+        array_push($allCardTags, $cardTags);
+      }
+      // dd($allCardTags);
       $lesCard = $board_id->lessoncards;
       // $helperId = User::where("id", $cards["helper_id"])->get();
 
@@ -68,7 +80,7 @@ class BoardController extends Controller
 
     
 
-      return view('boardCrud.oneBoard', ['cards'=>$cards, 'thisBoard'=>$board_id, 'lessonCards'=>$lessonCards]);
+      return view('boardCrud.oneBoard', ['cards'=>$cards, 'cardTags' =>$allCardTags, 'thisBoard'=>$board_id, 'lessonCards'=>$lessonCards]);
     }
 
     public function addStudentsToBoard($board_id)
@@ -133,7 +145,18 @@ class BoardController extends Controller
           "board_id" => $board_id->id
       ]
       );
-      return view('boardCrud.oneBoard', ['cards'=>$cards, 'thisBoard'=>$board_id, 'lessonCards'=>$lessonCards]);
+
+      $allCardTags = [];
+      foreach ($cards as $card) {
+        $cardTags = [];
+        $tags = CardTags::where('card_id', $card['id'])->get();
+        for ($i=0; $i < count($tags); $i++) { 
+            $cardTag = Tags::where('id', $tags[$i]['tag_id'])->get();
+            array_push($cardTags, $cardTag[0]);
+        }
+        array_push($allCardTags, $cardTags);
+      }
+      return view('boardCrud.oneBoard', ['cards'=>$cards, 'cardTags' =>$allCardTags, 'thisBoard'=>$board_id, 'lessonCards'=>$lessonCards]);
 
   }
 

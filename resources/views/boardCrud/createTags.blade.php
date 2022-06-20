@@ -10,7 +10,7 @@
     @csrf
         <div class="">
             <label class="label" for="name">naam: </label>
-            <input class="form-input-container input @error('name') is-danger @enderror" type="text" name="name" value="{{ old('name') }}">
+            <input class="form-input-container input @error('name') is-danger @enderror" type="text" name="name" maxlength="10" value="{{ old('name') }}">
             
             @error('name')
                 <p class="help is-danger">{{ $errors->first('name') }}</p>
