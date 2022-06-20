@@ -654,11 +654,27 @@ canvas{
     
 .image-uploader-box{
   grid-column: 1/2;
-  grid-row: 2/4;
+  grid-row: 2/3;
 }
         
-.image-uploader-box > input[type="file"]{
+.image-uploader-box > input[type="file"],
+.file-uploader-box > input[type="file"]{
   width: 7rem;
+}
+
+.cardUploaders{
+    display: flex;
+    position: relative;
+    bottom: 4vh;
+    left: 19vw;
+    width: 50%;
+    height: 150%;
+    margin: 0;
+}
+
+.file-uploader-box{
+  grid-column: 1/2;
+  grid-row: 3/4;
 }
 
 .card-status{

@@ -102,12 +102,20 @@ $user_id = Auth::user()->id;
 
                 <fieldset id="image-uploader" class="image-uploader-box card-info-border">
                     <legend>Afbeelding</legend>
-                    <input type="file" name="image" placeholder="Choose image" id="card-upload-image" onchange="loadFile(event)" accept=".gif,.jpg,.jpeg,.png">
+                    <input type="file" name="image" placeholder="Choose image" id="card-upload-image" onchange="loadImage(event)" accept=".gif,.jpg,.jpeg,.png">
                     @error('image')
                         <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                     @enderror
                     <a class="delete-card-image-button" id="deleteImage">verwijder</a>
-                    <p><img id="uploaded-card-image" width="150"/></p>
+                    <p class="cardUploaders"><img id="uploaded-card-image" width="70" height="70"/></p>
+                    
+                </fieldset>
+
+                <fieldset id="file-uploader" class="file-uploader-box card-info-border">
+                    <legend>file</legend>
+                    <input type="file" name="file" placeholder="Choose file" id="card-upload-file" onchange="loadFile(event)" accept=".doc,.xls,.pdf" disabled="">
+                        <a class="delete-card-file-button" id="deleteImage">verwijder</a>
+                    <p class="cardUploaders"><img id="uploaded-card-file" width="70" height="70" src=""></p>
                     
                 </fieldset>
             
