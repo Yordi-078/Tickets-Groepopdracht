@@ -424,7 +424,7 @@ function checkForOwner(user_id, card_owner_id, user_role_id){
   //make eventListener enabled
   CARDUPVOTEQUESTION.style.display = 'flex';
   CARDDOWNVOTEQUESTION.style.display = 'none';
-  if( user_role_id == 2 ){
+  if( user_role_id != 1 ){
     CARDSTATUS.disabled = false
     CARDSUBMITFORM.style.display = 'grid';
   }
