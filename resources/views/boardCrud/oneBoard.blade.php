@@ -45,7 +45,7 @@ $user_id = Auth::user()->id;
                 {{$cards[$i][""]}}
                 {{$cards[$i]["name"]}}
                 <br>
-                @foreach ($cardTags[$i] as $cardTag)
+                @foreach (array_slice($cardTags[$i], 0, 3) as $cardTag)
                     <span class="cardTags">{{$cardTag['name']}}</span>
                 @endforeach 
             </a> 
