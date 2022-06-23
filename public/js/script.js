@@ -547,15 +547,11 @@ function eventListeners(card_id, helper_id, helper_name, user_id){
   CARDINFOPOPUP.addEventListener('submit', function(event){
     event.preventDefault();
     var name = CARDTITLE.value;
-    console.count("submit");
     if(CARDSTATUS.selectedOptions[0].value == "finished"){
       name = "// " + CARDTITLE.value;
     }
     // console.log("submit test, name: " + name);
-    console.log(document.getElementById('card-' + card_id));
     document.getElementById('card-' + card_id).innerText = name;
-    console.countReset("submit")
-    console.log("count has been reset")
     saveImage(event, card_id);
     saveFile(event, card_id);
     updateCard(event);
@@ -825,7 +821,8 @@ function updateCardImage(card_id, image_id){
     },
     method: 'GET',
     credentials: "same-origin",
-  });
+  }) .then(response => response.json())
+  .then(data => alert(data) );
 }
 
 var getHelperInfo = function (helper_id){

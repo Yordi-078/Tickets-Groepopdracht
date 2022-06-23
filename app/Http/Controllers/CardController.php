@@ -9,6 +9,7 @@ use App\Models\LessonCard;
 use App\Models\CardUpvotes;
 use App\Models\LessonUpvotes;
 use App\Models\BoardUser;
+use App\Models\CardPhotos;
 use App\Models\Card;
 use App\Models\Photo;
 use App\Models\CardTags;
@@ -138,13 +139,20 @@ class CardController extends Controller
     }
 
     public function updateCardImage($card_id, $image_id){
-        Card::updateOrCreate(
-            [
-                "id" => $card_id
-            ],[
-                "image" => $image_id,
-            ]
-        );
+        $allCardPhotos = CardPhotos::where('card_id', $card_id)->get();
+        $returnMessage = 'afbeelding opgeslagen';
+        if(count($allCardPhotos) == 5){
+            $allPhotos = Photo::where('id', $allCardPhotos[0]['photo_id'])->get();
+            $returnMessage = 'maximum van 5 afbeeldingen bereikt. "' . $allPhotos[0]['name'] . '" verwijderd. nieuwe afbeelding opgeslagen.';
+            $allCardPhotos[0]->delete();
+            $allPhotos[0]->delete();
+        }
+        $cardPhotos = new CardPhotos ();
+        $cardPhotos->card_id = $card_id;
+        $cardPhotos->photo_id = $image_id;
+        $cardPhotos->save();
+
+        return response()->json($returnMessage);
     }
 
     public function getUpvoters($card_id)
